@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">MLUSSIS</string>
+    <string name="empMenuItem1_value">Create Requisition</string>
+    <string name="empMenuItem2_value">View Disbursement</string>
+    <string name="empMenuItem3_value">Logout</string>
+
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
