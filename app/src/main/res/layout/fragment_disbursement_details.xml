@@ -1,7 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context="com.logicuniv.mlussis.DisbursementDetailsFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -12,17 +12,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="18sp" />
 
     <TextView
-    android:id="@+id/textView_Employee"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="80dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="35dp"
-    android:text="TextView" />
+        android:id="@+id/textView_Employee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="35dp"
+        android:text="TextView"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView_ColPt"
@@ -32,5 +34,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="18sp" />
 </FrameLayout>

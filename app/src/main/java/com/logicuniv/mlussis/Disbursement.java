@@ -83,13 +83,10 @@ public class Disbursement extends HashMap<String, String> {
 //            } catch (Exception e) {
 //            }
 //            String result = JSONParser.postStream(baseURL+"/Update", jBook.toString());
-//            Log.d("EUGENE",jBook.toString());
-//            Log.d("EUGENE",result);
 //            if(result == "true"){
 //                return true;
 //            }
 //            else{
-//                Log.e("update", result);
 //                return false;
 //            }
 //        }
