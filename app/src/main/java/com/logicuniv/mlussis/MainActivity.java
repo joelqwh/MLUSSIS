@@ -28,6 +28,7 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.empMenuItem1:
+                startActivity(new Intent(this, Catalogue_EmployeeActivity.class));
                 return true;
             case R.id.empMenuItem2:
                 startActivity(new Intent(this, DisbursementActivity.class));

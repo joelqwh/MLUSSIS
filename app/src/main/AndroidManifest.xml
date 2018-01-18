@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DisbursementActivity"></activity>
+        <activity android:name=".DisbursementActivity" />
+        <activity android:name=".Catalogue_EmployeeActivity"></activity>
     </application>
 
 </manifest>

@@ -22,4 +22,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="deptRep_pin">Pin:</string>
+    <string name="catalogue">Stationery Catalogue</string>
+    <string name="search">Search...</string>
+    <string name="button_clear">Clear</string>
+    <string name="catalogue_category">Cat.</string>
+    <string name="catalogue_description">Description</string>
+    <string name="catalogue_uom">U.O.M.</string>
 </resources>
