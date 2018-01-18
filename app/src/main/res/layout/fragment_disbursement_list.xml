@@ -19,6 +19,6 @@ tools:context="com.logicuniv.mlussis.DisbursementListFragment" >
         android:id="@+id/table_deptRep_disbursement_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:stretchColumns="1">
-    </TableLayout>
+        android:showDividers="end"
+        android:stretchColumns="1"></TableLayout>
 </LinearLayout>

@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="left">
+    android:dividerPadding="5dp"
+    android:gravity="left"
+    app:layout_dodgeInsetEdges="none">
 
         <TextView
             android:id="@+id/textView_deptRep_disbursement_list_item"
@@ -31,7 +33,6 @@
             android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/textView_deptRep_disbursement_list_item" />
-
 
 
 </TableRow>
