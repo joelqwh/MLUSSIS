@@ -33,6 +33,12 @@
     <string name="button_cancel">Cancel</string>
     <string name="text_enterDesiredQty">Enter Desired Quantity:</string>
 
+    <!-- StoreClerk Menu -->
+    <string name="scMenuItem1">Inventory</string>
+    <string name="scMenuItem2">Retrieval</string>
+    <string name="scMenuItem3">Disbursement</string>
+
+    <!-- InventoryActivity Usage -->
     <string name="inventory_search">Search...</string>
     <string-array name="category_items">
         <item>All items</item>
