@@ -23,6 +23,7 @@
         <activity android:name=".DisbursementActivity" />
         <activity android:name=".Catalogue_EmployeeActivity" />
         <activity android:name=".RequisitionEmployeeActivity"></activity>
+        <activity android:name=".InventoryActivity" />
     </application>
 
 </manifest>
