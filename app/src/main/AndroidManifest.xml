@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DisbursementActivity" />
-        <activity android:name=".Catalogue_EmployeeActivity"></activity>
+        <activity android:name=".Catalogue_EmployeeActivity" />
+        <activity android:name=".RequisitionEmployeeActivity"></activity>
     </application>
 
 </manifest>

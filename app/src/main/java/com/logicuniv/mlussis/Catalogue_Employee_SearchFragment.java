@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,8 @@ import java.util.ArrayList;
  */
 public class Catalogue_Employee_SearchFragment extends Fragment {
 
+    private EditText searchtext;
+    private ArrayList<StationeryCatalogue> als = StationeryCatalogue.getCatalogue();
 
     public Catalogue_Employee_SearchFragment() {
         // Required empty public constructor
@@ -34,7 +38,7 @@ public class Catalogue_Employee_SearchFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_catalogue__employee__search, container, false);
 
         Button clearButton = v.findViewById(R.id.button_employee_clear);
-        final EditText searchtext = v.findViewById(R.id.editText_employee_search);
+        searchtext = v.findViewById(R.id.editText_employee_search);
 
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,27 +47,36 @@ public class Catalogue_Employee_SearchFragment extends Fragment {
             }
         });
 
+
+
+
         searchtext.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                ArrayList<StationeryCatalogue> original = StationeryCatalogue.getCatalogue();
-                display(original);
+                display(als);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //do code here
 
-                String searchInfo = searchtext.getText().toString();
-                StationeryCatalogue sc = new StationeryCatalogue(searchInfo,searchInfo,searchInfo);
-                ArrayList<StationeryCatalogue> als = StationeryCatalogue.searchCatalogue(sc);
-                display(als);
-            }
+                   String searchInfo = searchtext.getText().toString();
+                ArrayList<StationeryCatalogue> alsearch = new ArrayList<>();
+                   for(StationeryCatalogue sc:als)
+                   {
+                       if(sc.get("Description").toUpperCase().contains(searchInfo.toUpperCase()))
+                       {
+                           alsearch.add(sc);
+                       }
+                   }
+
+                   display(alsearch);
+                   Toast.makeText(getActivity(), als.toString(), Toast.LENGTH_SHORT).show();
+           }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
@@ -80,12 +93,12 @@ public class Catalogue_Employee_SearchFragment extends Fragment {
         Bundle args = new Bundle();
         args.putSerializable("catalogue", details);
         frag.setArguments(args);
-        if (fm.findFragmentByTag(TAG) == null)        //to be amended with framelayout within the list fragment is out
+        if (fm.findFragmentByTag(TAG) == null)        //to be amended with framelayout when the list fragment is out
             // fragment not found -- to be added
-            trans.add(R.id.listframe_employee_catalogue, frag, TAG);
+            trans.add(R.id.detailsframe, frag, TAG);
         else
             // fragment found -- to be replaced
-            trans.replace(R.id.listframe_employee_catalogue, frag, TAG);
+            trans.replace(R.id.detailsframe, frag, TAG);
         trans.commit();
     }
 

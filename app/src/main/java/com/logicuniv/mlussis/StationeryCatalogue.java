@@ -41,7 +41,7 @@ public class StationeryCatalogue extends HashMap<String, String> {
 
         for(StationeryCatalogue scdummy :alscc)
         {
-            if(sc.get("Description")==scdummy.get("Description")) {
+            if(sc.get("Description").contains(scdummy.get("Description"))==true) {
                 alsccfake.add(scdummy);
             }
         }
