@@ -36,6 +36,7 @@ public class InvTableFragment extends ListFragment {
 
         View header = (View)inflater.inflate(R.layout.fragment_inv_row_header,null);
         lv1.addHeaderView(header);
+        header.setEnabled(false);
 
         lv1.setAdapter(adapter);
         return (v);

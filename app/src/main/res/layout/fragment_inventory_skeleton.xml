@@ -6,15 +6,18 @@
 
 
     <EditText
+        android:id="@+id/invSearch"
         android:layout_marginStart="8dp"
         android:layout_marginTop="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
         android:hint="@string/inventory_search" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/catspinner"
         android:layout_width="170dp"
         android:layout_height="45dp"
         android:layout_marginTop="47dp"
