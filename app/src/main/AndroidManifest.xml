@@ -20,6 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".StoreClerk.StoreClerk_MainActivity"
+            android:theme="@style/MainPage" />
         <activity android:name=".DisbursementActivity" />
         <activity android:name=".Catalogue_EmployeeActivity" />
         <activity android:name=".RequisitionEmployeeActivity"></activity>
