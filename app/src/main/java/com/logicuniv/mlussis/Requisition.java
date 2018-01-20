@@ -1,5 +1,6 @@
 package com.logicuniv.mlussis;
 
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -8,7 +9,7 @@ import java.util.HashMap;
 
 public class Requisition extends HashMap{
 
-    public Requisition(String reqNo, String issuedBy, String dateIssued, String approvedBy,String dateReviewed, String status, String remarks) {
+    public Requisition(String reqNo, String issuedBy, Date dateIssued, String approvedBy, Date dateReviewed, String status, String remarks) {
         put("ReqNo", reqNo);
         put("IssuedBy", issuedBy);
         put("DateIssued", dateIssued);
@@ -18,7 +19,7 @@ public class Requisition extends HashMap{
         put("Remarks", remarks);
     }
 
-    public Requisition(String reqNo, String issuedBy, String dateIssued) {
+    public Requisition(String reqNo, String issuedBy, Date dateIssued) {
         put("ReqNo", reqNo);
         put("IssuedBy", issuedBy);
         put("DateIssued", dateIssued);

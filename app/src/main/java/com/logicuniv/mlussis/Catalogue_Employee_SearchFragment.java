@@ -72,7 +72,6 @@ public class Catalogue_Employee_SearchFragment extends Fragment {
                    }
 
                    display(alsearch);
-                   Toast.makeText(getActivity(), als.toString(), Toast.LENGTH_SHORT).show();
            }
 
             @Override

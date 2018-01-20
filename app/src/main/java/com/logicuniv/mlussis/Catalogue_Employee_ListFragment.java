@@ -117,10 +117,10 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
         d.setTitle("Add to Requisition");
         d.setContentView(R.layout.dialog_catalogue_employee);
         //d.setCancelable(false);
-        Button buttonCancel = v.findViewById(R.id.dialog_catalogue_employee_buttonCancel);
-        Button buttonAdd = v.findViewById(R.id.dialog_catalogue_employee_buttonAddItem);
-        TextView tv_itemNo = v.findViewById(R.id.textView_dialog_catalogue_employee_itemNo);
-        final EditText et_qty = v.findViewById(R.id.editText_dialog_catalogue_employee_qty);
+        Button buttonCancel = d.findViewById(R.id.dialog_catalogue_employee_buttonCancel);
+        Button buttonAdd = d.findViewById(R.id.dialog_catalogue_employee_buttonAddItem);
+        TextView tv_itemNo = d.findViewById(R.id.textView_dialog_catalogue_employee_itemNo);
+        final EditText et_qty = d.findViewById(R.id.editText_dialog_catalogue_employee_qty);
         tv_itemNo.setText(b.get("ItemNo").toString());
         et_qty.setText("1");
 

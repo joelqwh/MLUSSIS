@@ -6,4 +6,69 @@
     android:layout_height="match_parent"
     tools:context="com.logicuniv.mlussis.RequisitionEmployeeActivity">
 
+    <TextView
+        android:id="@+id/textView_ReqToRaise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/reqToRaise"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/listView_requisition_employee_raised"
+        android:layout_width="match_parent"
+        android:layout_height="247dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_ReqToRaise">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/button_requisition_employee_addItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="@string/button_additem"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listView_requisition_employee_raised" />
+
+    <Button
+        android:id="@+id/button_requisition_employee_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
+        android:background="@android:color/holo_green_light"
+        android:elevation="0dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:text="@string/button_submitReq"
+        app:layout_constraintEnd_toStartOf="@+id/button_requisition_employee_cancelReq"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/button_requisition_employee_addItem"
+        app:layout_constraintTop_toBottomOf="@+id/listView_requisition_employee_raised" />
+
+    <Button
+        android:id="@+id/button_requisition_employee_cancelReq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="28dp"
+        android:background="@android:color/holo_red_dark"
+        android:text="@string/button_reject"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listView_requisition_employee_raised" />
 </android.support.constraint.ConstraintLayout>
