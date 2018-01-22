@@ -3,6 +3,8 @@ package com.logicuniv.mlussis.StoreClerk;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.logicuniv.mlussis.R;
@@ -34,5 +36,18 @@ public class StoreClerk_StockCard_Activity extends Activity {
         t6.setText(sc.get("Supplier2"));
         TextView t7 = findViewById(R.id.textViewItemSupp3);
         t7.setText(sc.get("Supplier3"));
+
+        //use adapter to pull in Txn History
+
+        Button itemStockEditBtn = (Button) findViewById(R.id.itemStockEditbtn);
+        itemStockEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),StoreClerk_EditStockQtyActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 }
