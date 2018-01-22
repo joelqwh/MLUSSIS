@@ -1,4 +1,4 @@
-package com.logicuniv.mlussis.StoreClerk;
+package com.logicuniv.mlussis.storeclerk;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,9 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.logicuniv.mlussis.R;
-import com.logicuniv.mlussis.StationeryCatalogue;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 

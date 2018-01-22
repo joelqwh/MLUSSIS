@@ -1,4 +1,4 @@
-package com.logicuniv.mlussis.StoreClerk;
+package com.logicuniv.mlussis.storeclerk;
 
 import android.app.Activity;
 import android.os.Bundle;

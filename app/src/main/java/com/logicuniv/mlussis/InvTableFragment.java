@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.logicuniv.mlussis.StoreClerk.StoreClerk_StockCard_Activity;
+import com.logicuniv.mlussis.storeclerk.StoreClerk_StockCard_Activity;
 
 import java.util.ArrayList;
 

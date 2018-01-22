@@ -20,12 +20,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StoreClerk.StoreClerk_MainActivity"
-            android:theme="@style/MainPage" />
+        <activity
+            android:name=".storeclerk.StoreClerk_MainActivity"
+            android:theme="@style/MainPage">
+
+
+        </activity>
         <activity android:name=".DisbursementActivity" />
         <activity android:name=".Catalogue_EmployeeActivity" />
-        <activity android:name=".RequisitionEmployeeActivity"></activity>
+        <activity android:name=".RequisitionEmployeeActivity" />
         <activity android:name=".InventoryActivity" />
+        <activity android:name=".storeclerk.StoreClerk_StockCard_Activity" />
+        <activity android:name=".storeclerk.StoreClerk_EditStockQtyActivity">
+
+        </activity>
     </application>
 
 </manifest>
