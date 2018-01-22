@@ -83,4 +83,9 @@
     <string name="itemSupp1">Supplier 1</string>
     <string name="itemSupp2">Supplier 2</string>
     <string name="itemSupp3">Supplier 3</string>
+    <string name="itemStockEdit">Edit Stock</string>
+    <string name="itemTxnView">View Full History</string>
+    <string name="itemCurrentStock">Current Stock</string>
+    <string name="itemAdjustedStock">Adjusted Stock</string>
+    <string name="adjReasonInput">Insert Adjustment Reason</string>
 </resources>
