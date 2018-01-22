@@ -39,7 +39,6 @@
     <string name="scMenuItem3">Disbursement</string>
 
     <!-- InventoryActivity Usage -->
-    <string name="inventory_search">Search...</string>
     <string name="reqToRaise">Requisition to Raise</string>
     <string name="button_submitReq">Submit</string>
     <string name="button_reject">Reject</string>
@@ -77,4 +76,11 @@
         <item>9</item>
         <item>10</item>
     </string-array>
+
+    <!-- StockCard Usage -->
+    <string name="itemCode">Item Code</string>
+    <string name="itemBin">Bin#</string>
+    <string name="itemSupp1">Supplier 1</string>
+    <string name="itemSupp2">Supplier 2</string>
+    <string name="itemSupp3">Supplier 3</string>
 </resources>
