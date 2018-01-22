@@ -16,6 +16,17 @@ public class StationeryCatalogue extends HashMap<String, String> {
         put("Uom", uom);
     }
 
+    public StationeryCatalogue(String itemNo, String description, String cat, String uom, String binNo, String sup1, String sup2, String sup3) {
+        put("ItemNo", itemNo);
+        put("Description", description);
+        put("Category", cat);
+        put("Uom", uom);
+        put("BinNo", binNo);
+        put("Supplier1", sup1);
+        put("Supplier2", sup2);
+        put("Supplier3", sup3);
+    }
+
     public StationeryCatalogue(String itemNo, String description, String cat) {     //search function
         put("ItemNo", itemNo);
         put("Description", description);
@@ -26,10 +37,24 @@ public class StationeryCatalogue extends HashMap<String, String> {
     {
         //getCatalogue() JSON Parser get as function
         ArrayList<StationeryCatalogue> alsc = new ArrayList<>();
-        StationeryCatalogue scl1 = new StationeryCatalogue("I001","Clips 1", "Clip", "Dozen");
-        StationeryCatalogue scl2 = new StationeryCatalogue("I002","Pilot", "Pen", "Each");
+        StationeryCatalogue scl1 = new StationeryCatalogue("I001","Clips 1", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
+        StationeryCatalogue scl2 = new StationeryCatalogue("I002","Pilot", "Pen", "Each", "B8", "CHEP", "OMEG", "BANES");
+        StationeryCatalogue scl3 = new StationeryCatalogue("I003","Cniballkhlasdjhkgkdslfahkgsadgkjlasdkfjaksdjlhfka", "Pen", "Each", "C4","ALPA","BANES","CHEP");
+        StationeryCatalogue scl4 = new StationeryCatalogue("I001","Clips 2", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
+        StationeryCatalogue scl5 = new StationeryCatalogue("I001","Clips 3", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
+        StationeryCatalogue scl6 = new StationeryCatalogue("I001","Clips 4", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
+        StationeryCatalogue scl7 = new StationeryCatalogue("I001","Clips 5", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
+        StationeryCatalogue scl8 = new StationeryCatalogue("I001","Clips 6", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
+        StationeryCatalogue scl9 = new StationeryCatalogue("I001","Clips 7", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
         alsc.add(scl1);
         alsc.add(scl2);
+        alsc.add(scl3);
+        alsc.add(scl4);
+        alsc.add(scl5);
+        alsc.add(scl6);
+        alsc.add(scl7);
+        alsc.add(scl8);
+        alsc.add(scl9);
         return alsc;
     }
 
