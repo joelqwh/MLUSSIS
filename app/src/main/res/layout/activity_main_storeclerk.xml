@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:background="@android:color/background_dark"
     android:weightSum="10"
-    tools:context="com.logicuniv.mlussis.storeclerk.StoreClerk_MainActivity">
+    tools:context="com.logicuniv.mlussis.StoreClerk.StoreClerk_MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

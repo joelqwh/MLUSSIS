@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.logicuniv.mlussis.storeclerk.StoreClerk_StockCard_Activity;
+import com.logicuniv.mlussis.StoreClerk.StoreClerk_StockCardActivity;
 
 import java.util.ArrayList;
 
@@ -55,7 +55,7 @@ public class InvTableFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         StationeryCatalogue sc = (StationeryCatalogue) getListAdapter().getItem(position-1);
-        Intent intent = new Intent(getActivity(), StoreClerk_StockCard_Activity.class);
+        Intent intent = new Intent(getActivity(), StoreClerk_StockCardActivity.class);
         intent.putExtra("invdetails", sc);
         startActivity(intent);
     }

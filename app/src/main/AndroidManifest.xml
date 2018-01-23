@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,15 +22,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".storeclerk.StoreClerk_MainActivity"
+            android:name=".StoreClerk.StoreClerk_MainActivity"
             android:theme="@style/MainPage">
-
 
         </activity>
         <activity android:name=".DisbursementActivity" />
         <activity android:name=".Catalogue_EmployeeActivity" />
-        <activity android:name=".RequisitionEmployeeActivity"></activity>
+        <activity android:name=".RequisitionEmployeeActivity" />
         <activity android:name=".InventoryActivity" />
+        <activity android:name=".StoreClerk.StoreClerk_StockCardActivity" />
+        <activity android:name=".StoreClerk.StoreClerk_EditStockQtyActivity"></activity>
+        <activity android:name=".StoreClerk.StoreClerk_DisbursementActivity"></activity>
         <activity android:name=".storeclerk.StoreClerk_StockCard_Activity" />
         <activity android:name=".storeclerk.StoreClerk_EditStockQtyActivity">
 
