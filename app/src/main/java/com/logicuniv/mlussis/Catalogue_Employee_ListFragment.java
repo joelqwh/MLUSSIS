@@ -6,6 +6,7 @@ import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -47,65 +46,10 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
             SimpleAdapter adapter = new SimpleAdapter(getActivity(), alsc,
                     R.layout.row_list_catalogue_employee,
                     new String[]{"Category", "Description", "Uom"},
-                    new int[]{R.id.textView_cat_emp, R.id.textView_cat_desc, R.id.textView_cat_uom});
+                    new int[]{R.id.textView_req_desc, R.id.textView_cat_desc, R.id.textView_req_uom});
             setListAdapter(adapter);
         }
         return v;
-
-        //*******************************************TABLELAYOUT CODE(HAVE ERRORS)******************************************************
-//        View v = inflater.inflate(R.layout.fragment_catalogue__employee__list, container, false);
-//        Bundle arg = getArguments();
-//            TableLayout table = (TableLayout) v.findViewById(R.id.table_catalogue_employee);
-//
-//            TableRow firstrow = (TableRow) LayoutInflater.from(getActivity()).inflate(R.layout.row_catalogue_employee, null);
-//            ((TextView) firstrow.findViewById(R.id.textView_catalogue_employee_list_category)).setText("Cat.");
-//            ((TextView) firstrow.findViewById(R.id.textView_catalogue_employee_list_description)).setText("Description");
-//            ((TextView) firstrow.findViewById(R.id.textView_catalogue_employee_list_uom)).setText("U.O.M.");
-//            table.addView((firstrow));
-//
-//
-//            if(arg!=null) {
-//            ArrayList<StationeryCatalogue> alsc = (ArrayList<StationeryCatalogue>) arg.getSerializable("catalogue");
-//            for (StationeryCatalogue d : alsc) {
-//                // Inflate your row "template" and fill out the fields.
-//                TableRow row = (TableRow) LayoutInflater.from(getActivity()).inflate(R.layout.row_catalogue_employee, null);
-//                ((TextView) firstrow.findViewById(R.id.textView_catalogue_employee_list_category)).setText(d.get("Category"));
-//                ((TextView) firstrow.findViewById(R.id.textView_catalogue_employee_list_description)).setText(d.get("Description"));
-//                ((TextView) firstrow.findViewById(R.id.textView_catalogue_employee_list_uom)).setText(d.get("Uom"));
-//                row.setTag(d.get("ItemNo"));
-//                row.setClickable(true);
-//                row.setOnClickListener(tablerowOnClickListener);
-//                table.addView(row);
-//            }
-//            table.requestLayout();
-//        }
-//        return v;
-//    }
-//
-//    private View.OnClickListener tablerowOnClickListener = new View.OnClickListener() {
-//        public void onClick(View v) {
-//            String itemNo = v.getTag().toString();
-//            Intent intent = new Intent(getActivity(), CatalogueEmployeeDetailsActivity.class);        //not done yet
-//            intent.putExtra("ItemNo", itemNo);
-//            startActivity(intent);
-//        }
-//    };
-//        Fragment for above
-//            <fragment
-//        android:id="@+id/fragment4"
-//        android:name="com.logicuniv.mlussis.Catalogue_Employee_ListFragment"
-//        android:layout_width="wrap_content"
-//        android:layout_height="20dp"
-//        android:layout_marginBottom="336dp"
-//        android:layout_marginEnd="8dp"
-//        android:layout_marginStart="8dp"
-//        android:layout_marginTop="8dp"
-//        app:layout_constraintBottom_toBottomOf="parent"
-//        app:layout_constraintEnd_toEndOf="parent"
-//        app:layout_constraintStart_toStartOf="parent"
-//        app:layout_constraintTop_toBottomOf="@+id/fragment"
-//        app:layout_constraintVertical_bias="0.0" />
-
 
     }
 
@@ -138,8 +82,13 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
                     {
                         String qty = et_qty.getText().toString();
                         Intent i = new Intent(getActivity(),RequisitionEmployeeActivity.class);
-                        i.putExtra("addItem",b);
-                        i.putExtra("qty",qty);
+                        Bundle argus = new Bundle();
+                        argus.putSerializable("qty",qty.toString());
+                        argus.putSerializable("ItemNo", b.get("ItemNo"));
+                        i.putExtra("bundle",argus);
+//
+//                        i.putExtra("addItem",b);
+//                        i.putExtra("qty",qty);
                         startActivity(i);
                     }
                 });

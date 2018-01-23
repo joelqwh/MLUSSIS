@@ -47,14 +47,14 @@ public class Catalogue_Employee_SearchFragment extends Fragment {
             }
         });
 
-
+        display(als);
 
 
         searchtext.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                display(als);
+
             }
 
             @Override

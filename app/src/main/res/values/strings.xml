@@ -43,6 +43,7 @@
     <string name="reqToRaise">Requisition to Raise</string>
     <string name="button_submitReq">Submit</string>
     <string name="button_reject">Reject</string>
+    <string name="text_PendingRequisition">Pending Stationery Requisitions</string>
     <string-array name="category_items">
         <item>All items</item>
         <item>Clip</item>

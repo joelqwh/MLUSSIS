@@ -1,5 +1,6 @@
 package com.logicuniv.mlussis;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,7 +8,7 @@ import java.util.HashMap;
  * Created by e0231991 on 18/1/2018.
  */
 
-public class StationeryCatalogue extends HashMap<String, String> {
+public class StationeryCatalogue extends HashMap<String, String> implements Serializable{
 
     public StationeryCatalogue(String itemNo, String description, String cat, String uom) {
         put("ItemNo", itemNo);
@@ -20,6 +21,9 @@ public class StationeryCatalogue extends HashMap<String, String> {
         put("ItemNo", itemNo);
         put("Description", description);
         put("Category", cat);
+    }
+
+    public StationeryCatalogue(HashMap<String, Object> bundle) {     //search function
     }
 
     public static ArrayList<StationeryCatalogue> getCatalogue()
@@ -49,8 +53,19 @@ public class StationeryCatalogue extends HashMap<String, String> {
         return alsccfake;
     }
 
+    public static StationeryCatalogue searchCatalogueById(String itemNo)
+    {
+        //searchJSONFromUrl url will settle
+        ArrayList<StationeryCatalogue> alscc = getCatalogue(); //dummy values
+        StationeryCatalogue sc=null;
 
-
-
+        for(StationeryCatalogue scdummy :alscc)
+        {
+            if(scdummy.get("ItemNo").equals(itemNo)) {
+               sc=scdummy;
+            }
+        }
+    return sc;
+    }
 
 }
