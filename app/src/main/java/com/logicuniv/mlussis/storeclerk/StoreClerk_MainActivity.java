@@ -1,4 +1,4 @@
-package com.logicuniv.mlussis.StoreClerk;
+package com.logicuniv.mlussis.storeclerk;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridLayout;
 
-import com.logicuniv.mlussis.Catalogue_EmployeeActivity;
 import com.logicuniv.mlussis.DisbursementActivity;
 import com.logicuniv.mlussis.InventoryActivity;
 import com.logicuniv.mlussis.R;

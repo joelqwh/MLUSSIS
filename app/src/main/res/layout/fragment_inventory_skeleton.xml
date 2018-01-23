@@ -14,7 +14,7 @@
         android:paddingTop="10dp"
         android:singleLine="true"
         android:imeOptions="actionDone"
-        android:hint="@string/inventory_search" />
+        android:hint="@string/search" />
 
     <Spinner
         android:id="@+id/catspinner"
