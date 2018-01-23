@@ -88,4 +88,14 @@
     <string name="itemCurrentStock">Current Stock</string>
     <string name="itemAdjustedStock">Adjusted Stock</string>
     <string name="adjReasonInput">Insert Adjustment Reason</string>
+
+    <!-- StoreClerk Disbursement Usage -->
+    <string name="disburseConfirmQuantity">CONFIRM QUANTITY</string>
+    <string-array name="disburseDept">
+        <item>Registrar</item>
+        <item>English</item>
+        <item>Computer Science</item>
+        <item>Commerce</item>
+        <item>Zoology</item>
+    </string-array>
 </resources>

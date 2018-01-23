@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.logicuniv.mlussis.StoreClerk.StoreClerk_DisbursementActivity">
+
+    <fragment
+        android:id="@+id/scDisburseSpinFragment"
+        android:name="com.logicuniv.mlussis.StoreClerk.StoreClerk_DisburseSpinFragment"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <fragment
+        android:id="@+id/scDisburseRepFragment"
+        android:name="com.logicuniv.mlussis.StoreClerk.StoreClerk_DisburseRepFragment"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/scDisburseSpinFragment" />
+
+    <FrameLayout
+        android:id="@+id/scDisburseListFragment"
+        android:name="com.logicuniv.mlussis.StoreClerk.StoreClerk_DisburseListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/scDisburseRepFragment">
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/confirmDisburseQtybtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/disburseConfirmQuantity"
+        android:layout_below="@id/scDisburseListFragment"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

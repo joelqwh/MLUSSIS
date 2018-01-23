@@ -1,4 +1,4 @@
-package com.logicuniv.mlussis.storeclerk;
+package com.logicuniv.mlussis.StoreClerk;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import com.logicuniv.mlussis.R;
 
 import java.util.HashMap;
 
-public class StoreClerk_StockCard_Activity extends Activity {
+public class StoreClerk_StockCardActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
