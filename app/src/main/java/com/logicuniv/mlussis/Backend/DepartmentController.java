@@ -13,7 +13,7 @@ public class DepartmentController {
         return null;
     }
 
-    public String getDepartmentName (String deptCode)
+    public static String getDepartmentName(String deptCode)
     {
         return "Department Name";
     }

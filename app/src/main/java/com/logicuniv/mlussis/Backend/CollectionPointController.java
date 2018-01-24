@@ -6,7 +6,7 @@ package com.logicuniv.mlussis.Backend;
 
 public class CollectionPointController {
 
-    public String getCollectionPointDetails(String collectionPointNo)
+    public static String getCollectionPointDetails(String collectionPointNo)
     {
         return "collection point details";
     }

@@ -7,8 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.logicuniv.mlussis.Backend.CollectionPointController;
+import com.logicuniv.mlussis.Backend.DepartmentController;
 import com.logicuniv.mlussis.Backend.DisbursementController;
+import com.logicuniv.mlussis.Backend.EmployeeController;
 import com.logicuniv.mlussis.Model.Disbursement;
+import com.logicuniv.mlussis.Model.Employee;
 
 
 public class DisbursementDetailsFragment extends Fragment {
@@ -22,13 +26,13 @@ public class DisbursementDetailsFragment extends Fragment {
         Disbursement d = DisbursementController.getCurrentDisbursementForDepartment("1");     //get parameter from login details when it is set up
         if (d != null) {
             TextView tv_Dept = v.findViewById(R.id.textView_Dept);
-            //getDepartmentName(d.get("DeptCode"));     //to initialise this method later
+            //String deptName = DepartmentController.getDepartmentName(d.get("DeptCode"));     //to initialise this method later
             tv_Dept.setText(d.get("DeptCode"));
             TextView tv_Emp = v.findViewById(R.id.textView_Employee);
-            //getEmployeeName(d.get("RepEmpNo"));
+            //String empName = EmployeeController.getEmployeeName(d.get("RepEmpNo"));
             tv_Emp.setText(d.get("RepEmpNo"));
             TextView tv_colPt = v.findViewById(R.id.textView_ColPt);
-            //getCollectionPointName(d.get("CollectionPoint"));
+            String colPtName = CollectionPointController.getCollectionPointDetails(d.get("CollectionPoint"));
             tv_colPt.setText(d.get("CollectionPointNo"));
         }
         return v;
