@@ -13,7 +13,7 @@ public class EmployeeController {
      return null;
     }
 
-    public String getEmployeeName(String employeeId)
+    public static String getEmployeeName(String employeeId)
     {
         return "employee name";     //using getEmployeeById
     }

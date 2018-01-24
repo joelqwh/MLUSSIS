@@ -64,6 +64,10 @@ public class StoreClerk_MainActivity extends Activity {
                     {
                         startActivity(new Intent(getApplicationContext(), InventoryActivity.class));
                     }
+                    if (finalI==1)
+                    {
+
+                    }
                     if (finalI==2)
                     {
                         startActivity(new Intent(getApplicationContext(), StoreClerk_DisbursementActivity.class));

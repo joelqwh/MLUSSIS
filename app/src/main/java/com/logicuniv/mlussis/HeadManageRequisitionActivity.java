@@ -29,7 +29,7 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
         ListAdapter adapt = new SimpleAdapter(this,alr,R.layout.row_list_managereq_deputy, new String[]{"IssuedBy", "ReqNo", "DateIssued"},
                 new int[]{R.id.textView__managereq_empname, R.id.textView_managereq_reqno, R.id.textView_managereq_reqdate});
         lv_manageReq.setAdapter(adapt);
-        lv_manageReq.setOnItemClickListener(this);
+        lv_manageReq.setOnItemClickListener(this);      //need to change
     }
 
     @Override
