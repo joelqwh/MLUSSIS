@@ -27,7 +27,8 @@
 
         </activity>
         <activity android:name=".DisbursementActivity" />
-        <activity android:name=".Catalogue_EmployeeActivity" />
+        <activity android:name=".Catalogue_EmployeeActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".RequisitionEmployeeActivity" />
         <activity android:name=".InventoryActivity" />
         <activity android:name=".StoreClerk.StoreClerk_StockCardActivity" />
@@ -38,7 +39,8 @@
 
         </activity>
         <activity android:name=".HeadManageRequisitionActivity" />
-        <activity android:name=".ViewPendingRequisitionDetailsActivity"></activity>
+        <activity android:name=".ViewPendingRequisitionDetailsActivity"
+                    android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>

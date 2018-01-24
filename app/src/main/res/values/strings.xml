@@ -32,6 +32,8 @@
     <string name="button_additem">Add Item</string>
     <string name="button_cancel">Cancel</string>
     <string name="text_enterDesiredQty">Enter Desired Quantity:</string>
+    <string name = "text_pendingrep_empname">Employee Name: %1$s</string>
+    <string name = "text_pendingrep_reqno">Requisition No.: %1$s</string>
 
     <!-- StoreClerk Menu -->
     <string name="scMenuItem1">Inventory</string>
@@ -92,6 +94,8 @@
 
     <!-- StoreClerk Disbursement Usage -->
     <string name="disburseConfirmQuantity">CONFIRM QUANTITY</string>
+    <string name="hint_remarks_pendingreq">Enter Remarks here...(under 300 char)</string>
+    <string name="button_approve">Approve</string>
     <string-array name="disburseDept">
         <item>Registrar</item>
         <item>English</item>

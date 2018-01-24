@@ -1,17 +1,24 @@
 package com.logicuniv.mlussis;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,31 +28,32 @@ import java.util.HashMap;
 
 public class RequisitionEmployeeActivity extends Activity {
 
-    Requisition req;
-    ArrayList<RequisitionDetail> reqDetList;
+    Requisition req = new Requisition();
+    ArrayList<RequisitionDetail> reqDetList=new ArrayList<>();
     SharedPreferences pref;
     RequisitionEmployeeArrayAdapter adapt;
     String saveReq;
     SharedPreferences.Editor edit;
 
-
+    ListView reqItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requisition_employee);
+        setTitle("Raise Requisition");
         //restoreInstance(savedInstanceState);
         pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String requisitionNo = pref.getString("ReqNo",saveReq);
-//        Log.e("joel",requisitionNo.toString());
-
-
-
+        String requisitionNo = pref.getString("ReqNo",saveReq); //use this to get Requisition and RequsitionDetail
+        //Log.e("joel",requisitionNo.toString()); y
 
         Button button_addItem = (Button) findViewById(R.id.button_requisition_employee_addItem);
         Button button_submitReq = (Button) findViewById(R.id.button_requisition_employee_submit);
         Button button_cancelReq = (Button) findViewById(R.id.button_requisition_employee_cancelReq);
-        ListView reqItemList = (ListView) findViewById(R.id.listView_requisition_employee_raised);
+        reqItemList = (ListView) findViewById(R.id.listView_requisition_employee_raised);
+
+        registerForContextMenu(reqItemList);
+        reqItemList.setLongClickable(true);
 
         Intent i = getIntent();
         Bundle b = i.getBundleExtra("bundle");
@@ -62,25 +70,51 @@ public class RequisitionEmployeeActivity extends Activity {
             reqDetList=RequisitionDetail.getRequisitionDetail(requisitionNo);
         }
 
-        if (req!=null||reqDetList!=(null))
+        adapt = new RequisitionEmployeeArrayAdapter(this,reqDetList);
+
+        if (req.isEmpty()||reqDetList.isEmpty())
+        {
+
+
+            Date currentTime = Calendar.getInstance().getTime();
+            req = new Requisition("R1","E001",Calendar.getInstance().getTime());
+            //reqDetList= new ArrayList<>();      //createRequisitionDetailsArrayList
+            RequisitionDetail reqDet = new RequisitionDetail((String)req.get("ReqNo"),sc.get("ItemNo"),qty);
+            reqDetList.add(reqDet);
+        }
+        else
         {
             RequisitionDetail reqDetAdd = new RequisitionDetail((String)req.get("ReqNo"),sc.get("ItemNo"),qty);
 
             Log.e("joel",reqDetAdd.toString());
             reqDetList.add(reqDetAdd);
-            //adapt.add(reqDetAdd);
-        }
-        else
-        {
+            adapt.add(reqDetAdd);
+            Log.e("joel",reqDetList.toString());
 
-            Date currentTime = Calendar.getInstance().getTime();
-            req = new Requisition("R1"," E001",Calendar.getInstance().getTime());
-            reqDetList= new ArrayList<>();      //createRequisitionDetailsArrayList
-            RequisitionDetail reqDet = new RequisitionDetail((String)req.get("ReqNo"),sc.get("ItemNo"),qty);
-            reqDetList.add(reqDet);
         }
-            adapt = new RequisitionEmployeeArrayAdapter(this,reqDetList);
+
         reqItemList.setAdapter(adapt);
+
+//        if (req!=null||reqDetList!=(null))
+//        {
+//            RequisitionDetail reqDetAdd = new RequisitionDetail((String)req.get("ReqNo"),sc.get("ItemNo"),qty);
+//
+//            Log.e("joel",reqDetAdd.toString());
+//            reqDetList.add(reqDetAdd);
+//            adapt.add(reqDetAdd);
+//            Log.e("joel",reqDetList.toString());
+//        }
+//        else
+//        {
+//
+//            Date currentTime = Calendar.getInstance().getTime();
+//            req = new Requisition("R1","E001",Calendar.getInstance().getTime());
+//            reqDetList= new ArrayList<>();      //createRequisitionDetailsArrayList
+//            RequisitionDetail reqDet = new RequisitionDetail((String)req.get("ReqNo"),sc.get("ItemNo"),qty);
+//            reqDetList.add(reqDet);
+//        }
+//            adapt = new RequisitionEmployeeArrayAdapter(this,reqDetList);
+//        reqItemList.setAdapter(adapt);
 
 
 //        ArrayAdapter<RequisitionDetail> requisitionDetailArrayAdapter = new ArrayAdapter<RequisitionDetail>(this, R.layout.row_list_catalogue_employee,reqDetList);
@@ -103,13 +137,15 @@ public class RequisitionEmployeeActivity extends Activity {
         View.OnClickListener ocl_reject = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                req.equals(null);
-                reqDetList.equals(null); //or set it to null?
+                req.clear();
+                reqDetList.clear(); //or set it to null?
                 adapt.clear();
-                edit = pref.edit();
                 edit.clear();
+                edit.remove("ReqNo");
                 edit.commit();
                 Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
+                startActivity(intent);
             }
         };
         button_cancelReq.setOnClickListener(ocl_reject);
@@ -120,35 +156,80 @@ public class RequisitionEmployeeActivity extends Activity {
                 Requisition.addRequisition(req);
                 RequisitionDetail.addRequisitionDetail(reqDetList);
                 Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
-                req.equals(null);
-                reqDetList.equals(null); //or set it to null?
-                edit = pref.edit();
+                req.clear();
+                reqDetList.clear(); //or set it to null?
                 edit.clear();
+                edit.remove("ReqNo");
                 edit.commit();
+
                 adapt.clear();
             }
         };
         button_submitReq.setOnClickListener(ocl_submit);
 
+    }
 
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_req_employee_context, menu);
 
     }
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//
-//        outState.putSerializable("Req",req);
-//        outState.putSerializable("List", reqDetList);
-//    }
-//
-//    void restoreInstance (Bundle state)
-//    {
-//        if (state!=null)
-//        {
-//            req = (Requisition)state.get("Req");
-//            Log.e("joel",req.toString());
-//            reqDetList = (ArrayList<RequisitionDetail>) state.get("List");
-//            Log.e("joel",reqDetList.toString());
-//        }
-//    }
+
+    public boolean onContextItemSelected(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        final RequisitionDetail reqDet = adapt.getItem(info.position);
+        //find out which menu item was pressed
+        switch (item.getItemId()) {
+            case R.id.option1:
+
+
+
+                StationeryCatalogue sc = StationeryCatalogue.searchCatalogueById((String)reqDet.get("ItemNo"));
+
+                final Dialog d = new Dialog(RequisitionEmployeeActivity.this);
+                d.setTitle("Add to Requisition");
+                d.setContentView(R.layout.dialog_catalogue_employee);
+                //d.setCancelable(false);
+                Button buttonCancel = d.findViewById(R.id.dialog_catalogue_employee_buttonCancel);
+                Button buttonAdd = d.findViewById(R.id.dialog_catalogue_employee_buttonAddItem);
+                TextView tv_itemNo = d.findViewById(R.id.textView_dialog_catalogue_employee_itemNo);
+                final EditText et_qty = d.findViewById(R.id.editText_dialog_catalogue_employee_qty);
+                tv_itemNo.setText(sc.get("ItemNo").toString());
+                et_qty.setText(reqDet.get("Qty").toString());
+                buttonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        d.dismiss();
+                    }
+                });
+
+                buttonAdd.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        String qty = et_qty.getText().toString();
+                        reqDet.put("Qty",qty);
+                                Log.e("joel",reqDet.toString());
+                        Toast.makeText(RequisitionEmployeeActivity.this, "Quantity Updated",Toast.LENGTH_SHORT).show();
+                       reqItemList.setAdapter(reqItemList.getAdapter());
+                        d.dismiss();
+                    }
+                });
+                d.show();
+                return true;
+            case R.id.option2:
+
+                   reqDetList.remove(reqDet);
+                Toast.makeText(RequisitionEmployeeActivity.this, "Item Deleted",Toast.LENGTH_SHORT).show();
+                reqItemList.setAdapter(reqItemList.getAdapter());
+
+                return true;
+            default:
+                return false;
+        }
+    }
+
 }

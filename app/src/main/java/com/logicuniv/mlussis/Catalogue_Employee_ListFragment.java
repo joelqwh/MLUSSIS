@@ -27,6 +27,8 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
 
 
     String itemNo;
+    StationeryCatalogue b;
+    EditText et_qty;
 
     public Catalogue_Employee_ListFragment() {
         // Required empty public constructor
@@ -55,7 +57,9 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView av, View v, int position, long id) {
-        final StationeryCatalogue b = (StationeryCatalogue) getListAdapter().getItem(position);
+        super.onListItemClick(av,v,position,id);
+
+        b = (StationeryCatalogue) getListAdapter().getItem(position);
 
         final Dialog d = new Dialog(getActivity());
         d.setTitle("Add to Requisition");
@@ -64,7 +68,7 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
         Button buttonCancel = d.findViewById(R.id.dialog_catalogue_employee_buttonCancel);
         Button buttonAdd = d.findViewById(R.id.dialog_catalogue_employee_buttonAddItem);
         TextView tv_itemNo = d.findViewById(R.id.textView_dialog_catalogue_employee_itemNo);
-        final EditText et_qty = d.findViewById(R.id.editText_dialog_catalogue_employee_qty);
+        et_qty = d.findViewById(R.id.editText_dialog_catalogue_employee_qty);
         tv_itemNo.setText(b.get("ItemNo").toString());
         et_qty.setText("1");
 

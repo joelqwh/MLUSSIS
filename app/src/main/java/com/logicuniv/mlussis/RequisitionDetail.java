@@ -24,17 +24,17 @@ public class RequisitionDetail extends HashMap {
     public static void addRequisitionDetail (ArrayList<RequisitionDetail> alrd)
     {
         alalrd.add(alrd);
-        Log.e("joel",alalrd.toString());;
+//        Log.e("joel",alalrd.toString());;
     }
 
     public static ArrayList<RequisitionDetail> getRequisitionDetail(String rnum)
     {
-        RequisitionDetail reqA = new RequisitionDetail("R1","I001","2");
-        RequisitionDetail reqB = new RequisitionDetail("R1","I002","3");
-        ArrayList<RequisitionDetail> alrrrrd = new ArrayList<>();
-        alrrrrd.add(reqA);
-        alrrrrd.add(reqB);
-        addRequisitionDetail(alrrrrd);      //just for dummy purposes
+//        RequisitionDetail reqA = new RequisitionDetail("R1","I001","2");
+//        RequisitionDetail reqB = new RequisitionDetail("R1","I002","3");
+//        ArrayList<RequisitionDetail> alrrrrd = new ArrayList<>();
+//        alrrrrd.add(reqA);
+//        alrrrrd.add(reqB);
+//        addRequisitionDetail(alrrrrd);      //just for dummy purposes
 
         ArrayList<RequisitionDetail> pack = new ArrayList<>();
         for (ArrayList<RequisitionDetail> alrd:alalrd)

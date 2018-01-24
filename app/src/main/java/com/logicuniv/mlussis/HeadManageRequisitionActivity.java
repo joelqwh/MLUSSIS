@@ -20,6 +20,7 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_head_manage_requisition);
+        setTitle("View Pending Requisitions");
 
         ListView lv_manageReq = findViewById(R.id.listView_managereqlist_deputy);
 
@@ -35,7 +36,7 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Requisition r = (Requisition) parent.getAdapter().getItem(position);
         Intent intent = new Intent(this, ViewPendingRequisitionDetailsActivity.class);
-        intent.putExtra("Req",r);
+        intent.putExtra("Req",(String)r.get("ReqNo"));
 
         startActivity(intent);
     }

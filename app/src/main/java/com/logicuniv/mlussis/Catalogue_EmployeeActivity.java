@@ -10,5 +10,6 @@ public class Catalogue_EmployeeActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalogue__employee);
+        setTitle("Item Catalogue");
     }
 }

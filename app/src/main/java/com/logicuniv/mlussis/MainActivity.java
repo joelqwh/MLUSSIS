@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
                 startActivity(new Intent(this, DisbursementActivity.class));
                 return true;
             case R.id.empMenuItem3:
+                startActivity(new Intent(this,HeadManageRequisitionActivity.class));        //temporary
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

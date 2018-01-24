@@ -44,12 +44,12 @@ public class StationeryCatalogue extends HashMap<String, String> implements Seri
         StationeryCatalogue scl1 = new StationeryCatalogue("I001","Clips 1", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
         StationeryCatalogue scl2 = new StationeryCatalogue("I002","Pilot", "Pen", "Each", "B8", "CHEP", "OMEG", "BANES");
         StationeryCatalogue scl3 = new StationeryCatalogue("I003","Cniballkhlasdjhkgkdslfahkgsadgkjlasdkfjaksdjlhfka", "Pen", "Each", "C4","ALPA","BANES","CHEP");
-        StationeryCatalogue scl4 = new StationeryCatalogue("I001","Clips 2", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
-        StationeryCatalogue scl5 = new StationeryCatalogue("I001","Clips 3", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
-        StationeryCatalogue scl6 = new StationeryCatalogue("I001","Clips 4", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
-        StationeryCatalogue scl7 = new StationeryCatalogue("I001","Clips 5", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
-        StationeryCatalogue scl8 = new StationeryCatalogue("I001","Clips 6", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
-        StationeryCatalogue scl9 = new StationeryCatalogue("I001","Clips 7", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
+        StationeryCatalogue scl4 = new StationeryCatalogue("I004","Clips 2", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
+        StationeryCatalogue scl5 = new StationeryCatalogue("I005","Clips 3", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
+        StationeryCatalogue scl6 = new StationeryCatalogue("I006","Clips 4", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
+        StationeryCatalogue scl7 = new StationeryCatalogue("I007","Clips 5", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
+        StationeryCatalogue scl8 = new StationeryCatalogue("I008","Clips 6", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
+        StationeryCatalogue scl9 = new StationeryCatalogue("I009","Clips 7", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
         alsc.add(scl1);
         alsc.add(scl2);
         alsc.add(scl3);

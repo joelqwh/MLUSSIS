@@ -7,22 +7,83 @@
     tools:context="com.logicuniv.mlussis.ViewPendingRequisitionDetailsActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView_pending_req_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Req No"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView_pending_req_empname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="42dp" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Emp Name"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_pending_req_no" />
 
     <ListView
-        android:layout_width="368dp"
-        android:layout_height="434dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="69dp" />
+        android:id="@+id/listView_pending_req_details"
+        android:layout_width="0dp"
+        android:layout_height="225dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_pending_req_empname" />
+
+    <Button
+        android:id="@+id/button_pending_req_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="36dp"
+        android:background="@android:color/holo_green_dark"
+        android:text="@string/button_approve"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_pending_req_remarks" />
+
+    <Button
+        android:id="@+id/button_pending_req_reject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:background="@android:color/holo_red_dark"
+        android:text="@string/button_reject"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.585"
+        app:layout_constraintStart_toEndOf="@+id/button_pending_req_approve"
+        app:layout_constraintTop_toBottomOf="@+id/editText_pending_req_remarks" />
+
+    <EditText
+        android:id="@+id/editText_pending_req_remarks"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="@string/hint_remarks_pendingreq"
+        android:inputType="textMultiLine"
+        android:maxLength="300"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listView_pending_req_details" />
+
 </android.support.constraint.ConstraintLayout>
