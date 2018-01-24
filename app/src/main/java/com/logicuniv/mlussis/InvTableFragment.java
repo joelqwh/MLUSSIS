@@ -8,9 +8,11 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.logicuniv.mlussis.StoreClerk.StoreClerk_EditStockQtyActivity;
 import com.logicuniv.mlussis.StoreClerk.StoreClerk_StockCardActivity;
 
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ public class InvTableFragment extends ListFragment {
         View v = inflater.inflate(R.layout.inv_list, container, false);
 
         Bundle args = getArguments();
-        ArrayList<StationeryCatalogue> alscc = (ArrayList<StationeryCatalogue>)args.getSerializable("stationerycatalogue");
+        final ArrayList<StationeryCatalogue> alscc = (ArrayList<StationeryCatalogue>)args.getSerializable("stationerycatalogue");
 
         SimpleAdapter adapter = new SimpleAdapter(getActivity(),alscc,
                 R.layout.fragment_inv_row,
@@ -50,13 +52,32 @@ public class InvTableFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
         getListView().addHeaderView(header);
+
+        AdapterView.OnItemLongClickListener listener = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> l, View v, int position, long id) {
+            StationeryCatalogue sc = (StationeryCatalogue) getListAdapter().getItem(position-1);
+            Intent intent = new Intent(getActivity(), StoreClerk_EditStockQtyActivity.class);
+            intent.putExtra("invdetails", sc);
+            startActivity(intent);
+
+            return true;
+        }
+        };
+        getListView().setOnItemLongClickListener(listener);
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         StationeryCatalogue sc = (StationeryCatalogue) getListAdapter().getItem(position-1);
         Intent intent = new Intent(getActivity(), StoreClerk_StockCardActivity.class);
-        intent.putExtra("invdetails", sc);
+        intent.putExtra("invdetails1", sc);
         startActivity(intent);
     }
+
+    /*@Override
+    public boolean onItemLongClick(AdapterView<?> l, View v, int position, long id) {
+        Toast.makeText(getActivity().getBaseContext(),"long click", Toast.LENGTH_LONG).show();
+        return false;
+    }*/
 }

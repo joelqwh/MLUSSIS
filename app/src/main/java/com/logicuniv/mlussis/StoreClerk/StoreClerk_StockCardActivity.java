@@ -8,17 +8,20 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.logicuniv.mlussis.R;
+import com.logicuniv.mlussis.StationeryCatalogue;
 
 import java.util.HashMap;
 
 public class StoreClerk_StockCardActivity extends Activity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_clerk__stock_card_);
         Bundle b = getIntent().getExtras();
-        HashMap<String, String> sc = (HashMap<String, String>) b.get("invdetails");
+        HashMap<String, String> sc = (HashMap<String, String>) b.get("invdetails1");
         TextView t1 = findViewById(R.id.textViewItemCode);
         t1.setText(sc.get("ItemNo"));
         TextView t2 = findViewById(R.id.textViewItemDesc);
@@ -40,7 +43,10 @@ public class StoreClerk_StockCardActivity extends Activity {
         itemStockEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TextView t1 = findViewById(R.id.textViewItemCode);
+                StationeryCatalogue sc1 = StationeryCatalogue.searchCatalogueById(t1.getText().toString());
                 Intent intent = new Intent(getApplicationContext(),StoreClerk_EditStockQtyActivity.class);
+                intent.putExtra("invdetails", sc1);
                 startActivity(intent);
             }
         });
