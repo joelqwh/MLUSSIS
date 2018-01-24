@@ -2,11 +2,10 @@ package com.logicuniv.mlussis.StoreClerk;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.logicuniv.mlussis.DisbursementDetails;
+import com.logicuniv.mlussis.Model.DisbursementDetail;
 import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
@@ -23,11 +22,10 @@ public class StoreClerk_ConfirmationActivity extends Activity {
         TextView confDeptRep = (TextView)findViewById(R.id.confDeptRep);
         confDeptRep.setText(b.getString("repName"));
         String confdisbNo = b.getString("disbNo");
-        Log.e("fish", confdisbNo);
 
-        ArrayList<DisbursementDetails> disAdd = DisbursementDetails.getDisbursementDetails(confdisbNo);
+        ArrayList<DisbursementDetail> disAdd = DisbursementDetail.getDisbursementDetails(confdisbNo);
         DisbursementItemArrayAdapter ddadapt = new DisbursementItemArrayAdapter(this,disAdd);
         ListView conf = (ListView)findViewById(R.id.listView_confirmation_storeclerk);
         conf.setAdapter(ddadapt);
-    };
+    }
 }

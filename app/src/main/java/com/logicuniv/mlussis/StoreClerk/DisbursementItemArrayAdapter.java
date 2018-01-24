@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.logicuniv.mlussis.Model.DisbursementDetail;
 import com.logicuniv.mlussis.R;
-import com.logicuniv.mlussis.Model.RequisitionDetail;
 import com.logicuniv.mlussis.StationeryCatalogue;
 
 import java.util.ArrayList;

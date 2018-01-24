@@ -10,7 +10,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.logicuniv.mlussis.DisbursementDetails;
+import com.logicuniv.mlussis.Model.DisbursementDetail;
 import com.logicuniv.mlussis.R;
 import com.logicuniv.mlussis.StationeryCatalogue;
 
@@ -43,7 +43,7 @@ public class StoreClerk_DisbursementActivity extends Activity {
                 Bundle b = new Bundle();
                 b.putSerializable("deptName", scDeptName.getSelectedItem().toString());
                 b.putSerializable("repName", scRepName.getText().toString());
-                String disbNo = DisbursementDetails.getCurrentDisbursementDetailsForDepartment().get(0).get("DisbursementNo").toString();
+                String disbNo = DisbursementDetail.getCurrentDisbursementDetailsForDepartment().get(0).get("DisbursementNo");
                 b.putSerializable("disbNo", disbNo);
                 intent.putExtra("bundle", b);
                 //Toast.makeText(getApplicationContext(),disbNo,Toast.LENGTH_LONG).show();
