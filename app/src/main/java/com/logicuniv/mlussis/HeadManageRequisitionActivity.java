@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 public class HeadManageRequisitionActivity extends Activity implements AdapterView.OnItemClickListener{
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +29,12 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
         ArrayList<Requisition> alr = (ArrayList<Requisition>) RequisitionController.getPendingRequisitions();
 
         ListAdapter adapt = new SimpleAdapter(this,alr,R.layout.row_list_managereq_deputy, new String[]{"IssuedBy", "ReqNo", "DateIssued"},
-                new int[]{R.id.textView__managereq_empname, R.id.textView_managereq_reqno, R.id.textView_managereq_reqdate});
+                new int[]{R.id.textView__managereq_empname, R.id.textView_managereq_reqno, R.id.textView_managereq_reqdate});   //change issuedby to empName
         lv_manageReq.setAdapter(adapt);
         lv_manageReq.setOnItemClickListener(this);      //need to change
+
+        View header = getLayoutInflater().inflate(R.layout.header_row_list_managereq_deputy,null);
+        lv_manageReq.addHeaderView(header,null,false);
     }
 
     @Override

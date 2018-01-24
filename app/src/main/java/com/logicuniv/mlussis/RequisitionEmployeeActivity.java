@@ -37,7 +37,6 @@ public class RequisitionEmployeeActivity extends Activity {
     RequisitionEmployeeArrayAdapter adapt;
     String saveReq;
     SharedPreferences.Editor edit;
-
     ListView reqItemList;
 
     @Override
@@ -54,6 +53,8 @@ public class RequisitionEmployeeActivity extends Activity {
         Button button_submitReq = (Button) findViewById(R.id.button_requisition_employee_submit);
         Button button_cancelReq = (Button) findViewById(R.id.button_requisition_employee_cancelReq);
         reqItemList = (ListView) findViewById(R.id.listView_requisition_employee_raised);
+        View header = getLayoutInflater().inflate(R.layout.header_row_list_requisition_employee,null);
+        reqItemList.addHeaderView(header,null,false);
 
         registerForContextMenu(reqItemList);
         reqItemList.setLongClickable(true);
@@ -187,12 +188,10 @@ public class RequisitionEmployeeActivity extends Activity {
     public boolean onContextItemSelected(MenuItem item) {
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        final RequisitionDetail reqDet = adapt.getItem(info.position);
+        final RequisitionDetail reqDet = (RequisitionDetail) reqItemList.getItemAtPosition(info.position);  //need to check
         //find out which menu item was pressed
         switch (item.getItemId()) {
             case R.id.option1:
-
-
 
                 StationeryCatalogue sc = StationeryCatalogueController.searchCatalogueById((String)reqDet.get("ItemNo"));
 
@@ -206,6 +205,7 @@ public class RequisitionEmployeeActivity extends Activity {
                 final EditText et_qty = d.findViewById(R.id.editText_dialog_catalogue_employee_qty);
                 tv_itemNo.setText(sc.get("ItemNo").toString());
                 et_qty.setText(reqDet.get("Qty").toString());
+                buttonAdd.setText("Edit Qty");
                 buttonCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -239,5 +239,4 @@ public class RequisitionEmployeeActivity extends Activity {
                 return false;
         }
     }
-
 }

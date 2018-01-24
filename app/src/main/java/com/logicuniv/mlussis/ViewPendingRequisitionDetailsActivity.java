@@ -36,6 +36,10 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
         TextView tv_empname = findViewById(R.id.textView_pending_req_empname);
         TextView tv_reqNo = findViewById(R.id.textView_pending_req_no);
         ListView lv_reqdetails = findViewById(R.id.listView_pending_req_details);
+
+        View header = getLayoutInflater().inflate(R.layout.header_row_list_requisition_employee,null);
+        lv_reqdetails.addHeaderView(header,null,false);
+
         Button button_approve = findViewById(R.id.button_pending_req_approve);
         Button button_reject = findViewById(R.id.button_pending_req_reject);
         final EditText editText_remarks = findViewById(R.id.editText_pending_req_remarks);

@@ -6,7 +6,9 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.logicuniv.mlussis.Backend.DisbursementDetailController;
 import com.logicuniv.mlussis.DisbursementDetails;
+import com.logicuniv.mlussis.Model.DisbursementDetail;
 import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
@@ -25,9 +27,9 @@ public class StoreClerk_ConfirmationActivity extends Activity {
         String confdisbNo = b.getString("disbNo");
         Log.e("fish", confdisbNo);
 
-        ArrayList<DisbursementDetails> disAdd = DisbursementDetails.getDisbursementDetails(confdisbNo);
-        DisbursementItemArrayAdapter ddadapt = new DisbursementItemArrayAdapter(this,disAdd);
-        ListView conf = (ListView)findViewById(R.id.listView_confirmation_storeclerk);
-        conf.setAdapter(ddadapt);
+//        ArrayList<DisbursementDetail> disAdd = DisbursementDetailController.getDisbursementDetail(confdisbNo);
+//        DisbursementItemArrayAdapter ddadapt = new DisbursementItemArrayAdapter(this,disAdd);
+//        ListView conf = (ListView)findViewById(R.id.listView_confirmation_storeclerk);
+//        conf.setAdapter(ddadapt);
     };
 }

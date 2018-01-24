@@ -29,6 +29,7 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
     String itemNo;
     StationeryCatalogue b;
     EditText et_qty;
+    View header;
 
     public Catalogue_Employee_ListFragment() {
         // Required empty public constructor
@@ -40,6 +41,7 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        header = inflater.inflate(R.layout.header_row_list_catalogue_employee, null);
         View v = inflater.inflate(R.layout.list_catalogue_employee, container, false);
         Bundle arg = getArguments();
 
@@ -51,6 +53,8 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
                     new int[]{R.id.textView_req_desc, R.id.textView_cat_desc, R.id.textView_req_uom});
             setListAdapter(adapter);
         }
+
+
         return v;
 
     }
@@ -59,7 +63,8 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
     public void onListItemClick(ListView av, View v, int position, long id) {
         super.onListItemClick(av,v,position,id);
 
-        b = (StationeryCatalogue) getListAdapter().getItem(position);
+        //b = (StationeryCatalogue) getListAdapter().getItem(position);
+        b = (StationeryCatalogue) av.getItemAtPosition(position);
 
         final Dialog d = new Dialog(getActivity());
         d.setTitle("Add to Requisition");
@@ -97,5 +102,10 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
                     }
                 });
         d.show();
+    }
+
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getListView().addHeaderView(header,null,false);
     }
 }
