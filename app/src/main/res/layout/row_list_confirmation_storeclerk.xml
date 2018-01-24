@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/scDisburseItemDesc"
+        android:id="@+id/scConfirmItemDesc"
         android:layout_width="301dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -23,8 +23,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/scDisburseItemQty"
+    <TextView
+        android:id="@+id/scConfirmItemQty"
         android:layout_width="68dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -36,7 +36,6 @@
         android:text="TextView"
         android:singleLine="true"
         android:imeOptions="actionDone"
-        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
