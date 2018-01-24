@@ -21,6 +21,9 @@ public class DisbursementDetail extends HashMap<String, String> {
         put("Received", received);
     }
 
+
+
+    //ALL AFTER THIS TO BE DELETED
     public static ArrayList<DisbursementDetail> getCurrentDisbursementDetailsForDepartment()
     {
         //JSONWAY
