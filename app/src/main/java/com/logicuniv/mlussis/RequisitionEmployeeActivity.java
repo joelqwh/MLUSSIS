@@ -12,19 +12,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.logicuniv.mlussis.Backend.RequisitionController;
+import com.logicuniv.mlussis.Backend.RequisitionDetailController;
+import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
+import com.logicuniv.mlussis.Model.Requisition;
+import com.logicuniv.mlussis.Model.RequisitionDetail;
+import com.logicuniv.mlussis.Model.StationeryCatalogue;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 
 public class RequisitionEmployeeActivity extends Activity {
 
@@ -60,14 +63,14 @@ public class RequisitionEmployeeActivity extends Activity {
 
         String itemNo = b.getString("ItemNo");
 
-        StationeryCatalogue sc = StationeryCatalogue.searchCatalogueById(itemNo);
+        StationeryCatalogue sc = StationeryCatalogueController.searchCatalogueById(itemNo);
 
         String qty =b.getString("qty");
 
         if(requisitionNo!=null)
         {
-            req= Requisition.getRequisitionById(requisitionNo);
-            reqDetList=RequisitionDetail.getRequisitionDetail(requisitionNo);
+            req= RequisitionController.getRequisitionById(requisitionNo);
+            reqDetList= RequisitionDetailController.getRequisitionDetail(requisitionNo);
         }
 
         adapt = new RequisitionEmployeeArrayAdapter(this,reqDetList);
@@ -127,6 +130,8 @@ public class RequisitionEmployeeActivity extends Activity {
                 saveReq = (String)req.get("ReqNo");
                 edit.putString("ReqNo",saveReq);
                 edit.apply();
+                //will change to add new Requisition and RequisitionDetails when it is up, SharedPref doesnt really work well here.
+
                 Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
                 startActivity(intent); //check if Requisition gets lost when adding new item. need to ensure that it stays. StartActivityForResult?
 
@@ -140,8 +145,8 @@ public class RequisitionEmployeeActivity extends Activity {
                 req.clear();
                 reqDetList.clear(); //or set it to null?
                 adapt.clear();
-                edit.clear();
-                edit.remove("ReqNo");
+                edit.clear();           //removeRequisition
+                edit.remove("ReqNo");       //removeRequisitionDetail
                 edit.commit();
                 Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
@@ -153,8 +158,8 @@ public class RequisitionEmployeeActivity extends Activity {
         View.OnClickListener ocl_submit = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Requisition.addRequisition(req);
-                RequisitionDetail.addRequisitionDetail(reqDetList);
+                RequisitionController.addRequisition(req);
+                RequisitionDetailController.addRequisitionDetail(reqDetList);
                 Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
                 req.clear();
                 reqDetList.clear(); //or set it to null?
@@ -163,6 +168,9 @@ public class RequisitionEmployeeActivity extends Activity {
                 edit.commit();
 
                 adapt.clear();
+
+                Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
+                startActivity(intent);
             }
         };
         button_submitReq.setOnClickListener(ocl_submit);
@@ -186,7 +194,7 @@ public class RequisitionEmployeeActivity extends Activity {
 
 
 
-                StationeryCatalogue sc = StationeryCatalogue.searchCatalogueById((String)reqDet.get("ItemNo"));
+                StationeryCatalogue sc = StationeryCatalogueController.searchCatalogueById((String)reqDet.get("ItemNo"));
 
                 final Dialog d = new Dialog(RequisitionEmployeeActivity.this);
                 d.setTitle("Add to Requisition");

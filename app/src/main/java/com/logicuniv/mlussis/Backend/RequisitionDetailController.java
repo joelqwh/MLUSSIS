@@ -1,25 +1,16 @@
-package com.logicuniv.mlussis;
+package com.logicuniv.mlussis.Backend;
 
-import android.os.Parcelable;
-import android.util.Log;
+import com.logicuniv.mlussis.Model.RequisitionDetail;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
- * Created by e0231991 on 19/1/2018.
+ * Created by e0231991 on 24/1/2018.
  */
 
-public class RequisitionDetail extends HashMap {
+public class RequisitionDetailController {
 
     static ArrayList<ArrayList<RequisitionDetail>> alalrd = new ArrayList<>();
-
-    public RequisitionDetail(String reqNo, String itemNo, String qty) {
-        put("ReqNo", reqNo);
-        put("ItemNo", itemNo);
-        put("Qty", qty);
-    }
 
     public static void addRequisitionDetail (ArrayList<RequisitionDetail> alrd)
     {
@@ -48,6 +39,15 @@ public class RequisitionDetail extends HashMap {
             }
         }
         return pack;
+    }
+
+    public void removeRequisitionDetail(RequisitionDetail rd){
+
+    }
+
+    public void updateRequisitionDetail(RequisitionDetail rd)
+    {
+
     }
 
 }

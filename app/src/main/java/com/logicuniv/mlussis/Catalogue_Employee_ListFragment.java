@@ -6,7 +6,6 @@ import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,8 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import java.io.Serializable;
+import com.logicuniv.mlussis.Model.StationeryCatalogue;
+
 import java.util.ArrayList;
 
 

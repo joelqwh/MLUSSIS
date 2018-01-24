@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.logicuniv.mlussis.Model.StationeryCatalogue;
 import com.logicuniv.mlussis.StoreClerk.StoreClerk_EditStockQtyActivity;
 import com.logicuniv.mlussis.StoreClerk.StoreClerk_StockCardActivity;
 

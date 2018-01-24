@@ -2,12 +2,15 @@ package com.logicuniv.mlussis;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
+import com.logicuniv.mlussis.Model.RequisitionDetail;
+import com.logicuniv.mlussis.Model.StationeryCatalogue;
 
 import java.util.ArrayList;
 
@@ -24,7 +27,7 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
     public View getView (int position, View convertView, ViewGroup parent)
     {
         RequisitionDetail reqDet = getItem(position);
-        StationeryCatalogue sc = StationeryCatalogue.searchCatalogueById((String)reqDet.get("ItemNo"));
+        StationeryCatalogue sc = StationeryCatalogueController.searchCatalogueById((String)reqDet.get("ItemNo"));
 
         if(convertView==null)
         {

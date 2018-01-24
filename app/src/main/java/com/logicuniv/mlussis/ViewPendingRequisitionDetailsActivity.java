@@ -10,6 +10,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.logicuniv.mlussis.Backend.RequisitionController;
+import com.logicuniv.mlussis.Backend.RequisitionDetailController;
+import com.logicuniv.mlussis.Model.Requisition;
+import com.logicuniv.mlussis.Model.RequisitionDetail;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -25,8 +30,8 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
         setTitle("Requisition Details");
 
         Intent i = getIntent();
-        req = Requisition.getRequisitionById((String)i.getExtras().get("Req"));
-        ArrayList<RequisitionDetail> al_rd = RequisitionDetail.getRequisitionDetail((String)req.get("ReqNo"));
+        req = RequisitionController.getRequisitionById((String)i.getExtras().get("Req"));
+        ArrayList<RequisitionDetail> al_rd = RequisitionDetailController.getRequisitionDetail((String)req.get("ReqNo"));
 
         TextView tv_empname = findViewById(R.id.textView_pending_req_empname);
         TextView tv_reqNo = findViewById(R.id.textView_pending_req_no);
@@ -52,7 +57,7 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
                     req.put("Remarks",editText_remarks.getText().toString());
                 }
 
-                //Requisition.updateRequisition(req);
+                //RequisitionController.updateRequisition(req);
                 Toast.makeText(ViewPendingRequisitionDetailsActivity.this,"Requisition Approved",Toast.LENGTH_LONG).show();
                 Intent i = new Intent(ViewPendingRequisitionDetailsActivity.this, HeadManageRequisitionActivity.class);
                 startActivity(i);
@@ -74,7 +79,7 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
                     req.put("Remarks",editText_remarks.getText().toString());
                 }
 
-                //Requisition.updateRequisition(req);
+                //RequisitionController.updateRequisition(req);
 
                 Toast.makeText(ViewPendingRequisitionDetailsActivity.this,"Requisition Rejected",Toast.LENGTH_LONG).show();
                 Intent i = new Intent(ViewPendingRequisitionDetailsActivity.this, HeadManageRequisitionActivity.class);

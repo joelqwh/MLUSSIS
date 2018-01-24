@@ -7,16 +7,11 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.logicuniv.mlussis.DisbursementDetails;
+import com.logicuniv.mlussis.Model.DisbursementDetail;
 import com.logicuniv.mlussis.R;
-import com.logicuniv.mlussis.StationeryCatalogue;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -37,7 +32,7 @@ public class StoreClerk_DisburseListFragment extends ListFragment {
         View v = inflater.inflate(R.layout.inv_list,container,false);
 
         Bundle args = getArguments();
-        ArrayList<DisbursementDetails> scdd = (ArrayList<DisbursementDetails>)args.getSerializable("disbursementdetails");
+        ArrayList<DisbursementDetail> scdd = (ArrayList<DisbursementDetail>)args.getSerializable("disbursementdetails");
 
         SimpleAdapter adapter = new SimpleAdapter(getActivity(), scdd,
                 R.layout.fragment_store_clerk_disburse_row,

@@ -1,13 +1,14 @@
 package com.logicuniv.mlussis;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.logicuniv.mlussis.Backend.DisbursementController;
+import com.logicuniv.mlussis.Model.Disbursement;
 
 
 public class DisbursementDetailsFragment extends Fragment {
@@ -18,7 +19,7 @@ public class DisbursementDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_disbursement_details, container, false);
-        Disbursement d = Disbursement.getCurrentDisbursementForDepartment("1");     //get parameter from login details when it is set up
+        Disbursement d = DisbursementController.getCurrentDisbursementForDepartment("1");     //get parameter from login details when it is set up
         if (d != null) {
             TextView tv_Dept = v.findViewById(R.id.textView_Dept);
             //getDepartmentName(d.get("DeptCode"));     //to initialise this method later

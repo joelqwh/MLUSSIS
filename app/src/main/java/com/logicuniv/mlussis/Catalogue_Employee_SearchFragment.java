@@ -7,13 +7,14 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
+import com.logicuniv.mlussis.Model.StationeryCatalogue;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 public class Catalogue_Employee_SearchFragment extends Fragment {
 
     private EditText searchtext;
-    private ArrayList<StationeryCatalogue> als = StationeryCatalogue.getCatalogue();
+    private ArrayList<StationeryCatalogue> als = StationeryCatalogueController.getCatalogue();
 
     public Catalogue_Employee_SearchFragment() {
         // Required empty public constructor

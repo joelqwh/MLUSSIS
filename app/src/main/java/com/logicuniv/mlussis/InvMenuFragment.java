@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
+
+import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
+import com.logicuniv.mlussis.Model.StationeryCatalogue;
 
 import java.util.ArrayList;
 
@@ -22,7 +24,7 @@ import java.util.ArrayList;
  */
 public class InvMenuFragment extends Fragment {
 
-    ArrayList<StationeryCatalogue> arraystationery = StationeryCatalogue.getCatalogue();
+    ArrayList<StationeryCatalogue> arraystationery = StationeryCatalogueController.getCatalogue();
     private EditText invSearch;
     private Spinner catSearch;
 

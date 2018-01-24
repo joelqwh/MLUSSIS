@@ -9,7 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.logicuniv.mlussis.DisbursementDetails;
+import com.logicuniv.mlussis.Backend.DisbursementDetailController;
+import com.logicuniv.mlussis.Model.DisbursementDetail;
 import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class StoreClerk_DisburseSpinFragment extends Fragment {
         // Required empty public constructor
     }
 
-    ArrayList<DisbursementDetails> disbursementdetails = DisbursementDetails.getCurrentDisbursementDetailsForDepartment();
+    ArrayList<DisbursementDetail> disbursementdetails = DisbursementDetailController.getCurrentDisbursementDetailsForDepartment();
 
 
     @Override
@@ -36,7 +37,7 @@ public class StoreClerk_DisburseSpinFragment extends Fragment {
         return v;
     }
 
-    void display(ArrayList<DisbursementDetails> disbursementdetails) {
+    void display(ArrayList<DisbursementDetail> disbursementdetails) {
         final String TAG = "DETAILS_FRAG";
         FragmentManager fm = getFragmentManager();
         FragmentTransaction trans = fm.beginTransaction();

@@ -7,8 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.R;
-import com.logicuniv.mlussis.StationeryCatalogue;
+import com.logicuniv.mlussis.Model.StationeryCatalogue;
 
 import java.util.HashMap;
 
@@ -44,7 +45,7 @@ public class StoreClerk_StockCardActivity extends Activity {
             @Override
             public void onClick(View v) {
                 TextView t1 = findViewById(R.id.textViewItemCode);
-                StationeryCatalogue sc1 = StationeryCatalogue.searchCatalogueById(t1.getText().toString());
+                StationeryCatalogue sc1 = StationeryCatalogueController.searchCatalogueById(t1.getText().toString());
                 Intent intent = new Intent(getApplicationContext(),StoreClerk_EditStockQtyActivity.class);
                 intent.putExtra("invdetails", sc1);
                 startActivity(intent);

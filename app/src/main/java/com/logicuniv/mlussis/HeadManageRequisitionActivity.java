@@ -1,18 +1,18 @@
 package com.logicuniv.mlussis;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.logicuniv.mlussis.Backend.RequisitionController;
+import com.logicuniv.mlussis.Model.Requisition;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class HeadManageRequisitionActivity extends Activity implements AdapterView.OnItemClickListener{
 
@@ -24,7 +24,7 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
 
         ListView lv_manageReq = findViewById(R.id.listView_managereqlist_deputy);
 
-        ArrayList<Requisition> alr = (ArrayList<Requisition>)Requisition.getPendingRequisitions();
+        ArrayList<Requisition> alr = (ArrayList<Requisition>) RequisitionController.getPendingRequisitions();
 
         ListAdapter adapt = new SimpleAdapter(this,alr,R.layout.row_list_managereq_deputy, new String[]{"IssuedBy", "ReqNo", "DateIssued"},
                 new int[]{R.id.textView__managereq_empname, R.id.textView_managereq_reqno, R.id.textView_managereq_reqdate});
