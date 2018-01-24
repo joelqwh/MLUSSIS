@@ -13,32 +13,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
 
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DisbursementActivity" />
+        <activity android:name=".RequisitionEmployeeActivity" />
+        <activity android:name=".HeadManageRequisitionActivity" />
+
         <activity
             android:name=".StoreClerk.StoreClerk_MainActivity"
             android:theme="@style/MainPage">
 
         </activity>
-        <activity android:name=".DisbursementActivity" />
         <activity android:name=".Catalogue_EmployeeActivity"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".RequisitionEmployeeActivity" />
         <activity android:name=".InventoryActivity" />
         <activity android:name=".StoreClerk.StoreClerk_StockCardActivity" />
         <activity android:name=".StoreClerk.StoreClerk_EditStockQtyActivity"></activity>
         <activity android:name=".StoreClerk.StoreClerk_DisbursementActivity"></activity>
-        <activity android:name=".storeclerk.StoreClerk_StockCard_Activity" />
-        <activity android:name=".storeclerk.StoreClerk_EditStockQtyActivity">
 
-        </activity>
-        <activity android:name=".HeadManageRequisitionActivity" />
         <activity android:name=".ViewPendingRequisitionDetailsActivity"
                     android:windowSoftInputMode="adjustPan"></activity>
     </application>

@@ -103,4 +103,6 @@
         <item>Commerce</item>
         <item>Zoology</item>
     </string-array>
+    <string name="enterPinReq">Enter PIN:</string>
+    <string name="scEnterpin">PIN</string>
 </resources>
