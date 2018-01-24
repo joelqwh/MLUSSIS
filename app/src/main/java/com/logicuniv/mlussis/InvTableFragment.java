@@ -52,7 +52,7 @@ public class InvTableFragment extends ListFragment {
 
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        getListView().addHeaderView(header);
+        getListView().addHeaderView(header,null,false);
 
         AdapterView.OnItemLongClickListener listener = new AdapterView.OnItemLongClickListener() {
         @Override
