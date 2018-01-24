@@ -19,7 +19,7 @@ public class LoginController {
         boolean result = false;
 
         String response = JSONParser.postStream(
-                R.string.server+"android.aspx",
+                App.LoginServer+"android.aspx",
                 "user="+username+"&pass="+password);
 
         if(response.length() > 2)

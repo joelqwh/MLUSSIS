@@ -53,7 +53,6 @@ public class InvMenuFragment extends Fragment {
                     }
                 }
                 display(stationerySearch);
-                //Toast.makeText(getActivity(), catSearched, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -81,7 +80,6 @@ public class InvMenuFragment extends Fragment {
                     }
                 }
                 display(stationerySearch);
-                //Toast.makeText(getActivity(), arraystationery.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override

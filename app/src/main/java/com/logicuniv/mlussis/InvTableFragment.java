@@ -75,10 +75,4 @@ public class InvTableFragment extends ListFragment {
         intent.putExtra("invdetails1", sc);
         startActivity(intent);
     }
-
-    /*@Override
-    public boolean onItemLongClick(AdapterView<?> l, View v, int position, long id) {
-        Toast.makeText(getActivity().getBaseContext(),"long click", Toast.LENGTH_LONG).show();
-        return false;
-    }*/
 }

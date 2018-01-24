@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">MLUSSIS</string>
-    <string name="server">http://172.17.255.135/</string>
     <string name="empMenuItem1_value">Create Requisition</string>
     <string name="empMenuItem2_value">View Disbursement</string>
     <string name="empMenuItem3_value">Logout</string>
