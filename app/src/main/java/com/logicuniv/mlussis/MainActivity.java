@@ -4,8 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.logicuniv.mlussis.Backend.App;
+import com.logicuniv.mlussis.Backend.LoginController;
 
 public class MainActivity extends Activity {
 
@@ -14,6 +19,21 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // TODO : Remove This
+        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
+
+        // Setting App Context for Backend
+        // TODO : Find a better way
+        App.setAppContext(getApplicationContext());
+
+        //If not logged in, goto login
+        if(!LoginController.IsCurrentSessionValid())
+        {
+            Log.d("MainActivity", "Session Invalid, Need to login again");
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
 

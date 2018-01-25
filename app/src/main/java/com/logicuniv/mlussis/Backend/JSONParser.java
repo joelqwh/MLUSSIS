@@ -61,7 +61,7 @@ public class JSONParser {
             }
             is.close();
         } catch (Exception e) {
-            Log.e("readStream Exception", "readStream Exception");
+            Log.e("readStream Exception", e.getMessage());
         }
         return(sb.toString());
     }
@@ -83,9 +83,9 @@ public class JSONParser {
             os.flush();
             is = conn.getInputStream();
         } catch (UnsupportedEncodingException e) {
-            Log.e("postStream Exception", "postStream Exception");
+            Log.e("postStream Exception", e.getMessage());
         } catch (Exception e) {
-            Log.e("postStream Exception", "postStream Exception");
+            Log.e("postStream Exception", e.getMessage());
         }
         return readStream(is);
     }
