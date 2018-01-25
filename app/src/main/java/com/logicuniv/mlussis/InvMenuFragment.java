@@ -43,13 +43,18 @@ public class InvMenuFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String catSearched = catSearch.getSelectedItem().toString();
+                String searchInfo = invSearch.getText().toString();
                 ArrayList<StationeryCatalogue> stationerySearch = new ArrayList<>();
                 for (StationeryCatalogue stationeryCatalogue : arraystationery) {
-                    if (stationeryCatalogue.get("Category").toUpperCase().equals(catSearched.toUpperCase())) {
+                    if (stationeryCatalogue.get("Category").toUpperCase().equals(catSearched.toUpperCase())
+                            && stationeryCatalogue.get("Description").toUpperCase().contains(searchInfo.toUpperCase())
+                            ) {
                         stationerySearch.add(stationeryCatalogue);
                     }
-                    else if (catSearched.toUpperCase().equals(("All items").toUpperCase())){
-                        stationerySearch = arraystationery;
+                    else if (catSearched.toUpperCase().equals(("All items").toUpperCase())
+                            && stationeryCatalogue.get("Description").toUpperCase().contains(searchInfo.toUpperCase())
+                            ){
+                        stationerySearch.add(stationeryCatalogue);
                     }
                 }
                 display(stationerySearch);
@@ -73,14 +78,21 @@ public class InvMenuFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //do code here
                 String searchInfo = invSearch.getText().toString();
+                String catSearched = catSearch.getSelectedItem().toString();
                 ArrayList<StationeryCatalogue> stationerySearch = new ArrayList<>();
                 for (StationeryCatalogue sc : arraystationery) {
-                    if (sc.get("Description").toUpperCase().contains(searchInfo.toUpperCase())) {
+                    if (sc.get("Category").toUpperCase().equals(catSearched.toUpperCase())
+                            && sc.get("Description").toUpperCase().contains(searchInfo.toUpperCase())
+                            ) {
                         stationerySearch.add(sc);
                     }
+                    else if (catSearched.toUpperCase().equals(("All items").toUpperCase())
+                            && sc.get("Description").toUpperCase().contains(searchInfo.toUpperCase())
+                            ){
+                        stationerySearch.add(sc);
                 }
                 display(stationerySearch);
-            }
+            }}
 
             @Override
             public void afterTextChanged(Editable s) {
