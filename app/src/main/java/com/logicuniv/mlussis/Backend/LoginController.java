@@ -3,10 +3,12 @@ package com.logicuniv.mlussis.Backend;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.logicuniv.mlussis.LoginActivity;
 import com.logicuniv.mlussis.R;
 
 import org.json.JSONObject;
@@ -94,6 +96,11 @@ public class LoginController {
             Log.e("LoginController", e.getMessage());
         }
 
+        // Logout if session is invalid
+        if(!result) {
+            Logout(App.getAppContext());
+        }
+
         return result;
     }
 
@@ -111,5 +118,13 @@ public class LoginController {
                 PreferenceManager.getDefaultSharedPreferences(context);
         Log.d("LoginController", "Reading Session ID :'" + pref.getString("SessionID", "0") + "'");
         return pref.getString("SessionID", "0");
+    }
+
+    public static void Logout(Context context) {
+        setSessionID(context, "0");
+
+        Log.d("MainActivity", "Session Invalid, Need to login");
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
     }
 }

@@ -56,6 +56,9 @@ public class MainActivity extends Activity {
             case R.id.empMenuItem3:
                 startActivity(new Intent(this,HeadManageRequisitionActivity.class));        //temporary
                 return true;
+            case R.id.LogoutMenuItem:
+                LoginController.Logout(getApplicationContext());
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
