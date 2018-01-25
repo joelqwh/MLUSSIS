@@ -10,7 +10,7 @@
         android:id="@+id/invFragment1"
         android:name="com.logicuniv.mlussis.InvMenuFragment"
         android:layout_width="match_parent"
-        android:layout_height="188dp">
+        android:layout_height="wrap_content">
     </fragment>
 
     <FrameLayout
