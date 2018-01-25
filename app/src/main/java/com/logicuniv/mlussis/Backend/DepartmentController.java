@@ -41,6 +41,7 @@ public class DepartmentController {
     }
 
     public String getDepartmentName(String deptCode) {
-        return "Department Name";
+
+        return getDepartmentById(deptCode).get("DeptName");
     }
 }
