@@ -230,7 +230,7 @@ public class RequisitionEmployeeActivity extends Activity {
                 return true;
             case R.id.option2:
 
-                   reqDetList.remove(reqDet);
+                reqDetList.remove(reqDet);      //removeRequisitionDetail(RequisitionDetail);
                 Toast.makeText(RequisitionEmployeeActivity.this, "Item Deleted",Toast.LENGTH_SHORT).show();
                 reqItemList.setAdapter(reqItemList.getAdapter());
 
