@@ -35,6 +35,7 @@
 
         </activity>
         <activity android:name=".InventoryActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".StoreClerk.StoreClerk_StockCardActivity" />
         <activity android:name=".StoreClerk.StoreClerk_EditStockQtyActivity"></activity>
         <activity android:name=".StoreClerk.StoreClerk_DisbursementActivity"></activity>

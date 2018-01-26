@@ -2,13 +2,13 @@
     <string name="app_name">MLUSSIS</string>
     <string name="empMenuItem1_value">Create Requisition</string>
     <string name="empMenuItem2_value">View Disbursement</string>
-    <string name="empMenuItem3_value">Logout</string>
+    <string name="empMenuItem3_value">Requisition</string>
 
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -105,4 +105,5 @@
     </string-array>
     <string name="enterPinReq">Enter PIN:</string>
     <string name="scEnterpin">PIN</string>
+    <string name="Logout">Logout</string>
 </resources>

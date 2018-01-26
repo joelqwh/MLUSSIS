@@ -11,8 +11,8 @@ import android.content.Context;
 @SuppressLint("Registered")
 public class App extends Application {
 
-    public static final String LoginServer = "http://172.17.252.67/";
-    public static final String WCFServer = "http://172.17.252.67/LussisWcfService/Service.svc/";
+    public static final String LoginServer = "http://172.17.255.135/LUSSIS/";
+    public static final String WCFServer = "http://172.17.255.135/LussisWcfService/Service.svc/";
 
     private static Context appContext;
     @Override
@@ -20,6 +20,9 @@ public class App extends Application {
         super.onCreate();
         appContext = this;
     }
+
+    public static void setAppContext(Context c) {appContext = c;}
+
     public static Context getAppContext() {
         return appContext;
     }
