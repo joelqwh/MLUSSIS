@@ -33,7 +33,7 @@ public class DisbursementDetailsFragment extends Fragment {
             tv_Emp.setText(d.get("RepEmpNo"));
             TextView tv_colPt = v.findViewById(R.id.textView_ColPt);
             String colPtName = new CollectionPointController().getCollectionPointDetails(d.get("CollectionPoint"));
-            tv_colPt.setText(d.get("CollectionPointNo"));
+            tv_colPt.setText(colPtName);
         }
         return v;
     }
