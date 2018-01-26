@@ -1,6 +1,7 @@
 package com.logicuniv.mlussis;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -15,6 +16,15 @@ public class LoginActivity extends Activity {
 
     EditText usernameEditText;
     EditText passwordEditText;
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,18 +43,14 @@ public class LoginActivity extends Activity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
-                if(username.isEmpty() || password.isEmpty())
-                {
+                if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please Fill in Both Fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(!LoginController.AuthenticateCredentials(getApplicationContext(),username, password))
-                {
+                if (!LoginController.AuthenticateCredentials(getApplicationContext(), username, password)) {
                     Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_LONG).show();
-                }
-                else
-                {
+                } else {
                     // TODO : Redirect User to the first Page Here
                     Toast.makeText(getApplicationContext(), "Congrats!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
