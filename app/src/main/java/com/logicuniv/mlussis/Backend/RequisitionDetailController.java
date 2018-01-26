@@ -97,13 +97,69 @@ public class RequisitionDetailController {
         return result;
     }
 
-    public void removeRequisitionDetail(RequisitionDetail rd){
+    public boolean removeRequisitionDetail(RequisitionDetail rdItem){
+
+        Boolean result = false;
+
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonRequisitionDetail = new JSONObject();
+        String response;
+
+        try {
+            //put requisition details into a JSONObject "jsonRequisitionDetail"
+            jsonRequisitionDetail.put("ReqNo", rdItem.get("ReqNo"));
+            jsonRequisitionDetail.put("ItemNo", rdItem.get("ItemNo"));
+            jsonRequisitionDetail.put("Qty", rdItem.get("Qty"));
+
+            //put JSONObject "jsonRequisitionDetail" and sessionID into a JSONObject "jsonObject"
+            jsonObject.put("sessionID", LoginController.getSessionID((App.getAppContext())));
+            jsonObject.put("removeRequisitionDetail", jsonRequisitionDetail.toString());
+
+            //result of passing the "jsonObject".toString() into the WCF Server
+            response = JSONParser.postStream(App.WCFServer + "RemoveRequisitionDetail", jsonObject.toString());
+
+            result = response.trim().equals("true");
+        }
+        catch (Exception e)
+        {
+            Log.e("RemoveRequisitionDetail", e.getMessage());
+            result = false;
+        }
+
+        return result;
 
     }
 
-    public void updateRequisitionDetail(RequisitionDetail rd)
+    public boolean updateRequisitionDetail(RequisitionDetail rdItem)
     {
+        Boolean result = false;
 
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonRequisitionDetail = new JSONObject();
+        String response;
+
+        try {
+            //put requisition details into a JSONObject "jsonRequisitionDetail"
+            jsonRequisitionDetail.put("ReqNo", rdItem.get("ReqNo"));
+            jsonRequisitionDetail.put("ItemNo", rdItem.get("ItemNo"));
+            jsonRequisitionDetail.put("Qty", rdItem.get("Qty"));
+
+            //put JSONObject "jsonRequisitionDetail" and sessionID into a JSONObject "jsonObject"
+            jsonObject.put("sessionID", LoginController.getSessionID((App.getAppContext())));
+            jsonObject.put("updateRequisitionDetail", jsonRequisitionDetail.toString());
+
+            //result of passing the "jsonObject".toString() into the WCF Server
+            response = JSONParser.postStream(App.WCFServer + "UpdateRequisitionDetail", jsonObject.toString());
+
+            result = response.trim().equals("true");
+        }
+        catch (Exception e)
+        {
+            Log.e("UpdateRequisitionDetail", e.getMessage());
+            result = false;
+        }
+
+        return result;
     }
 
 }
