@@ -14,7 +14,18 @@ import org.json.JSONObject;
 @SuppressLint("Registered")
 public class App extends Application {
 
+    //Xavier
     public static final String WCFServer = "http://172.17.255.135/LUSSIS/Service.svc/";
+
+    /*Joel
+    public static final String LoginServer = "http://172.17.252.67/";
+    public static final String WCFServer = "http://172.17.252.67/LussisWcfService/Service.svc/";
+    */
+
+    /*Junyi
+    public static final String LoginServer = "http://172.17.253.140/";
+    public static final String WCFServer = "http://172.17.253.140/LussisWcfService/Service.svc/";
+     */
 
     private static Context appContext;
     @Override

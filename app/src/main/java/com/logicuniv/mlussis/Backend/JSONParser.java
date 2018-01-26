@@ -2,6 +2,8 @@ package com.logicuniv.mlussis.Backend;
 
 import android.util.Log;
 
+import com.logicuniv.mlussis.Model.StationeryCatalogue;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -111,6 +113,27 @@ public class JSONParser {
         }
         return jArray;
     }
+
+    /*public static JSONArray searchJSONArrayFromUrl(String url, StationeryCatalogue sc) {
+        JSONObject scItem = new JSONObject();
+        JSONArray scItemArray = null;
+        try {
+            scItem.put("Description", sc.get("Description"));
+        }
+        catch (Exception e)
+        {
+            Log.e("JSON Parser", "Error searching array "+ e.toString());
+        }
+
+        try {
+            scItemArray = new JSONArray(postStream(url, scItem.toString()));
+        }
+        catch (JSONException e)
+        {
+            Log.e("JSON Parser", "Error parsing array "+ e.toString());
+        }
+        return scItemArray;
+    }*/
 
 //    public static JSONArray searchJSONArrayFromUrl(String url, Book book) {
 //        JSONObject jBook = new JSONObject();
