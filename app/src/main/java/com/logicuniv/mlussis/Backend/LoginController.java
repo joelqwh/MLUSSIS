@@ -111,4 +111,27 @@ public class LoginController {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
+
+    public static String GetLoggedInEmployeeNumber(Context context)
+    {
+        String result = "";
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("sessionID", getSessionID(App.getAppContext()));
+
+            Log.d("LoginController", App.WCFServer + "GetEmployeeIDFromSession");
+            Log.d("LoginController", jsonObject.toString());
+
+            result = JSONParser.postStream(
+                    App.WCFServer + "checkSession",
+                    jsonObject.toString()).trim();
+
+            Log.d("LoginController", result);
+        } catch (Exception e) {
+            Log.e("LoginController", e.getMessage());
+        }
+
+        return result;
+    }
 }
