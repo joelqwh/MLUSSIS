@@ -11,8 +11,7 @@ import android.content.Context;
 @SuppressLint("Registered")
 public class App extends Application {
 
-    public static final String LoginServer = "http://172.17.255.135/LUSSIS/";
-    public static final String WCFServer = "http://172.17.255.135/LussisWcfService/Service.svc/";
+    public static final String WCFServer = "http://172.17.255.135/LUSSIS/Service.svc/";
 
     private static Context appContext;
     @Override

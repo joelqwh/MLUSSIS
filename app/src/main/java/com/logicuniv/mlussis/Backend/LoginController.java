@@ -28,47 +28,31 @@ import static com.logicuniv.mlussis.Backend.JSONParser.readStream;
 
 public class LoginController {
 
-    // To get the unique id we should not specify json
-    private static String postStream(String url, String data) {
-
-        InputStream is = null;
-        try {
-            URL u = new URL(url);
-            HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setFixedLengthStreamingMode(data.getBytes().length);
-            conn.connect();
-            OutputStream os = new BufferedOutputStream(conn.getOutputStream());
-            os.write(data.getBytes());
-            os.flush();
-            is = conn.getInputStream();
-        } catch (UnsupportedEncodingException e) {
-            Log.e("LoginController", e.getMessage());
-        } catch (Exception e) {
-            Log.e("LoginController", e.getMessage());
-        }
-        return readStream(is);
-    }
-
     public static boolean AuthenticateCredentials(Context context, String username, String password) {
         boolean result = false;
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonResponse;
 
-        Log.d("LoginController", App.LoginServer + "android.aspx");
-        Log.d("LoginController", "user=****&pass=****");
-        String response = postStream(
-                App.LoginServer + "android.aspx",
-                "user=" + username + "&pass=" + password).trim();
+        try {
+            jsonObject.put("user", username);
+            jsonObject.put("pass", password);
 
+            Log.d("LoginController", App.WCFServer + "login");
+            Log.d("LoginController", jsonObject.toString());
+            jsonResponse = new JSONObject(JSONParser.postStream(
+                    App.WCFServer + "login",
+                    jsonObject.toString()).trim());
 
-        if (response.length() > 2) {
-            setSessionID(context, response);
-            result = true;
-            Log.d("LoginController", "Session ID Sucessfully Accquired");
-        } else {
-            Log.d("LoginController", "Could not Get Session ID");
+            setSessionID(context, jsonResponse.getString("SessionID"));
+
+            if (getSessionID(App.getAppContext()).length() > 3) {
+                result = true;
+                Log.d("LoginController", "Session ID Sucessfully Accquired");
+            } else {
+                Log.d("LoginController", "Could not Get Session ID");
+            }
+        } catch (Exception e) {
+            Log.e("LoginController", e.getMessage());
         }
 
         return result;
@@ -89,7 +73,7 @@ public class LoginController {
                     App.WCFServer + "checkSession",
                     jsonObject.toString()).trim();
 
-            Log.d("LoginController",response);
+            Log.d("LoginController", response);
 
             result = response.equals("true");
         } catch (Exception e) {
@@ -97,7 +81,7 @@ public class LoginController {
         }
 
         // Logout if session is invalid
-        if(!result) {
+        if (!result) {
             Logout(App.getAppContext());
         }
 
