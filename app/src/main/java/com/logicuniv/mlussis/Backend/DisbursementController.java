@@ -20,7 +20,7 @@ public class DisbursementController {
 
         try {
             jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
-            jsonObject.put("collectionPointNo", deptCode);
+            jsonObject.put("deptCode", deptCode);
 
             jsonResult = new JSONObject(JSONParser.postStream(App.WCFServer + "LatestDisbursement", jsonObject.toString()));
 
