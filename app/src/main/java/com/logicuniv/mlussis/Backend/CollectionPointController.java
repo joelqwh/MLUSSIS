@@ -19,6 +19,8 @@ public class CollectionPointController {
         try {
             jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
             jsonObject.put("collectionPointNo", collectionPointNo);
+            Log.e("joel",jsonObject.toString());
+            Log.e("joel",App.WCFServer + "CollectionPoint");
             result = JSONParser.postStream(App.WCFServer + "CollectionPoint", jsonObject.toString());
         } catch (Exception e) {
             Log.e("CollectionPointControl", e.getMessage());
