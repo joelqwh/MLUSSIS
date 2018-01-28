@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.logicuniv.mlussis.Backend.DisbursementController;
+import com.logicuniv.mlussis.Backend.EmployeeController;
+import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.Model.Disbursement;
 
 
@@ -28,7 +30,11 @@ public class PinDisbursementFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_pin_disbursement, container, false);
-        Disbursement d = DisbursementController.getCurrentDisbursementForDepartment("1");     //get parameter from login details when it is set up
+
+        String empNoLoggedIn = LoginController.GetLoggedInEmployeeNumber(getContext());
+
+        String deptCode = EmployeeController.getEmployeeById(empNoLoggedIn).get("DeptCode").toString();
+        Disbursement d = DisbursementController.getCurrentDisbursementForDepartment(deptCode);     //get parameter from login details when it is set up
         if (d != null) {
             TextView tv_Dept = v.findViewById(R.id.textView_deptRep_PinNumber);
             tv_Dept.setText(d.get("Pin"));

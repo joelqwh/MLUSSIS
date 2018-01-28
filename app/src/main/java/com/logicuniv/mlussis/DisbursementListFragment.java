@@ -34,7 +34,7 @@ public class DisbursementListFragment extends Fragment {
         // Inflate the layout for this fragment
        View v = inflater.inflate(R.layout.fragment_disbursement_list, container, false);
 
-        ArrayList<DisbursementDetail> disburse = DisbursementDetail.getCurrentDisbursementDetailsForDepartment();
+        ArrayList<DisbursementDetail> disburse = DisbursementDetailController.getCurrentDisbursementDetailsForDepartment();
 //        setListAdapter(new SimpleAdapter
 //                (getActivity(),disburse, android.R.layout.simple_list_item_2,
 //                        new String[]{"ItemNo", "Promised"},

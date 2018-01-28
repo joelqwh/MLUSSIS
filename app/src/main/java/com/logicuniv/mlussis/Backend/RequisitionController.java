@@ -129,7 +129,7 @@ public class RequisitionController {
 //        return null;
 //    }
 
-    public Requisition getRequisitionById(String reqNo) {
+    public static Requisition getRequisitionById(String reqNo) {
         Requisition result = null;
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonResult;

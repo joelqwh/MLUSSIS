@@ -97,7 +97,7 @@ public class RequisitionDetailController {
         return result;
     }
 
-    public boolean removeRequisitionDetail(RequisitionDetail rdItem){
+    public static boolean removeRequisitionDetail(RequisitionDetail rdItem){
 
         Boolean result = false;
 

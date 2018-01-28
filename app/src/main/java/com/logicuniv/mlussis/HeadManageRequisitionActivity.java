@@ -9,6 +9,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.logicuniv.mlussis.Backend.EmployeeController;
 import com.logicuniv.mlussis.Backend.RequisitionController;
 import com.logicuniv.mlussis.Model.Requisition;
 
@@ -28,7 +29,7 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
 
         ArrayList<Requisition> alr = (ArrayList<Requisition>) RequisitionController.getPendingRequisitions();
 
-        ListAdapter adapt = new SimpleAdapter(this,alr,R.layout.row_list_managereq_deputy, new String[]{"IssuedBy", "ReqNo", "DateIssued"},
+        ListAdapter adapt = new SimpleAdapter(this,alr,R.layout.row_list_managereq_deputy, new String[]{EmployeeController.getEmployeeName("IssuedBy"), "ReqNo", "DateIssued"},
                 new int[]{R.id.textView__managereq_empname, R.id.textView_managereq_reqno, R.id.textView_managereq_reqdate});   //change issuedby to empName
         lv_manageReq.setAdapter(adapt);
         lv_manageReq.setOnItemClickListener(this);      //need to change

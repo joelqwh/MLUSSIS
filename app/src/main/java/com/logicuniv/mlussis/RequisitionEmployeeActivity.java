@@ -160,7 +160,7 @@ public class RequisitionEmployeeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 RequisitionController.addRequisition(req);
-                RequisitionDetailController.addRequisitionDetail(reqDetList);
+                RequisitionDetailController.addRequisitionDetails(reqDetList);
                 Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
                 req.clear();
                 reqDetList.clear(); //or set it to null?
@@ -196,7 +196,7 @@ public class RequisitionEmployeeActivity extends Activity {
                 StationeryCatalogue sc = StationeryCatalogueController.searchCatalogueById((String)reqDet.get("ItemNo"));
 
                 final Dialog d = new Dialog(RequisitionEmployeeActivity.this);
-                d.setTitle("Add to Requisition");
+                d.setTitle("Change Quantity of Item");
                 d.setContentView(R.layout.dialog_catalogue_employee);
                 //d.setCancelable(false);
                 Button buttonCancel = d.findViewById(R.id.dialog_catalogue_employee_buttonCancel);
@@ -230,7 +230,8 @@ public class RequisitionEmployeeActivity extends Activity {
                 return true;
             case R.id.option2:
 
-                reqDetList.remove(reqDet);      //removeRequisitionDetail(RequisitionDetail);
+                RequisitionDetailController.removeRequisitionDetail(reqDet);
+                //reqDetList.remove(reqDet);      //removeRequisitionDetail(RequisitionDetail);
                 Toast.makeText(RequisitionEmployeeActivity.this, "Item Deleted",Toast.LENGTH_SHORT).show();
                 reqItemList.setAdapter(reqItemList.getAdapter());
 

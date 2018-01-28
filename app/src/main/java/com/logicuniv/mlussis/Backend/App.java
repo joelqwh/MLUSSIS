@@ -21,8 +21,8 @@ public class App extends Application {
 //    public static final String LoginServer = "http://172.17.252.67/";
 //    public static final String WCFServer = "http://172.17.252.67/LussisWcfService/Service.svc/";
 
-    public static final String LoginServer = "http://192.168.0.100/";       //for NTU
-    public static final String WCFServer = "http://192.168.0.100/LussisWcfService/Service.svc/";        //for NTU
+    public static final String LoginServer = "http://192.168.2.151/";
+    public static final String WCFServer = "http://192.168.2.151/LussisWcfService/Service.svc/";
 
 
     /*Junyi

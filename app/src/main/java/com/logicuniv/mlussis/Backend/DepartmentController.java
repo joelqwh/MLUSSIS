@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 public class DepartmentController {
 
-    public Department getDepartmentById(String deptCode) {
+    public static Department getDepartmentById(String deptCode) {
         Department result = null;
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonResult;
@@ -40,7 +40,7 @@ public class DepartmentController {
         return result;
     }
 
-    public String getDepartmentName(String deptCode) {
+    public static String getDepartmentName(String deptCode) {
 
         return getDepartmentById(deptCode).get("DeptName");
     }

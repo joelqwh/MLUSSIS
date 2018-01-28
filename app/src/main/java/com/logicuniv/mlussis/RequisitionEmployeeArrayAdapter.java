@@ -27,7 +27,7 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
     public View getView (int position, View convertView, ViewGroup parent)
     {
         RequisitionDetail reqDet = getItem(position);
-        StationeryCatalogue sc = StationeryCatalogueController.searchCatalogueById((String)reqDet.get("ItemNo"));
+        StationeryCatalogue sc = StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
 
         if(convertView==null)
         {

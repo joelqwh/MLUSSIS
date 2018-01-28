@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.logicuniv.mlussis.Backend.EmployeeController;
+import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.Backend.RequisitionController;
 import com.logicuniv.mlussis.Backend.RequisitionDetailController;
 import com.logicuniv.mlussis.Model.Requisition;
@@ -44,7 +46,7 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
         Button button_reject = findViewById(R.id.button_pending_req_reject);
         final EditText editText_remarks = findViewById(R.id.editText_pending_req_remarks);
 
-        tv_empname.setText(getString(R.string.text_pendingrep_empname,req.get("IssuedBy")));      //when employee table is up, use the appropraite method
+        tv_empname.setText(getString(R.string.text_pendingrep_empname, EmployeeController.getEmployeeName(req.get("IssuedBy").toString())));      //when employee table is up, use the appropraite method
         tv_reqNo.setText(getString(R.string.text_pendingrep_reqno,req.get("ReqNo")));
         adapt = new RequisitionEmployeeArrayAdapter(this,al_rd);
         lv_reqdetails.setAdapter(adapt);
@@ -52,11 +54,11 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
         View.OnClickListener ocl_approve = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                req.put("ApprovedBy","E002");   //get HeadID from login
-                req.put("DateReviewed", Calendar.getInstance().getTime());
+                req.put("ApprovedBy", LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));   //get HeadID from login
+                req.put("DateReviewed", Calendar.getInstance().getTime().toString());
                 req.put("Status","Approved");
 
-                if(editText_remarks!=null)
+                if(editText_remarks.getText()!=null)
                 {
                     req.put("Remarks",editText_remarks.getText().toString());
                 }
@@ -73,7 +75,7 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
         View.OnClickListener ocl_reject = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                req.put("ApprovedBy","E002");   //get HeadID from login
+                req.put("ApprovedBy",LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));   //get HeadID from login
                 req.put("DateReviewed", Calendar.getInstance().getTime());
                 req.put("Status","Rejected");
 
