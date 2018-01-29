@@ -84,6 +84,7 @@ public class DisbursementDetailController {
                 result.add(new DisbursementDetail(
                         jsonResult.getJSONObject(i).getString("DisbursementNo"),
                         jsonResult.getJSONObject(i).getString("ItemNo"),
+                        jsonResult.getJSONObject(i).getString("Description"),
                         jsonResult.getJSONObject(i).getString("Needed"),
                         jsonResult.getJSONObject(i).getString("Promised"),
                         jsonResult.getJSONObject(i).getString("Received")));
