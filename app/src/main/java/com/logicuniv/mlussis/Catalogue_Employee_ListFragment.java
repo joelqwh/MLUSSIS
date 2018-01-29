@@ -98,6 +98,7 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
 //                        i.putExtra("addItem",b);
 //                        i.putExtra("qty",qty);
                         startActivity(i);
+                        d.dismiss();
                     }
                 });
         d.show();

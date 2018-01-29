@@ -58,9 +58,12 @@ public class Catalogue_Employee_SearchFragment extends Fragment {
                 als = StationeryCatalogueController.getCatalogue();
                 return null;
             }
-        }.execute();
 
-        display(als);
+            protected void onPostExecute(Void result)
+            {
+                display(als);
+            }
+        }.execute();
 
 
         searchtext.addTextChangedListener(new TextWatcher() {

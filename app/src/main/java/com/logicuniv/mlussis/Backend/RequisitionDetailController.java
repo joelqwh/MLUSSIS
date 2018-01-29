@@ -34,6 +34,7 @@ public class RequisitionDetailController {
                 result.add(new RequisitionDetail(
                         requisitionDetail.getString("ReqNo"),
                         requisitionDetail.getString("ItemNo"),
+                        requisitionDetail.getString("Description"),
                         requisitionDetail.getString("Qty")
                 ));
             }

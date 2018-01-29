@@ -3,6 +3,7 @@ package com.logicuniv.mlussis;
 
 import android.app.ListFragment;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,11 +13,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
 import com.logicuniv.mlussis.StoreClerk.StoreClerk_EditStockQtyActivity;
 import com.logicuniv.mlussis.StoreClerk.StoreClerk_StockCardActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -38,7 +41,21 @@ public class InvTableFragment extends ListFragment {
         header = inflater.inflate(R.layout.fragment_inv_row_header,null);
         View v = inflater.inflate(R.layout.inv_list, container, false);
 
-        Bundle args = getArguments();
+        new AsyncTask<Void, Void, List<StationeryCatalogue>>() {
+            @Override
+            protected List<StationeryCatalogue> doInBackground(Void... params) {
+                return StationeryCatalogueController.getCatalogue();
+            }
+
+            @Override
+            protected void onPostExecute(List<StationeryCatalogue> result) {
+                setListAdapter(new SimpleAdapter(getActivity(),result,R.layout.fragment_inv_row,
+                        new String[] {"Description", "Bin", "CurrentQty"},
+                        new int[]{R.id.itemDesc, R.id.itemBin, R.id.itemQty}));
+            }
+        }.execute();
+
+        /*Bundle args = getArguments();
         final ArrayList<StationeryCatalogue> alscc = (ArrayList<StationeryCatalogue>)args.getSerializable("stationerycatalogue");
 
         SimpleAdapter adapter = new SimpleAdapter(getActivity(),alscc,
@@ -46,7 +63,7 @@ public class InvTableFragment extends ListFragment {
                 new String[] {"Description", "Category", "ItemNo"},
                 new int[]{R.id.itemDesc, R.id.itemBin, R.id.itemQty});
 
-        setListAdapter(adapter);
+        setListAdapter(adapter);*/
         return v;
     }
 

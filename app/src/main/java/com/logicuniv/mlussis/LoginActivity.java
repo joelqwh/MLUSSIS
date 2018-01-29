@@ -4,13 +4,18 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.logicuniv.mlussis.Backend.LoginController;
+import com.logicuniv.mlussis.StoreClerk.StoreClerk_MainActivity;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends Activity {
 
@@ -51,10 +56,34 @@ public class LoginActivity extends Activity {
                 if (!LoginController.AuthenticateCredentials(getApplicationContext(), username, password)) {
                     Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_LONG).show();
                 } else {
-                    // TODO : Redirect User to the first Page Here
-                    Toast.makeText(getApplicationContext(), "Congrats!", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                    // Redirect User to the first Page Here
+                    Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
+
+                    ArrayList<String> rolesAssigned = LoginController.GetRolesFromCurrentSessionId(getApplicationContext());
+
+                    // Assign based on the first role
+                    Class nextActivity = null;
+                    switch (rolesAssigned.get(0)) {
+                        case "StoreManager":
+                        case "StoreSupervisor":
+                        case "StoreClerk":
+                            nextActivity = StoreClerk_MainActivity.class;
+                            break;
+                        case "DepartmentHead":
+                        case "DepartmentDeputy":
+                        case "DepartmentRepresentative":
+                        case "DepartmentEmployee":
+                            nextActivity = MainActivity.class;
+                            break;
+                        default:
+                            // TODO : Finish this
+                            Log.e("LoginActivity", "Unknown Role : " + rolesAssigned.get(0));
+                    }
+
+                    if (nextActivity != null) {
+                        Intent intent = new Intent(getApplicationContext(), nextActivity);
+                        startActivity(intent);
+                    }
                 }
             }
         });

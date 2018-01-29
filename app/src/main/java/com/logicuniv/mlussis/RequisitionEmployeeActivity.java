@@ -50,8 +50,8 @@ public class RequisitionEmployeeActivity extends Activity {
         setContentView(R.layout.activity_requisition_employee);
         setTitle("Raise Requisition");
         //restoreInstance(savedInstanceState);
-        pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final String requisitionNo = pref.getString("ReqNo",saveReq); //use this to get Requisition and RequsitionDetail
+        pref = getSharedPreferences("requisition",0); //PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String requisitionNo = pref.getString("ReqNo",saveReq); //use this to get Requisition and RequsitionDetail
         //Log.e("joel",requisitionNo.toString()); y
 
         Button button_addItem = (Button) findViewById(R.id.button_requisition_employee_addItem);
@@ -70,12 +70,19 @@ public class RequisitionEmployeeActivity extends Activity {
         String itemNo = b.getString("ItemNo");
 
         new AsyncTask<String, Void, Void>() {
+            StationeryCatalogue scd;
             @Override
             protected Void doInBackground(String... params) {
 
-                sc = StationeryCatalogueController.searchCatalogueById(params[0]);
+                scd = StationeryCatalogueController.searchCatalogueById(params[0]);
 
                 return null;
+
+            }
+
+            protected void onPostExecute(Void result)
+            {
+                sc=scd;
             }
         }.execute(itemNo);
 
@@ -84,11 +91,19 @@ public class RequisitionEmployeeActivity extends Activity {
         if(requisitionNo!=null)
         {
             new AsyncTask<String, Void, Void>() {
+                Requisition r;
                 @Override
                 protected Void doInBackground(String... params) {
-                    req= RequisitionController.getRequisitionById(params[0]);
+                    r= RequisitionController.getRequisitionById(params[0]);
                     reqDetList= RequisitionDetailController.getRequisitionDetail(params[0]);
                     return null;
+                }
+
+                protected void onPostExecute(Void result)
+                {
+                    req=r;
+                    adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this,reqDetList);
+                    reqItemList.setAdapter(adapt);
                 }
             }.execute(requisitionNo);
 
@@ -97,22 +112,33 @@ public class RequisitionEmployeeActivity extends Activity {
         {
             new AsyncTask<Void, Void, Void>() {
                 boolean t = false;
+                Requisition getReq;
                 @Override
                 protected Void doInBackground(Void... params) {
                     Requisition r = new Requisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()),Calendar.getInstance().getTime().toString());
-                    saveReq = RequisitionController.addRequisition2(r);
-                    req = RequisitionController.getRequisitionById(saveReq);
-                    RequisitionDetail rd = new RequisitionDetail((String)req.get("ReqNo"),sc.get("ItemNo"),qty);
+                    saveReq = RequisitionController.addRequisitionAndGetReqNo(r);
+                    getReq = RequisitionController.getRequisitionById(saveReq);
+                    RequisitionDetail rd = new RequisitionDetail((String)getReq.get("ReqNo"),sc.get("ItemNo"),qty);
                     t=RequisitionDetailController.addRequisitionDetail(rd);
                     reqDetList = RequisitionDetailController.getRequisitionDetail(saveReq);
-                    pref.edit().putString("ReqNo",saveReq);
+
                     return null;
                 }
+                protected void onPostExecute(Void result)
+                {
+                    req=getReq;
+                    adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this,reqDetList);
+                    reqItemList.setAdapter(adapt);
+                    pref.edit().putString("ReqNo",saveReq);
+                    pref.edit().apply();
+                }
+
+
             }.execute();
         }
 
-        adapt = new RequisitionEmployeeArrayAdapter(this,reqDetList);
-        reqItemList.setAdapter(adapt);
+//        adapt = new RequisitionEmployeeArrayAdapter(this,reqDetList);
+//        reqItemList.setAdapter(adapt);
 
 //29Jan2018
 //        if(requisitionNo!=null)
@@ -174,6 +200,24 @@ public class RequisitionEmployeeActivity extends Activity {
                         return null;
                     }
 
+                    protected void onPostExecute(Void result)
+                    {
+                        if (t=true)
+                        {
+                            adapt.clear();              //removeRequisition
+                            edit.remove("ReqNo");       //removeRequisitionDetail
+                            edit.apply();
+                            saveReq = null;
+                            Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            Toast.makeText(RequisitionEmployeeActivity.this, "Requisition not yet removed", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
                 }.execute(req);
 
                 new AsyncTask<RequisitionDetail[], Void, Void>() {
@@ -184,17 +228,28 @@ public class RequisitionEmployeeActivity extends Activity {
                         return null;
                     }
 
+                    protected void onPostExecute(Void result)
+                    {
+                        if (t=true)
+                        {
+                            adapt.clear();              //removeRequisition
+                            edit.remove("ReqNo");       //removeRequisitionDetail
+                            edit.apply();
+                            saveReq = null;
+                        }
+                    }
+
                 }.execute((RequisitionDetail[])reqDetList.toArray());
 
 //                req.clear();
 //                reqDetList.clear(); //or set it to null?
-                adapt.clear();              //removeRequisition
-                edit.remove("ReqNo");       //removeRequisitionDetail
-                edit.apply();
-                saveReq = null;
-                Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
-                startActivity(intent);
+//                adapt.clear();              //removeRequisition
+//                edit.remove("ReqNo");       //removeRequisitionDetail
+//                edit.apply();
+//                saveReq = null;
+//                Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
+//                Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
+//                startActivity(intent);
             }
         };
         button_cancelReq.setOnClickListener(ocl_reject);
@@ -211,6 +266,17 @@ public class RequisitionEmployeeActivity extends Activity {
                         return null;
                     }
 
+                    protected void onPostExecute(Void result)
+                    {
+                        edit.remove("ReqNo");
+                        edit.apply();
+                        saveReq = null;
+                        adapt.clear();
+                        Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
+                        startActivity(intent);
+                    }
+
                 }.execute(req);
 
                 new AsyncTask<RequisitionDetail[], Void, Void>() {
@@ -221,6 +287,11 @@ public class RequisitionEmployeeActivity extends Activity {
                         return null;
                     }
 
+                    protected void onPostExecute(Void result)
+                    {
+
+                    }
+
                 }.execute((RequisitionDetail[])reqDetList.toArray());
 
 //                RequisitionController.addRequisition(req);
@@ -228,13 +299,6 @@ public class RequisitionEmployeeActivity extends Activity {
 
 //                req.clear();
 //                reqDetList.clear(); //or set it to null?
-                edit.remove("ReqNo");
-                edit.commit();
-                saveReq = null;
-                adapt.clear();
-                Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
-                startActivity(intent);
             }
         };
         button_submitReq.setOnClickListener(ocl_submit);
@@ -257,12 +321,18 @@ public class RequisitionEmployeeActivity extends Activity {
             case R.id.option1:
 
                 new AsyncTask<String, Void, Void>() {
+                    StationeryCatalogue scd;
                     @Override
                     protected Void doInBackground(String... params) {
 
-                        sc = StationeryCatalogueController.searchCatalogueById(params[0]);
+                        scd = StationeryCatalogueController.searchCatalogueById(params[0]);
 
                         return null;
+                    }
+
+                    protected void onPostExecute(Void result)
+                    {
+                        sc=scd;
                     }
                 }.execute((String)reqDet.get("ItemNo"));
 
