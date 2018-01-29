@@ -124,7 +124,7 @@ public class LoginController {
             Log.d("LoginController", jsonObject.toString());
 
             result = JSONParser.postStream(
-                    App.WCFServer + "checkSession",
+                    App.WCFServer + "GetEmployeeIDFromSession",
                     jsonObject.toString()).trim();
 
             Log.d("LoginController", result);
