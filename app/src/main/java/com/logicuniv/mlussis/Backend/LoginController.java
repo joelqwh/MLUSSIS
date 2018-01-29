@@ -11,6 +11,7 @@ import android.util.Log;
 import com.logicuniv.mlussis.LoginActivity;
 import com.logicuniv.mlussis.R;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
@@ -19,6 +20,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import static com.logicuniv.mlussis.Backend.JSONParser.readStream;
 
@@ -51,6 +53,34 @@ public class LoginController {
             } else {
                 Log.d("LoginController", "Could not Get Session ID");
             }
+        } catch (Exception e) {
+            Log.e("LoginController", e.getMessage());
+        }
+
+        return result;
+    }
+
+    public static ArrayList<String> GetRolesFromCurrentSessionId(Context context) {
+        ArrayList<String> result = new ArrayList<>();
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonResponse;
+
+        try {
+            jsonObject.put("sessionID", getSessionID(context));
+
+            Log.d("LoginController", App.WCFServer + "GetRolesFromSession");
+            Log.d("LoginController", jsonObject.toString());
+
+            jsonResponse = new JSONArray(JSONParser.postStream(
+                    App.WCFServer + "GetRolesFromSession",
+                    jsonObject.toString()).trim());
+
+            for(int i = 0; i < jsonResponse.length(); i++)
+            {
+                result.add(jsonResponse.getString(i));
+            }
+
+            Log.d("LoginController", jsonResponse.toString());
         } catch (Exception e) {
             Log.e("LoginController", e.getMessage());
         }
