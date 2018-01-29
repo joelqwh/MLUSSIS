@@ -34,6 +34,13 @@
             android:theme="@style/MainPage">
 
         </activity>
+        <activity
+            android:screenOrientation="landscape" android:configChanges="keyboardHidden|orientation" android:name=".StoreClerk.StatRetActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".InventoryActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".StoreClerk.StoreClerk_StockCardActivity" />
