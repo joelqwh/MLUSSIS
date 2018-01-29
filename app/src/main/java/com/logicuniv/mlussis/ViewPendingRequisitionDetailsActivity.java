@@ -2,6 +2,7 @@ package com.logicuniv.mlussis;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,10 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
 
     RequisitionEmployeeArrayAdapter adapt;
     Requisition req;
+    String reqNo;
+    ArrayList<RequisitionDetail> al_rd;
+
+    TextView tv_empname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +37,22 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
         setTitle("Requisition Details");
 
         Intent i = getIntent();
-        req = RequisitionController.getRequisitionById((String)i.getExtras().get("Req"));
-        ArrayList<RequisitionDetail> al_rd = RequisitionDetailController.getRequisitionDetail((String)req.get("ReqNo"));
+        reqNo = i.getExtras().getString("Req");
 
-        TextView tv_empname = findViewById(R.id.textView_pending_req_empname);
+        new AsyncTask<String, Void, Void>() {
+            @Override
+            protected Void doInBackground(String... params) {
+
+                req = RequisitionController.getRequisitionById(params[0]);
+                al_rd = RequisitionDetailController.getRequisitionDetail(params[0]);
+
+                return null;
+            }
+        }.execute(reqNo);
+
+
+
+        tv_empname = findViewById(R.id.textView_pending_req_empname);
         TextView tv_reqNo = findViewById(R.id.textView_pending_req_no);
         ListView lv_reqdetails = findViewById(R.id.listView_pending_req_details);
 
@@ -46,7 +63,17 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
         Button button_reject = findViewById(R.id.button_pending_req_reject);
         final EditText editText_remarks = findViewById(R.id.editText_pending_req_remarks);
 
-        tv_empname.setText(getString(R.string.text_pendingrep_empname, EmployeeController.getEmployeeName(req.get("IssuedBy").toString())));      //when employee table is up, use the appropraite method
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+
+                tv_empname.setText(getString(R.string.text_pendingrep_empname, EmployeeController.getEmployeeName(req.get("IssuedBy").toString())));
+
+                return null;
+            }
+        }.execute();
+
+     //when employee table is up, use the appropraite method
         tv_reqNo.setText(getString(R.string.text_pendingrep_reqno,req.get("ReqNo")));
         adapt = new RequisitionEmployeeArrayAdapter(this,al_rd);
         lv_reqdetails.setAdapter(adapt);
@@ -54,7 +81,18 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
         View.OnClickListener ocl_approve = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                req.put("ApprovedBy", LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));   //get HeadID from login
+
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... params) {
+
+                        req.put("ApprovedBy", LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));
+
+                        return null;
+                    }
+                }.execute();
+
+                //req.put("ApprovedBy", LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));   //get HeadID from login
                 req.put("DateReviewed", Calendar.getInstance().getTime().toString());
                 req.put("Status","Approved");
 
@@ -63,10 +101,32 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
                     req.put("Remarks",editText_remarks.getText().toString());
                 }
 
-                //RequisitionController.updateRequisition(req);
-                Toast.makeText(ViewPendingRequisitionDetailsActivity.this,"Requisition Approved",Toast.LENGTH_LONG).show();
-                Intent i = new Intent(ViewPendingRequisitionDetailsActivity.this, HeadManageRequisitionActivity.class);
-                startActivity(i);
+                new AsyncTask<Requisition, Void, Void>() {
+                    boolean t = false;
+                    @Override
+                    protected Void doInBackground(Requisition... params) {
+
+                        t=RequisitionController.updateRequisition(params[0]);
+
+                        return null;
+                    }
+                    @Override
+                    protected void onPostExecute(Void result)
+                    {
+                        if(t=true)
+                        {
+                            Toast.makeText(ViewPendingRequisitionDetailsActivity.this,"Requisition Approved",Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(ViewPendingRequisitionDetailsActivity.this, HeadManageRequisitionActivity.class);
+                            startActivity(i);
+                        }
+                        else
+                        {
+                            Toast.makeText(ViewPendingRequisitionDetailsActivity.this,"Requisition Rejected",Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(ViewPendingRequisitionDetailsActivity.this, HeadManageRequisitionActivity.class);
+                            startActivity(i);
+                        }
+                    }
+                }.execute(req);
 
             }
         };
@@ -76,7 +136,7 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
             @Override
             public void onClick(View v) {
                 req.put("ApprovedBy",LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));   //get HeadID from login
-                req.put("DateReviewed", Calendar.getInstance().getTime());
+                req.put("DateReviewed", Calendar.getInstance().getTime().toString());
                 req.put("Status","Rejected");
 
 
@@ -85,17 +145,27 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
                     req.put("Remarks",editText_remarks.getText().toString());
                 }
 
-                //RequisitionController.updateRequisition(req);
+                new AsyncTask<Requisition, Void, Void>() {
+                    boolean t = false;
+                    @Override
+                    protected Void doInBackground(Requisition... params) {
 
-                Toast.makeText(ViewPendingRequisitionDetailsActivity.this,"Requisition Rejected",Toast.LENGTH_LONG).show();
-                Intent i = new Intent(ViewPendingRequisitionDetailsActivity.this, HeadManageRequisitionActivity.class);
-                startActivity(i);
+                        t=RequisitionController.updateRequisition(params[0]);
+
+                        return null;
+                    }
+                    @Override
+                    protected void onPostExecute(Void result)
+                    {
+                            Toast.makeText(ViewPendingRequisitionDetailsActivity.this,"Requisition Rejected",Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(ViewPendingRequisitionDetailsActivity.this, HeadManageRequisitionActivity.class);
+                            startActivity(i);
+                    }
+                }.execute(req);
+
             }
         };
         button_reject.setOnClickListener(ocl_reject);
-
-
-
 
     }
 

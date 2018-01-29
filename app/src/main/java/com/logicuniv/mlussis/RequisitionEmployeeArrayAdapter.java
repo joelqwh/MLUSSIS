@@ -1,6 +1,7 @@
 package com.logicuniv.mlussis;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,9 @@ import java.util.ArrayList;
  */
 
 public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDetail> {
+
+    RequisitionDetail reqDet;
+    StationeryCatalogue sc;
     public RequisitionEmployeeArrayAdapter(@NonNull Context context, ArrayList<RequisitionDetail> alReqDet) {
         super(context, 0,alReqDet);
     }
@@ -26,8 +30,17 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
     @Override
     public View getView (int position, View convertView, ViewGroup parent)
     {
-        RequisitionDetail reqDet = getItem(position);
-        StationeryCatalogue sc = StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
+       reqDet = getItem(position);
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                sc = StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
+                return null;
+            }
+
+        }.execute();
+
 
         if(convertView==null)
         {

@@ -22,7 +22,7 @@ public class DepartmentController {
 
         try {
             jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
-            jsonObject.put("collectionPointNo", deptCode);
+            jsonObject.put("deptCode", deptCode);
 
             jsonResult = new JSONObject(JSONParser.postStream(App.WCFServer + "Department", jsonObject.toString()));
 
@@ -37,7 +37,7 @@ public class DepartmentController {
                     jsonResult.getString("RepEmpNo"),
                     jsonResult.getString("DeputyEmpNo"));
         } catch (Exception e) {
-            Log.e("CollectionPointControl", e.getMessage());
+            Log.e("DepartmentController", e.getMessage());
         }
 
         return result;

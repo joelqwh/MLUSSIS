@@ -66,7 +66,7 @@ public class RequisitionController {
     //TODO: Change name
     public static String addRequisition2 (Requisition r)
     {
-        String result;
+        String result = null;
 
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonRequisition = new JSONObject();
@@ -87,17 +87,14 @@ public class RequisitionController {
             jsonObject.put("addRequisition", jsonRequisition.toString());
 
             //result of passing the "jsonObject".toString() into the WCF Server
-            response = JSONParser.postStream(App.WCFServer + "AddRequisitionAndGetReqNo", jsonObject.toString());
-
-            //result = response.trim().equals("true");
+            result = JSONParser.postStream(App.WCFServer + "AddRequisitionAndGetReqNo", jsonObject.toString());
         }
         catch (Exception e)
         {
             Log.e("AddRequisition", e.getMessage());
-            //result = false;
         }
 
-        return response.toString();
+        return result;
     }
 
 //    public static ArrayList<Requisition> getPendingRequisitions()
@@ -225,7 +222,7 @@ public class RequisitionController {
     }
 
 
-    public boolean removeRequisition(Requisition rRemove){
+    public static boolean removeRequisition(Requisition rRemove){
 
         Boolean result = false;
 
