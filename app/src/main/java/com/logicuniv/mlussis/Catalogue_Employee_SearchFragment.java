@@ -3,6 +3,8 @@ package com.logicuniv.mlussis;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Editable;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
@@ -25,7 +28,8 @@ import java.util.ArrayList;
 public class Catalogue_Employee_SearchFragment extends Fragment {
 
     private EditText searchtext;
-    private ArrayList<StationeryCatalogue> als = StationeryCatalogueController.getCatalogue();
+
+    private ArrayList<StationeryCatalogue> als;
 
     public Catalogue_Employee_SearchFragment() {
         // Required empty public constructor
@@ -47,6 +51,14 @@ public class Catalogue_Employee_SearchFragment extends Fragment {
                 searchtext.setText(null);
             }
         });
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                als = StationeryCatalogueController.getCatalogue();
+                return null;
+            }
+        }.execute();
 
         display(als);
 

@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class Employee  extends HashMap<String,Object>{
 
-    public Employee(String empNo, String empName, String deptCode, String email, String sessionNo, Date sessionExpiry) {
+    public Employee(String empNo, String empName, String deptCode, String email, String sessionNo, String sessionExpiry) {
 
         put("EmpNo", empNo);
         put("EmpName", empName);

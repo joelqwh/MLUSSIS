@@ -107,11 +107,5 @@
     <string name="enterPinReq">Enter PIN:</string>
     <string name="scEnterpin">PIN</string>
     <string name="Logout">Logout</string>
-    <!-- Emil play play usage -->
-    <string name="action_setting">Setting</string>
-    <string-array name="RetDate">
-        <item>Select Date</item>
-        <item>2017-01-12</item>
-        <item>2017-01-19</item>
-    </string-array>
+    <string name="ImageCredit">https://thenounproject.com/icon/625993/</string>
 </resources>

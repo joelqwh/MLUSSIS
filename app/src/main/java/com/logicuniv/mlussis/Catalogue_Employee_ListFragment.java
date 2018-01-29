@@ -63,7 +63,6 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
     public void onListItemClick(ListView av, View v, int position, long id) {
         super.onListItemClick(av,v,position,id);
 
-        //b = (StationeryCatalogue) getListAdapter().getItem(position);
         b = (StationeryCatalogue) av.getItemAtPosition(position);
 
         final Dialog d = new Dialog(getActivity());
