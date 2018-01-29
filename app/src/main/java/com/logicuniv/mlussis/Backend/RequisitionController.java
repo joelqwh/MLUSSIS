@@ -63,6 +63,43 @@ public class RequisitionController {
         return result;
     }
 
+    //TODO: Change name
+    public static String addRequisition2 (Requisition r)
+    {
+        String result;
+
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonRequisition = new JSONObject();
+        String response=null;
+
+        try {
+            //put requisition into a JSONObject "jsonRequisition"
+            jsonRequisition.put("ReqNo",r.get("ReqNo"));
+            jsonRequisition.put("IssuedBy", r.get("IssuedBy"));
+            jsonRequisition.put("DateIssued", r.get("DateIssued"));
+            jsonRequisition.put("ApprovedBy", r.get("ApprovedBy"));
+            jsonRequisition.put("DateReviewed", r.get("DateReviewed"));
+            jsonRequisition.put("Status", r.get("Status"));
+            jsonRequisition.put("Remarks", r.get("Remarks"));
+
+            //put JSONObject "jsonRequisitionDetail" and sessionID into a JSONObject "jsonObject"
+            jsonObject.put("sessionID", LoginController.getSessionID((App.getAppContext())));
+            jsonObject.put("addRequisition", jsonRequisition.toString());
+
+            //result of passing the "jsonObject".toString() into the WCF Server
+            response = JSONParser.postStream(App.WCFServer + "AddRequisitionAndGetReqNo", jsonObject.toString());
+
+            //result = response.trim().equals("true");
+        }
+        catch (Exception e)
+        {
+            Log.e("AddRequisition", e.getMessage());
+            //result = false;
+        }
+
+        return response.toString();
+    }
+
 //    public static ArrayList<Requisition> getPendingRequisitions()
 //    {
 //        Requisition r = new Requisition("R1"," E001", Calendar.getInstance().getTime(),null,null,"Pending",null);
