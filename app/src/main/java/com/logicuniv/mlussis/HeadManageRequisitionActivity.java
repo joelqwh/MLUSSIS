@@ -19,13 +19,14 @@ import java.util.ArrayList;
 public class HeadManageRequisitionActivity extends Activity implements AdapterView.OnItemClickListener{
 
     ListAdapter adapt;
+    ListView lv_manageReq;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_head_manage_requisition);
         setTitle("View Pending Requisitions");
 
-        ListView lv_manageReq = findViewById(R.id.listView_managereqlist_deputy);
+        lv_manageReq = findViewById(R.id.listView_managereqlist_deputy);
 
 
         new AsyncTask<Void, Void, Void>() {
@@ -35,11 +36,14 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
             protected Void doInBackground(Void... params) {
                 alr = (ArrayList<Requisition>) RequisitionController.getPendingRequisitions();
 
+                adapt = new SimpleAdapter(HeadManageRequisitionActivity.this, alr, R.layout.row_list_managereq_deputy, new String[]{EmployeeController.getEmployeeName("IssuedBy"), "ReqNo", "DateIssued"},
+                        new int[]{R.id.textView__managereq_empname, R.id.textView_managereq_reqno, R.id.textView_managereq_reqdate});
+
                 return null;
             }
             protected void onPostExecute(Void result) {
-                adapt = new SimpleAdapter(HeadManageRequisitionActivity.this, alr, R.layout.row_list_managereq_deputy, new String[]{EmployeeController.getEmployeeName("IssuedBy"), "ReqNo", "DateIssued"},
-                        new int[]{R.id.textView__managereq_empname, R.id.textView_managereq_reqno, R.id.textView_managereq_reqdate});   //change issuedby to empName
+                lv_manageReq.setAdapter(adapt);
+                lv_manageReq.setOnItemClickListener(HeadManageRequisitionActivity.this);
             }
         }.execute();
 

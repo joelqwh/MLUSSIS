@@ -126,8 +126,8 @@ public class RequisitionController {
             jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
             jsonObject.put("sessionEmpNo",sessionEmpNo);
 
-            jsonResult = new JSONArray(JSONParser.postStream(App.WCFServer + "PendingRequisitions", jsonObject.toString()));
-
+            jsonResult = new JSONArray(JSONParser.postStream(App.WCFServer + "PendingRequisitions",jsonObject.toString()));
+            Log.e("jsonResultReq",jsonResult.toString());
             for (int i = 0; i < jsonResult.length(); i++) {
                 result.add(new Requisition(
                         jsonResult.getJSONObject(i).getString("ReqNo"),
@@ -137,7 +137,6 @@ public class RequisitionController {
                         jsonResult.getJSONObject(i).getString("DateReviewed"),
                         jsonResult.getJSONObject(i).getString("Status"),
                         jsonResult.getJSONObject(i).getString("Remarks")));
-
             }
         } catch (Exception e) {
             Log.e("PendingRequisitions", e.getMessage());

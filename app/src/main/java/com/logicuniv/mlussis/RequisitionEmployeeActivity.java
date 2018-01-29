@@ -118,7 +118,7 @@ public class RequisitionEmployeeActivity extends Activity {
                     Requisition r = new Requisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()),Calendar.getInstance().getTime().toString());
                     saveReq = RequisitionController.addRequisitionAndGetReqNo(r);
                     getReq = RequisitionController.getRequisitionById(saveReq);
-                    RequisitionDetail rd = new RequisitionDetail((String)getReq.get("ReqNo"),sc.get("ItemNo"),qty);
+                    RequisitionDetail rd = new RequisitionDetail((String)getReq.get("ReqNo"),sc.get("ItemNo"), sc.get("Description"),qty);
                     t=RequisitionDetailController.addRequisitionDetail(rd);
                     reqDetList = RequisitionDetailController.getRequisitionDetail(saveReq);
 

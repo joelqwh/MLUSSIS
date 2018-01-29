@@ -18,7 +18,6 @@ public class Requisition extends HashMap<String,Object>{
     static ArrayList<Requisition> alr = new ArrayList<Requisition>();
 
 
-
     public Requisition(String reqNo, String issuedBy, String dateIssued, String approvedBy, String dateReviewed, String status, String remarks) {
         put("ReqNo", reqNo);
         put("IssuedBy", issuedBy);
