@@ -34,6 +34,7 @@ public class PinDisbursementFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_pin_disbursement, container, false);
+        final TextView tv_Dept = v.findViewById(R.id.textView_deptRep_PinNumber);
 
 
         new AsyncTask<Void, Void, Void>() {
@@ -45,13 +46,19 @@ public class PinDisbursementFragment extends Fragment {
                 d = DisbursementController.getCurrentDisbursementForDepartment(deptCode);     //get parameter from login details when it is set up
 
                 return null;
+
+
+                }
+            @Override
+            protected void onPostExecute(Void result)
+            {
+                    if (d != null) {
+
+                tv_Dept.setText(d.get("Pin"));
+                }
+
             }
         }.execute();
-
-        if (d != null) {
-            TextView tv_Dept = v.findViewById(R.id.textView_deptRep_PinNumber);
-            tv_Dept.setText(d.get("Pin"));
-        }
 
         return v;
     }
