@@ -1,8 +1,13 @@
 package com.logicuniv.mlussis.Backend;
 
+import android.util.Log;
+
 import com.logicuniv.mlussis.Model.Retrieval;
 import com.logicuniv.mlussis.Model.RetrievalDetails;
 import com.logicuniv.mlussis.StationeryCatalogue;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -12,7 +17,39 @@ import java.util.ArrayList;
 
 public class RetrievalDetailsController {
 
-    public static ArrayList<RetrievalDetails> getRetrievalDetails() {
+    public static ArrayList<RetrievalDetails> getRetrievalDetails(String retrievalNo) {
+        ArrayList<RetrievalDetails> result = new ArrayList<RetrievalDetails>();
+
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonResult;
+
+        try {
+            jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
+            jsonObject.put("RetrievalNo", retrievalNo);
+
+            jsonResult = new JSONArray(JSONParser.postStream(App.WCFServer + "RetrievalDetails", jsonObject.toString()));
+
+            for (int i = 0; i < jsonResult.length(); i++) {
+                result.add(new RetrievalDetails(
+                        jsonResult.getJSONObject(i).getString("RetrievalNo"),
+                        jsonResult.getJSONObject(i).getString("DeptCode"),
+                        jsonResult.getJSONObject(i).getString("ItemNo"),
+                        jsonResult.getJSONObject(i).getString("Needed"),
+                        jsonResult.getJSONObject(i).getString("BackLogQty"),
+                        jsonResult.getJSONObject(i).getString("Actual")));
+            }
+        } catch (Exception e) {
+            Log.e("RetrievalDetails", e.getMessage());
+        }
+        return result;
+    }
+
+}
+
+
+
+
+    /*public static ArrayList<RetrievalDetails> getRetrievalDetails1() {
         //getRetrieval() JSON Parser get as function
         ArrayList<RetrievalDetails> retda = new ArrayList<>();
         RetrievalDetails rtd1 = new RetrievalDetails("1", "COMM","C001", "10","0","10");
@@ -45,7 +82,7 @@ public class RetrievalDetailsController {
         retda.add(rtd14);
         return retda;
 
-    }
+    }*/
 
 
     /*
@@ -116,4 +153,3 @@ d       retd.add(rtd4);
         }
         return sc;
     }*/
-}

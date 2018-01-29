@@ -42,9 +42,10 @@ public class StoreClerk_MainActivity extends Activity {
                 startActivity(new Intent(this, InventoryActivity.class));
                 return true;
             case R.id.scMenuItem2:
-                startActivity(new Intent(this, DisbursementActivity.class));
+                startActivity(new Intent(this, StatRetActivity.class));
                 return true;
             case R.id.scMenuItem3:
+                startActivity(new Intent(this, StoreClerk_DisbursementActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -66,7 +67,7 @@ public class StoreClerk_MainActivity extends Activity {
                     }
                     if (finalI==1)
                     {
-
+                        startActivity(new Intent(getApplicationContext(), StatRetActivity.class));
                     }
                     if (finalI==2)
                     {

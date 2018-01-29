@@ -12,8 +12,8 @@ public class Retrieval extends HashMap<String,String> implements Serializable {
 
 
 
-    public Retrieval(String retno, String date) {
-        put("RetNo", retno);
+    public Retrieval(String retrievalNo, String date) {
+        put("RetrievalNo", retrievalNo);
         put("Date", date);
     }
 
