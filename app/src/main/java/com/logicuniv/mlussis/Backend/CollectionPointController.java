@@ -21,7 +21,8 @@ public class CollectionPointController {
             jsonObject.put("collectionPointNo", collectionPointNo);
             Log.e("joel",jsonObject.toString());
             Log.e("joel",App.WCFServer + "CollectionPoint");
-            result = JSONParser.postStream(App.WCFServer + "CollectionPoint", jsonObject.toString());
+            result = JSONParser.postStream(App.WCFServer + "CollectionPoint", jsonObject.toString()).trim();
+            result = result.substring(1, result.length()-1);
         } catch (Exception e) {
             Log.e("CollectionPointControl", e.getMessage());
         }
