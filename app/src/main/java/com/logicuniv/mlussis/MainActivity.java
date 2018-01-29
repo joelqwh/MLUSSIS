@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
         App.setAppContext(getApplicationContext());
 
         //If not logged in, goto login
-        if(!LoginController.IsCurrentSessionValid())
+        if(!LoginController.IsCurrentSessionValid(getApplicationContext()))
         {
             Log.d("MainActivity", "Session Invalid, Need to login again");
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

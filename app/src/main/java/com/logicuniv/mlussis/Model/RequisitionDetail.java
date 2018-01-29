@@ -11,9 +11,11 @@ public class RequisitionDetail extends HashMap {
 
     static ArrayList<ArrayList<RequisitionDetail>> alalrd = new ArrayList<>();
 
-    public RequisitionDetail(String reqNo, String itemNo, String qty) {
+
+    public RequisitionDetail(String reqNo, String itemNo, String description, String qty) {
         put("ReqNo", reqNo);
         put("ItemNo", itemNo);
+        put("Description", description);
         put("Qty", qty);
     }
 
