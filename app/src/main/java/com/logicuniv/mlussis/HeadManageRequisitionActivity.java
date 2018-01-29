@@ -29,15 +29,18 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
 
 
         new AsyncTask<Void, Void, Void>() {
+
+            ArrayList<Requisition> alr;
             @Override
             protected Void doInBackground(Void... params) {
-                ArrayList<Requisition> alr = (ArrayList<Requisition>) RequisitionController.getPendingRequisitions();
+                alr = (ArrayList<Requisition>) RequisitionController.getPendingRequisitions();
 
-                adapt = new SimpleAdapter(HeadManageRequisitionActivity.this,alr,R.layout.row_list_managereq_deputy, new String[]{EmployeeController.getEmployeeName("IssuedBy"), "ReqNo", "DateIssued"},
-                        new int[]{R.id.textView__managereq_empname, R.id.textView_managereq_reqno, R.id.textView_managereq_reqdate});   //change issuedby to empName
                 return null;
             }
-
+            protected void onPostExecute(Void result) {
+                adapt = new SimpleAdapter(HeadManageRequisitionActivity.this, alr, R.layout.row_list_managereq_deputy, new String[]{EmployeeController.getEmployeeName("IssuedBy"), "ReqNo", "DateIssued"},
+                        new int[]{R.id.textView__managereq_empname, R.id.textView_managereq_reqno, R.id.textView_managereq_reqdate});   //change issuedby to empName
+            }
         }.execute();
 
         lv_manageReq.setAdapter(adapt);

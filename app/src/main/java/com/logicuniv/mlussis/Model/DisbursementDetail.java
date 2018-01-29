@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class DisbursementDetail extends HashMap<String, String> {
 
     //final static String baseURL = "http://172.17.252.67/Bookshop13/Service.svc/"; //to change if not will fail
-    static ArrayList<ArrayList<DisbursementDetail>> disbursementdetailsalal = new ArrayList<>();
+      static ArrayList<ArrayList<DisbursementDetail>> disbursementdetailsalal = new ArrayList<>();
 
     public DisbursementDetail(String disbNo, String itemNo , String description, String need, String promise, String received) {
         put("DisbursementNo", disbNo);

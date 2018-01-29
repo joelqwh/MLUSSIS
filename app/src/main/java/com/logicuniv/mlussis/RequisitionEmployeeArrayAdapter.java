@@ -33,10 +33,16 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
        reqDet = getItem(position);
 
         new AsyncTask<Void, Void, Void>() {
+            StationeryCatalogue scd;
             @Override
             protected Void doInBackground(Void... params) {
-                sc = StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
+                scd = StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
                 return null;
+            }
+
+            protected void onPostExecute(Void result)
+            {
+                sc=scd;
             }
 
         }.execute();

@@ -63,10 +63,9 @@ public class RequisitionController {
         return result;
     }
 
-    //TODO: Change name
-    public static String addRequisition2 (Requisition r)
+    public static String addRequisitionAndGetReqNo (Requisition r)
     {
-        String result = null;
+        String result=null;
 
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonRequisition = new JSONObject();
@@ -87,7 +86,8 @@ public class RequisitionController {
             jsonObject.put("addRequisition", jsonRequisition.toString());
 
             //result of passing the "jsonObject".toString() into the WCF Server
-            result = JSONParser.postStream(App.WCFServer + "AddRequisitionAndGetReqNo", jsonObject.toString());
+            response = JSONParser.postStream(App.WCFServer + "AddRequisitionAndGetReqNo", jsonObject.toString());
+            result = response.toString();
         }
         catch (Exception e)
         {

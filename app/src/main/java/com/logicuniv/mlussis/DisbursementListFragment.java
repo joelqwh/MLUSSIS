@@ -41,7 +41,7 @@ public class DisbursementListFragment extends Fragment {
        final TableLayout table = (TableLayout)v.findViewById(R.id.table_deptRep_disbursement_list);
 
         TableRow firstrow = (TableRow)LayoutInflater.from(getActivity()).inflate(R.layout.row_disbursement_list, null);
-        ((TextView)firstrow.findViewById(R.id.textView_deptRep_disbursement_list_item)).setText("ItemNo.");
+        ((TextView)firstrow.findViewById(R.id.textView_deptRep_disbursement_list_item)).setText("Item Description.");
         ((TextView)firstrow.findViewById(R.id.textView_deptRep_disbursement_list_qty)).setText("Rec. Qty");
         table.addView((firstrow));
 
