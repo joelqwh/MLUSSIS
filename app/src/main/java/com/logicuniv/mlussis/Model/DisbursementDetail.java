@@ -13,9 +13,10 @@ public class DisbursementDetail extends HashMap<String, String> {
     //final static String baseURL = "http://172.17.252.67/Bookshop13/Service.svc/"; //to change if not will fail
     static ArrayList<ArrayList<DisbursementDetail>> disbursementdetailsalal = new ArrayList<>();
 
-    public DisbursementDetail(String disbNo, String itemNo , String need, String promise, String received) {
+    public DisbursementDetail(String disbNo, String itemNo , String description, String need, String promise, String received) {
         put("DisbursementNo", disbNo);
         put("ItemNo", itemNo);             //getItemName(itemNo)
+        put("Description", description);
         put("Needed", need);
         put("Promised", promise);
         put("Received", received);
@@ -44,10 +45,10 @@ public class DisbursementDetail extends HashMap<String, String> {
 
 
         ArrayList<DisbursementDetail> aldd= new ArrayList<>();   //dummy values
-        DisbursementDetail d1 = new DisbursementDetail("1", "I001", "10", "9", "9"); //dummy values
-        DisbursementDetail d2 = new DisbursementDetail("1","I002","2","1","1"); //dummy values
-        aldd.add(d1); //dummy values
-        aldd.add(d2); //dummy values
+        //DisbursementDetail d1 = new DisbursementDetail("1", "I001", "10", "9", "9"); //dummy values
+        //DisbursementDetail d2 = new DisbursementDetail("1","I002","2","1","1"); //dummy values
+        //aldd.add(d1); //dummy values
+        //aldd.add(d2); //dummy values
         return aldd;
     }
 
