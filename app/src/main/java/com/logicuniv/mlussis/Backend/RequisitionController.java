@@ -225,7 +225,7 @@ public class RequisitionController {
     }
 
 
-    public boolean removeRequisition(Requisition rRemove){
+    public static boolean removeRequisition(Requisition rRemove){
 
         Boolean result = false;
 

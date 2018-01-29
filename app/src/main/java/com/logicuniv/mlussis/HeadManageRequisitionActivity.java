@@ -2,6 +2,7 @@ package com.logicuniv.mlussis;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,8 +18,7 @@ import java.util.ArrayList;
 
 public class HeadManageRequisitionActivity extends Activity implements AdapterView.OnItemClickListener{
 
-
-
+    ListAdapter adapt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +27,19 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
 
         ListView lv_manageReq = findViewById(R.id.listView_managereqlist_deputy);
 
-        ArrayList<Requisition> alr = (ArrayList<Requisition>) RequisitionController.getPendingRequisitions();
 
-        ListAdapter adapt = new SimpleAdapter(this,alr,R.layout.row_list_managereq_deputy, new String[]{EmployeeController.getEmployeeName("IssuedBy"), "ReqNo", "DateIssued"},
-                new int[]{R.id.textView__managereq_empname, R.id.textView_managereq_reqno, R.id.textView_managereq_reqdate});   //change issuedby to empName
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                ArrayList<Requisition> alr = (ArrayList<Requisition>) RequisitionController.getPendingRequisitions();
+
+                adapt = new SimpleAdapter(HeadManageRequisitionActivity.this,alr,R.layout.row_list_managereq_deputy, new String[]{EmployeeController.getEmployeeName("IssuedBy"), "ReqNo", "DateIssued"},
+                        new int[]{R.id.textView__managereq_empname, R.id.textView_managereq_reqno, R.id.textView_managereq_reqdate});   //change issuedby to empName
+                return null;
+            }
+
+        }.execute();
+
         lv_manageReq.setAdapter(adapt);
         lv_manageReq.setOnItemClickListener(this);      //need to change
 

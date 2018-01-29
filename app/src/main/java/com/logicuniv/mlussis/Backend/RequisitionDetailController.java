@@ -65,7 +65,7 @@ public class RequisitionDetailController {
         return result;
     }
 
-    private static boolean addRequisitionDetail (RequisitionDetail rdItem)
+    public static boolean addRequisitionDetail (RequisitionDetail rdItem)
     {
         Boolean result = false;
 
@@ -94,6 +94,25 @@ public class RequisitionDetailController {
             result = false;
         }
 
+        return result;
+    }
+
+    public static boolean removeRequisitionDetails (RequisitionDetail[] rdItems)
+    {
+        boolean result = false;
+
+        for(int i = 0; i < rdItems.length; i++)
+        {
+            if(!removeRequisitionDetail(rdItems[i]))
+            {
+                result = false;
+                break;
+            }
+            else
+            {
+                result = true;
+            }
+        }
         return result;
     }
 

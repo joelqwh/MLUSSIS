@@ -29,8 +29,13 @@ public class Requisition extends HashMap<String,Object>{
         put("Remarks", remarks);
     }
 
-    public Requisition(String reqNo, String issuedBy, Date dateIssued) {
+    public Requisition(String reqNo, String issuedBy, String dateIssued) {
         put("ReqNo", reqNo);
+        put("IssuedBy", issuedBy);
+        put("DateIssued", dateIssued);
+    }
+
+    public Requisition(String issuedBy, String dateIssued) {
         put("IssuedBy", issuedBy);
         put("DateIssued", dateIssued);
     }
