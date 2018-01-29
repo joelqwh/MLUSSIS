@@ -58,13 +58,13 @@ public class LoginController {
         return result;
     }
 
-    public static boolean IsCurrentSessionValid() {
+    public static boolean IsCurrentSessionValid(Context context) {
         boolean result = false;
         JSONObject jsonObject = new JSONObject();
         String response;
 
         try {
-            jsonObject.put("sessionID", getSessionID(App.getAppContext()));
+            jsonObject.put("sessionID", getSessionID(context));
 
             Log.d("LoginController", App.WCFServer + "checkSession");
             Log.d("LoginController", jsonObject.toString());
@@ -82,7 +82,7 @@ public class LoginController {
 
         // Logout if session is invalid
         if (!result) {
-            Logout(App.getAppContext());
+            Logout(context);
         }
 
         return result;
@@ -118,7 +118,7 @@ public class LoginController {
         JSONObject jsonObject = new JSONObject();
 
         try {
-            jsonObject.put("sessionID", getSessionID(App.getAppContext()));
+            jsonObject.put("sessionID", getSessionID(context));
 
             Log.d("LoginController", App.WCFServer + "GetEmployeeIDFromSession");
             Log.d("LoginController", jsonObject.toString());
