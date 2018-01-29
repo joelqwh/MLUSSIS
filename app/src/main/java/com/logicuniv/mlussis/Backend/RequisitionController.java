@@ -27,8 +27,7 @@ public class RequisitionController {
 //        Log.e("joel",alr.toString());;
 //    }
 
-    public static boolean addRequisition (Requisition r)
-    {
+    public static boolean addRequisition(Requisition r) {
         Boolean result = false;
 
         JSONObject jsonObject = new JSONObject();
@@ -37,7 +36,7 @@ public class RequisitionController {
 
         try {
             //put requisition into a JSONObject "jsonRequisition"
-            jsonRequisition.put("ReqNo",r.get("ReqNo"));
+            jsonRequisition.put("ReqNo", r.get("ReqNo"));
             jsonRequisition.put("IssuedBy", r.get("IssuedBy"));
             jsonRequisition.put("DateIssued", r.get("DateIssued"));
             jsonRequisition.put("ApprovedBy", r.get("ApprovedBy"));
@@ -53,9 +52,7 @@ public class RequisitionController {
             response = JSONParser.postStream(App.WCFServer + "AddRequisition", jsonObject.toString());
 
             result = response.trim().equals("true");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Log.e("AddRequisition", e.getMessage());
             result = false;
         }
@@ -63,34 +60,21 @@ public class RequisitionController {
         return result;
     }
 
-    public static String addRequisitionAndGetReqNo (Requisition r)
-    {
-        String result=null;
-
+    public static String CreateNewRequisition() {
+        String result = null;
         JSONObject jsonObject = new JSONObject();
-        JSONObject jsonRequisition = new JSONObject();
-        String response=null;
 
         try {
-            //put requisition into a JSONObject "jsonRequisition"
-            jsonRequisition.put("ReqNo",r.get("ReqNo"));
-            jsonRequisition.put("IssuedBy", r.get("IssuedBy"));
-            jsonRequisition.put("DateIssued", r.get("DateIssued"));
-            jsonRequisition.put("ApprovedBy", r.get("ApprovedBy"));
-            jsonRequisition.put("DateReviewed", r.get("DateReviewed"));
-            jsonRequisition.put("Status", r.get("Status"));
-            jsonRequisition.put("Remarks", r.get("Remarks"));
-
             //put JSONObject "jsonRequisitionDetail" and sessionID into a JSONObject "jsonObject"
             jsonObject.put("sessionID", LoginController.getSessionID((App.getAppContext())));
-            jsonObject.put("addRequisition", jsonRequisition.toString());
+
+            Log.d("addRequisitionAndGetReq", App.WCFServer + "AddRequisitionAndGetReqNo");
+            Log.d("addRequisitionAndGetReq", jsonObject.toString());
 
             //result of passing the "jsonObject".toString() into the WCF Server
-            response = JSONParser.postStream(App.WCFServer + "AddRequisitionAndGetReqNo", jsonObject.toString());
-            result = response.toString();
-        }
-        catch (Exception e)
-        {
+            result = JSONParser.postStream(App.WCFServer + "AddRequisitionAndGetReqNo", jsonObject.toString()).trim();
+
+        } catch (Exception e) {
             Log.e("AddRequisition", e.getMessage());
         }
 
@@ -124,7 +108,7 @@ public class RequisitionController {
 
         try {
             jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
-            jsonObject.put("sessionEmpNo",sessionEmpNo);
+            jsonObject.put("sessionEmpNo", sessionEmpNo);
 
             jsonResult = new JSONArray(JSONParser.postStream(App.WCFServer + "PendingRequisitions", jsonObject.toString()));
 
@@ -170,7 +154,7 @@ public class RequisitionController {
 
         try {
             jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
-            jsonObject.put("ReqNo", reqNo);
+            jsonObject.put("reqNo", reqNo);
 
             jsonResult = new JSONObject(JSONParser.postStream(App.WCFServer + "GetRequisitionById", jsonObject.toString()));
 
@@ -190,7 +174,7 @@ public class RequisitionController {
         return result;
     }
 
-    public static boolean updateRequisition(Requisition rUpdated){
+    public static boolean updateRequisition(Requisition rUpdated) {
         Boolean result = false;
 
         JSONObject jsonObject = new JSONObject();
@@ -198,7 +182,7 @@ public class RequisitionController {
         String response;
 
         try {
-            jsonRequisition.put("ReqNo",rUpdated.get("ReqNo"));
+            jsonRequisition.put("ReqNo", rUpdated.get("ReqNo"));
             jsonRequisition.put("IssuedBy", rUpdated.get("IssuedBy"));
             jsonRequisition.put("DateIssued", rUpdated.get("DateIssued"));
             jsonRequisition.put("ApprovedBy", rUpdated.get("ApprovedBy"));
@@ -222,7 +206,7 @@ public class RequisitionController {
     }
 
 
-    public static boolean removeRequisition(Requisition rRemove){
+    public static boolean removeRequisition(Requisition rRemove) {
 
         Boolean result = false;
 
@@ -244,9 +228,7 @@ public class RequisitionController {
             response = JSONParser.postStream(App.WCFServer + "RemoveRequisition", jsonObject.toString());
 
             result = response.trim().equals("true");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Log.e("RemoveRequisition", e.getMessage());
             result = false;
         }
