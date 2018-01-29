@@ -26,14 +26,11 @@ public class DisbursementDetailController {
         String result = null;
 
         JSONObject jsonObject = new JSONObject();
-        JSONObject jsonResult;
 
         try {
             jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
-
-            jsonResult = new JSONObject(JSONParser.postStream(App.WCFServer + "CurrentDisbursementNo", jsonObject.toString()));
-
-            result = jsonResult.getString("DisbursementNo");
+            result = JSONParser.postStream(App.WCFServer + "CurrentDisbursementNo", jsonObject.toString()).trim();
+            result = result.substring(1, result.length()-1).trim();
         } catch (Exception e) {
             Log.e("DisbursementDetailCont.", e.getMessage());
         }
