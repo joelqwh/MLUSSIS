@@ -1,0 +1,24 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.logicuniv.mlussis.StoreClerk.StatRetMenuFragment">
+
+
+    <Spinner
+        android:id="@+id/retBinSpinner"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="182dp"
+        android:layout_marginTop="20dp"
+        android:entries="@array/binNo"></Spinner>
+
+    <Spinner
+        android:id="@+id/retDateSpinner"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:entries="@array/RetDate"></Spinner>
+
+</FrameLayout>
