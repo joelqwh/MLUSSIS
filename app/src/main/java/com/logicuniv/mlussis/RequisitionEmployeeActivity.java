@@ -160,7 +160,8 @@ public class RequisitionEmployeeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 RequisitionController.addRequisition(req);
-                RequisitionDetailController.addRequisitionDetails(reqDetList);
+                RequisitionDetail[] reqDets = reqDetList.toArray( new RequisitionDetail[reqDetList.size()]);
+                RequisitionDetailController.addRequisitionDetails(reqDets);
                 Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
                 req.clear();
                 reqDetList.clear(); //or set it to null?
