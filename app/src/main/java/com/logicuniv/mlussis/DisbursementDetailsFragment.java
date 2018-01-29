@@ -1,15 +1,12 @@
 package com.logicuniv.mlussis;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.logicuniv.mlussis.Backend.CollectionPointController;
 import com.logicuniv.mlussis.Backend.DepartmentController;
@@ -17,7 +14,6 @@ import com.logicuniv.mlussis.Backend.DisbursementController;
 import com.logicuniv.mlussis.Backend.EmployeeController;
 import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.Model.Disbursement;
-import com.logicuniv.mlussis.Model.Employee;
 
 
 public class DisbursementDetailsFragment extends Fragment {
@@ -34,29 +30,41 @@ public class DisbursementDetailsFragment extends Fragment {
         final TextView tv_Emp = v.findViewById(R.id.textView_Employee);
         final TextView tv_colPt = v.findViewById(R.id.textView_ColPt);
 
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTask<String, Void, Void>() {
             boolean t = false;
+            String deptName;
+            String empName;
+            String colPtName;
+
             @Override
-            protected Void doInBackground(Void...voids) {
+            protected Void doInBackground(String...params) {
                 String empNoLoggedIn = LoginController.GetLoggedInEmployeeNumber(getContext());
 
                 String deptCode = EmployeeController.getEmployeeById(empNoLoggedIn).get("DeptCode").toString();
 
                 Disbursement d = DisbursementController.getCurrentDisbursementForDepartment(deptCode);     //get parameter from login details when it is set up
 
+
                 if (d != null) {
 
-                    String deptName = DepartmentController.getDepartmentName(d.get("DeptCode"));     //to initialise this method later
-                    tv_Dept.setText(deptName);
+                    deptName = DepartmentController.getDepartmentName(d.get("DeptCode"));     //to initialise this method later
 
-                    String empName = EmployeeController.getEmployeeName(d.get("RepEmpNo"));
-                    tv_Emp.setText(empName);
 
-                    String colPtName = new CollectionPointController().getCollectionPointDetails(d.get("CollectionPoint"));
-                    tv_colPt.setText(colPtName);
+                    empName = EmployeeController.getEmployeeName(d.get("RepEmpNo"));
+
+
+                    colPtName = new CollectionPointController().getCollectionPointDetails(d.get("CollectionPointNo"));
                 }
 
                 return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result)
+            {
+                tv_Dept.setText(deptName);
+                tv_Emp.setText(empName);
+                tv_colPt.setText(colPtName);
             }
 
         }.execute();

@@ -35,7 +35,7 @@ public class EmployeeController {
                     jsonResult.getString("DeptCode"),
                     jsonResult.getString("Email"),
                     jsonResult.getString("SessionNo"),
-                    new SimpleDateFormat("d-MM-yyyy").parse(jsonResult.getString("SessionExpiry")));
+                    jsonResult.getString("SessionExpiry"));
         } catch (Exception e) {
             Log.e("Employee.", e.getMessage());
         }
