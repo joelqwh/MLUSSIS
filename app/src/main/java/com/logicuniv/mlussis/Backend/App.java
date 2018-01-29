@@ -15,14 +15,14 @@ import org.json.JSONObject;
 public class App extends Application {
 
     //Xavier
-    //public static final String WCFServer = "http://172.17.255.135/LUSSIS/Service.svc/";
+    public static final String WCFServer = "http://172.17.255.135/LUSSIS/Service.svc/";
 
     //Joel
-    public static final String LoginServer = "http://172.17.252.67/";
-    public static final String WCFServer = "http://172.17.252.67/LUSSIS/Service.svc/";
+//    public static final String LoginServer = "http://172.17.252.67/";
+//    public static final String WCFServer = "http://172.17.252.67/LussisWcfService/Service.svc/";
 
-//    public static final String LoginServer = "http://192.168.2.151/";
-//    public static final String WCFServer = "http://192.168.2.151/LussisWcfService/Service.svc/";
+    //public static final String LoginServer = "http://192.168.2.151/";
+    //public static final String WCFServer = "http://192.168.2.151/LussisWcfService/Service.svc/";
 
 
     /*Junyi
