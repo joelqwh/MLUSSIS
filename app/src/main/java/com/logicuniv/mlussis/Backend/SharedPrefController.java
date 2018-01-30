@@ -22,4 +22,12 @@ public class SharedPrefController {
                 PreferenceManager.getDefaultSharedPreferences(context);
         return pref.getString(name, null);
     }
+
+    public static void clearValue(Context context, String name) {
+        SharedPreferences pref =
+                PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove(name);
+        editor.apply();
+    }
 }
