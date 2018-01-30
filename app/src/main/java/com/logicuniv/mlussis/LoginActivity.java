@@ -20,8 +20,6 @@ public class LoginActivity extends Activity {
     EditText usernameEditText;
     EditText passwordEditText;
 
-
-
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -35,11 +33,9 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         usernameEditText = findViewById(R.id.userNameEditText);
         passwordEditText = findViewById(R.id.PasswordEditText);
         Button signIn = findViewById(R.id.signInButton);
-
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,31 +43,26 @@ public class LoginActivity extends Activity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
-//                if (username.isEmpty() || password.isEmpty()) {
-//                    Toast.makeText(getApplicationContext(), "Please Fill in Both Fields", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
+                new AsyncTask<String, Void, ArrayList<String>>() {
+                    ArrayList<String> rolesAssigned;
+                    boolean logintrue = false;
 
+                    @Override
+                    protected ArrayList<String> doInBackground(String... params) {
+                        logintrue = LoginController.AuthenticateCredentials(getApplicationContext(), params[0], params[1]);
+                        return LoginController.GetRolesFromCurrentSessionId(getApplicationContext());
+                    }
 
-                    new AsyncTask<String, Void, ArrayList<String>>() {
-                        ArrayList<String> rolesAssigned;
-                        boolean logintrue = false;
-                        @Override
-                        protected ArrayList<String> doInBackground(String... params) {
-                                logintrue = LoginController.AuthenticateCredentials(getApplicationContext(), params[0], params[1]);
-                            return LoginController.GetRolesFromCurrentSessionId(getApplicationContext());
-                        }
+                    @Override
+                    protected void onPostExecute(ArrayList<String> result) {
+                        rolesAssigned = result;
+                        if (!logintrue) {
+                            Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_LONG).show();
+                        } else
 
-                        @Override
-                        protected void onPostExecute(ArrayList<String> result) {
-                            rolesAssigned = result;
-                            if (!logintrue) {
-                                Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_LONG).show();
-                            } else
-
-                            {
-                                // Redirect User to the first Page Here
-                                Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
+                        {
+                            // Redirect User to the first Page Here
+                            Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
                             // Assign based on the first role
                             Class nextActivity = null;
                             switch (rolesAssigned.get(0)) {
@@ -100,7 +91,7 @@ public class LoginActivity extends Activity {
                     }
                 }.execute(username, password);
 
-                }
-            });
-        }
+            }
+        });
     }
+}
