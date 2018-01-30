@@ -150,7 +150,7 @@ public class RequisitionDetailController {
 
     }
 
-    public boolean updateRequisitionDetail(RequisitionDetail rdItem)
+    public static boolean updateRequisitionDetail(RequisitionDetail rdItem)
     {
         Boolean result = false;
 

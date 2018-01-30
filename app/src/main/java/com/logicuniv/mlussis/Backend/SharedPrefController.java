@@ -9,7 +9,7 @@ import android.preference.PreferenceManager;
  */
 
 public class SharedPrefController {
-    private static void setValue(Context context, String name, String value) {
+    public static void setValue(Context context, String name, String value) {
         SharedPreferences pref =
                 PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = pref.edit();
@@ -20,6 +20,6 @@ public class SharedPrefController {
     public static String getValue(Context context, String name) {
         SharedPreferences pref =
                 PreferenceManager.getDefaultSharedPreferences(context);
-        return pref.getString(name, "");
+        return pref.getString(name, null);
     }
 }
