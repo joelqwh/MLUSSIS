@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -32,6 +33,8 @@ import java.util.Calendar;
 
 public class RequisitionEmployeeActivity extends Activity {
 
+
+
     Requisition req = new Requisition();
     ArrayList<RequisitionDetail> reqDetList=new ArrayList<>();
     SharedPreferences pref;
@@ -40,17 +43,19 @@ public class RequisitionEmployeeActivity extends Activity {
     SharedPreferences.Editor edit;
     ListView reqItemList;
 
-    StationeryCatalogue sc=null;
+    StationeryCatalogue sc;
     String qty=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
         setContentView(R.layout.activity_requisition_employee);
         setTitle("Raise Requisition");
         //restoreInstance(savedInstanceState);
-        pref = getSharedPreferences("requisition",0); //PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String requisitionNo = pref.getString("ReqNo",saveReq); //use this to get Requisition and RequsitionDetail
+        pref = getSharedPreferences("requisition",MODE_PRIVATE); //PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String requisitionNo = pref.getString("ReqNo",""); //use this to get Requisition and RequsitionDetail
         //Log.e("joel",requisitionNo.toString()); y
 
         Button button_addItem = (Button) findViewById(R.id.button_requisition_employee_addItem);
@@ -68,74 +73,31 @@ public class RequisitionEmployeeActivity extends Activity {
 
         String itemNo = b.getString("ItemNo");
 
-        new AsyncTask<String, Void, Void>() {
-            StationeryCatalogue scd;
-            @Override
-            protected Void doInBackground(String... params) {
-
-                scd = StationeryCatalogueController.searchCatalogueById(params[0]);
-
-                return null;
-
-            }
-
-            protected void onPostExecute(Void result)
-            {
-                sc=scd;
-            }
-        }.execute(itemNo);
+        sc = StationeryCatalogueController.searchCatalogueById(itemNo);
 
         qty =b.getString("qty");
 
         if(requisitionNo!=null)
         {
-            new AsyncTask<String, Void, Void>() {
-                Requisition r;
-                @Override
-                protected Void doInBackground(String... params) {
-                    r= RequisitionController.getRequisitionById(params[0]);
-                    reqDetList= RequisitionDetailController.getRequisitionDetail(params[0]);
-                    return null;
-                }
-
-                protected void onPostExecute(Void result)
-                {
-                    req=r;
-                    adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this,reqDetList);
-                    reqItemList.setAdapter(adapt);
-                }
-            }.execute(requisitionNo);
-
+            req= RequisitionController.getRequisitionById(requisitionNo);
+            reqDetList= RequisitionDetailController.getRequisitionDetail(requisitionNo);
+            RequisitionDetail rd = new RequisitionDetail(requisitionNo, sc.get("ItemNo"), sc.get("Description"),qty);
+            RequisitionDetailController.addRequisitionDetail(rd);
         }
         else
         {
-            new AsyncTask<Void, Void, Void>() {
-                boolean t = false;
-                Requisition getReq;
-                @Override
-                protected Void doInBackground(Void... params) {
-                    //Requisition r = new Requisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()),Calendar.getInstance().getTime().toString());
-                    saveReq = RequisitionController.CreateNewRequisition();
-                    getReq = RequisitionController.getRequisitionById(saveReq);
-                    RequisitionDetail rd = new RequisitionDetail(saveReq, sc.get("ItemNo"), sc.get("Description"),qty);
-                    t=RequisitionDetailController.addRequisitionDetail(rd);
-                    reqDetList = RequisitionDetailController.getRequisitionDetail(saveReq);
+            saveReq = RequisitionController.CreateNewRequisition();
+            req = RequisitionController.getRequisitionById(saveReq);
+            RequisitionDetail rd = new RequisitionDetail(saveReq, sc.get("ItemNo"), sc.get("Description"),qty);
+            RequisitionDetailController.addRequisitionDetail(rd);
+            reqDetList = RequisitionDetailController.getRequisitionDetail(saveReq);
 
-                    return null;
-                }
-                protected void onPostExecute(Void result)
-                {
-                    req=getReq;
-                    adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this,reqDetList);
-                    reqItemList.setAdapter(adapt);
-                    pref.edit().putString("ReqNo",saveReq);
-                    pref.edit().apply();
-                }
+            pref.edit().putString("ReqNo",saveReq);
+            pref.edit().apply();
 
-
-            }.execute();
         }
-
+        adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this,reqDetList);
+        reqItemList.setAdapter(adapt);
 
         View.OnClickListener ocl_addItem = new View.OnClickListener() {
             @Override
@@ -156,64 +118,18 @@ public class RequisitionEmployeeActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                new AsyncTask<Requisition, Void, Void>() {
-                    boolean t = false;
-                    @Override
-                    protected Void doInBackground(Requisition... params) {
-                        t=RequisitionController.removeRequisition(params[0]);
-                        return null;
-                    }
+                RequisitionController.removeRequisition(req);
+                RequisitionDetailController.removeRequisitionDetails((RequisitionDetail[])reqDetList.toArray());
 
-                    protected void onPostExecute(Void result)
-                    {
-                        if (t=true)
-                        {
-                            adapt.clear();              //removeRequisition
-                            edit.remove("ReqNo");       //removeRequisitionDetail
-                            edit.apply();
-                            saveReq = null;
-                            Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
-                            startActivity(intent);
-                        }
-                        else
-                        {
-                            Toast.makeText(RequisitionEmployeeActivity.this, "Requisition not yet removed", Toast.LENGTH_LONG).show();
-                        }
-                    }
+                adapt.clear();              //removeRequisition
+                edit.remove("ReqNo");       //removeRequisitionDetail
+                edit.apply();
+                saveReq = null;
+                Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
+                startActivity(intent);
 
-                }.execute(req);
 
-                new AsyncTask<RequisitionDetail[], Void, Void>() {
-                    boolean t = false;
-                    @Override
-                    protected Void doInBackground(RequisitionDetail[]... params) {
-                        t=RequisitionDetailController.removeRequisitionDetails(params[0]);
-                        return null;
-                    }
-
-                    protected void onPostExecute(Void result)
-                    {
-                        if (t=true)
-                        {
-                            adapt.clear();              //removeRequisition
-                            edit.remove("ReqNo");       //removeRequisitionDetail
-                            edit.apply();
-                            saveReq = null;
-                        }
-                    }
-
-                }.execute((RequisitionDetail[])reqDetList.toArray());
-
-//                req.clear();
-//                reqDetList.clear(); //or set it to null?
-//                adapt.clear();              //removeRequisition
-//                edit.remove("ReqNo");       //removeRequisitionDetail
-//                edit.apply();
-//                saveReq = null;
-//                Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
-//                Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
-//                startActivity(intent);
             }
         };
         button_cancelReq.setOnClickListener(ocl_reject);
@@ -222,41 +138,16 @@ public class RequisitionEmployeeActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                new AsyncTask<Requisition, Void, Void>() {
-                    boolean t = false;
-                    @Override
-                    protected Void doInBackground(Requisition... params) {
-                        t=RequisitionController.addRequisition(params[0]);
-                        return null;
-                    }
+                RequisitionController.addRequisition(req);
+                RequisitionDetailController.addRequisitionDetails((RequisitionDetail[])reqDetList.toArray());
 
-                    protected void onPostExecute(Void result)
-                    {
-                        edit.remove("ReqNo");
-                        edit.apply();
-                        saveReq = null;
-                        adapt.clear();
-                        Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
-                        startActivity(intent);
-                    }
-
-                }.execute(req);
-
-                new AsyncTask<RequisitionDetail[], Void, Void>() {
-                    boolean t = false;
-                    @Override
-                    protected Void doInBackground(RequisitionDetail[]... params) {
-                        t=RequisitionDetailController.addRequisitionDetails(params[0]);
-                        return null;
-                    }
-
-                    protected void onPostExecute(Void result)
-                    {
-
-                    }
-
-                }.execute((RequisitionDetail[])reqDetList.toArray());
+                edit.remove("ReqNo");
+                edit.apply();
+                saveReq = null;
+                adapt.clear();
+                Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
+                startActivity(intent);
 
 //                RequisitionController.addRequisition(req);
 //                RequisitionDetailController.addRequisitionDetails(reqDetList);
@@ -284,21 +175,7 @@ public class RequisitionEmployeeActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.option1:
 
-                new AsyncTask<String, Void, Void>() {
-                    StationeryCatalogue scd;
-                    @Override
-                    protected Void doInBackground(String... params) {
-
-                        scd = StationeryCatalogueController.searchCatalogueById(params[0]);
-
-                        return null;
-                    }
-
-                    protected void onPostExecute(Void result)
-                    {
-                        sc=scd;
-                    }
-                }.execute((String)reqDet.get("ItemNo"));
+                sc = StationeryCatalogueController.searchCatalogueById((String)reqDet.get("ItemNo"));
 
                 final Dialog d = new Dialog(RequisitionEmployeeActivity.this);
                 d.setTitle("Change Quantity of Item");
@@ -335,29 +212,11 @@ public class RequisitionEmployeeActivity extends Activity {
                 return true;
             case R.id.option2:
 
-                new AsyncTask<RequisitionDetail, Void, Void>() {
-                    boolean t = false;
-                    @Override
-                    protected Void doInBackground(RequisitionDetail... params) {
+                RequisitionDetailController.removeRequisitionDetail(reqDet);
 
-                       t=RequisitionDetailController.removeRequisitionDetail(params[0]);
+                Toast.makeText(RequisitionEmployeeActivity.this, "Item Deleted",Toast.LENGTH_SHORT).show();
 
-                        return null;
-                    }
-                    @Override
-                    protected void onPostExecute(Void result)
-                    {
-                        if(t=true)
-                        {
-                            Toast.makeText(RequisitionEmployeeActivity.this, "Item Deleted",Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            Toast.makeText(RequisitionEmployeeActivity.this, "Item Not Deleted",Toast.LENGTH_SHORT).show();
-                        }
-                        reqItemList.setAdapter(reqItemList.getAdapter());
-                    }
-                }.execute(reqDet);
+                reqItemList.setAdapter(reqItemList.getAdapter());
 
                // RequisitionDetailController.removeRequisitionDetail(reqDet);
                 //reqDetList.remove(reqDet);      //removeRequisitionDetail(RequisitionDetail);
