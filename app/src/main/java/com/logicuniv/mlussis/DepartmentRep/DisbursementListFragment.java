@@ -1,4 +1,4 @@
-package com.logicuniv.mlussis;
+package com.logicuniv.mlussis.DepartmentRep;
 
 
 import android.content.Intent;
@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.logicuniv.mlussis.Backend.DisbursementDetailController;
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.Model.*;
+import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
 

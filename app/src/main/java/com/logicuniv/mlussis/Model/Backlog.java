@@ -13,4 +13,5 @@ public class Backlog extends HashMap<String, String> {
         put("ItemNo", itemNo);
         put("BackLogQty", backlogQty);
     }
+
 }

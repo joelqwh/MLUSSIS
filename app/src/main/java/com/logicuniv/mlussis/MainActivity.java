@@ -2,7 +2,6 @@ package com.logicuniv.mlussis;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -11,6 +10,9 @@ import android.view.MenuItem;
 
 import com.logicuniv.mlussis.Backend.App;
 import com.logicuniv.mlussis.Backend.LoginController;
+import com.logicuniv.mlussis.DepartmentRep.DisbursementActivity;
+import com.logicuniv.mlussis.DeputyHead.HeadManageRequisitionActivity;
+import com.logicuniv.mlussis.Employee.Catalogue_EmployeeActivity;
 
 public class MainActivity extends Activity {
 

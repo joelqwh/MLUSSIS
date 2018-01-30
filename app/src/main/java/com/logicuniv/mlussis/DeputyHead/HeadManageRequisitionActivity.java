@@ -1,4 +1,4 @@
-package com.logicuniv.mlussis;
+package com.logicuniv.mlussis.DeputyHead;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.SimpleAdapter;
 import com.logicuniv.mlussis.Backend.EmployeeController;
 import com.logicuniv.mlussis.Backend.RequisitionController;
 import com.logicuniv.mlussis.Model.Requisition;
+import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
 
@@ -27,14 +28,15 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
         setTitle("View Pending Requisitions");
 
         lv_manageReq = findViewById(R.id.listView_managereqlist_deputy);
-
+        View header = getLayoutInflater().inflate(R.layout.header_row_list_managereq_deputy,null);
+        lv_manageReq.addHeaderView(header,null,false);
 
         new AsyncTask<Void, Void, Void>() {
 
             ArrayList<Requisition> alr;
             @Override
             protected Void doInBackground(Void... params) {
-                alr = (ArrayList<Requisition>) RequisitionController.getPendingRequisitions();
+                alr = RequisitionController.getPendingRequisitions();
 
                 adapt = new SimpleAdapter(HeadManageRequisitionActivity.this, alr, R.layout.row_list_managereq_deputy, new String[]{EmployeeController.getEmployeeName("IssuedBy"), "ReqNo", "DateIssued"},
                         new int[]{R.id.textView__managereq_empname, R.id.textView_managereq_reqno, R.id.textView_managereq_reqdate});
@@ -47,11 +49,10 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
             }
         }.execute();
 
-        lv_manageReq.setAdapter(adapt);
-        lv_manageReq.setOnItemClickListener(this);      //need to change
+//        lv_manageReq.setAdapter(adapt);
+//        lv_manageReq.setOnItemClickListener(this);      //need to change
 
-        View header = getLayoutInflater().inflate(R.layout.header_row_list_managereq_deputy,null);
-        lv_manageReq.addHeaderView(header,null,false);
+
     }
 
     @Override

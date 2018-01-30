@@ -21,12 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DisbursementActivity" />
-        <activity android:name=".Catalogue_EmployeeActivity"
+        <activity android:name=".DepartmentRep.DisbursementActivity" />
+        <activity android:name=".Employee.Catalogue_EmployeeActivity"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".RequisitionEmployeeActivity" />
-        <activity android:name=".HeadManageRequisitionActivity" />
-        <activity android:name=".ViewPendingRequisitionDetailsActivity"
+        <activity android:name=".Employee.RequisitionEmployeeActivity" />
+        <activity android:name=".DeputyHead.HeadManageRequisitionActivity" />
+        <activity android:name=".DeputyHead.ViewPendingRequisitionDetailsActivity"
             android:windowSoftInputMode="adjustPan"></activity>
 
         <activity
