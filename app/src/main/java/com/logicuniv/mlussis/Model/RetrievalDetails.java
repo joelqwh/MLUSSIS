@@ -9,10 +9,12 @@ import java.util.HashMap;
 
 public class RetrievalDetails extends HashMap<String,String> implements Serializable{
 
-    public RetrievalDetails(String retrievalNo, String deptCode, String itemNo, String needed, String backlogQty, String actual) {
+    public RetrievalDetails(String retrievalNo, String deptCode, String itemNo, String description, String bin, String needed, String backlogQty, String actual) {
         put("RetrievalNo", retrievalNo);
         put("DeptCode", deptCode);
         put("ItemNo", itemNo);
+        put("Description", description);
+        put("Bin", bin);
         put("Needed", needed);
         put("BackLogQty", backlogQty);
         put("Actual", actual);
