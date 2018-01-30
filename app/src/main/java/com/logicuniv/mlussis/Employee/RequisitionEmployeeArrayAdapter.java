@@ -2,6 +2,7 @@ package com.logicuniv.mlussis.Employee;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,22 +32,12 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
     @Override
     public View getView (int position, View convertView, ViewGroup parent)
     {
+
+        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
        reqDet = getItem(position);
 
-        new AsyncTask<Void, Void, Void>() {
-            StationeryCatalogue scd;
-            @Override
-            protected Void doInBackground(Void... params) {
-                scd = StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
-                return null;
-            }
+       sc=StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
 
-            protected void onPostExecute(Void result)
-            {
-                sc=scd;
-            }
-
-        }.execute();
 
 
         if(convertView==null)
