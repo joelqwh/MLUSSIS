@@ -41,47 +41,26 @@ public class StoreClerk_DisburseSpinFragment extends Fragment {
 
         new AsyncTask<Void, Void, Void>(){
             ArrayList<Department> alDept;
+            String[] deptName;
 
             @Override
             protected Void doInBackground(Void...params){
                 alDept = DepartmentController.getAllDepartments();
+                Department[] alldeptarray = alDept.toArray(new Department[alDept.size()]);
+                deptName = new String[alldeptarray.length];
+                for (int i=0; i<deptName.length; i++){
+                    deptName[i] = alDept.get(i).get("DeptName");
+                }
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void v)
             {
-                Department[] alldeptarray = alDept.toArray(new Department[alDept.size()]);
-                String[] deptName = new String[alldeptarray[0].size()];
-                for (int i=1; i<deptName.length; i++){
-                    deptName[i] = alDept.get(i).get("DeptName");
-                }
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.fragment_store_clerk_disburse_spin,deptName);
-                adapter.setDropDownViewResource(R.layout.fragment_store_clerk_disburse_spin);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,deptName);
+                //adapter.setDropDownViewResource(R.layout.fragment_store_clerk_disburse_spin);
                 deptSpinner.setAdapter(adapter);
             }}.execute();
-
-        /*new AsyncTask<Void, Void, Void>>(){
-            @Override
-            protected Void doInBackground(Void...params){
-                ArrayList<Department> alDept = DepartmentController.getAllDepartments();
-                return null;
-            }
-
-            @Override
-            protected void OnPostExecute(Void v){
-                Department[] alldeptarray = alDept.toArray(new Department[alDept.size()]);
-                String[] column = new String[alldeptarray[0].size()];
-                for (int i=1; i<column.length; i++){
-                    column[i] = result.get(i).get("DeptName");
-                }
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.fragment_store_clerk_disburse_spin,column);
-                adapter.setDropDownViewResource(R.layout.fragment_store_clerk_disburse_spin);
-                deptSpinner.setAdapter(adapter);
-            }
-        };*/
 
         return v;
     }
