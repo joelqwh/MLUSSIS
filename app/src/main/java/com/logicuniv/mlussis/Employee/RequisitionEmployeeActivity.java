@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.Backend.RequisitionController;
 import com.logicuniv.mlussis.Backend.RequisitionDetailController;
+import com.logicuniv.mlussis.Backend.SharedPrefController;
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.Model.Requisition;
 import com.logicuniv.mlussis.Model.RequisitionDetail;
@@ -54,8 +55,8 @@ public class RequisitionEmployeeActivity extends Activity {
         setContentView(R.layout.activity_requisition_employee);
         setTitle("Raise Requisition");
         //restoreInstance(savedInstanceState);
-        pref = getSharedPreferences("requisition",MODE_PRIVATE); //PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String requisitionNo = pref.getString("ReqNo",""); //use this to get Requisition and RequsitionDetail
+        String requisitionNo = SharedPrefController.getValue(getApplicationContext(),"reqNo");
+        //String requisitionNo = pref.getString("ReqNo",""); //use this to get Requisition and RequsitionDetail
         //Log.e("joel",requisitionNo.toString()); y
 
         Button button_addItem = (Button) findViewById(R.id.button_requisition_employee_addItem);
@@ -80,9 +81,9 @@ public class RequisitionEmployeeActivity extends Activity {
         if(requisitionNo!=null)
         {
             req= RequisitionController.getRequisitionById(requisitionNo);
-            reqDetList= RequisitionDetailController.getRequisitionDetail(requisitionNo);
             RequisitionDetail rd = new RequisitionDetail(requisitionNo, sc.get("ItemNo"), sc.get("Description"),qty);
             RequisitionDetailController.addRequisitionDetail(rd);
+            reqDetList= RequisitionDetailController.getRequisitionDetail(requisitionNo);
         }
         else
         {
@@ -91,9 +92,7 @@ public class RequisitionEmployeeActivity extends Activity {
             RequisitionDetail rd = new RequisitionDetail(saveReq, sc.get("ItemNo"), sc.get("Description"),qty);
             RequisitionDetailController.addRequisitionDetail(rd);
             reqDetList = RequisitionDetailController.getRequisitionDetail(saveReq);
-
-            pref.edit().putString("ReqNo",saveReq);
-            pref.edit().apply();
+            SharedPrefController.setValue(getApplicationContext(),"reqNo",saveReq);
 
         }
         adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this,reqDetList);
@@ -202,6 +201,7 @@ public class RequisitionEmployeeActivity extends Activity {
                     {
                         String qty = et_qty.getText().toString();
                         reqDet.put("Qty",qty);
+                        RequisitionDetailController.updateRequisitionDetail(reqDet);
                                 Log.e("joel",reqDet.toString());
                         Toast.makeText(RequisitionEmployeeActivity.this, "Quantity Updated",Toast.LENGTH_SHORT).show();
                        reqItemList.setAdapter(reqItemList.getAdapter());
