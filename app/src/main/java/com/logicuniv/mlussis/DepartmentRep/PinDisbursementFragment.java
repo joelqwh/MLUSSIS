@@ -1,4 +1,4 @@
-package com.logicuniv.mlussis;
+package com.logicuniv.mlussis.DepartmentRep;
 
 
 import android.content.Intent;
@@ -15,6 +15,7 @@ import com.logicuniv.mlussis.Backend.DisbursementController;
 import com.logicuniv.mlussis.Backend.EmployeeController;
 import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.Model.Disbursement;
+import com.logicuniv.mlussis.R;
 
 
 /**

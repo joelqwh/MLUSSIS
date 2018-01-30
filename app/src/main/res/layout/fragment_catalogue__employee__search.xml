@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="com.logicuniv.mlussis.Catalogue_Employee_SearchFragment">
+    tools:context="com.logicuniv.mlussis.Employee.Catalogue_Employee_SearchFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

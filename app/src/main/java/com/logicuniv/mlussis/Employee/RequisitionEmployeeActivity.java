@@ -1,4 +1,4 @@
-package com.logicuniv.mlussis;
+package com.logicuniv.mlussis.Employee;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -26,10 +25,10 @@ import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.Model.Requisition;
 import com.logicuniv.mlussis.Model.RequisitionDetail;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
+import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class RequisitionEmployeeActivity extends Activity {
 
@@ -115,7 +114,7 @@ public class RequisitionEmployeeActivity extends Activity {
                 Requisition getReq;
                 @Override
                 protected Void doInBackground(Void... params) {
-                    Requisition r = new Requisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()),Calendar.getInstance().getTime().toString());
+                    //Requisition r = new Requisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()),Calendar.getInstance().getTime().toString());
                     saveReq = RequisitionController.CreateNewRequisition();
                     getReq = RequisitionController.getRequisitionById(saveReq);
                     RequisitionDetail rd = new RequisitionDetail(saveReq, sc.get("ItemNo"), sc.get("Description"),qty);
@@ -137,41 +136,6 @@ public class RequisitionEmployeeActivity extends Activity {
             }.execute();
         }
 
-//        adapt = new RequisitionEmployeeArrayAdapter(this,reqDetList);
-//        reqItemList.setAdapter(adapt);
-
-//29Jan2018
-//        if(requisitionNo!=null)
-//        {
-//            req= RequisitionController.getRequisitionById(requisitionNo);
-//            reqDetList= RequisitionDetailController.getRequisitionDetail(requisitionNo);
-//        }
-//        else
-//        {
-//            req = new Requisition("R1","E001",Calendar.getInstance().getTime().toString());
-//            //reqDetList= new ArrayList<>();      //createRequisitionDetailsArrayList
-//            RequisitionDetail reqDet = new RequisitionDetail((String)req.get("ReqNo"),sc.get("ItemNo"),qty);
-//            reqDetList.add(reqDet);
-//        }
-//17Jan2018
-//        if (req.isEmpty()||reqDetList.isEmpty())
-//        {
-//            Date currentTime = Calendar.getInstance().getTime();
-//            req = new Requisition("R1","E001",Calendar.getInstance().getTime().toString());
-//            //reqDetList= new ArrayList<>();      //createRequisitionDetailsArrayList
-//            RequisitionDetail reqDet = new RequisitionDetail((String)req.get("ReqNo"),sc.get("ItemNo"),qty);
-//            reqDetList.add(reqDet);
-//        }
-//        else
-//        {
-//            RequisitionDetail reqDetAdd = new RequisitionDetail((String)req.get("ReqNo"),sc.get("ItemNo"),qty);
-//
-//            Log.e("joel",reqDetAdd.toString());
-//            reqDetList.add(reqDetAdd);
-//            adapt.add(reqDetAdd);
-//            Log.e("joel",reqDetList.toString());
-//
-//        }
 
         View.OnClickListener ocl_addItem = new View.OnClickListener() {
             @Override

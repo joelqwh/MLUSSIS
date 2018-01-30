@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.logicuniv.mlussis.DisbursementActivity"
+    tools:context="com.logicuniv.mlussis.DepartmentRep.DisbursementActivity"
     tools:layout_editor_absoluteY="81dp">
 
     <fragment
         android:id="@+id/fragment1"
-        android:name="com.logicuniv.mlussis.DisbursementDetailsFragment"
+        android:name="com.logicuniv.mlussis.DepartmentRep.DisbursementDetailsFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.logicuniv.mlussis.DisbursementListFragment"
+        android:name="com.logicuniv.mlussis.DepartmentRep.DisbursementListFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/fragment3"
-        android:name="com.logicuniv.mlussis.PinDisbursementFragment"
+        android:name="com.logicuniv.mlussis.DepartmentRep.PinDisbursementFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

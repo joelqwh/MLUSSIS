@@ -78,12 +78,11 @@ public class RequisitionDetailController {
             //put requisition details into a JSONObject "jsonRequisitionDetail"
             jsonRequisitionDetail.put("ReqNo", rdItem.get("ReqNo"));
             jsonRequisitionDetail.put("ItemNo", rdItem.get("ItemNo"));
-            jsonRequisitionDetail.put("Description", rdItem.get("Description"));
             jsonRequisitionDetail.put("Qty", rdItem.get("Qty"));
 
             //put JSONObject "jsonRequisitionDetail" and sessionID into a JSONObject "jsonObject"
             jsonObject.put("sessionID", LoginController.getSessionID((App.getAppContext())));
-            jsonObject.put("addRequisitionDetail", jsonRequisitionDetail.toString());
+            jsonObject.put("addRequisitionDetail", jsonRequisitionDetail.toString().replaceAll("\\\\","").replaceAll("\"",""));
 
             //result of passing the "jsonObject".toString() into the WCF Server
             response = JSONParser.postStream(App.WCFServer + "AddRequisitionDetail", jsonObject.toString());

@@ -1,4 +1,4 @@
-package com.logicuniv.mlussis;
+package com.logicuniv.mlussis.DeputyHead;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,8 +15,10 @@ import com.logicuniv.mlussis.Backend.EmployeeController;
 import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.Backend.RequisitionController;
 import com.logicuniv.mlussis.Backend.RequisitionDetailController;
+import com.logicuniv.mlussis.Employee.RequisitionEmployeeArrayAdapter;
 import com.logicuniv.mlussis.Model.Requisition;
 import com.logicuniv.mlussis.Model.RequisitionDetail;
+import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;

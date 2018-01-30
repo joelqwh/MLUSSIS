@@ -1,4 +1,4 @@
-package com.logicuniv.mlussis;
+package com.logicuniv.mlussis.Employee;
 
 
 import android.app.Dialog;
@@ -16,6 +16,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
+import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
 

@@ -107,6 +107,7 @@
     <string name="enterPinReq">Enter PIN:</string>
     <string name="scEnterpin">PIN</string>
     <string name="Logout">Logout</string>
+    <string name="ManagePendingReq">Manage Pending Req.</string>
     <string name="ImageCredit">https://thenounproject.com/icon/625993/</string>
     <!-- DisplayRetUsage -->
     <string name="action_setting">Setting</string>

@@ -1,4 +1,4 @@
-package com.logicuniv.mlussis;
+package com.logicuniv.mlussis.Employee;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.Model.RequisitionDetail;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
+import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
 
