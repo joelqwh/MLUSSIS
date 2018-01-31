@@ -58,7 +58,7 @@ public class LoginController {
 
             setSessionID(context, jsonResponse.getString("SessionID"));
 
-            if (getSessionID(App.getAppContext()).length() > 3) {
+            if (getSessionID(context).length() > 3) {
                 result = true;
                 Log.d("LoginController", "Session ID Sucessfully Accquired");
             } else {
@@ -178,5 +178,12 @@ public class LoginController {
         }
 
         return result;
+    }
+
+    public static boolean IsServerPresent()
+    {
+        String result = JSONParser.getStream(App.WCFServer + "test");
+
+        return result.contains("test");
     }
 }

@@ -5,20 +5,21 @@
     tools:context="com.logicuniv.mlussis.StoreClerk.StatRetMenuFragment">
 
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="20dp"
+        android:text="Retrieval Date"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
     <Spinner
         android:id="@+id/retBinSpinner"
         android:layout_width="170dp"
         android:layout_height="45dp"
-        android:layout_marginStart="182dp"
-        android:layout_marginTop="20dp"
-        android:entries="@array/binNo"></Spinner>
-
-    <Spinner
-        android:id="@+id/retDateSpinner"
-        android:layout_width="170dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:entries="@array/RetDate"></Spinner>
+        android:layout_marginStart="252dp"
+        android:layout_marginTop="20dp"></Spinner>
 
 </FrameLayout>

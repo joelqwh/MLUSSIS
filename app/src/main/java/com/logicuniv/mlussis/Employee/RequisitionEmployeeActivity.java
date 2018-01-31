@@ -19,12 +19,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.logicuniv.mlussis.Backend.DepartmentController;
+import com.logicuniv.mlussis.Backend.EmailController;
+import com.logicuniv.mlussis.Backend.EmployeeController;
 import com.logicuniv.mlussis.Backend.FakeRequisition;
 import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.Backend.RequisitionController;
 import com.logicuniv.mlussis.Backend.RequisitionDetailController;
 import com.logicuniv.mlussis.Backend.SharedPrefController;
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
+import com.logicuniv.mlussis.Model.Department;
+import com.logicuniv.mlussis.Model.EmailTemplate;
+import com.logicuniv.mlussis.Model.Employee;
 import com.logicuniv.mlussis.Model.Requisition;
 import com.logicuniv.mlussis.Model.RequisitionDetail;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
@@ -111,8 +117,17 @@ public class RequisitionEmployeeActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                String empNo = LoginController.GetLoggedInEmployeeNumber(getApplicationContext());
                 FakeRequisition.submitNewRequisition();
-                FakeRequisition.startNewRequisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));
+                FakeRequisition.startNewRequisition(empNo);
+
+                Employee e = EmployeeController.getEmployeeById(empNo);
+                Department d = DepartmentController.getDepartmentById(e.get("DeptCode").toString());
+                Employee head = EmployeeController.getEmployeeById(d.get("DeputyEmpNo"));
+                String headEmail = head.get("Email").toString();
+
+                EmailController.sendEmail(headEmail, EmailTemplate.GenerateRequisitionSubmittedEmailToDeputySubject(),
+                        EmailTemplate.GenerateRequisitionSubmittedEmailToDeputySubject());
 
                 Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);

@@ -21,7 +21,7 @@ public class EmailController {
             jsonObject.put("subject", subject);
             jsonObject.put("message", message);
 
-            response = JSONParser.postStream(App.WCFServer + "UpdateRequisition", jsonObject.toString());
+            response = JSONParser.postStream(App.WCFServer + "sendEmail", jsonObject.toString());
 
             result = response.equals("true");
         } catch (Exception e) {

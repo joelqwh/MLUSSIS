@@ -9,11 +9,12 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.logicuniv.mlussis.MLussisActivity;
 import com.logicuniv.mlussis.R;
 
 import java.sql.Connection;
 
-public class StatRetActivity extends Activity {
+public class StatRetActivity extends MLussisActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
