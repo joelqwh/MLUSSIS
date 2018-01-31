@@ -32,7 +32,6 @@ public class RetrievalDetailsController {
             for (int i = 0; i < jsonResult.length(); i++) {
                 result.add(new RetrievalDetails(
                         jsonResult.getJSONObject(i).getString("RetrievalNo"),
-                        jsonResult.getJSONObject(i).getString("DeptCode"),
                         jsonResult.getJSONObject(i).getString("ItemNo"),
                         jsonResult.getJSONObject(i).getString("Description"),
                         jsonResult.getJSONObject(i).getString("Bin"),
