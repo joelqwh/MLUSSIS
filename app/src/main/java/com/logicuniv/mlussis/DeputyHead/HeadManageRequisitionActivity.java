@@ -12,12 +12,13 @@ import android.widget.SimpleAdapter;
 
 import com.logicuniv.mlussis.Backend.EmployeeController;
 import com.logicuniv.mlussis.Backend.RequisitionController;
+import com.logicuniv.mlussis.MLussisActivity;
 import com.logicuniv.mlussis.Model.Requisition;
 import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
 
-public class HeadManageRequisitionActivity extends Activity implements AdapterView.OnItemClickListener{
+public class HeadManageRequisitionActivity extends MLussisActivity implements AdapterView.OnItemClickListener{
 
     ListAdapter adapt;
     ListView lv_manageReq;

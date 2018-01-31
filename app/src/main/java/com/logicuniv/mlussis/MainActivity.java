@@ -14,6 +14,7 @@ import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.DepartmentRep.DisbursementActivity;
 import com.logicuniv.mlussis.DeputyHead.HeadManageRequisitionActivity;
 import com.logicuniv.mlussis.Employee.Catalogue_EmployeeActivity;
+import com.logicuniv.mlussis.Employee.RequisitionEmployeeActivity;
 
 public class MainActivity extends Activity {
 
@@ -52,13 +53,13 @@ public class MainActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.empMenuItem1:
                 FakeRequisition.startNewRequisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));
-                startActivity(new Intent(this, Catalogue_EmployeeActivity.class));
+                startActivityForResult(new Intent(this, RequisitionEmployeeActivity.class),0);
                 return true;
             case R.id.empMenuItem2:
-                startActivity(new Intent(this, DisbursementActivity.class));
+                startActivityForResult(new Intent(this, DisbursementActivity.class),1);
                 return true;
             case R.id.empMenuItem3:
-                startActivity(new Intent(this,HeadManageRequisitionActivity.class));        //temporary
+                startActivityForResult(new Intent(this,HeadManageRequisitionActivity.class),3);        //temporary
                 return true;
             case R.id.LogoutMenuItem:
                 LoginController.Logout(getApplicationContext());

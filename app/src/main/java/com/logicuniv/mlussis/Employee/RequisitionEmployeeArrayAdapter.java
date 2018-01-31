@@ -33,22 +33,33 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
     public View getView (int position, View convertView, ViewGroup parent)
     {
 
-        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
+        //StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
        reqDet = getItem(position);
 
-       sc=StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
-
-        if(convertView==null)
-        {
+        if(convertView==null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_list_requisition_employee, parent, false);
 
-            TextView tv_description = convertView.findViewById(R.id.textView_req_desc);
-            TextView tv_qty = convertView.findViewById(R.id.textView_req_qty);
-            TextView tv_uom = convertView.findViewById(R.id.textView_req_uom);
-            tv_description.setText(sc.get("Description"));
-            tv_qty.setText((String)reqDet.get("Qty"));
-            tv_uom.setText(sc.get("Uom"));
+            final TextView tv_description = convertView.findViewById(R.id.textView_req_desc);
+            final TextView tv_qty = convertView.findViewById(R.id.textView_req_qty);
+            final TextView tv_uom = convertView.findViewById(R.id.textView_req_uom);
+
+            new AsyncTask<String, Void, StationeryCatalogue>() {
+
+                @Override
+                protected StationeryCatalogue doInBackground(String... params) {
+
+                    return StationeryCatalogueController.searchCatalogueById(params[0]);
+                }
+
+                protected void onPostExecute(StationeryCatalogue result) {
+                    sc = result;
+                    tv_description.setText(sc.get("Description"));
+                    tv_qty.setText((String) reqDet.get("Qty"));
+                    tv_uom.setText(sc.get("Uom"));
+                }
+            }.execute(reqDet.get("ItemNo").toString());
         }
+
         return convertView;
     }
 

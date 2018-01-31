@@ -1,6 +1,7 @@
 package com.logicuniv.mlussis.Employee;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ListFragment;
 import android.content.Intent;
@@ -55,7 +56,6 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
             setListAdapter(adapter);
         }
 
-
         return v;
 
     }
@@ -89,24 +89,26 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
                     @Override
                     public void onClick(View v)
                     {
+
                         String qty = et_qty.getText().toString();
                         Intent i = new Intent(getActivity(),RequisitionEmployeeActivity.class);
                         Bundle argus = new Bundle();
                         argus.putSerializable("qty",qty.toString());
                         argus.putSerializable("ItemNo", b.get("ItemNo"));
                         i.putExtra("bundle",argus);
-//
-//                        i.putExtra("addItem",b);
-//                        i.putExtra("qty",qty);
-                        startActivity(i);
+
+                        getActivity().setResult(Activity.RESULT_OK,i);
+                        getActivity().finish();
                         d.dismiss();
                     }
                 });
         d.show();
+
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getListView().addHeaderView(header,null,false);
     }
+
 }
