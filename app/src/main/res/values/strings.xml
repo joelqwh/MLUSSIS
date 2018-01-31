@@ -46,40 +46,6 @@
     <string name="button_submitReq">Submit</string>
     <string name="button_reject">Reject</string>
     <string name="text_PendingRequisition">Pending Stationery Requisitions</string>
-    <string-array name="category_items">
-        <item>All items</item>
-        <item>Clip</item>
-        <item>Envelope</item>
-        <item>Eraser</item>
-        <item>Exercise</item>
-        <item>File</item>
-        <item>Pad</item>
-        <item>Paper</item>
-        <item>Pen</item>
-        <item>Puncher</item>
-        <item>Ruler</item>
-        <item>Scissors</item>
-        <item>Sharpener</item>
-        <item>Shorthand</item>
-        <item>Stapler</item>
-        <item>Tacks</item>
-        <item>Tape</item>
-        <item>Transparency</item>
-        <item>Tray</item>
-    </string-array>
-    <string-array name="binNo">
-        <item>All Bins</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-    </string-array>
 
     <!-- StockCard Usage -->
     <string name="itemCode">Item Code</string>
@@ -89,8 +55,8 @@
     <string name="itemSupp3">Supplier 3</string>
     <string name="itemStockEdit">Edit Stock</string>
     <string name="itemTxnView">View Full History</string>
-    <string name="itemCurrentStock">Current Stock</string>
-    <string name="itemAdjustedStock">Adjusted Stock</string>
+    <string name="itemCurrentStock">Current Quantity</string>
+    <string name="itemAdjustedStock">Actual Quantity</string>
     <string name="adjReasonInput">Insert Adjustment Reason</string>
 
     <!-- StoreClerk Disbursement Usage -->
