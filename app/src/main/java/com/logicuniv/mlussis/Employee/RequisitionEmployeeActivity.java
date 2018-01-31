@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.logicuniv.mlussis.Backend.App;
 import com.logicuniv.mlussis.Backend.DepartmentController;
 import com.logicuniv.mlussis.Backend.EmailController;
 import com.logicuniv.mlussis.Backend.EmployeeController;
@@ -28,6 +29,8 @@ import com.logicuniv.mlussis.Backend.RequisitionController;
 import com.logicuniv.mlussis.Backend.RequisitionDetailController;
 import com.logicuniv.mlussis.Backend.SharedPrefController;
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
+import com.logicuniv.mlussis.MLussisActivity;
+import com.logicuniv.mlussis.MainActivity;
 import com.logicuniv.mlussis.Model.Department;
 import com.logicuniv.mlussis.Model.EmailTemplate;
 import com.logicuniv.mlussis.Model.Employee;
@@ -42,32 +45,67 @@ import java.util.Calendar;
 import static com.logicuniv.mlussis.Backend.FakeRequisition.details;
 import static com.logicuniv.mlussis.Backend.FakeRequisition.startNewRequisition;
 
-public class RequisitionEmployeeActivity extends Activity {
+public class RequisitionEmployeeActivity extends MLussisActivity {
 
-
-
-    Requisition req = new Requisition();
-    ArrayList<RequisitionDetail> reqDetList=new ArrayList<>();
-    SharedPreferences pref;
     RequisitionEmployeeArrayAdapter adapt;
-    String saveReq;
-    SharedPreferences.Editor edit;
     ListView reqItemList;
 
     StationeryCatalogue sc;
-    String qty=null;
+    String qty;
+    String itemNo;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(RESULT_OK==resultCode) {
+            Bundle b = data.getBundleExtra("bundle");
+            qty = b.getString("qty");
+
+            itemNo = b.getString("ItemNo");
+
+            new AsyncTask<String, Void, Void>() {
+                @Override
+                protected Void doInBackground(String... params) {
+                    sc = StationeryCatalogueController.searchCatalogueById(params[0]);
+                    return null;
+                }
+
+                protected void onPostExecute(Void result) {
+                    details.add(new RequisitionDetail("", sc.get("ItemNo"), sc.get("Description"), qty));
+
+                    adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this, details);
+                    reqItemList.setAdapter(adapt);
+
+                    Button button_submitReq = (Button) findViewById(R.id.button_requisition_employee_submit);
+                    Button button_cancelReq = (Button) findViewById(R.id.button_requisition_employee_cancelReq);
+
+                    if (details.size() > 0) {
+                        button_submitReq.setEnabled(true);
+                        button_cancelReq.setEnabled(true);
+                    } else {
+                        button_submitReq.setEnabled(false);
+                        button_cancelReq.setEnabled(false);
+                    }
+                }
+            }.execute(itemNo);
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
+        //StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
         setContentView(R.layout.activity_requisition_employee);
         setTitle("Raise Requisition");
 
         Button button_addItem = (Button) findViewById(R.id.button_requisition_employee_addItem);
         Button button_submitReq = (Button) findViewById(R.id.button_requisition_employee_submit);
+        button_submitReq.setEnabled(false);
         Button button_cancelReq = (Button) findViewById(R.id.button_requisition_employee_cancelReq);
+        button_cancelReq.setEnabled(false);
         reqItemList = (ListView) findViewById(R.id.listView_requisition_employee_raised);
         View header = getLayoutInflater().inflate(R.layout.header_row_list_requisition_employee,null);
         reqItemList.addHeaderView(header,null,false);
@@ -75,26 +113,19 @@ public class RequisitionEmployeeActivity extends Activity {
         registerForContextMenu(reqItemList);
         reqItemList.setLongClickable(true);
 
-        Intent i = getIntent();
-        Bundle b = i.getBundleExtra("bundle");
+//        Intent i = getIntent();
+//        Bundle b = i.getBundleExtra("bundle");
+//
+//        qty =b.getString("qty");
+//
+//        String itemNo = b.getString("ItemNo");
 
-        String itemNo = b.getString("ItemNo");
-
-        sc = StationeryCatalogueController.searchCatalogueById(itemNo);
-
-        qty =b.getString("qty");
-
-        details.add(new RequisitionDetail("",sc.get("ItemNo"), sc.get("Description"),qty));
-
-
-        adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this,details);
-        reqItemList.setAdapter(adapt);
 
         View.OnClickListener ocl_addItem = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
-                startActivity(intent); //check if Requisition gets lost when adding new item. need to ensure that it stays. StartActivityForResult?
+                startActivityForResult(intent,4); //check if Requisition gets lost when adding new item. need to ensure that it stays. StartActivityForResult?
 
             }
         };
@@ -104,11 +135,21 @@ public class RequisitionEmployeeActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                FakeRequisition.startNewRequisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        FakeRequisition.startNewRequisition(LoginController.GetLoggedInEmployeeNumber(App.getAppContext()));
+                        return null;
+                    }
 
-                Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
-                startActivity(intent);
+                    protected void onPostExecute(Void result)
+                    {
+                        Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
+//                        Intent intent = new Intent(RequisitionEmployeeActivity.this,MainActivity.class);
+//                        startActivity(intent);
+                        finish();
+                    }
+                }.execute();
             }
         };
         button_cancelReq.setOnClickListener(ocl_reject);
@@ -117,21 +158,31 @@ public class RequisitionEmployeeActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                String empNo = LoginController.GetLoggedInEmployeeNumber(getApplicationContext());
-                FakeRequisition.submitNewRequisition();
-                FakeRequisition.startNewRequisition(empNo);
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        String empNo = LoginController.GetLoggedInEmployeeNumber(App.getAppContext());
+                        FakeRequisition.submitNewRequisition();
+                        FakeRequisition.startNewRequisition(empNo);
 
-                Employee e = EmployeeController.getEmployeeById(empNo);
-                Department d = DepartmentController.getDepartmentById(e.get("DeptCode").toString());
-                Employee head = EmployeeController.getEmployeeById(d.get("DeputyEmpNo"));
-                String headEmail = head.get("Email").toString();
+//                        Employee e = EmployeeController.getEmployeeById(empNo);
+//                        Department d = DepartmentController.getDepartmentById(e.get("DeptCode").toString());
+//                        Employee head = EmployeeController.getEmployeeById(d.get("DeputyEmpNo"));
+//                        String headEmail = head.get("Email").toString();
+//
+//                        EmailController.sendEmail(headEmail, EmailTemplate.GenerateRequisitionSubmittedEmailToDeputySubject(),
+//                                EmailTemplate.GenerateRequisitionSubmittedEmailToDeputySubject());
+                        return null;
+                    }
 
-                EmailController.sendEmail(headEmail, EmailTemplate.GenerateRequisitionSubmittedEmailToDeputySubject(),
-                        EmailTemplate.GenerateRequisitionSubmittedEmailToDeputySubject());
-
-                Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
-                startActivity(intent);
+                    protected void onPostExecute(Void result)
+                    {
+                        Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
+//                        Intent intent = new Intent(RequisitionEmployeeActivity.this,MainActivity.class);
+//                        startActivity(intent);
+                        finish();
+                    }
+                }.execute();
 
             }
         };
@@ -154,41 +205,51 @@ public class RequisitionEmployeeActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.option1:
 
-                sc = StationeryCatalogueController.searchCatalogueById((String)reqDet.get("ItemNo"));
-
-                final Dialog d = new Dialog(RequisitionEmployeeActivity.this);
-                d.setTitle("Change Quantity of Item");
-                d.setContentView(R.layout.dialog_catalogue_employee);
-                //d.setCancelable(false);
-                Button buttonCancel = d.findViewById(R.id.dialog_catalogue_employee_buttonCancel);
-                Button buttonAdd = d.findViewById(R.id.dialog_catalogue_employee_buttonAddItem);
-                TextView tv_itemNo = d.findViewById(R.id.textView_dialog_catalogue_employee_itemNo);
-                final EditText et_qty = d.findViewById(R.id.editText_dialog_catalogue_employee_qty);
-                tv_itemNo.setText(sc.get("ItemNo").toString());
-                et_qty.setText(reqDet.get("Qty").toString());
-                buttonAdd.setText("Edit Qty");
-                buttonCancel.setOnClickListener(new View.OnClickListener() {
+                new AsyncTask<String, Void, Void>() {
                     @Override
-                    public void onClick(View v) {
-                        d.dismiss();
+                    protected Void doInBackground(String... params) {
+                        sc = StationeryCatalogueController.searchCatalogueById(params[0]);
+                        return null;
                     }
-                });
 
-                buttonAdd.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
+                    protected void onPostExecute(Void result)
                     {
-                        String qty = et_qty.getText().toString();
-                        reqDet.put("Qty",qty);
-                        RequisitionDetailController.updateRequisitionDetail(reqDet);
+                        final Dialog d = new Dialog(RequisitionEmployeeActivity.this);
+                        d.setTitle("Change Quantity of Item");
+                        d.setContentView(R.layout.dialog_catalogue_employee);
+                        //d.setCancelable(false);
+                        Button buttonCancel = d.findViewById(R.id.dialog_catalogue_employee_buttonCancel);
+                        Button buttonAdd = d.findViewById(R.id.dialog_catalogue_employee_buttonAddItem);
+                        TextView tv_itemNo = d.findViewById(R.id.textView_dialog_catalogue_employee_itemNo);
+                        final EditText et_qty = d.findViewById(R.id.editText_dialog_catalogue_employee_qty);
+                        tv_itemNo.setText(sc.get("ItemNo").toString());
+                        et_qty.setText(reqDet.get("Qty").toString());
+                        buttonAdd.setText("Edit Qty");
+                        buttonCancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                d.dismiss();
+                            }
+                        });
+
+                        buttonAdd.setOnClickListener(new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                String qty = et_qty.getText().toString();
+                                reqDet.put("Qty",qty);
+                                //RequisitionDetailController.updateRequisitionDetail(reqDet);
                                 Log.e("joel",reqDet.toString());
-                        Toast.makeText(RequisitionEmployeeActivity.this, "Quantity Updated",Toast.LENGTH_SHORT).show();
-                       reqItemList.setAdapter(reqItemList.getAdapter());
-                        d.dismiss();
+                                Log.e("joel",details.toString());
+                                Toast.makeText(RequisitionEmployeeActivity.this, "Quantity Updated",Toast.LENGTH_SHORT).show();
+                                reqItemList.setAdapter(reqItemList.getAdapter());
+                                d.dismiss();
+                            }
+                        });
+                        d.show();
                     }
-                });
-                d.show();
+                }.execute((String)reqDet.get("ItemNo"));
                 return true;
             case R.id.option2:
 
@@ -202,4 +263,6 @@ public class RequisitionEmployeeActivity extends Activity {
                 return false;
         }
     }
+
+
 }
