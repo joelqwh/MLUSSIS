@@ -25,6 +25,7 @@ public class DisbursementItemArrayAdapter extends ArrayAdapter<DisbursementDetai
         super(context, 0,alReqDet);
     }
 
+
     @Override
     public View getView (int position, View convertView, ViewGroup parent)
     {
@@ -44,5 +45,4 @@ public class DisbursementItemArrayAdapter extends ArrayAdapter<DisbursementDetai
         }
         return convertView;
     }
-
 }
