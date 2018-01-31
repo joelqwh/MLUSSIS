@@ -16,6 +16,7 @@ import android.widget.SimpleAdapter;
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
 import com.logicuniv.mlussis.StoreClerk.StoreClerk_EditStockQtyActivity;
+import com.logicuniv.mlussis.StoreClerk.StoreClerk_MainActivity;
 import com.logicuniv.mlussis.StoreClerk.StoreClerk_StockCardActivity;
 
 import java.util.ArrayList;
@@ -38,32 +39,20 @@ public class InvTableFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
         header = inflater.inflate(R.layout.fragment_inv_row_header,null);
-        View v = inflater.inflate(R.layout.inv_list, container, false);
+        final View v = inflater.inflate(R.layout.inv_list, container, false);
 
-        new AsyncTask<Void, Void, List<StationeryCatalogue>>() {
-            @Override
-            protected List<StationeryCatalogue> doInBackground(Void... params) {
-                return StationeryCatalogueController.getCatalogue();
-            }
-
-            @Override
-            protected void onPostExecute(List<StationeryCatalogue> result) {
-                setListAdapter(new SimpleAdapter(getActivity(),result,R.layout.fragment_inv_row,
-                        new String[] {"Description", "Bin", "CurrentQty"},
-                        new int[]{R.id.itemDesc, R.id.itemBin, R.id.itemQty}));
-            }
-        }.execute();
-
-        /*Bundle args = getArguments();
-        final ArrayList<StationeryCatalogue> alscc = (ArrayList<StationeryCatalogue>)args.getSerializable("stationerycatalogue");
+        Bundle args = getArguments();
+        ArrayList<StationeryCatalogue> alscc = (ArrayList<StationeryCatalogue>)args.getSerializable("stationerycatalogue");
 
         SimpleAdapter adapter = new SimpleAdapter(getActivity(),alscc,
                 R.layout.fragment_inv_row,
-                new String[] {"Description", "Category", "ItemNo"},
+                new String[] {"Description", "Bin", "CurrentQty"},
                 new int[]{R.id.itemDesc, R.id.itemBin, R.id.itemQty});
 
-        setListAdapter(adapter);*/
+        setListAdapter(adapter);
         return v;
     }
 

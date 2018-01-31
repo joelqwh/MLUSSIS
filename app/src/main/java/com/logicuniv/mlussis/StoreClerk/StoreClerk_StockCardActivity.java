@@ -2,18 +2,22 @@ package com.logicuniv.mlussis.StoreClerk;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
+import com.logicuniv.mlussis.MLussisActivity;
 import com.logicuniv.mlussis.R;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
 
 import java.util.HashMap;
 
-public class StoreClerk_StockCardActivity extends Activity {
+public class StoreClerk_StockCardActivity extends MLussisActivity {
+    HashMap<String, String> sc;
 
 
 
@@ -22,7 +26,7 @@ public class StoreClerk_StockCardActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_clerk__stock_card_);
         Bundle b = getIntent().getExtras();
-        HashMap<String, String> sc = (HashMap<String, String>) b.get("invdetails1");
+        sc = (HashMap<String, String>) b.get("invdetails1");
         final TextView itemCode = findViewById(R.id.textViewItemCode);
         TextView itemDesc = findViewById(R.id.textViewItemDesc);
         TextView itemBin = findViewById(R.id.textViewItemBin);
@@ -45,13 +49,20 @@ public class StoreClerk_StockCardActivity extends Activity {
         itemStockEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StationeryCatalogue sc1 = StationeryCatalogueController.searchCatalogueById(itemCode.getText().toString());
-                Intent intent = new Intent(getApplicationContext(),StoreClerk_EditStockQtyActivity.class);
-                intent.putExtra("invdetails", sc1);
-                startActivity(intent);
+                new AsyncTask<String,Void,StationeryCatalogue>(){
+                    @Override
+                    protected StationeryCatalogue doInBackground(String... params){
+                        return StationeryCatalogueController.searchCatalogueById(params[0]);
+                    }
+                    @Override
+                    protected void onPostExecute(StationeryCatalogue result){
+                        StationeryCatalogue sc1 = result;
+                        Intent intent = new Intent(getApplicationContext(),StoreClerk_EditStockQtyActivity.class);
+                        intent.putExtra("invdetails", sc1);
+                        startActivity(intent);
+                    }
+                }.execute(sc.get("ItemNo"));
             }
         });
-
-
     }
 }

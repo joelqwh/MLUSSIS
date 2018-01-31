@@ -7,7 +7,7 @@ import android.widget.Spinner;
 
 import java.sql.Connection;
 
-public class InventoryActivity extends Activity {
+public class InventoryActivity extends MLussisActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

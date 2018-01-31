@@ -18,6 +18,7 @@ import com.logicuniv.mlussis.Backend.DepartmentController;
 import com.logicuniv.mlussis.Backend.DisbursementController;
 import com.logicuniv.mlussis.Backend.DisbursementDetailController;
 import com.logicuniv.mlussis.Backend.EmployeeController;
+import com.logicuniv.mlussis.MLussisActivity;
 import com.logicuniv.mlussis.Model.Department;
 import com.logicuniv.mlussis.Model.DisbursementDetail;
 import com.logicuniv.mlussis.R;
@@ -25,7 +26,7 @@ import com.logicuniv.mlussis.R;
 import java.util.ArrayList;
 
 
-public class StoreClerk_DisbursementActivity extends Activity {
+public class StoreClerk_DisbursementActivity extends MLussisActivity {
     Spinner spinner_dept;
     TextView tv_deptRep;
     ListView lv_disList;
@@ -44,6 +45,8 @@ public class StoreClerk_DisbursementActivity extends Activity {
         tv_deptRep = (TextView) findViewById(R.id.scDisburseRepText);
         lv_disList = (ListView) findViewById(R.id.scDisburseList);
         final Button button_confirmDisburse = (Button) findViewById(R.id.confirmDisburseQtybtn);
+        View header = getLayoutInflater().inflate(R.layout.fragment_store_clerk_disburse_row_header, null);
+        lv_disList.addHeaderView(header, null, false);
 
         pop_spinner();
 
@@ -121,19 +124,32 @@ public class StoreClerk_DisbursementActivity extends Activity {
 
     private void pop_disList(String deptCode){
         new AsyncTask<String, Void, Void>(){
+            boolean isDisbursementPresent = false;
             @Override
             protected Void doInBackground(String... params){
+                try {
                     String disbursementNo = DisbursementController.getCurrentDisbursementForDepartment(params[0]).get("DisbursementNo");
                     deptDisDet = DisbursementDetailController.getCurrentDisbursementDetailsOf(disbursementNo);
+                    isDisbursementPresent = true;
+                }
+                catch (Exception e)
+                {
+                    isDisbursementPresent = false;
+                }
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void result){
+                if (isDisbursementPresent) {
                     DisbursementPendingArrayAdapter ddadapt = new DisbursementPendingArrayAdapter(StoreClerk_DisbursementActivity.this, deptDisDet);
                     lv_disList.setAdapter(ddadapt);
-                    View header = getLayoutInflater().inflate(R.layout.fragment_store_clerk_disburse_row_header,null);
-                    lv_disList.addHeaderView(header, null, false);
+                }
+                else if (!isDisbursementPresent)
+                {
+                    DisbursementPendingArrayAdapter ddadapt = new DisbursementPendingArrayAdapter(StoreClerk_DisbursementActivity.this, deptDisDet);
+                    lv_disList.setAdapter(null);
+                }
             }
         }.execute(deptCode);
     }
