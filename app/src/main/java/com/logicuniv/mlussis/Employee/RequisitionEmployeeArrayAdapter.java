@@ -38,8 +38,6 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
 
        sc=StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
 
-
-
         if(convertView==null)
         {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_list_requisition_employee, parent, false);

@@ -24,7 +24,8 @@ public class FakeRequisition {
     {
         String reqNo = RequisitionController.CreateNewRequisition();
         for (RequisitionDetail detail: details) {
-         RequisitionDetailController.addRequisitionDetail(detail);
+            detail.put("ReqNo",reqNo);
+            RequisitionDetailController.addRequisitionDetail(detail);
         }
     }
 }

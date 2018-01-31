@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.logicuniv.mlussis.Backend.App;
+import com.logicuniv.mlussis.Backend.FakeRequisition;
 import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.DepartmentRep.DisbursementActivity;
 import com.logicuniv.mlussis.DeputyHead.HeadManageRequisitionActivity;
@@ -50,6 +51,7 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.empMenuItem1:
+                FakeRequisition.startNewRequisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));
                 startActivity(new Intent(this, Catalogue_EmployeeActivity.class));
                 return true;
             case R.id.empMenuItem2:

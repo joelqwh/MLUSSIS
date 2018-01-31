@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.logicuniv.mlussis.Backend.FakeRequisition;
 import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.Backend.RequisitionController;
 import com.logicuniv.mlussis.Backend.RequisitionDetailController;
@@ -31,6 +32,9 @@ import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import static com.logicuniv.mlussis.Backend.FakeRequisition.details;
+import static com.logicuniv.mlussis.Backend.FakeRequisition.startNewRequisition;
 
 public class RequisitionEmployeeActivity extends Activity {
 
@@ -54,10 +58,6 @@ public class RequisitionEmployeeActivity extends Activity {
         StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
         setContentView(R.layout.activity_requisition_employee);
         setTitle("Raise Requisition");
-        //restoreInstance(savedInstanceState);
-        String requisitionNo = SharedPrefController.getValue(getApplicationContext(),"reqNo");
-        //String requisitionNo = pref.getString("ReqNo",""); //use this to get Requisition and RequsitionDetail
-        //Log.e("joel",requisitionNo.toString()); y
 
         Button button_addItem = (Button) findViewById(R.id.button_requisition_employee_addItem);
         Button button_submitReq = (Button) findViewById(R.id.button_requisition_employee_submit);
@@ -78,34 +78,15 @@ public class RequisitionEmployeeActivity extends Activity {
 
         qty =b.getString("qty");
 
-        if(requisitionNo!=null)
-        {
-            req= RequisitionController.getRequisitionById(requisitionNo);
-            RequisitionDetail rd = new RequisitionDetail(requisitionNo, sc.get("ItemNo"), sc.get("Description"),qty);
-            RequisitionDetailController.addRequisitionDetail(rd);
-            reqDetList= RequisitionDetailController.getRequisitionDetail(requisitionNo);
-        }
-        else
-        {
-            saveReq = RequisitionController.CreateNewRequisition();
-            req = RequisitionController.getRequisitionById(saveReq);
-            RequisitionDetail rd = new RequisitionDetail(saveReq, sc.get("ItemNo"), sc.get("Description"),qty);
-            RequisitionDetailController.addRequisitionDetail(rd);
-            reqDetList = RequisitionDetailController.getRequisitionDetail(saveReq);
-            SharedPrefController.setValue(getApplicationContext(),"reqNo",saveReq);
+        details.add(new RequisitionDetail("",sc.get("ItemNo"), sc.get("Description"),qty));
 
-        }
-        adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this,reqDetList);
+
+        adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this,details);
         reqItemList.setAdapter(adapt);
 
         View.OnClickListener ocl_addItem = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                edit = pref.edit();
-//                saveReq = (String)req.get("ReqNo");
-//                edit.putString("ReqNo",saveReq);
-//                edit.apply();
-                //will change to add new Requisition and RequisitionDetails when it is up, SharedPref doesnt really work well here.
                 Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
                 startActivity(intent); //check if Requisition gets lost when adding new item. need to ensure that it stays. StartActivityForResult?
 
@@ -117,18 +98,11 @@ public class RequisitionEmployeeActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                RequisitionController.removeRequisition(req);
-                RequisitionDetailController.removeRequisitionDetails((RequisitionDetail[])reqDetList.toArray());
+                FakeRequisition.startNewRequisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));
 
-                adapt.clear();              //removeRequisition
-                edit.remove("ReqNo");       //removeRequisitionDetail
-                edit.apply();
-                saveReq = null;
                 Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
                 startActivity(intent);
-
-
             }
         };
         button_cancelReq.setOnClickListener(ocl_reject);
@@ -137,22 +111,13 @@ public class RequisitionEmployeeActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                RequisitionController.addRequisition(req);
-                RequisitionDetailController.addRequisitionDetails((RequisitionDetail[])reqDetList.toArray());
+                FakeRequisition.submitNewRequisition();
+                FakeRequisition.startNewRequisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));
 
-                edit.remove("ReqNo");
-                edit.apply();
-                saveReq = null;
-                adapt.clear();
                 Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
                 startActivity(intent);
 
-//                RequisitionController.addRequisition(req);
-//                RequisitionDetailController.addRequisitionDetails(reqDetList);
-
-//                req.clear();
-//                reqDetList.clear(); //or set it to null?
             }
         };
         button_submitReq.setOnClickListener(ocl_submit);
@@ -212,14 +177,11 @@ public class RequisitionEmployeeActivity extends Activity {
                 return true;
             case R.id.option2:
 
-                RequisitionDetailController.removeRequisitionDetail(reqDet);
-
+                details.remove(reqDet);
                 Toast.makeText(RequisitionEmployeeActivity.this, "Item Deleted",Toast.LENGTH_SHORT).show();
 
                 reqItemList.setAdapter(reqItemList.getAdapter());
 
-               // RequisitionDetailController.removeRequisitionDetail(reqDet);
-                //reqDetList.remove(reqDet);      //removeRequisitionDetail(RequisitionDetail);
                 return true;
             default:
                 return false;
