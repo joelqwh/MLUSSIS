@@ -31,6 +31,7 @@ public class StoreClerk_DisbursementActivity extends Activity {
     ListView lv_disList;
     String repName;
     String repEmpNo;
+    static String deptCode;
     static ArrayList<Department> alDept = new ArrayList<>();
     static ArrayList<DisbursementDetail> deptDisDet = new ArrayList<>();
 
@@ -49,7 +50,7 @@ public class StoreClerk_DisbursementActivity extends Activity {
         spinner_dept.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String deptCode = alDept.get(position).get("DeptCode");
+                deptCode = alDept.get(position).get("DeptCode");
                 pop_rep(deptCode);
                 pop_disList(deptCode);
             }
@@ -67,7 +68,7 @@ public class StoreClerk_DisbursementActivity extends Activity {
                 Bundle b = new Bundle();
                 b.putSerializable("deptName", spinner_dept.getSelectedItem().toString());
                 b.putSerializable("repName", tv_deptRep.getText().toString());
-                String disbNo = DisbursementDetail.getCurrentDisbursementDetailsForDepartment().get(0).get("DisbursementNo");
+                String disbNo = DisbursementController.getCurrentDisbursementForDepartment(deptCode).get("DisbursementNo");
                 b.putSerializable("disbNo", disbNo);
                 intent.putExtra("bundle", b);
                 startActivity(intent);
@@ -122,15 +123,17 @@ public class StoreClerk_DisbursementActivity extends Activity {
         new AsyncTask<String, Void, Void>(){
             @Override
             protected Void doInBackground(String... params){
-                String disbursementNo = DisbursementController.getCurrentDisbursementForDepartment(params[0]).get("DisbursementNo");
-                deptDisDet = DisbursementDetailController.getCurrentDisbursementDetailsOf(disbursementNo);
+                    String disbursementNo = DisbursementController.getCurrentDisbursementForDepartment(params[0]).get("DisbursementNo");
+                    deptDisDet = DisbursementDetailController.getCurrentDisbursementDetailsOf(disbursementNo);
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void result){
-                DisbursementPendingArrayAdapter ddadapt = new DisbursementPendingArrayAdapter(StoreClerk_DisbursementActivity.this,deptDisDet);
-                lv_disList.setAdapter(ddadapt);
+                    DisbursementPendingArrayAdapter ddadapt = new DisbursementPendingArrayAdapter(StoreClerk_DisbursementActivity.this, deptDisDet);
+                    lv_disList.setAdapter(ddadapt);
+                    View header = getLayoutInflater().inflate(R.layout.fragment_store_clerk_disburse_row_header,null);
+                    lv_disList.addHeaderView(header, null, false);
             }
         }.execute(deptCode);
     }

@@ -30,6 +30,17 @@ import static com.logicuniv.mlussis.Backend.JSONParser.readStream;
 
 public class LoginController {
 
+    private static ArrayList<String> currentRoles = new ArrayList<String>();
+
+    public static boolean IsLoggedInUserInRole(Context context, String role)
+    {
+        if(getSessionID(context).toString().length()>3) {
+            return currentRoles.contains(role);
+        }else {
+            return  false;
+        }
+    }
+
     public static boolean AuthenticateCredentials(Context context, String username, String password) {
         boolean result = false;
         JSONObject jsonObject = new JSONObject();
@@ -85,6 +96,8 @@ public class LoginController {
             Log.e("LoginController", e.getMessage());
         }
 
+        currentRoles = result;
+
         return result;
     }
 
@@ -136,6 +149,7 @@ public class LoginController {
 
     public static void Logout(Context context) {
         setSessionID(context, "0");
+        currentRoles.clear();
 
         Log.d("MainActivity", "Session Invalid, Need to login");
         Intent intent = new Intent(context, LoginActivity.class);
