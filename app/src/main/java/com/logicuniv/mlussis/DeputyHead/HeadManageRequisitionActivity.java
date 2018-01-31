@@ -31,6 +31,7 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
         View header = getLayoutInflater().inflate(R.layout.header_row_list_managereq_deputy,null);
         lv_manageReq.addHeaderView(header,null,false);
 
+
         new AsyncTask<Void, Void, Void>() {
 
             ArrayList<Requisition> alr;
@@ -38,12 +39,11 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
             protected Void doInBackground(Void... params) {
                 alr = RequisitionController.getPendingRequisitions();
 
-                adapt = new SimpleAdapter(HeadManageRequisitionActivity.this, alr, R.layout.row_list_managereq_deputy, new String[]{EmployeeController.getEmployeeName("IssuedBy"), "ReqNo", "DateIssued"},
-                        new int[]{R.id.textView__managereq_empname, R.id.textView_managereq_reqno, R.id.textView_managereq_reqdate});
-
                 return null;
             }
             protected void onPostExecute(Void result) {
+
+                adapt = new HeadManageRequisitionArrayAdapter(HeadManageRequisitionActivity.this, alr);
                 lv_manageReq.setAdapter(adapt);
                 lv_manageReq.setOnItemClickListener(HeadManageRequisitionActivity.this);
             }
@@ -51,7 +51,6 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
 
 //        lv_manageReq.setAdapter(adapt);
 //        lv_manageReq.setOnItemClickListener(this);      //need to change
-
 
     }
 
@@ -61,6 +60,27 @@ public class HeadManageRequisitionActivity extends Activity implements AdapterVi
         Intent intent = new Intent(this, ViewPendingRequisitionDetailsActivity.class);
         intent.putExtra("Req",(String)r.get("ReqNo"));
 
-        startActivity(intent);
+        startActivityForResult(intent,0);
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        new AsyncTask<Void, Void, Void>() {
+
+            ArrayList<Requisition> alr;
+            @Override
+            protected Void doInBackground(Void... params) {
+                alr = RequisitionController.getPendingRequisitions();
+
+                return null;
+            }
+            protected void onPostExecute(Void result) {
+
+                adapt = new HeadManageRequisitionArrayAdapter(HeadManageRequisitionActivity.this, alr);
+                lv_manageReq.setAdapter(adapt);
+                lv_manageReq.setOnItemClickListener(HeadManageRequisitionActivity.this);
+            }
+        }.execute();
+    }
+
 }

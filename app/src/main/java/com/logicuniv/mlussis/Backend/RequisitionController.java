@@ -185,17 +185,17 @@ public class RequisitionController {
             jsonRequisition.put("IssuedBy", rUpdated.get("IssuedBy"));
             jsonRequisition.put("DateIssued", rUpdated.get("DateIssued"));
             jsonRequisition.put("ApprovedBy", rUpdated.get("ApprovedBy"));
-            jsonRequisition.put("DateReviewed", rUpdated.get("DateReviewed"));
+//            jsonRequisition.put("DateReviewed", rUpdated.get("DateReviewed"));
             jsonRequisition.put("Status", rUpdated.get("Status"));
             jsonRequisition.put("Remarks", rUpdated.get("Remarks"));
 
 
             jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
-            jsonObject.put("updatedRequisition", jsonRequisition.toString());
+            jsonObject.putOpt("updatedRequisition", jsonRequisition);
 
             response = JSONParser.postStream(App.WCFServer + "UpdateRequisition", jsonObject.toString());
 
-            result = response.equals("true");
+            result = response.trim().contains("true");
         } catch (Exception e) {
             Log.e("UpdateRequisition.", e.getMessage());
             result = false;
