@@ -51,30 +51,47 @@ public class StationeryCatalogueController {
 
     }
 
-    /*public static ArrayList<StationeryCatalogue> getCatalogue1()
-        {
-            //getCatalogue() JSON Parser get as function
-            ArrayList<StationeryCatalogue> alsc = new ArrayList<>();
-            StationeryCatalogue scl1 = new StationeryCatalogue("I001","Clips 1", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
-            StationeryCatalogue scl2 = new StationeryCatalogue("I002","Pilot", "Pen", "Each", "B8", "CHEP", "OMEG", "BANES");
-            StationeryCatalogue scl3 = new StationeryCatalogue("I003","Cniballkhlasdjhkgkdslfahkgsadgkjlasdkfjaksdjlhfka", "Pen", "Each", "C4","ALPA","BANES","CHEP");
-            StationeryCatalogue scl4 = new StationeryCatalogue("I004","Clips 2", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
-            StationeryCatalogue scl5 = new StationeryCatalogue("I005","Clips 3", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
-            StationeryCatalogue scl6 = new StationeryCatalogue("I006","Clips 4", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
-            StationeryCatalogue scl7 = new StationeryCatalogue("I007","Clips 5", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
-            StationeryCatalogue scl8 = new StationeryCatalogue("I008","Clips 6", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
-            StationeryCatalogue scl9 = new StationeryCatalogue("I009","Clips 7", "Clip", "Dozen", "A7", "BANES", "CHEP", "ALPA");
-            alsc.add(scl1);
-            alsc.add(scl2);
-            alsc.add(scl3);
-            alsc.add(scl4);
-            alsc.add(scl5);
-            alsc.add(scl6);
-            alsc.add(scl7);
-            alsc.add(scl8);
-            alsc.add(scl9);
-            return alsc;
-        }*/
+    public static ArrayList<String> getCategoryList() {
+        ArrayList<String> listSC = new ArrayList<String>();
+        JSONObject jsonObject = new JSONObject();
+
+        try{
+            jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
+            JSONArray sc = new JSONArray (JSONParser.postStream(App.WCFServer+"GetCatalogueCatList",jsonObject.toString()));
+            Log.d("getCatalogueCat", App.WCFServer+"CatalogueCatList");
+            Log.d("getCatalogueCat", jsonObject.toString());
+
+            for (int i=0; i<sc.length();i++){
+                String item = sc.getString(i);
+                listSC.add(item);
+            }
+        }
+        catch (Exception e) {
+            Log.e("StatCat.getCategory()","JSONArray error");
+        }
+        return listSC;
+    }
+
+    public static ArrayList<String> getBinList() {
+        ArrayList<String> listSC = new ArrayList<String>();
+        JSONObject jsonObject = new JSONObject();
+
+        try{
+            jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
+            JSONArray sc = new JSONArray (JSONParser.postStream(App.WCFServer+"GetCatalogueBinList",jsonObject.toString()));
+            Log.d("getCatalogueBin", App.WCFServer+"CatalogueBinList");
+            Log.d("getCatalogueBin", jsonObject.toString());
+
+            for (int i=0; i<sc.length();i++){
+                String item = sc.getString(i);
+                listSC.add(item);
+            }
+        }
+        catch (Exception e) {
+            Log.e("StatCat.getBin()","JSONArray error");
+        }
+        return listSC;
+    }
 
     public static ArrayList<StationeryCatalogue> getCatalogueByCategory(String itemNo, String category, String desc, String bin)
     {
