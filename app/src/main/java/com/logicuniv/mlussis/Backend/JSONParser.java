@@ -51,6 +51,36 @@ public class JSONParser {
         return(sb.toString());
     }
 
+    public static String getStream(String url, int timeoutmilliseconds) {
+        InputStream is = null;
+        StringBuilder sb = new StringBuilder();
+        try {
+            URL u = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setConnectTimeout(timeoutmilliseconds);
+            conn.connect();
+            is = conn.getInputStream();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    is, "iso-8859-1"), 8);
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+                sb.append('\n');
+            }
+            is.close();
+        } catch (Exception e) {
+            Log.e("Buffer Error", "Error converting result " + e.toString());
+        }
+        return(sb.toString());
+    }
+
     static String readStream(InputStream is) {
         StringBuilder sb = new StringBuilder();
         try {

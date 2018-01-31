@@ -179,4 +179,11 @@ public class LoginController {
 
         return result;
     }
+
+    public static boolean IsServerPresent()
+    {
+        String result = JSONParser.getStream(App.WCFServer + "test");
+
+        return result.contains("test");
+    }
 }
