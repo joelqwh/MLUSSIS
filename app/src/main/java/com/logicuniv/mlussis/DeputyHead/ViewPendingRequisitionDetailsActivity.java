@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,11 +13,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.logicuniv.mlussis.Backend.EmailController;
 import com.logicuniv.mlussis.Backend.EmployeeController;
 import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.Backend.RequisitionController;
 import com.logicuniv.mlussis.Backend.RequisitionDetailController;
 import com.logicuniv.mlussis.Employee.RequisitionEmployeeArrayAdapter;
+import com.logicuniv.mlussis.Model.EmailTemplate;
+import com.logicuniv.mlussis.Model.Employee;
 import com.logicuniv.mlussis.Model.Requisition;
 import com.logicuniv.mlussis.Model.RequisitionDetail;
 import com.logicuniv.mlussis.R;
@@ -61,7 +65,6 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
         req = RequisitionController.getRequisitionById(reqNo);
         al_rd = RequisitionDetailController.getRequisitionDetail(reqNo);
 
-
         tv_empname.setText(getString(R.string.text_pendingrep_empname, EmployeeController.getEmployeeName(req.get("IssuedBy").toString())));
 
 
@@ -89,11 +92,20 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
 
                 RequisitionController.updateRequisition(req);
 
+                String empNo = req.get("IssuedBy").toString();
+                Employee employee = EmployeeController.getEmployeeById(empNo);
+                String empEmail = employee.get("Email").toString();
+                String empName = employee.get("EmpName").toString();
+
+                EmailController.sendEmail(empEmail,
+                        EmailTemplate.GenerateRequisitionStatusChangedEmailSubject(reqNo,req.get("Status").toString()),
+                        EmailTemplate.GenerateRequisitionStatusChangedEmail
+                                (empName,reqNo,EmployeeController.getEmployeeName(LoginController.GetLoggedInEmployeeNumber(getApplicationContext())),
+                                        req.get("Status").toString(),req.get("Remarks").toString()));
+
                 Toast.makeText(ViewPendingRequisitionDetailsActivity.this,"Requisition Approved",Toast.LENGTH_LONG).show();
 
                 finish();
-//                Intent i = new Intent(ViewPendingRequisitionDetailsActivity.this, HeadManageRequisitionActivity.class);
-//                startActivity(i);
             }
         };
         button_approve.setOnClickListener(ocl_approve);
@@ -102,7 +114,6 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
             @Override
             public void onClick(View v) {
                 req.put("ApprovedBy",LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));   //get HeadID from login
-//                req.put("DateReviewed", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
                 req.put("Status","Rejected");
 
 
@@ -113,11 +124,20 @@ public class ViewPendingRequisitionDetailsActivity extends Activity{
 
                 RequisitionController.updateRequisition(req);
 
+                String empNo = req.get("IssuedBy").toString();
+                Employee employee = EmployeeController.getEmployeeById(empNo);
+                String empEmail = employee.get("Email").toString();
+                String empName = employee.get("EmpName").toString();
+
+                EmailController.sendEmail(empEmail,
+                        EmailTemplate.GenerateRequisitionStatusChangedEmailSubject(reqNo,req.get("Status").toString()),
+                        EmailTemplate.GenerateRequisitionStatusChangedEmail
+                                (empName,reqNo,EmployeeController.getEmployeeName(LoginController.GetLoggedInEmployeeNumber(getApplicationContext())),
+                                        req.get("Status").toString(),req.get("Remarks").toString()));
+
                 Toast.makeText(ViewPendingRequisitionDetailsActivity.this,"Requisition Rejected",Toast.LENGTH_LONG).show();
 
                 finish();
-//                Intent i = new Intent(ViewPendingRequisitionDetailsActivity.this, HeadManageRequisitionActivity.class);
-//                startActivity(i);
 
             }
         };

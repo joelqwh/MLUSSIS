@@ -25,7 +25,7 @@ public class RetrievalDetailsController {
 
         try {
             jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
-            jsonObject.put("RetrievalNo", retrievalNo);
+            jsonObject.put("retrievalNo", retrievalNo);
 
             jsonResult = new JSONArray(JSONParser.postStream(App.WCFServer + "RetrievalDetails", jsonObject.toString()));
 
@@ -36,7 +36,7 @@ public class RetrievalDetailsController {
                         jsonResult.getJSONObject(i).getString("Description"),
                         jsonResult.getJSONObject(i).getString("Bin"),
                         jsonResult.getJSONObject(i).getString("Needed"),
-                        jsonResult.getJSONObject(i).getString("BackLogQty"),
+                        jsonResult.getJSONObject(i).getString("BacklogQty"),
                         jsonResult.getJSONObject(i).getString("Actual")));
             }
         } catch (Exception e) {

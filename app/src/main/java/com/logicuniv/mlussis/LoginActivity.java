@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.logicuniv.mlussis.Backend.App;
 import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.StoreClerk.StoreClerk_MainActivity;
 
@@ -32,7 +33,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        App.setAppContext(App.getAppContext());
         usernameEditText = findViewById(R.id.userNameEditText);
         passwordEditText = findViewById(R.id.PasswordEditText);
         Button signIn = findViewById(R.id.signInButton);
@@ -65,21 +66,27 @@ public class LoginActivity extends Activity {
                             Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
                             // Assign based on the first role
                             Class nextActivity = null;
-                            switch (rolesAssigned.get(0)) {
-                                case "StoreManager":
-                                case "StoreSupervisor":
-                                case "StoreClerk":
-                                    nextActivity = StoreClerk_MainActivity.class;
-                                    break;
-                                case "DepartmentHead":
-                                case "DepartmentDeputy":
-                                case "DepartmentRepresentative":
-                                case "DepartmentEmployee":
-                                    nextActivity = MainActivity.class;
-                                    break;
-                                default:
-                                    // TODO : Finish this
-                                    Log.e("LoginActivity", "Unknown Role : " + rolesAssigned.get(0));
+
+                            for (int i=0;i<rolesAssigned.size();i++) {
+
+                                switch (rolesAssigned.get(0)) {
+                                    case "StoreManager":
+                                    case "StoreSupervisor":
+                                    case "StoreClerk":
+                                        i=rolesAssigned.size();
+                                        nextActivity = StoreClerk_MainActivity.class;
+                                        break;
+                                    case "DepartmentHead":
+                                    case "DepartmentDeputy":
+                                    case "DepartmentRepresentative":
+                                    case "DepartmentEmployee":
+                                        nextActivity = MainActivity.class;
+                                        i=rolesAssigned.size();
+                                        break;
+                                    default:
+                                        // TODO : Finish this
+                                        Log.e("LoginActivity", "Unknown Role : " + rolesAssigned.get(0));
+                                }
                             }
 
                             if (nextActivity != null) {

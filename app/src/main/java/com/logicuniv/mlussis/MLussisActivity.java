@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -21,6 +22,14 @@ import com.logicuniv.mlussis.Model.Department;
 public class MLussisActivity extends Activity {
 
     private static boolean isFirstTime = true;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // TODO : Find a better way to get App Context for Controllers
+        App.setAppContext(getApplicationContext());
+    }
 
     @Override
     protected void onPause() {

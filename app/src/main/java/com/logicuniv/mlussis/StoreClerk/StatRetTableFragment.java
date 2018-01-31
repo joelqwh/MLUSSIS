@@ -5,21 +5,15 @@ package com.logicuniv.mlussis.StoreClerk;
  */
 
 import android.app.ListFragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.logicuniv.mlussis.Model.RetrievalDisplayStationery;
-import com.logicuniv.mlussis.Model.StationeryCatalogue;
+import com.logicuniv.mlussis.Model.RetrievalDetails;
 import com.logicuniv.mlussis.R;
-import com.logicuniv.mlussis.StoreClerk.StoreClerk_EditStockQtyActivity;
-import com.logicuniv.mlussis.StoreClerk.StoreClerk_StockCardActivity;
 
 import java.util.ArrayList;
 
@@ -51,12 +45,12 @@ public class StatRetTableFragment extends ListFragment {
 */
 
         Bundle args = getArguments();
-        final ArrayList<RetrievalDisplayStationery> rds = (ArrayList<RetrievalDisplayStationery>)args.getSerializable("displaystatret");
+        final ArrayList<RetrievalDetails> rds = (ArrayList<RetrievalDetails>)args.getSerializable("displaystatret");
 
         SimpleAdapter adapter = new SimpleAdapter(getActivity(),rds,
                 R.layout.fragment_store_clerk_ret_row,
-                new String[] {"BinNo", "StatDesc", "Needed","BacklogQty","Retrieved"},
-                new int[]{R.id.itemRetBin, R.id.itemRetDesc, R.id.itemRetNeeded,R.id.itemRetBacklog,R.id.itemRetActual});
+                new String[] {"BinNo", "ItemNo", "Description","Actual"},
+                new int[]{R.id.itemRetBin, R.id.itemRetItemCode, R.id.itemRetDescHeader,R.id.itemRetActual});
 
         setListAdapter(adapter);
         return contactLayout;

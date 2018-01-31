@@ -15,11 +15,6 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".DepartmentRep.DisbursementActivity" />
         <activity android:name=".Employee.Catalogue_EmployeeActivity"
@@ -36,13 +31,14 @@
         </activity>
         <activity
             android:screenOrientation="landscape" android:configChanges="keyboardHidden|orientation" android:name=".StoreClerk.StatRetActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".InventoryActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".StoreClerk.StoreClerk_StockCardActivity" />
         <activity android:name=".StoreClerk.StoreClerk_EditStockQtyActivity"></activity>
         <activity android:name=".StoreClerk.StoreClerk_DisbursementActivity"></activity>

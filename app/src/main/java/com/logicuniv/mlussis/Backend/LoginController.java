@@ -58,7 +58,7 @@ public class LoginController {
 
             setSessionID(context, jsonResponse.getString("SessionID"));
 
-            if (getSessionID(App.getAppContext()).length() > 3) {
+            if (getSessionID(context).length() > 3) {
                 result = true;
                 Log.d("LoginController", "Session ID Sucessfully Accquired");
             } else {
