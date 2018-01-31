@@ -58,10 +58,10 @@ public class InvMenuFragment extends Fragment {
         binSpinner_inflate();
 
         catSearch = v.findViewById(R.id.catspinner);
-        catSearch.setSelection(0,false);
+        catSearch.setSelection(0);
         invSearch = v.findViewById(R.id.invSearch);
         binSearch = v.findViewById(R.id.binspinner);
-        binSearch.setSelection(0,false);
+        binSearch.setSelection(0);
 
         //Filter by Category
         catSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
