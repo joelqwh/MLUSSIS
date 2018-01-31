@@ -38,4 +38,26 @@ public class DisbursementController {
 
         return result;
     }
+
+    public static boolean MarkDisbursementAsCollected(String DisbursementNo, String Pin)
+    {
+        boolean result = false;
+
+        JSONObject jsonObject = new JSONObject();
+        String response;
+
+        try {
+            jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
+            jsonObject.put("DisbursementNo", DisbursementNo);
+            jsonObject.put("Pin", Pin);
+
+            response = JSONParser.postStream(App.WCFServer + "MarkDisbursementAsCollected", jsonObject.toString());
+
+            result = response.contains("true");
+        } catch (Exception e) {
+            Log.e("MarkDisbursementAsColl.", e.getMessage());
+        }
+
+        return result;
+    }
 }

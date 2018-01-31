@@ -14,20 +14,30 @@ public class PendingDisbursement {
     public static Disbursement pendingDisbursement = null;
 
     public static ArrayList<DisbursementDetail> getPendingDisDetsforDepartment(String deptCode) {
-        String disbNo = DisbursementController.getCurrentDisbursementForDepartment(deptCode).get("DisbursementNo");
-        pendingDisDets = DisbursementDetailController.getCurrentDisbursementDetailsOf(disbNo);
+        pendingDisbursement = DisbursementController.getCurrentDisbursementForDepartment(deptCode);
+        pendingDisDets = DisbursementDetailController.getCurrentDisbursementDetailsOf(pendingDisbursement.get("DisbursementNo"));
         return pendingDisDets;
     }
 
     public static void updatePendingDisDetsforDepartment() {
         //pass adjusted values into real DisbursementDetails database
         //DisbursementDetailController.UpdateDisbursementDetail()
-
+        for(int i = 0; i < pendingDisDets.size(); i++)
+        {
+            DisbursementDetailController.UpdateDisbursementDetail(pendingDisDets.get(i));
+        }
     }
 
     public static boolean confirmPendingDisDetsforDepartment(String PinNo){
         //compare Pin and change status to Collected
+        boolean result = false;
 
-        return false;
+        if(PinNo.equals(pendingDisbursement.get("Pin").toString()))
+        {
+            updatePendingDisDetsforDepartment();
+            result = DisbursementController.MarkDisbursementAsCollected(pendingDisbursement.get("DisbursementNo"), PinNo);
+        }
+
+        return result;
     }
 }
