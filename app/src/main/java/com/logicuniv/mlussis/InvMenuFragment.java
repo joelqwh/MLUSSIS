@@ -3,6 +3,7 @@ package com.logicuniv.mlussis;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Editable;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -24,9 +26,11 @@ import java.util.ArrayList;
  */
 public class InvMenuFragment extends Fragment {
 
-    ArrayList<StationeryCatalogue> arraystationery = StationeryCatalogueController.getCatalogue();
+    private ArrayList<StationeryCatalogue> arraystationery;
     private EditText invSearch;
     private Spinner catSearch;
+    private Spinner binSearch;
+    static ArrayList<StationeryCatalogue> stationerySearch = new ArrayList<>();
 
     public InvMenuFragment() {
         // Required empty public constructor
@@ -36,28 +40,55 @@ public class InvMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_inventory_skeleton,container,false);
-        display (arraystationery);
+
+        new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                arraystationery = StationeryCatalogueController.getCatalogue();
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result){
+                display(arraystationery);
+            }
+        }.execute();
+
+        catSpinner_inflate();
+        binSpinner_inflate();
 
         catSearch = v.findViewById(R.id.catspinner);
+        catSearch.setSelection(0,false);
+        invSearch = v.findViewById(R.id.invSearch);
+        binSearch = v.findViewById(R.id.binspinner);
+        binSearch.setSelection(0,false);
+
+        //Filter by Category
         catSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String catSearched = catSearch.getSelectedItem().toString();
-                String searchInfo = invSearch.getText().toString();
-                ArrayList<StationeryCatalogue> stationerySearch = new ArrayList<>();
-                for (StationeryCatalogue stationeryCatalogue : arraystationery) {
-                    if (stationeryCatalogue.get("Category").toUpperCase().equals(catSearched.toUpperCase())
-                            && stationeryCatalogue.get("Description").toUpperCase().contains(searchInfo.toUpperCase())
-                            ) {
-                        stationerySearch.add(stationeryCatalogue);
-                    }
-                    else if (catSearched.toUpperCase().equals(("All items").toUpperCase())
-                            && stationeryCatalogue.get("Description").toUpperCase().contains(searchInfo.toUpperCase())
-                            ){
-                        stationerySearch.add(stationeryCatalogue);
-                    }
-                }
-                display(stationerySearch);
+                String catSearchInfo = catSearch.getSelectedItem().toString();
+                String binSearchInfo = binSearch.getSelectedItem().toString();
+                String invSearchInfo = invSearch.getText().toString();
+
+                display(inventorySearch(catSearchInfo, binSearchInfo, invSearchInfo));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+
+            }
+        });
+
+        binSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String binSearchInfo = binSearch.getSelectedItem().toString();
+                String invSearchInfo = invSearch.getText().toString();
+                String catSearchInfo = catSearch.getSelectedItem().toString();
+
+                display(inventorySearch(catSearchInfo, binSearchInfo, invSearchInfo));
             }
 
             @Override
@@ -66,33 +97,21 @@ public class InvMenuFragment extends Fragment {
             }
         });
 
-        //Search Function
-        invSearch = v.findViewById(R.id.invSearch);
+        //Search Function for EditText
         invSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                display(arraystationery);
+
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //do code here
-                String searchInfo = invSearch.getText().toString();
-                String catSearched = catSearch.getSelectedItem().toString();
-                ArrayList<StationeryCatalogue> stationerySearch = new ArrayList<>();
-                for (StationeryCatalogue sc : arraystationery) {
-                    if (sc.get("Category").toUpperCase().equals(catSearched.toUpperCase())
-                            && sc.get("Description").toUpperCase().contains(searchInfo.toUpperCase())
-                            ) {
-                        stationerySearch.add(sc);
-                    }
-                    else if (catSearched.toUpperCase().equals(("All items").toUpperCase())
-                            && sc.get("Description").toUpperCase().contains(searchInfo.toUpperCase())
-                            ){
-                        stationerySearch.add(sc);
-                }
-                display(stationerySearch);
-            }}
+                String catSearchInfo = catSearch.getSelectedItem().toString();
+                String binSearchInfo = binSearch.getSelectedItem().toString();
+                String invSearchInfo = invSearch.getText().toString();
+
+                display(inventorySearch(catSearchInfo, binSearchInfo, invSearchInfo));
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -118,4 +137,88 @@ public class InvMenuFragment extends Fragment {
         trans.commit();
     }
 
+    private void catSpinner_inflate(){
+        new AsyncTask<Void, Void, Void>() {
+            String[] catName;
+            ArrayList<String> catList;
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                catList = StationeryCatalogueController.getCategoryList();
+                String[] catArray = catList.toArray(new String[catList.size()]);
+                catName = new String[catArray.length+1];
+                for (int i = 0; i < catName.length; i++) {
+                    if (i==0)
+                    {
+                        catName[i]="All Categories";
+                    }
+                    else {
+                        catName[i] = catList.get(i-1);
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void v) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, catName);
+                catSearch.setAdapter(adapter);
+            }
+        }.execute();
+    }
+
+    private void binSpinner_inflate(){
+        new AsyncTask<Void, Void, Void>() {
+            ArrayList<String> binList;
+            String[] binName;
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                binList = StationeryCatalogueController.getBinList();
+                String[] binArray = binList.toArray(new String[binList.size()]);
+                binName = new String[binArray.length+1];
+                for (int i = 0; i < binName.length; i++) {
+                    if (i==0)
+                    {
+                        binName[i] = "All Bins";
+                    }
+                    else {
+                        binName[i] = binList.get(i - 1);
+                    }
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void v) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, binName);
+                binSearch.setAdapter(adapter);
+            }
+        }.execute();
+    }
+
+    private ArrayList<StationeryCatalogue> inventorySearch(String catSearchInfo, String binSearchInfo, String invSearchInfo) {
+
+        ArrayList<StationeryCatalogue> stationerySearch = new ArrayList<>();
+        for (StationeryCatalogue stationeryCatalogue : arraystationery) {
+            if (stationeryCatalogue.get("Category").toUpperCase().equals(catSearchInfo.toUpperCase())
+                    && stationeryCatalogue.get("Bin").toUpperCase().equals(binSearchInfo.toUpperCase())
+                    && stationeryCatalogue.get("Description").toUpperCase().contains(invSearchInfo.toUpperCase())
+                    ) {
+                stationerySearch.add(stationeryCatalogue);
+            } else if (catSearchInfo.equals("All Categories")
+                    && stationeryCatalogue.get("Bin").toUpperCase().equals(binSearchInfo.toUpperCase())
+                    && stationeryCatalogue.get("Description").toUpperCase().contains(invSearchInfo.toUpperCase())
+                    ) {
+                stationerySearch.add(stationeryCatalogue);
+            } else if (catSearchInfo.equals("All Categories")
+                    && binSearchInfo.equals("All Bins")
+                    && stationeryCatalogue.get("Description").toUpperCase().contains(invSearchInfo.toUpperCase())
+                    ) {
+                stationerySearch.add(stationeryCatalogue);
+            }
+        }
+        return stationerySearch;
+    }
 }

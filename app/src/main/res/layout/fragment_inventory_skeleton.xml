@@ -21,8 +21,7 @@
         android:layout_width="170dp"
         android:layout_height="45dp"
         android:layout_marginTop="47dp"
-        android:layout_marginStart="8dp"
-        android:entries="@array/category_items" />
+        android:layout_marginStart="8dp" />
 
     <Spinner
         android:id="@+id/binspinner"
