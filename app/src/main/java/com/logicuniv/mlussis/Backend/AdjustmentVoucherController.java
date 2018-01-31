@@ -16,7 +16,7 @@ public class AdjustmentVoucherController {
             jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
             jsonObject.put("ItemNo", itemNo);
             jsonObject.put("Qty", newQuantity);
-            jsonObject.put("Reason", itemNo);
+            jsonObject.put("Reason", reason);
 
             response = JSONParser.postStream(App.WCFServer + "CreateAdjustmentVoucher", jsonObject.toString());
 
