@@ -11,11 +11,12 @@ import android.widget.Toast;
 
 import com.logicuniv.mlussis.Backend.AdjustmentVoucherController;
 import com.logicuniv.mlussis.InventoryActivity;
+import com.logicuniv.mlussis.MLussisActivity;
 import com.logicuniv.mlussis.R;
 
 import java.util.HashMap;
 
-public class StoreClerk_EditStockQtyActivity extends Activity {
+public class StoreClerk_EditStockQtyActivity extends MLussisActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

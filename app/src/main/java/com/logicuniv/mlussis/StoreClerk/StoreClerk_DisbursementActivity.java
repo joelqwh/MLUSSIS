@@ -18,6 +18,7 @@ import com.logicuniv.mlussis.Backend.DepartmentController;
 import com.logicuniv.mlussis.Backend.DisbursementController;
 import com.logicuniv.mlussis.Backend.DisbursementDetailController;
 import com.logicuniv.mlussis.Backend.EmployeeController;
+import com.logicuniv.mlussis.MLussisActivity;
 import com.logicuniv.mlussis.Model.Department;
 import com.logicuniv.mlussis.Model.DisbursementDetail;
 import com.logicuniv.mlussis.R;
@@ -25,7 +26,7 @@ import com.logicuniv.mlussis.R;
 import java.util.ArrayList;
 
 
-public class StoreClerk_DisbursementActivity extends Activity {
+public class StoreClerk_DisbursementActivity extends MLussisActivity {
     Spinner spinner_dept;
     TextView tv_deptRep;
     ListView lv_disList;

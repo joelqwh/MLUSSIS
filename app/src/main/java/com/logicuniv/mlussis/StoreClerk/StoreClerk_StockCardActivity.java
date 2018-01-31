@@ -8,12 +8,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
+import com.logicuniv.mlussis.MLussisActivity;
 import com.logicuniv.mlussis.R;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
 
 import java.util.HashMap;
 
-public class StoreClerk_StockCardActivity extends Activity {
+public class StoreClerk_StockCardActivity extends MLussisActivity {
 
 
 

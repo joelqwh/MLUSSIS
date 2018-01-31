@@ -8,13 +8,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.logicuniv.mlussis.Backend.DisbursementDetailController;
+import com.logicuniv.mlussis.MLussisActivity;
 import com.logicuniv.mlussis.Model.DisbursementDetail;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
 import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
 
-public class StoreClerk_ConfirmationActivity extends Activity {
+public class StoreClerk_ConfirmationActivity extends MLussisActivity {
 
 
     static ArrayList<DisbursementDetail> disbursementConf = new ArrayList<>();

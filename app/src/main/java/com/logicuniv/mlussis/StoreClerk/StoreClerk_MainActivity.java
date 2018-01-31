@@ -10,9 +10,10 @@ import android.view.View;
 import android.widget.GridLayout;
 
 import com.logicuniv.mlussis.InventoryActivity;
+import com.logicuniv.mlussis.MLussisActivity;
 import com.logicuniv.mlussis.R;
 
-public class StoreClerk_MainActivity extends Activity {
+public class StoreClerk_MainActivity extends MLussisActivity {
 
     GridLayout storeClerkMain;
 
