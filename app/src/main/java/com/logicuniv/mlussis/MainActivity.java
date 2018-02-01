@@ -16,7 +16,7 @@ import com.logicuniv.mlussis.DeputyHead.HeadManageRequisitionActivity;
 import com.logicuniv.mlussis.Employee.Catalogue_EmployeeActivity;
 import com.logicuniv.mlussis.Employee.RequisitionEmployeeActivity;
 
-public class MainActivity extends Activity {
+public class MainActivity extends MLussisActivity {
 
     // The Main Screen probably the login screen
     @Override
@@ -24,20 +24,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO : Remove This
-        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
-
-        // Setting App Context for Backend
-        // TODO : Find a better way
-        App.setAppContext(getApplicationContext());
-
-        //If not logged in, goto login
-        if(!LoginController.IsCurrentSessionValid(getApplicationContext()))
-        {
-            Log.d("MainActivity", "Session Invalid, Need to login again");
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-        }
     }
 
 

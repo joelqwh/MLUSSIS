@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/textView__managereq_empname"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
@@ -20,10 +20,10 @@
 
     <TextView
         android:id="@+id/textView_managereq_reqno"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="132dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
         android:text="Req No."
         android:textAlignment="center"
@@ -34,7 +34,7 @@
 
     <TextView
         android:id="@+id/textView_managereq_reqdate"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
