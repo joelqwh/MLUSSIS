@@ -46,15 +46,15 @@ public class DisbursementDetailController {
         String response;
 
         try {
-            jsonDisbursementDetail.put("DisbursementNo", jsonDisbursementDetail.get("DisbursementNo"));
-            jsonDisbursementDetail.put("ItemNo", jsonDisbursementDetail.get("ItemNo"));
-            jsonDisbursementDetail.put("Needed", jsonDisbursementDetail.get("Needed"));
-            jsonDisbursementDetail.put("Promised", jsonDisbursementDetail.get("Promised"));
-            jsonDisbursementDetail.put("Received", jsonDisbursementDetail.get("Received"));
+            jsonDisbursementDetail.put("DisbursementNo", updatedDisbursementDetail.get("DisbursementNo"));
+            jsonDisbursementDetail.put("ItemNo", updatedDisbursementDetail.get("ItemNo"));
+            jsonDisbursementDetail.put("Needed", updatedDisbursementDetail.get("Needed"));
+            jsonDisbursementDetail.put("Promised", updatedDisbursementDetail.get("Promised"));
+            jsonDisbursementDetail.put("Received", updatedDisbursementDetail.get("Received"));
 
 
             jsonObject.put("sessionID", LoginController.getSessionID(App.getAppContext()));
-            jsonObject.put("updatedDisbursementDetail", jsonDisbursementDetail.toString());
+            jsonObject.putOpt("updatedDisbursementDetail", jsonDisbursementDetail);
 
             response = JSONParser.postStream(App.WCFServer + "UpdateDisbursementDetail", jsonObject.toString());
 
