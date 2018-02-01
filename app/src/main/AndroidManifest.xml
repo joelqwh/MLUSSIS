@@ -14,8 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".DepartmentRep.DisbursementActivity" />
         <activity android:name=".Employee.Catalogue_EmployeeActivity"
             android:windowSoftInputMode="stateHidden"/>
@@ -27,15 +26,17 @@
         <activity
             android:name=".StoreClerk.StoreClerk_MainActivity"
             android:theme="@style/MainPage">
-
         </activity>
         <activity
-            android:screenOrientation="landscape" android:configChanges="keyboardHidden|orientation" android:name=".StoreClerk.StatRetActivity">
+            android:name=".StoreClerk.StatRetActivity"
+            android:screenOrientation="landscape" android:configChanges="keyboardHidden|orientation">
         </activity>
+
         <activity android:name=".InventoryActivity" />
         <activity android:name=".LoginActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
+
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>

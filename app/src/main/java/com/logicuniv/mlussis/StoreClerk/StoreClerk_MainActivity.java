@@ -45,7 +45,7 @@ public class StoreClerk_MainActivity extends MLussisActivity {
                 startActivity(new Intent(this, StatRetActivity.class));
                 return true;
             case R.id.scMenuItem3:
-                startActivity(new Intent(this, StoreClerk_DisbursementActivity.class));
+                startActivityForResult(new Intent(this, StoreClerk_DisbursementActivity.class),29);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
