@@ -39,9 +39,9 @@ public class InvMenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_inventory_skeleton,container,false);
+        View v = inflater.inflate(R.layout.fragment_inventory_skeleton, container, false);
 
-        new AsyncTask<Void, Void, Void>(){
+        new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 arraystationery = StationeryCatalogueController.getCatalogue();
@@ -49,7 +49,7 @@ public class InvMenuFragment extends Fragment {
             }
 
             @Override
-            protected void onPostExecute(Void result){
+            protected void onPostExecute(Void result) {
                 display(arraystationery);
             }
         }.execute();
@@ -130,14 +130,14 @@ public class InvMenuFragment extends Fragment {
         Bundle args = new Bundle();
         args.putSerializable("stationerycatalogue", details);
         frag.setArguments(args);
-        if (fm.findFragmentByTag(TAG)==null)
+        if (fm.findFragmentByTag(TAG) == null)
             trans.add(R.id.invDetailsFragment, frag, TAG);
         else
             trans.replace(R.id.invDetailsFragment, frag, TAG);
         trans.commit();
     }
 
-    private void catSpinner_inflate(){
+    private void catSpinner_inflate() {
         new AsyncTask<Void, Void, Void>() {
             String[] catName;
             ArrayList<String> catList;
@@ -146,14 +146,12 @@ public class InvMenuFragment extends Fragment {
             protected Void doInBackground(Void... params) {
                 catList = StationeryCatalogueController.getCategoryList();
                 String[] catArray = catList.toArray(new String[catList.size()]);
-                catName = new String[catArray.length+1];
+                catName = new String[catArray.length + 1];
                 for (int i = 0; i < catName.length; i++) {
-                    if (i==0)
-                    {
-                        catName[i]="All Categories";
-                    }
-                    else {
-                        catName[i] = catList.get(i-1);
+                    if (i == 0) {
+                        catName[i] = "All Categories";
+                    } else {
+                        catName[i] = catList.get(i - 1);
                     }
                 }
                 return null;
@@ -167,7 +165,7 @@ public class InvMenuFragment extends Fragment {
         }.execute();
     }
 
-    private void binSpinner_inflate(){
+    private void binSpinner_inflate() {
         new AsyncTask<Void, Void, Void>() {
             ArrayList<String> binList;
             String[] binName;
@@ -176,13 +174,11 @@ public class InvMenuFragment extends Fragment {
             protected Void doInBackground(Void... params) {
                 binList = StationeryCatalogueController.getBinList();
                 String[] binArray = binList.toArray(new String[binList.size()]);
-                binName = new String[binArray.length+1];
+                binName = new String[binArray.length + 1];
                 for (int i = 0; i < binName.length; i++) {
-                    if (i==0)
-                    {
+                    if (i == 0) {
                         binName[i] = "All Bins";
-                    }
-                    else {
+                    } else {
                         binName[i] = binList.get(i - 1);
                     }
                 }
@@ -213,6 +209,11 @@ public class InvMenuFragment extends Fragment {
                     ) {
                 stationerySearch.add(stationeryCatalogue);
             } else if (catSearchInfo.equals("All Categories")
+                    && binSearchInfo.equals("All Bins")
+                    && stationeryCatalogue.get("Description").toUpperCase().contains(invSearchInfo.toUpperCase())
+                    ) {
+                stationerySearch.add(stationeryCatalogue);
+            } else if (stationeryCatalogue.get("Category").toUpperCase().equals(catSearchInfo.toUpperCase())
                     && binSearchInfo.equals("All Bins")
                     && stationeryCatalogue.get("Description").toUpperCase().contains(invSearchInfo.toUpperCase())
                     ) {

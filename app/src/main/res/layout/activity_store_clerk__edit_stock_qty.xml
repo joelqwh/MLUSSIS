@@ -65,6 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
+                android:paddingLeft="8dp"
                 android:layout_marginLeft="10dp"
                 android:textSize="16dp" />
 
@@ -86,6 +87,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
+                android:ems="3"
+                android:paddingLeft="8dp"
+                android:background="@drawable/textbox_login"
                 android:textSize="16dp"
                 android:inputType="number"/>
 
@@ -100,7 +104,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/textbox_adjreason"
+        android:background="@drawable/textbox_login"
         android:ems="10"
         android:gravity="top|left"
         android:hint="@string/adjReasonInput"
@@ -113,7 +117,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-        app:layout_constraintVertical_bias="0.06999999" />
+        app:layout_constraintVertical_bias="0.07" />
 
     <Button
         android:id="@+id/itemAdjSubmitbtn"
@@ -124,9 +128,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/button_submitReq"
+        android:paddingHorizontal="8dp"
+        android:background="@drawable/button_selector"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextAdjReason"
-        app:layout_constraintVertical_bias="0.13999999" />
+        app:layout_constraintVertical_bias="0.14" />
 </android.support.constraint.ConstraintLayout>
