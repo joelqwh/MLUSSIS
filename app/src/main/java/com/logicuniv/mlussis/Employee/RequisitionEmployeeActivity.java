@@ -240,7 +240,20 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
                 }
 
                 protected void onPostExecute(Void result) {
-                    details.add(new RequisitionDetail("", sc.get("ItemNo"), sc.get("Description"), qty));
+                    boolean isAlreadyAdded = false;
+                    for(int i = 0; i < details.size(); i++)
+                    {
+                        if(details.get(i).get("ItemNo").equals(sc.get("ItemNo"))){
+                            isAlreadyAdded = true;
+                            int sum = Integer.parseInt(details.get(i).get("Qty").toString()) + Integer.parseInt(qty);
+                            details.get(i).put("Qty",(String.valueOf(sum)));
+                            break;
+                        }
+                    }
+
+                    if(!isAlreadyAdded) {
+                        details.add(new RequisitionDetail("", sc.get("ItemNo"), sc.get("Description"), qty));
+                    }
                     //                   adapt = (RequisitionEmployeeArrayAdapter) reqItemList.getAdapter();
                     adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this,details);
                     reqItemList.setAdapter(adapt);
