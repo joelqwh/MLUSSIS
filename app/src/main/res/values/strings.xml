@@ -71,6 +71,7 @@
 
     <!-- DisplayRetUsage -->
     <string name="action_setting">Setting</string>
+    <string name="refresh">Refresh</string>
     <string-array name="RetDate">
         <item>Select Date</item>
         <item>2017-01-12</item>

@@ -14,7 +14,7 @@
         android:layout_marginTop="8dp"
         android:text="Cat"
         android:textAlignment="textStart"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +27,11 @@
         android:layout_marginTop="8dp"
         android:text="Descr"
         android:textAlignment="textStart"
-        android:textSize="18sp"
+        android:textSize="14sp"
+        android:maxLength="20"
+        android:maxLines="1"
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
         app:layout_constraintEnd_toStartOf="@+id/textView_req_uom"
         app:layout_constraintStart_toEndOf="@+id/textView_req_desc"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +44,7 @@
         android:layout_marginTop="8dp"
         android:text="UOM"
         android:textAlignment="textStart"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
