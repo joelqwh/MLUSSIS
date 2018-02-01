@@ -7,6 +7,8 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+import android.widget.Toast;
 
 import com.logicuniv.mlussis.Backend.App;
 import com.logicuniv.mlussis.Backend.FakeRequisition;
@@ -23,7 +25,6 @@ public class MainActivity extends MLussisActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
 
@@ -52,6 +53,16 @@ public class MainActivity extends MLussisActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 0 && resultCode == RESULT_OK)
+        {
+            Toast.makeText(getApplicationContext(), "Requisition submitted", Toast.LENGTH_LONG).show();
         }
     }
 }

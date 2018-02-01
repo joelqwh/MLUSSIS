@@ -184,9 +184,9 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
 
                     protected void onPostExecute(Void result)
                     {
-                        Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
 //                        Intent intent = new Intent(RequisitionEmployeeActivity.this,MainActivity.class);
 //                        startActivity(intent);
+                        setResult(RESULT_OK);
                         finish();
                     }
                 }.execute();

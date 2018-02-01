@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
@@ -18,6 +21,7 @@ import com.logicuniv.mlussis.Backend.DepartmentController;
 import com.logicuniv.mlussis.Backend.DisbursementController;
 import com.logicuniv.mlussis.Backend.DisbursementDetailController;
 import com.logicuniv.mlussis.Backend.EmployeeController;
+import com.logicuniv.mlussis.Backend.PendingDisbursement;
 import com.logicuniv.mlussis.MLussisActivity;
 import com.logicuniv.mlussis.Model.Department;
 import com.logicuniv.mlussis.Model.DisbursementDetail;
@@ -32,6 +36,8 @@ public class StoreClerk_DisbursementActivity extends MLussisActivity {
     ListView lv_disList;
     String repName;
     String repEmpNo;
+    Button button_confirmDisburse;
+    DisbursementPendingArrayAdapter ddadapt;
     static String deptCode;
     static ArrayList<Department> alDept = new ArrayList<>();
     static ArrayList<DisbursementDetail> deptDisDet = new ArrayList<>();
@@ -44,7 +50,7 @@ public class StoreClerk_DisbursementActivity extends MLussisActivity {
         spinner_dept = (Spinner) findViewById(R.id.scDisburseDeptspinner);
         tv_deptRep = (TextView) findViewById(R.id.scDisburseRepText);
         lv_disList = (ListView) findViewById(R.id.scDisburseList);
-        final Button button_confirmDisburse = (Button) findViewById(R.id.confirmDisburseQtybtn);
+        button_confirmDisburse = (Button) findViewById(R.id.confirmDisburseQtybtn);
         View header = getLayoutInflater().inflate(R.layout.fragment_store_clerk_disburse_row_header, null);
         lv_disList.addHeaderView(header, null, false);
 
@@ -64,17 +70,54 @@ public class StoreClerk_DisbursementActivity extends MLussisActivity {
             }
         });
 
+
+
         button_confirmDisburse.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
+//                for (DisbursementDetail dd : deptDisDet) {
+//                    EditText et = lv_disList.findViewById(R.id.scDisburseItemQty);
+//                    dd.put("Received",et.getText().toString());
+//                    Log.e("disburse",dd.get("ItemNo"));
+//                    Log.e("disburse", dd.get("Received"));
+//                }
+
+                //StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
+                for (int i=1;i<=deptDisDet.size();i++)
+                {
+                    View view = lv_disList.getChildAt(i);
+                    EditText et = view.findViewById(R.id.scDisburseItemQty);
+                    TextView tv = view.findViewById(R.id.scDisburseItemDesc);
+                        DisbursementDetail ddd = deptDisDet.get(i-1);
+                        ddd.put("Received", et.getText().toString());
+                        Log.e("disburse", ddd.get("ItemNo"));
+                        Log.e("disburse", ddd.get("Received"));
+                }
+
+                new AsyncTask<Void, Void, Void>(){
+                    @Override
+                    protected Void doInBackground(Void... params){
+                        PendingDisbursement.updatePendingDisDetsforDepartment();
+                        return null;
+                    }
+                    @Override
+                    protected void onPostExecute(Void result){
+                    }
+                }.execute();
+
+                // PendingDisbursement.updatePendingDisDetsforDepartment();
+
                 Intent intent = new Intent(getApplicationContext(), StoreClerk_ConfirmationActivity.class);
                 Bundle b = new Bundle();
                 b.putSerializable("deptName", spinner_dept.getSelectedItem().toString());
                 b.putSerializable("repName", tv_deptRep.getText().toString());
-                String disbNo = DisbursementController.getCurrentDisbursementForDepartment(deptCode).get("DisbursementNo");
+                String disbNo = deptDisDet.get(0).get("DisbursementNo");
+                //String disbNo = DisbursementController.getCurrentDisbursementForDepartment(deptCode).get("DisbursementNo");
                 b.putSerializable("disbNo", disbNo);
                 intent.putExtra("bundle", b);
-                startActivity(intent);
+                startActivityForResult(intent,0);
             }
         });
     }
@@ -123,31 +166,35 @@ public class StoreClerk_DisbursementActivity extends MLussisActivity {
     }
 
     private void pop_disList(String deptCode){
-        new AsyncTask<String, Void, Void>(){
+        new AsyncTask<String, Void, Boolean>(){
             boolean isDisbursementPresent = false;
             @Override
-            protected Void doInBackground(String... params){
+            protected Boolean doInBackground(String... params){
                 try {
-                    String disbursementNo = DisbursementController.getCurrentDisbursementForDepartment(params[0]).get("DisbursementNo");
-                    deptDisDet = DisbursementDetailController.getCurrentDisbursementDetailsOf(disbursementNo);
+                    //String disbursementNo = DisbursementController.getCurrentDisbursementForDepartment(params[0]).get("DisbursementNo");
+                    //deptDisDet = DisbursementDetailController.getCurrentDisbursementDetailsOf(disbursementNo);
+                    deptDisDet = PendingDisbursement.getPendingDisDetsforDepartment(params[0]);
                     isDisbursementPresent = true;
                 }
                 catch (Exception e)
                 {
                     isDisbursementPresent = false;
                 }
-                return null;
+                return isDisbursementPresent;
             }
 
             @Override
-            protected void onPostExecute(Void result){
+            protected void onPostExecute(Boolean result){
                 if (isDisbursementPresent) {
-                    DisbursementPendingArrayAdapter ddadapt = new DisbursementPendingArrayAdapter(StoreClerk_DisbursementActivity.this, deptDisDet);
+                    //ddadapt = new DisbursementPendingArrayAdapter(StoreClerk_DisbursementActivity.this, deptDisDet);
+                    //lv_disList.setAdapter(ddadapt);
+                    SimpleAdapter ddadapt = new SimpleAdapter(getApplicationContext(),deptDisDet,R.layout.fragment_store_clerk_disburse_row,
+                            new String[]{"Description", "Received"},
+                            new int[]{R.id.scDisburseItemDesc, R.id.scDisburseItemQty});
                     lv_disList.setAdapter(ddadapt);
                 }
                 else if (!isDisbursementPresent)
                 {
-                    DisbursementPendingArrayAdapter ddadapt = new DisbursementPendingArrayAdapter(StoreClerk_DisbursementActivity.this, deptDisDet);
                     lv_disList.setAdapter(null);
                 }
             }
