@@ -50,7 +50,7 @@ public class StatRetTableFragment extends ListFragment {
         SimpleAdapter adapter = new SimpleAdapter(getActivity(),rds,
                 R.layout.fragment_store_clerk_ret_row,
                 new String[] {"BinNo", "ItemNo", "Description","Actual"},
-                new int[]{R.id.itemRetBin, R.id.itemRetItemCode, R.id.itemRetDescHeader,R.id.itemRetActual});
+                new int[]{R.id.itemRetBin, R.id.itemRetItemCode, R.id.itemRetItemDesc,R.id.itemRetActual});
 
         setListAdapter(adapter);
         return contactLayout;

@@ -50,9 +50,9 @@ public class Catalogue_Employee_ListFragment extends ListFragment {
         if (arg != null) {
             ArrayList<StationeryCatalogue> alsc = (ArrayList<StationeryCatalogue>) arg.getSerializable("catalogue");
             SimpleAdapter adapter = new SimpleAdapter(getActivity(), alsc,
-                    R.layout.row_list_catalogue_employee,
-                    new String[]{"Category", "Description", "Uom"},
-                    new int[]{R.id.textView_req_desc, R.id.textView_cat_desc, R.id.textView_req_uom});
+                    R.layout.row_list_confirmation_storeclerk,
+                    new String[]{"Description", "Uom"},
+                    new int[]{R.id.scConfirmItemDesc, R.id.scConfirmItemQty});
             setListAdapter(adapter);
         }
 

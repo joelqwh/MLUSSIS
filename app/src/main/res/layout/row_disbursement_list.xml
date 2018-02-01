@@ -3,7 +3,7 @@
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:dividerPadding="5dp"
     android:gravity="left"
@@ -11,13 +11,13 @@
 
         <TextView
             android:id="@+id/textView_deptRep_disbursement_list_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
             android:layout_weight="0"
             android:gravity="start"
-            android:paddingRight="150dp"
+            android:maxLines="3"
             android:text="Test"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textSize="18sp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -27,12 +27,13 @@
 
         <TextView
             android:id="@+id/textView_deptRep_disbursement_list_qty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
             android:layout_row="0"
             android:layout_weight="0"
             android:text="Testse"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/textView_deptRep_disbursement_list_item" />
 
