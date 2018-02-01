@@ -26,7 +26,7 @@
         android:id="@+id/fragment2"
         android:name="com.logicuniv.mlussis.DepartmentRep.DisbursementListFragment"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"

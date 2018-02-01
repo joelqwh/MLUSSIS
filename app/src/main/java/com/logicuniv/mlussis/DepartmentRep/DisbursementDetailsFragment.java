@@ -65,7 +65,7 @@ public class DisbursementDetailsFragment extends Fragment {
             {
                 tv_Dept.setText(deptName);
                 tv_Emp.setText(empName);
-                tv_colPt.setText(colPtName);
+                tv_colPt.setText("Collection Point: " + colPtName);
             }
 
         }.execute();

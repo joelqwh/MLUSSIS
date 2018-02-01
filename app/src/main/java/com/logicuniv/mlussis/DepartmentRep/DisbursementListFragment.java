@@ -2,6 +2,7 @@ package com.logicuniv.mlussis.DepartmentRep;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -106,7 +107,9 @@ public class DisbursementListFragment extends Fragment {
 
                 if (!disburse.isEmpty()&& firstRowAdded==false){
                     ((TextView) firstrow.findViewById(R.id.textView_deptRep_disbursement_list_item)).setText("Item Description.");
+                    ((TextView) firstrow.findViewById(R.id.textView_deptRep_disbursement_list_item)).setTypeface(null, Typeface.BOLD);
                     ((TextView) firstrow.findViewById(R.id.textView_deptRep_disbursement_list_qty)).setText("Rec. Qty");
+                    ((TextView) firstrow.findViewById(R.id.textView_deptRep_disbursement_list_qty)).setTypeface(null,Typeface.BOLD);
                     table.addView((firstrow));
                     firstRowAdded=true;
                 }
@@ -115,7 +118,10 @@ public class DisbursementListFragment extends Fragment {
                         // Inflate your row "template" and fill out the fields.
                         TableRow row = (TableRow) LayoutInflater.from(getActivity()).inflate(R.layout.row_disbursement_list, null);
                         ((TextView) row.findViewById(R.id.textView_deptRep_disbursement_list_item)).setText(d.get("Description"));
+                        ((TextView) row.findViewById(R.id.textView_deptRep_disbursement_list_item)).setPadding(0,15,0,15);
                         ((TextView) row.findViewById(R.id.textView_deptRep_disbursement_list_qty)).setText(d.get("Promised"));
+                        ((TextView) row.findViewById(R.id.textView_deptRep_disbursement_list_qty)).setPadding(0,15,0,15);
+
                         table.addView(row);
                     }
                     table.requestLayout();
