@@ -109,6 +109,7 @@ public class StoreClerk_DisbursementActivity extends MLussisActivity {
                         Bundle b = new Bundle();
                         b.putSerializable("deptName", spinner_dept.getSelectedItem().toString());
                         b.putSerializable("repName", tv_deptRep.getText().toString());
+                        b.putSerializable("deptCode", deptCode);
                         String disbNo = deptDisDet.get(0).get("DisbursementNo");
                         //String disbNo = DisbursementController.getCurrentDisbursementForDepartment(deptCode).get("DisbursementNo");
                         b.putSerializable("disbNo", disbNo);

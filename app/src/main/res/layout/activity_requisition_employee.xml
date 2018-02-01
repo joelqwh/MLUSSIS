@@ -68,7 +68,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginTop="28dp"
         android:background="@android:color/holo_red_dark"
-        android:text="@string/button_reject"
+        android:text="@string/button_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listView_requisition_employee_raised" />
 </android.support.constraint.ConstraintLayout>
