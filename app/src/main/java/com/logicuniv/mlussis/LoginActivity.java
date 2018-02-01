@@ -43,60 +43,68 @@ public class LoginActivity extends Activity {
         final Button signIn = findViewById(R.id.signInButton);
 
         // If already logged in, redirect to next activity
-        new AsyncTask<String, Void, ArrayList<String>>() {
-            ArrayList<String> rolesAssigned;
-            boolean logintrue = false;
+        if (!LoginController.getSessionID(getApplicationContext()).equals("0")) {
+            new AsyncTask<String, Void, ArrayList<String>>() {
+                ArrayList<String> rolesAssigned;
+                boolean logintrue = false;
 
-            @Override
-            protected ArrayList<String> doInBackground(String... params) {
-                logintrue = LoginController.IsCurrentSessionValid(getApplicationContext());
-                return logintrue ? LoginController.GetRolesFromCurrentSessionId(getApplicationContext()) : null;
-            }
-
-            @Override
-            protected void onPostExecute(ArrayList<String> result) {
-                // If already logged in, goto next screen
-                if (logintrue) {
-                    rolesAssigned = result;
-                    Class nextActivity = null;
-
-                    for (int i = 0; i < rolesAssigned.size(); i++) {
-
-                        switch (rolesAssigned.get(0)) {
-                            case "StoreManager":
-                            case "StoreSupervisor":
-                            case "StoreClerk":
-                                i = rolesAssigned.size();
-                                Log.d("Login", "Going to StoreClerk_MainActivity");
-                                nextActivity = StoreClerk_MainActivity.class;
-                                break;
-                            case "DepartmentHead":
-                            case "DepartmentDeputy":
-                            case "DepartmentRepresentative":
-                            case "DepartmentEmployee":
-                                Log.d("Login", "Going to MainActivity");
-                                nextActivity = MainActivity.class;
-                                i = rolesAssigned.size();
-                                break;
-                            default:
-                                // TODO : Finish this
-                                Log.e("LoginActivity", "Unknown Role : " + rolesAssigned.get(0));
-                        }
-                    }
-
-                    if (nextActivity != null) {
-                        Intent intent = new Intent(getApplicationContext(), nextActivity);
-                        startActivity(intent);
-                    }
-                } else {
-                    // Now Show the login Button User won't have time to respond now
-                    signIn.setVisibility(View.VISIBLE);
-                    usernameEditText.setVisibility(View.VISIBLE);
-                    passwordEditText.setVisibility(View.VISIBLE);
-                    imageView.setVisibility(View.GONE);
+                @Override
+                protected ArrayList<String> doInBackground(String... params) {
+                    logintrue = LoginController.IsCurrentSessionValid(getApplicationContext());
+                    return logintrue ? LoginController.GetRolesFromCurrentSessionId(getApplicationContext()) : null;
                 }
-            }
-        }.execute();
+
+                @Override
+                protected void onPostExecute(ArrayList<String> result) {
+                    // If already logged in, goto next screen
+                    if (logintrue) {
+                        rolesAssigned = result;
+                        Class nextActivity = null;
+
+                        for (int i = 0; i < rolesAssigned.size(); i++) {
+
+                            switch (rolesAssigned.get(0)) {
+                                case "StoreManager":
+                                case "StoreSupervisor":
+                                case "StoreClerk":
+                                    i = rolesAssigned.size();
+                                    Log.d("Login", "Going to StoreClerk_MainActivity");
+                                    nextActivity = StoreClerk_MainActivity.class;
+                                    break;
+                                case "DepartmentHead":
+                                case "DepartmentDeputy":
+                                case "DepartmentRepresentative":
+                                case "DepartmentEmployee":
+                                    Log.d("Login", "Going to MainActivity");
+                                    nextActivity = MainActivity.class;
+                                    i = rolesAssigned.size();
+                                    break;
+                                default:
+                                    // TODO : Finish this
+                                    Log.e("LoginActivity", "Unknown Role : " + rolesAssigned.get(0));
+                            }
+                        }
+
+                        if (nextActivity != null) {
+                            Intent intent = new Intent(getApplicationContext(), nextActivity);
+                            startActivity(intent);
+                        }
+                    } else {
+                        // Now Show the login Button User won't have time to respond now
+                        signIn.setVisibility(View.VISIBLE);
+                        usernameEditText.setVisibility(View.VISIBLE);
+                        passwordEditText.setVisibility(View.VISIBLE);
+                        imageView.setVisibility(View.GONE);
+                    }
+                }
+            }.execute();
+        }
+        else{
+            signIn.setVisibility(View.VISIBLE);
+            usernameEditText.setVisibility(View.VISIBLE);
+            passwordEditText.setVisibility(View.VISIBLE);
+            imageView.setVisibility(View.GONE);
+        }
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,8 +130,6 @@ public class LoginActivity extends Activity {
                             Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_LONG).show();
                         } else {
                             rolesAssigned = result;
-                            // Redirect User to the first Page Here
-                            Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
                             // Assign based on the first role
                             Class nextActivity = null;
 
