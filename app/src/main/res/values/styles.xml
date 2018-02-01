@@ -24,9 +24,20 @@
         <item name="android:colorPrimary">@color/backgroundAndMenu</item>
         <item name="android:colorBackground">@android:color/background_light</item>
         <item name="android:statusBarColor">@color/backgroundAndMenu</item>
-        <item name="android:textColorPrimary">@android:color/white</item>
-        <item name="android:textColorSecondary">@color/login_text_color</item>
+        <item name="android:textColor">@color/login_text_color</item>
+        <item name="android:textColorPrimary">@color/login_text_color</item>
+        <item name="android:textColorSecondary">@android:color/darker_gray</item>
         <item name="android:colorForeground">@color/accent_device_default_dark</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+    </style>
+
+    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:titleTextStyle">@style/TitleBarTextColor</item>
+        <item name="android:background">@color/backgroundAndMenu</item>
+    </style>
+    <style name="TitleBarTextColor" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
 </resources>

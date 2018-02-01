@@ -14,7 +14,8 @@
         android:paddingTop="10dp"
         android:singleLine="true"
         android:imeOptions="actionDone"
-        android:hint="@string/search" />
+        android:hint="@string/search"
+        android:textColor="@color/login_text_color"/>
 
     <Spinner
         android:id="@+id/catspinner"

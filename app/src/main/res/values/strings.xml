@@ -56,7 +56,7 @@
     <string name="itemStockEdit">Edit Stock</string>
     <string name="itemTxnView">View Full History</string>
     <string name="itemCurrentStock">Current Quantity</string>
-    <string name="itemAdjustedStock">Actual Qty</string>
+    <string name="itemAdjustedStock">Actual Quantity</string>
     <string name="adjReasonInput">Insert Adjustment Reason</string>
     <string name="retrievalDate">Retrieval Date: </string>
 
