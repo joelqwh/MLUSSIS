@@ -87,9 +87,7 @@ public class LoginActivity extends Activity {
 
                     @Override
                     protected Void doInBackground(String... params) {
-                        if (!LoginController.IsCurrentSessionValid(getApplicationContext())) {
-                            logintrue = LoginController.AuthenticateCredentials(getApplicationContext(), params[0], params[1]);
-                        }
+                        logintrue = LoginController.AuthenticateCredentials(getApplicationContext(), params[0], params[1]);
                         return null;
                     }
 
