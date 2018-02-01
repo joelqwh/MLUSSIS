@@ -34,7 +34,7 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
     @Override
     public View getView (int position, View convertView, ViewGroup parent)
     {
-        //StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
+        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
        reqDet = getItem(position);
         final ViewHolder holder;
 
@@ -51,27 +51,27 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
             //final TextView tv_uom = convertView.findViewById(R.id.textView_req_uom);
 //            retrieveSC(reqDet.get("ItemNo").toString());
 
-//            sc = StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
-//            holder.description.setText(sc.get("Description"));
-//            holder.qty.setText((String) reqDet.get("Qty"));
-//            holder.uom.setText(sc.get("Uom"));
+            sc = StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
+            holder.description.setText(sc.get("Description"));
+            holder.qty.setText((String) reqDet.get("Qty"));
+            holder.uom.setText(sc.get("Uom"));
 
 
-            new AsyncTask<String, Void, StationeryCatalogue>() {
-
-                @Override
-                protected StationeryCatalogue doInBackground(String... params) {
-
-                    return StationeryCatalogueController.searchCatalogueById(params[0]);
-                }
-
-                protected void onPostExecute(StationeryCatalogue result) {
-                    sc = result;
-                    holder.description.setText(sc.get("Description"));
-                    holder.qty.setText((String) reqDet.get("Qty"));
-                    holder.uom.setText(sc.get("Uom"));
-                }
-            }.execute(reqDet.get("ItemNo").toString());
+//            new AsyncTask<String, Void, StationeryCatalogue>() {
+//
+//                @Override
+//                protected StationeryCatalogue doInBackground(String... params) {
+//
+//                    return StationeryCatalogueController.searchCatalogueById(params[0]);
+//                }
+//
+//                protected void onPostExecute(StationeryCatalogue result) {
+//                    sc = result;
+//                    holder.description.setText(sc.get("Description"));
+//                    holder.qty.setText((String) reqDet.get("Qty"));
+//                    holder.uom.setText(sc.get("Uom"));
+//                }
+//            }.execute(reqDet.get("ItemNo").toString());
 
         }
             else
