@@ -6,6 +6,7 @@ package com.logicuniv.mlussis.StoreClerk;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.StrictMode;
@@ -25,12 +26,14 @@ import com.logicuniv.mlussis.Backend.RetrievalDetailsController;
 import com.logicuniv.mlussis.Backend.RetrievalDisplayStationeryController;
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.InvTableFragment;
+import com.logicuniv.mlussis.Model.RequisitionDetail;
 import com.logicuniv.mlussis.Model.Retrieval;
 import com.logicuniv.mlussis.Model.RetrievalDetails;
 import com.logicuniv.mlussis.Model.RetrievalDisplayStationery;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
 import com.logicuniv.mlussis.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -52,27 +55,37 @@ public class StatRetMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_store_clerk_retrieval_body, container, false);
-
-        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
-
-        Retrieval ret = RetrievalController.getLatestRetrieval();
-        al_rd= RetrievalDetailsController.getRetrievalDetails(ret.get("RetrievalNo"));
-        display(al_rd);
-
-        Set<String> al_rs_bin = new LinkedHashSet<>();
-
-        for (RetrievalDetails rd : al_rd)
-        {
-            al_rs_bin.add(rd.get("Bin"));
-        }
-
-        ArrayList<String> al_rd_noDups = new ArrayList<>(al_rs_bin);
-
         bin_Spinner = v.findViewById(R.id.retBinSpinner);
 
-        ArrayAdapter<String> binSpinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item,al_rd_noDups);
+       // StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
+        new AsyncTask<Void, Void, ArrayList<RetrievalDetails>>() {
+            @Override
+            protected ArrayList<RetrievalDetails> doInBackground(Void... params) {
+                Retrieval ret = RetrievalController.getLatestRetrieval();
+                return RetrievalDetailsController.getRetrievalDetails(ret.get("RetrievalNo"));
+            }
 
-        bin_Spinner.setAdapter(binSpinnerAdapter);
+            protected void onPostExecute(ArrayList<RetrievalDetails> result)
+            {
+               al_rd = result;
+
+                display(al_rd);
+
+                Set<String> al_rs_bin = new LinkedHashSet<>();
+
+                for (RetrievalDetails rd : al_rd)
+                {
+                    al_rs_bin.add(rd.get("Bin"));
+                }
+
+                ArrayList<String> al_rd_noDups = new ArrayList<>(al_rs_bin);
+
+                ArrayAdapter<String> binSpinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item,al_rd_noDups);
+
+                bin_Spinner.setAdapter(binSpinnerAdapter);
+            }
+        }.execute();
+
 
         AdapterView.OnItemSelectedListener oisl = new AdapterView.OnItemSelectedListener() {
             @Override
