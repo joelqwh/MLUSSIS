@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,10 +12,6 @@ import android.widget.Toast;
 
 import com.logicuniv.mlussis.Backend.App;
 import com.logicuniv.mlussis.Backend.LoginController;
-import com.logicuniv.mlussis.Model.Employee;
-import com.logicuniv.mlussis.StoreClerk.StoreClerk_MainActivity;
-
-import java.util.ArrayList;
 
 public class LoginActivity extends Activity {
 
@@ -57,7 +51,7 @@ public class LoginActivity extends Activity {
                 protected void onPostExecute(Void result) {
                     // If already logged in, goto next screen
                     if (logintrue) {
-                        Class nextActivity = StoreClerk_MainActivity.class;
+                        Class nextActivity = MainActivity.class;
                         Intent intent = new Intent(getApplicationContext(), nextActivity);
                         startActivity(intent);
                     } else {
@@ -96,7 +90,7 @@ public class LoginActivity extends Activity {
                         if (!logintrue) {
                             Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_LONG).show();
                         } else {
-                            Class nextActivity = StoreClerk_MainActivity.class;
+                            Class nextActivity = MainActivity.class;
                             Intent intent = new Intent(getApplicationContext(), nextActivity);
                             startActivity(intent);
                         }

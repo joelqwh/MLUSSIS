@@ -3,7 +3,6 @@ package com.logicuniv.mlussis;
 
 import android.app.ListFragment;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,14 +12,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
 import com.logicuniv.mlussis.StoreClerk.StoreClerk_EditStockQtyActivity;
-import com.logicuniv.mlussis.StoreClerk.StoreClerk_MainActivity;
 import com.logicuniv.mlussis.StoreClerk.StoreClerk_StockCardActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
