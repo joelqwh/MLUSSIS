@@ -23,13 +23,16 @@
         android:id="@+id/listView_requisition_employee_raised"
         android:layout_width="match_parent"
         android:layout_height="247dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_ReqToRaise">
+        app:layout_constraintTop_toBottomOf="@+id/textView_ReqToRaise"
+        app:layout_constraintVertical_bias="0.0">
 
     </ListView>
 
@@ -51,7 +54,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
-        android:background="@android:color/holo_green_light"
+        android:background="@drawable/confirm_selector"
         android:elevation="0dp"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
@@ -67,8 +70,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="28dp"
-        android:background="@android:color/holo_red_dark"
+        android:background="@drawable/cancel_selector"
         android:text="@string/button_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listView_requisition_employee_raised" />
+
+
 </android.support.constraint.ConstraintLayout>

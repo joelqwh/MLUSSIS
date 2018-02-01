@@ -41,6 +41,7 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
     String qty;
     String itemNo;
 
+    View header;
 
 
     @Override
@@ -57,8 +58,8 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
         Button button_cancelReq = (Button) findViewById(R.id.button_requisition_employee_cancelReq);
         button_cancelReq.setEnabled(false);
         reqItemList = (ListView) findViewById(R.id.listView_requisition_employee_raised);
-        View header = getLayoutInflater().inflate(R.layout.header_row_list_requisition_employee,null);
-        reqItemList.addHeaderView(header,null,false);
+            header = getLayoutInflater().inflate(R.layout.header_row_list_requisition_employee, null);
+            reqItemList.addHeaderView(header, null, false);
 
         registerForContextMenu(reqItemList);
         reqItemList.setLongClickable(true);
@@ -200,6 +201,17 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
             case R.id.option2:
 
                 details.remove(reqDet);
+
+                Button button_submitReq = (Button) findViewById(R.id.button_requisition_employee_submit);
+                Button button_cancelReq = (Button) findViewById(R.id.button_requisition_employee_cancelReq);
+
+                if (details.size() > 0) {
+                    button_submitReq.setEnabled(true);
+                    button_cancelReq.setEnabled(true);
+                } else {
+                    button_submitReq.setEnabled(false);
+                    button_cancelReq.setEnabled(false);
+                }
                 Toast.makeText(RequisitionEmployeeActivity.this, "Item Deleted",Toast.LENGTH_SHORT).show();
 
                 reqItemList.setAdapter(reqItemList.getAdapter());
