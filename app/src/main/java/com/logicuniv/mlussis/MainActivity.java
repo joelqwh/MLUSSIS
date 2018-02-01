@@ -29,7 +29,7 @@ public class MainActivity extends MLussisActivity {
 
     GridLayout storeClerkMain;
     CardView storeclerk_inventory, storeclerk_retrieval, storeclerk_disbursement, deptemp_newrequisition, deptemp_mydisbursements, deptemp_requisitionreview;
-    String[] cardAssignedRole = new String[]{"StoreClerk", "StoreClerk", "StoreClerk", "DepartmentRepresentative", "DepartmentEmployee", "DepartmentEmployee", "DepartmentDeputy"};
+    String[] cardAssignedRole = new String[]{"StoreClerk", "StoreClerk", "StoreClerk", "DepartmentRepresentative", "DepartmentEmployee", "DepartmentDeputy"};
 
     static boolean isBackTwice = false;
 
@@ -91,22 +91,9 @@ public class MainActivity extends MLussisActivity {
             protected void onPostExecute(Void result) {
                 CardView[] cards = new CardView[]{storeclerk_inventory, storeclerk_retrieval, storeclerk_disbursement, deptemp_newrequisition, deptemp_mydisbursements, deptemp_requisitionreview};
                 int currButton = 0;
-                for (int i = 0; i < storeClerkMain.getRowCount(); i++) {
-                    for (int j = 0; j < storeClerkMain.getColumnCount(); j++) {
-                        boolean buttonAssigned = false;
-
-                        while (!buttonAssigned && currButton < cards.length) {
-                            if (roles.contains(cardAssignedRole[currButton])) {
-                                buttonAssigned = true;
-                            } else {
-                                if(cards[currButton]!= null) {
-                                    storeClerkMain.removeView(cards[currButton]);
-                                }else{
-                                    Log.e("Thereisaproblem", "Thereisaproblem");
-                                }
-                            }
-                            currButton++;
-                        }
+                for (int i = 0; i < cards.length; i++) {
+                    if (!roles.contains(cardAssignedRole[i])) {
+                        storeClerkMain.removeView(cards[i]);
                     }
                 }
             }
