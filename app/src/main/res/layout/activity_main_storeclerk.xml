@@ -28,29 +28,28 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7"
-        android:columnCount="1"
-        android:rowCount="3"
         android:alignmentMode="alignMargins"
-        android:columnOrderPreserved="false">
+        android:columnCount="3"
+        android:columnOrderPreserved="false"
+        android:rowCount="3">
 
         <android.support.v7.widget.CardView
             android:id="@+id/storeclerk_inventory"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            >
+            android:layout_marginTop="16dp"
+            android:layout_rowWeight="1">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="16dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imageViewInventory"
@@ -70,7 +69,7 @@
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-            </RelativeLayout>
+            </LinearLayout>
 
 
         </android.support.v7.widget.CardView>
@@ -80,19 +79,18 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            >
+            android:layout_marginTop="16dp"
+            android:layout_rowWeight="1">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="16dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imageViewRetrieval"
@@ -110,8 +108,8 @@
                     android:text="@string/scMenuItem2"
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
-            </RelativeLayout>
+                    android:textStyle="bold" />
+            </LinearLayout>
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -119,14 +117,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            >
+            android:layout_marginTop="16dp"
+            android:layout_rowWeight="1">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
@@ -149,8 +146,8 @@
                     android:text="@string/scMenuItem3"
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
-            </RelativeLayout>
+                    android:textStyle="bold" />
+            </LinearLayout>
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -158,14 +155,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            >
+            android:layout_marginTop="16dp"
+            android:layout_rowWeight="1">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
@@ -188,8 +184,8 @@
                     android:text="@string/scMenuItem3"
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
-            </RelativeLayout>
+                    android:textStyle="bold" />
+            </LinearLayout>
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -197,14 +193,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            >
+            android:layout_marginTop="16dp"
+            android:layout_rowWeight="1">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
@@ -227,8 +222,8 @@
                     android:text="@string/scMenuItem3"
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
-            </RelativeLayout>
+                    android:textStyle="bold" />
+            </LinearLayout>
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -236,14 +231,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            >
+            android:layout_marginTop="16dp"
+            android:layout_rowWeight="1">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
@@ -266,8 +260,8 @@
                     android:text="@string/scMenuItem3"
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
-            </RelativeLayout>
+                    android:textStyle="bold" />
+            </LinearLayout>
         </android.support.v7.widget.CardView>
 
     </GridLayout>

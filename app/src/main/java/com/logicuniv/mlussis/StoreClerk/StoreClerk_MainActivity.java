@@ -79,7 +79,7 @@ public class StoreClerk_MainActivity extends MLussisActivity {
                         return;
                     }
                     if (finalI == 2) {
-                        startActivity(new Intent(getApplicationContext(), StoreClerk_DisbursementActivity.class));
+                        startActivityForResult(new Intent(getApplicationContext(), StoreClerk_DisbursementActivity.class), 29);
                         return;
                     }
                 }
