@@ -7,6 +7,7 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.logicuniv.mlussis.Backend.App;
 import com.logicuniv.mlussis.Backend.FakeRequisition;
@@ -16,28 +17,13 @@ import com.logicuniv.mlussis.DeputyHead.HeadManageRequisitionActivity;
 import com.logicuniv.mlussis.Employee.Catalogue_EmployeeActivity;
 import com.logicuniv.mlussis.Employee.RequisitionEmployeeActivity;
 
-public class MainActivity extends Activity {
+public class MainActivity extends MLussisActivity {
 
     // The Main Screen probably the login screen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // TODO : Remove This
-        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
-
-        // Setting App Context for Backend
-        // TODO : Find a better way
-        App.setAppContext(getApplicationContext());
-
-        //If not logged in, goto login
-        if(!LoginController.IsCurrentSessionValid(getApplicationContext()))
-        {
-            Log.d("MainActivity", "Session Invalid, Need to login again");
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-        }
     }
 
 
@@ -66,6 +52,16 @@ public class MainActivity extends Activity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 0 && resultCode == RESULT_OK)
+        {
+            Toast.makeText(getApplicationContext(), "Requisition submitted", Toast.LENGTH_LONG).show();
         }
     }
 }
