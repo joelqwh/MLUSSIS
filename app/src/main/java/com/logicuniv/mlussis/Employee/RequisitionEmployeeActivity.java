@@ -138,7 +138,7 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
                 new AsyncTask<Void, Void, Void>() {
                     @Override
                     protected Void doInBackground(Void... params) {
-                        FakeRequisition.startNewRequisition(LoginController.GetLoggedInEmployeeNumber(App.getAppContext()));
+                        FakeRequisition.startNewRequisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));
                         return null;
                     }
 
@@ -161,9 +161,16 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
                 new AsyncTask<Void, Void, Void>() {
                     @Override
                     protected Void doInBackground(Void... params) {
-                        String empNo = LoginController.GetLoggedInEmployeeNumber(App.getAppContext());
-                        FakeRequisition.submitNewRequisition();
-                        FakeRequisition.startNewRequisition(empNo);
+                        try{
+                            String empNo = LoginController.GetLoggedInEmployeeNumber(getApplicationContext());
+                            FakeRequisition.submitNewRequisition();
+                            FakeRequisition.startNewRequisition(empNo);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.e("errorAsync", e.getMessage());
+                        }
+
 
 //                        Employee e = EmployeeController.getEmployeeById(empNo);
 //                        Department d = DepartmentController.getDepartmentById(e.get("DeptCode").toString());
@@ -177,9 +184,9 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
 
                     protected void onPostExecute(Void result)
                     {
-                        Toast.makeText(RequisitionEmployeeActivity.this, "Requisition submitted", Toast.LENGTH_LONG).show();
 //                        Intent intent = new Intent(RequisitionEmployeeActivity.this,MainActivity.class);
 //                        startActivity(intent);
+                        setResult(RESULT_OK);
                         finish();
                     }
                 }.execute();

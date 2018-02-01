@@ -109,23 +109,22 @@ public class LoginController {
         try {
             jsonObject.put("sessionID", getSessionID(context));
 
-            Log.d("LoginController", App.WCFServer + "checkSession");
-            Log.d("LoginController", jsonObject.toString());
+            if(getSessionID(context).length() >  3) {
+                Log.d("LoginController", App.WCFServer + "checkSession");
+                Log.d("LoginController", jsonObject.toString());
 
-            response = JSONParser.postStream(
-                    App.WCFServer + "checkSession",
-                    jsonObject.toString()).trim();
+                response = JSONParser.postStream(
+                        App.WCFServer + "checkSession",
+                        jsonObject.toString()).trim();
 
-            Log.d("LoginController", response);
+                Log.d("LoginController", response);
 
-            result = response.equals("true");
+                result = response.equals("true");
+            }else{
+                result = false;
+            }
         } catch (Exception e) {
             Log.e("LoginController", e.getMessage());
-        }
-
-        // Logout if session is invalid
-        if (!result) {
-            Logout(context);
         }
 
         return result;
