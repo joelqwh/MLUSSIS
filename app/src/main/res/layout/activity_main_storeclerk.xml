@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/background_dark"
+    android:background="@color/backgroundAndMenu"
     android:weightSum="10"
     tools:context="com.logicuniv.mlussis.StoreClerk.StoreClerk_MainActivity">
 
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/primary_device_default_dark"
+        android:background="@color/backgroundAndMenu"
         android:paddingBottom="20dp"
         android:paddingTop="20dp">
 
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Logic University"
-            android:background="@color/primary_device_default_dark"
+            android:background="@color/backgroundAndMenu"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="34sp" />
@@ -36,7 +36,7 @@
             android:id="@+id/storeClerkMainGrid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary_device_default_dark"
+            android:background="@color/backgroundAndMenu"
 
             android:alignmentMode="alignMargins"
             android:columnCount="2"
