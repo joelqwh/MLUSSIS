@@ -2,24 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="10dp"
     tools:context="com.logicuniv.mlussis.StoreClerk.StatRetMenuFragment">
 
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="170dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="20dp"
-        android:text="Retrieval Date"
-        android:textAlignment="center"
-        android:textSize="18sp" />
 
     <Spinner
         android:id="@+id/retBinSpinner"
         android:layout_width="170dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="252dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="52dp"
         android:layout_marginTop="20dp"></Spinner>
+
+    <TextView
+        android:id="@+id/textView_retDate_storeClerk"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="252dp"
+        android:layout_marginTop="20dp"
+        android:text="Retrieval Date"
+        android:textAlignment="textStart"
+        android:textSize="18sp" />
 
 </FrameLayout>

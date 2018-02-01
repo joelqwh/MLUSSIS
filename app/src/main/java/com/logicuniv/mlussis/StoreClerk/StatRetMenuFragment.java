@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 
 import com.logicuniv.mlussis.Backend.RetrievalController;
 import com.logicuniv.mlussis.Backend.RetrievalDetailsController;
@@ -46,6 +47,7 @@ public class StatRetMenuFragment extends Fragment {
     ArrayList<RetrievalDisplayStationery> disStat = RetrievalDisplayStationeryController.getRetrievalDisplayStationery();
     private Spinner bin_Spinner;
     ArrayList<RetrievalDetails> al_rd;
+    Retrieval ret;
 
     public StatRetMenuFragment() {
         // Required empty public constructor
@@ -56,12 +58,13 @@ public class StatRetMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_store_clerk_retrieval_body, container, false);
         bin_Spinner = v.findViewById(R.id.retBinSpinner);
+        final TextView tv_retDate = v.findViewById(R.id.textView_retDate_storeClerk);
 
        // StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
         new AsyncTask<Void, Void, ArrayList<RetrievalDetails>>() {
             @Override
             protected ArrayList<RetrievalDetails> doInBackground(Void... params) {
-                Retrieval ret = RetrievalController.getLatestRetrieval();
+                ret = RetrievalController.getLatestRetrieval();
                 return RetrievalDetailsController.getRetrievalDetails(ret.get("RetrievalNo"));
             }
 
@@ -83,6 +86,8 @@ public class StatRetMenuFragment extends Fragment {
                 ArrayAdapter<String> binSpinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item,al_rd_noDups);
 
                 bin_Spinner.setAdapter(binSpinnerAdapter);
+
+                tv_retDate.setText(getString(R.string.retrievalDate) + " " + ret.get("Date").toString());
             }
         }.execute();
 
