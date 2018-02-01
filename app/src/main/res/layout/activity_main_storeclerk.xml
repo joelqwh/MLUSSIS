@@ -8,261 +8,291 @@
     android:weightSum="10"
     tools:context="com.logicuniv.mlussis.StoreClerk.StoreClerk_MainActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3">
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/mainTitle"
-        android:text="Logic University"
-        android:textSize="34sp"
-        android:textColor="@android:color/holo_blue_dark"
-        android:layout_centerInParent="true" />
-    </RelativeLayout>
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp">
 
-    <GridLayout
-        android:id="@+id/storeClerkMainGrid"
+        <TextView
+            android:id="@+id/mainTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Logic University"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="34sp" />
+    </LinearLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="7"
-        android:alignmentMode="alignMargins"
-        android:columnCount="3"
-        android:columnOrderPreserved="false"
-        android:rowCount="3">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/storeclerk_inventory"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_rowWeight="1">
+        <GridLayout
+            android:id="@+id/storeClerkMainGrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical">
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:columnOrderPreserved="false"
+            android:rowCount="3">
 
-                <ImageView
-                    android:id="@+id/imageViewInventory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="0dp" />
-
-                <TextView
-                    android:id="@+id/scMenuItem1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="@string/scMenuItem1"
-                    android:textColor="@android:color/holo_green_dark"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/storeclerk_retrieval"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_rowWeight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <android.support.v7.widget.CardView
+                android:id="@+id/storeclerk_inventory"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical">
+                android:layout_columnWeight="1"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_rowWeight="1"
+                android:visibility="visible">
 
-                <ImageView
-                    android:id="@+id/imageViewRetrieval"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="0dp" />
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="@string/scMenuItem2"
-                    android:textColor="@android:color/holo_green_dark"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                    <ImageView
+                        android:id="@+id/imageViewInventory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_launcher"
+                        android:textAlignment="center"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="0dp" />
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/storeclerk_disbursement"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_rowWeight="1">
+                    <TextView
+                        android:id="@+id/scMenuItem1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:text="@string/scMenuItem1"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/storeclerk_retrieval"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical">
+                android:layout_columnWeight="1"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_rowWeight="1">
 
-                <ImageView
-                    android:id="@+id/imageViewDisbursement"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="0dp" />
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="@string/scMenuItem3"
-                    android:textColor="@android:color/holo_green_dark"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                    <ImageView
+                        android:id="@+id/imageViewRetrieval"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_launcher"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="0dp" />
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/deptemp_newrequisition"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_rowWeight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:text="@string/scMenuItem2"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <android.support.v7.widget.CardView
+                android:id="@+id/storeclerk_disbursement"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical">
+                android:layout_columnWeight="1"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_rowWeight="1"
+                android:visibility="visible">
 
-                <ImageView
-                    android:id="@+id/imageViewNewRequisition"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="0dp" />
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="@string/scMenuItem3"
-                    android:textColor="@android:color/holo_green_dark"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                    <ImageView
+                        android:id="@+id/imageViewDisbursement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_launcher"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="0dp" />
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/deptemp_pendingrequisition"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_rowWeight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:text="@string/scMenuItem3"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <android.support.v7.widget.CardView
+                android:id="@+id/deptemp_newrequisition"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical">
+                android:layout_columnWeight="1"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_rowWeight="1">
 
-                <ImageView
-                    android:id="@+id/imageViewPendingRequisition"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="0dp" />
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="@string/scMenuItem3"
-                    android:textColor="@android:color/holo_green_dark"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                    <ImageView
+                        android:id="@+id/imageViewNewRequisition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_launcher"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="0dp" />
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/deptemp_disbursement"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_rowWeight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:text="@string/scMenuItem4"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <android.support.v7.widget.CardView
+                android:id="@+id/deptemp_mydisbursements"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical">
+                android:layout_columnWeight="1"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_rowWeight="1">
 
-                <ImageView
-                    android:id="@+id/imageViewDeptEmpDisbursement"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="0dp" />
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
 
-                <TextView
+                    <ImageView
+                        android:id="@+id/imageViewPendingRequisition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_launcher"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="0dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:maxLines="2"
+                        android:text="@string/scMenuItem5"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/deptemp_requisitionreview"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_rowWeight="1">
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="@string/scMenuItem3"
-                    android:textColor="@android:color/holo_green_dark"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
 
-    </GridLayout>
+                    <ImageView
+                        android:id="@+id/imageViewDeptEmpDisbursement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_launcher"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="0dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:text="@string/scMenuItem6"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </GridLayout>
+    </ScrollView>
 </LinearLayout>
