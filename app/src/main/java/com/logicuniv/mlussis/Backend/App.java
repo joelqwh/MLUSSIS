@@ -19,10 +19,10 @@ public class App extends Activity {
     //public static final String WCFServer = "http://172.17.255.135/LUSSIS/Service.svc/";
 
     //Joel
-    public static final String WCFServer = "http://172.17.252.67/LUSSIS/Service.svc/";
+    //public static final String WCFServer = "http://172.17.252.67/LUSSIS/Service.svc/";
 
     //Junyi
-    //public static final String WCFServer = "http://172.17.253.140/LUSSIS/Service.svc/";
+    public static final String WCFServer = "http://172.17.253.140/LUSSIS/Service.svc/";
 
     private static Context appContext;
 
