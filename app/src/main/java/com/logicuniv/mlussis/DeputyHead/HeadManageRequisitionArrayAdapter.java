@@ -34,10 +34,6 @@ public class HeadManageRequisitionArrayAdapter extends ArrayAdapter<Requisition>
     Requisition req;
     Employee e;
 
-    TextView tv_empName;
-    TextView tv_reqNo;
-    TextView tv_reqDate;
-
     public HeadManageRequisitionArrayAdapter(@NonNull Context context, ArrayList<Requisition> alReq) {
         super(context, 0,alReq);
     }
@@ -46,39 +42,53 @@ public class HeadManageRequisitionArrayAdapter extends ArrayAdapter<Requisition>
     public View getView (int position, View convertView, ViewGroup parent)
     {
 
-        //StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
+        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
         req = getItem(position);
 
         if(convertView==null)
         {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_list_managereq_deputy, parent, false);
 
-            tv_empName = convertView.findViewById(R.id.textView__managereq_empname);
-            tv_reqNo = convertView.findViewById(R.id.textView_managereq_reqno);
-            tv_reqDate = convertView.findViewById(R.id.textView_managereq_reqdate);
+          final  TextView tv_empName = convertView.findViewById(R.id.textView__managereq_empname);
+          final TextView tv_reqNo = convertView.findViewById(R.id.textView_managereq_reqno);
+          final TextView tv_reqDate = convertView.findViewById(R.id.textView_managereq_reqdate);
 
-        new AsyncTask<String, Void, Employee>() {
+           e= EmployeeController.getEmployeeById(req.get("IssuedBy").toString());
 
-            @Override
-            protected Employee doInBackground(String... params) {
-
-                return e = EmployeeController.getEmployeeById((params[0]));
+            tv_empName.setText(e.get("EmpName").toString());
+            tv_reqNo.setText(req.get("ReqNo").toString());
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+            Date d = null;
+            try {
+                d = sdf.parse(req.get("DateIssued").toString());
+            } catch (ParseException e1) {
+                e1.printStackTrace();
             }
+            tv_reqDate.setText(sdf.format(d));
 
-            protected void onPostExecute(Employee result) {
-                e = result;
-                tv_empName.setText(e.get("EmpName").toString());
-                tv_reqNo.setText(req.get("ReqNo").toString());
-                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-                Date d = null;
-                try {
-                    d = sdf.parse(req.get("DateIssued").toString());
-                } catch (ParseException e1) {
-                    e1.printStackTrace();
-                }
-                tv_reqDate.setText(sdf.format(d));
-            }
-        }.execute(req.get("IssuedBy").toString());
+//        new AsyncTask<String, Void, Employee>() {
+//
+//            @Override
+//            protected Employee doInBackground(String... params) {
+//
+//                Employee ee = EmployeeController.getEmployeeById(params[0]);
+//                return ee;
+//            }
+//
+//            protected void onPostExecute(Employee result) {
+//                e = result;
+//                tv_empName.setText(e.get("EmpName").toString());
+//                tv_reqNo.setText(req.get("ReqNo").toString());
+//                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+//                Date d = null;
+//                try {
+//                    d = sdf.parse(req.get("DateIssued").toString());
+//                } catch (ParseException e1) {
+//                    e1.printStackTrace();
+//                }
+//                tv_reqDate.setText(sdf.format(d));
+//            }
+//        }.execute(req.get("IssuedBy").toString());
 
 
         }

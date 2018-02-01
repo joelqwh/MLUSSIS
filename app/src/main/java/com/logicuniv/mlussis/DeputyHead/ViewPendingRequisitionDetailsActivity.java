@@ -63,20 +63,19 @@ public class ViewPendingRequisitionDetailsActivity extends MLussisActivity{
         Intent i = getIntent();
         reqNo = i.getExtras().getString("Req");
 
-        new AsyncTask<String, Void, Void>() {
+        new AsyncTask<String, Void, String>() {
 
             ArrayList<Requisition> alr;
             @Override
-            protected Void doInBackground(String... params) {
+            protected String doInBackground(String... params) {
                 req = RequisitionController.getRequisitionById(params[0]);
                 al_rd = RequisitionDetailController.getRequisitionDetail(params[0]);
-                return null;
+                String employeeName = EmployeeController.getEmployeeName(req.get("IssuedBy").toString());
+                return employeeName;
             }
-            protected void onPostExecute(Void result) {
+            protected void onPostExecute(String result) {
 
-                tv_empname.setText(getString(R.string.text_pendingrep_empname, EmployeeController.getEmployeeName(req.get("IssuedBy").toString())));
-
-                //when employee table is up, use the appropraite method
+                tv_empname.setText(getString(R.string.text_pendingrep_empname, result));
 
                 adapt = new RequisitionEmployeeArrayAdapter(ViewPendingRequisitionDetailsActivity.this,al_rd);
                 tv_reqNo.setText(getString(R.string.text_pendingrep_reqno,req.get("ReqNo")));

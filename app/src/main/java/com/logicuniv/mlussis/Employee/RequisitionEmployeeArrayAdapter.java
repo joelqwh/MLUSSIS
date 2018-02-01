@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
 
     RequisitionDetail reqDet;
     StationeryCatalogue sc;
+
     public RequisitionEmployeeArrayAdapter(@NonNull Context context, ArrayList<RequisitionDetail> alReqDet) {
         super(context, 0,alReqDet);
     }
@@ -32,35 +34,73 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
     @Override
     public View getView (int position, View convertView, ViewGroup parent)
     {
-
-        //StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
+        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
        reqDet = getItem(position);
+        final ViewHolder holder;
 
         if(convertView==null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_list_requisition_employee, parent, false);
+            holder  = new ViewHolder();
 
-            final TextView tv_description = convertView.findViewById(R.id.textView_req_desc);
-            final TextView tv_qty = convertView.findViewById(R.id.textView_req_qty);
-            final TextView tv_uom = convertView.findViewById(R.id.textView_req_uom);
+            holder.description = (TextView) convertView.findViewById(R.id.textView_req_desc);
+            holder.qty = (TextView) convertView.findViewById(R.id.textView_req_qty);
+            holder.uom = (TextView) convertView.findViewById(R.id.textView_req_uom);
 
-            new AsyncTask<String, Void, StationeryCatalogue>() {
+            //final TextView tv_description = convertView.findViewById(R.id.textView_req_desc);
+            //final TextView tv_qty = convertView.findViewById(R.id.textView_req_qty);
+            //final TextView tv_uom = convertView.findViewById(R.id.textView_req_uom);
+//            retrieveSC(reqDet.get("ItemNo").toString());
 
-                @Override
-                protected StationeryCatalogue doInBackground(String... params) {
+            sc = StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
+            holder.description.setText(sc.get("Description"));
+            holder.qty.setText((String) reqDet.get("Qty"));
+            holder.uom.setText(sc.get("Uom"));
 
-                    return StationeryCatalogueController.searchCatalogueById(params[0]);
-                }
 
-                protected void onPostExecute(StationeryCatalogue result) {
-                    sc = result;
-                    tv_description.setText(sc.get("Description"));
-                    tv_qty.setText((String) reqDet.get("Qty"));
-                    tv_uom.setText(sc.get("Uom"));
-                }
-            }.execute(reqDet.get("ItemNo").toString());
+//            new AsyncTask<String, Void, StationeryCatalogue>() {
+//
+//                @Override
+//                protected StationeryCatalogue doInBackground(String... params) {
+//
+//                    return StationeryCatalogueController.searchCatalogueById(params[0]);
+//                }
+//
+//                protected void onPostExecute(StationeryCatalogue result) {
+//                    sc = result;
+//                    holder.description.setText(sc.get("Description"));
+//                    holder.qty.setText((String) reqDet.get("Qty"));
+//                    holder.uom.setText(sc.get("Uom"));
+//                }
+//            }.execute(reqDet.get("ItemNo").toString());
+
         }
+            else
+            {
+                holder= (ViewHolder)convertView.getTag();
+            }
 
         return convertView;
+    }
+
+    private static class ViewHolder{
+        public TextView description,qty,uom;
+    }
+
+
+    public void retrieveSC (String reqDetNo)
+    {
+        new AsyncTask<String, Void, StationeryCatalogue>() {
+
+            @Override
+            protected StationeryCatalogue doInBackground(String... params) {
+
+                return StationeryCatalogueController.searchCatalogueById(params[0]);
+            }
+
+            protected void onPostExecute(StationeryCatalogue result) {
+                sc=result;
+            }
+        }.execute(reqDetNo);
     }
 
 }
