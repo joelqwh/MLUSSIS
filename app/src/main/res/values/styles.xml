@@ -17,6 +17,16 @@
         <item name="android:textColorPrimaryInverse">@android:color/black</item>
         <item name="android:textColorSecondary">@android:color/white</item>
         <item name="android:statusBarColor">@color/backgroundAndMenu</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+    </style>
+
+    <style name="LussisTheme" parent="AppTheme" >
+        <item name="android:colorPrimary">@color/backgroundAndMenu</item>
+        <item name="android:colorBackground">@android:color/background_light</item>
+        <item name="android:statusBarColor">@color/backgroundAndMenu</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@color/login_text_color</item>
+        <item name="android:colorForeground">@color/accent_device_default_dark</item>
     </style>
 
 </resources>
