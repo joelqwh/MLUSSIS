@@ -10,7 +10,7 @@ import java.util.Calendar;
  * Created by xavie on 30-01-2018.
  */
 
-public class FakeRequisition {
+public class TempRequisition {
     public static ArrayList<RequisitionDetail> details = new ArrayList<>();
     public static Requisition requisition = new Requisition();
 

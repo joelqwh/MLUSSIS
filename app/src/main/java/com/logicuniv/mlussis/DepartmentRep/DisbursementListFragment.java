@@ -62,14 +62,11 @@ public class DisbursementListFragment extends Fragment {
        View v = inflater.inflate(R.layout.fragment_disbursement_list, container, false);
        setHasOptionsMenu(true);
 
-       table = (TableLayout)v.findViewById(R.id.table_deptRep_disbursement_list);
-
-        TableRow firstrow = (TableRow)LayoutInflater.from(getActivity()).inflate(R.layout.row_disbursement_list, null);
-        ((TextView)firstrow.findViewById(R.id.textView_deptRep_disbursement_list_item)).setText("Item Description.");
-        ((TextView)firstrow.findViewById(R.id.textView_deptRep_disbursement_list_qty)).setText("Rec. Qty");
-        table.addView((firstrow));
+        table = (TableLayout)v.findViewById(R.id.table_deptRep_disbursement_list);
 
         printDisbursementTable();
+
+
 
         return v;
     }
@@ -94,21 +91,23 @@ public class DisbursementListFragment extends Fragment {
             }
 
             @Override
-            protected void onPostExecute(Void result)
-            {
-                if (disburse !=null)
-                {
-                    for(DisbursementDetail d : disburse)
-                    {
+            protected void onPostExecute(Void result) {
+                if (!disburse.isEmpty()) {
+                    TableRow firstrow = (TableRow) LayoutInflater.from(getActivity()).inflate(R.layout.row_disbursement_list, null);
+                    ((TextView) firstrow.findViewById(R.id.textView_deptRep_disbursement_list_item)).setText("Item Description.");
+                    ((TextView) firstrow.findViewById(R.id.textView_deptRep_disbursement_list_qty)).setText("Rec. Qty");
+                    table.addView((firstrow));
+                }
+                if (disburse != null) {
+                    for (DisbursementDetail d : disburse) {
                         // Inflate your row "template" and fill out the fields.
-                        TableRow row = (TableRow)LayoutInflater.from(getActivity()).inflate(R.layout.row_disbursement_list, null);
-                        ((TextView)row.findViewById(R.id.textView_deptRep_disbursement_list_item)).setText(d.get("Description"));
-                        ((TextView)row.findViewById(R.id.textView_deptRep_disbursement_list_qty)).setText(d.get("Promised"));
+                        TableRow row = (TableRow) LayoutInflater.from(getActivity()).inflate(R.layout.row_disbursement_list, null);
+                        ((TextView) row.findViewById(R.id.textView_deptRep_disbursement_list_item)).setText(d.get("Description"));
+                        ((TextView) row.findViewById(R.id.textView_deptRep_disbursement_list_qty)).setText(d.get("Promised"));
                         table.addView(row);
                     }
                     table.requestLayout();
                 }
-
             }
 
         }.execute();

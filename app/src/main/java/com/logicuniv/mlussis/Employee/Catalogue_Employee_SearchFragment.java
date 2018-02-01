@@ -14,8 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.logicuniv.mlussis.Backend.FakeRequisition;
-import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
 import com.logicuniv.mlussis.R;

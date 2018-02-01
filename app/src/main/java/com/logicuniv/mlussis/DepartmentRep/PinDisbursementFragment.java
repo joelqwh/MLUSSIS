@@ -36,6 +36,7 @@ public class PinDisbursementFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_pin_disbursement, container, false);
         final TextView tv_Dept = v.findViewById(R.id.textView_deptRep_PinNumber);
+        final TextView tv_pinText = v.findViewById(R.id.textView_deptRep_PinText);
 
 
         new AsyncTask<Void, Void, Void>() {
@@ -57,6 +58,11 @@ public class PinDisbursementFragment extends Fragment {
 
                 tv_Dept.setText(d.get("Pin"));
                 }
+                else
+                    {
+                        tv_pinText.setText("No Current Disbursement");
+                        tv_Dept.setText(null);
+                    }
 
             }
         }.execute();

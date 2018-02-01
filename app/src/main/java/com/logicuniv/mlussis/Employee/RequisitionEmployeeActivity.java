@@ -1,12 +1,9 @@
 package com.logicuniv.mlussis.Employee;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -19,30 +16,21 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.logicuniv.mlussis.Backend.App;
 import com.logicuniv.mlussis.Backend.DepartmentController;
 import com.logicuniv.mlussis.Backend.EmailController;
 import com.logicuniv.mlussis.Backend.EmployeeController;
-import com.logicuniv.mlussis.Backend.FakeRequisition;
+import com.logicuniv.mlussis.Backend.TempRequisition;
 import com.logicuniv.mlussis.Backend.LoginController;
-import com.logicuniv.mlussis.Backend.RequisitionController;
-import com.logicuniv.mlussis.Backend.RequisitionDetailController;
-import com.logicuniv.mlussis.Backend.SharedPrefController;
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.MLussisActivity;
 import com.logicuniv.mlussis.Model.Department;
 import com.logicuniv.mlussis.Model.EmailTemplate;
 import com.logicuniv.mlussis.Model.Employee;
-import com.logicuniv.mlussis.Model.Requisition;
 import com.logicuniv.mlussis.Model.RequisitionDetail;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
 import com.logicuniv.mlussis.R;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-
-import static com.logicuniv.mlussis.Backend.FakeRequisition.details;
-import static com.logicuniv.mlussis.Backend.FakeRequisition.startNewRequisition;
+import static com.logicuniv.mlussis.Backend.TempRequisition.details;
 
 public class RequisitionEmployeeActivity extends MLussisActivity {
 
@@ -75,13 +63,6 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
         registerForContextMenu(reqItemList);
         reqItemList.setLongClickable(true);
 
-//        Intent i = getIntent();
-//        Bundle b = i.getBundleExtra("bundle");
-//
-//        qty =b.getString("qty");
-//
-//        String itemNo = b.getString("ItemNo");
-
 
         View.OnClickListener ocl_addItem = new View.OnClickListener() {
             @Override
@@ -100,15 +81,13 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
                 new AsyncTask<Void, Void, Void>() {
                     @Override
                     protected Void doInBackground(Void... params) {
-                        FakeRequisition.startNewRequisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));
+                        TempRequisition.startNewRequisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));
                         return null;
                     }
 
                     protected void onPostExecute(Void result)
                     {
                         Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
-//                        Intent intent = new Intent(RequisitionEmployeeActivity.this,MainActivity.class);
-//                        startActivity(intent);
                         finish();
                     }
                 }.execute();
@@ -123,31 +102,29 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
                 new AsyncTask<Void, Void, Void>() {
                     @Override
                     protected Void doInBackground(Void... params) {
+                        String empNo = LoginController.GetLoggedInEmployeeNumber(getApplicationContext());
                         try{
-                            String empNo = LoginController.GetLoggedInEmployeeNumber(getApplicationContext());
-                            FakeRequisition.submitNewRequisition();
-                            FakeRequisition.startNewRequisition(empNo);
+
+                            TempRequisition.submitNewRequisition();
+                            TempRequisition.startNewRequisition(empNo);
                         }
                         catch (Exception e)
                         {
                             Log.e("errorAsync", e.getMessage());
                         }
 
+                        Employee e = EmployeeController.getEmployeeById(empNo);
+                        Department d = DepartmentController.getDepartmentById(e.get("DeptCode").toString());
+                        Employee head = EmployeeController.getEmployeeById(d.get("DeputyEmpNo"));
+                        String headEmail = head.get("Email").toString();
 
-//                        Employee e = EmployeeController.getEmployeeById(empNo);
-//                        Department d = DepartmentController.getDepartmentById(e.get("DeptCode").toString());
-//                        Employee head = EmployeeController.getEmployeeById(d.get("DeputyEmpNo"));
-//                        String headEmail = head.get("Email").toString();
-//
-//                        EmailController.sendEmail(headEmail, EmailTemplate.GenerateRequisitionSubmittedEmailToDeputySubject(),
-//                                EmailTemplate.GenerateRequisitionSubmittedEmailToDeputySubject());
+                        EmailController.sendEmail(headEmail, EmailTemplate.GenerateRequisitionSubmittedEmailToDeputySubject(),
+                                EmailTemplate.GenerateRequisitionSubmittedEmailToDeputySubject());
                         return null;
                     }
 
                     protected void onPostExecute(Void result)
                     {
-//                        Intent intent = new Intent(RequisitionEmployeeActivity.this,MainActivity.class);
-//                        startActivity(intent);
                         setResult(RESULT_OK);
                         finish();
                     }
