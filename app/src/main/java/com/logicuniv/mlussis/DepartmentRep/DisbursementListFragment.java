@@ -43,8 +43,11 @@ public class DisbursementListFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.menu_disbursement_deptrep, menu);
-        menu.findItem(R.id.disbDeptRepIteme1).setVisible(true);
-        menu.findItem(R.id.disbDeptRepIteme1).setIcon(android.R.drawable.ic_popup_sync);
+        if(menu!=null) {
+            menu.findItem(R.id.disbDeptRepIteme1).setVisible(true);
+            menu.findItem(R.id.disbDeptRepIteme1).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            menu.findItem(R.id.disbDeptRepIteme1).setIcon(android.R.drawable.ic_popup_sync);
+        }
     }
 
     @Override
