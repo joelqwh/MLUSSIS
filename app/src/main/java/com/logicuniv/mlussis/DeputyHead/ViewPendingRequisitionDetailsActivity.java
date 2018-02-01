@@ -76,7 +76,7 @@ public class ViewPendingRequisitionDetailsActivity extends MLussisActivity{
 
                 tv_empname.setText(getString(R.string.text_pendingrep_empname, EmployeeController.getEmployeeName(req.get("IssuedBy").toString())));
 
-                //when employee table is up, use the appropraite method
+                //when employee table is up, use the appropriate method
 
                 adapt = new RequisitionEmployeeArrayAdapter(ViewPendingRequisitionDetailsActivity.this,al_rd);
                 tv_reqNo.setText(getString(R.string.text_pendingrep_reqno,req.get("ReqNo")));

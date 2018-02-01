@@ -54,44 +54,7 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
     String qty;
     String itemNo;
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if(RESULT_OK==resultCode) {
-            Bundle b = data.getBundleExtra("bundle");
-            qty = b.getString("qty");
-
-            itemNo = b.getString("ItemNo");
-
-            new AsyncTask<String, Void, Void>() {
-                @Override
-                protected Void doInBackground(String... params) {
-                    sc = StationeryCatalogueController.searchCatalogueById(params[0]);
-                    return null;
-                }
-
-                protected void onPostExecute(Void result) {
-                    details.add(new RequisitionDetail("", sc.get("ItemNo"), sc.get("Description"), qty));
-
-                    adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this, details);
-                    reqItemList.setAdapter(adapt);
-
-                    Button button_submitReq = (Button) findViewById(R.id.button_requisition_employee_submit);
-                    Button button_cancelReq = (Button) findViewById(R.id.button_requisition_employee_cancelReq);
-
-                    if (details.size() > 0) {
-                        button_submitReq.setEnabled(true);
-                        button_cancelReq.setEnabled(true);
-                    } else {
-                        button_submitReq.setEnabled(false);
-                        button_cancelReq.setEnabled(false);
-                    }
-                }
-            }.execute(itemNo);
-
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -271,5 +234,43 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(RESULT_OK==resultCode) {
+            Bundle b = data.getBundleExtra("bundle");
+            qty = b.getString("qty");
+
+            itemNo = b.getString("ItemNo");
+
+            new AsyncTask<String, Void, Void>() {
+                @Override
+                protected Void doInBackground(String... params) {
+                    sc = StationeryCatalogueController.searchCatalogueById(params[0]);
+                    return null;
+                }
+
+                protected void onPostExecute(Void result) {
+                    details.add(new RequisitionDetail("", sc.get("ItemNo"), sc.get("Description"), qty));
+                    //                   adapt = (RequisitionEmployeeArrayAdapter) reqItemList.getAdapter();
+                    adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this,details);
+                    reqItemList.setAdapter(adapt);
+                    adapt.notifyDataSetChanged();
+
+                    Button button_submitReq = (Button) findViewById(R.id.button_requisition_employee_submit);
+                    Button button_cancelReq = (Button) findViewById(R.id.button_requisition_employee_cancelReq);
+
+                    if (details.size() > 0) {
+                        button_submitReq.setEnabled(true);
+                        button_cancelReq.setEnabled(true);
+                    } else {
+                        button_submitReq.setEnabled(false);
+                        button_cancelReq.setEnabled(false);
+                    }
+                }
+            }.execute(itemNo);
+        }
+    }
 
 }
