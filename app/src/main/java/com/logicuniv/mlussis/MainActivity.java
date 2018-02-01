@@ -90,11 +90,19 @@ public class MainActivity extends MLussisActivity {
             @Override
             protected void onPostExecute(Void result) {
                 CardView[] cards = new CardView[]{storeclerk_inventory, storeclerk_retrieval, storeclerk_disbursement, deptemp_newrequisition, deptemp_mydisbursements, deptemp_requisitionreview};
-                int currButton = 0;
+                int buttonsRemoved = 0;
                 for (int i = 0; i < cards.length; i++) {
                     if (!roles.contains(cardAssignedRole[i])) {
                         storeClerkMain.removeView(cards[i]);
+                        buttonsRemoved++;
                     }
+                }
+
+                if(buttonsRemoved % 2 != 0)
+                {
+                    CardView temp = new CardView(getApplicationContext());
+                    temp.setVisibility(View.INVISIBLE);
+                    storeClerkMain.addView(temp);
                 }
             }
         }.execute();
