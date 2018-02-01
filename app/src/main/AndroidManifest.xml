@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:theme="@style/test"/>
         <activity android:name=".DepartmentRep.DisbursementActivity" />
         <activity android:name=".Employee.Catalogue_EmployeeActivity"
             android:windowSoftInputMode="stateHidden"/>
@@ -30,7 +31,8 @@
         </activity>
 
         <activity android:name=".InventoryActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"
+            android:theme="@style/test">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -42,6 +44,10 @@
         <activity android:name=".StoreClerk.StoreClerk_DisbursementActivity"></activity>
         <activity android:name=".StoreClerk.StoreClerk_ConfirmationActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
