@@ -32,6 +32,8 @@ public class DisbursementListFragment extends Fragment {
     ArrayList<DisbursementDetail> disburse=null;
 
     TableLayout table;
+
+    boolean firstRowAdded = false;
     public DisbursementListFragment() {
         // Required empty public constructor
 
@@ -41,10 +43,14 @@ public class DisbursementListFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.menu_disbursement_deptrep, menu);
+        menu.findItem(R.id.disbDeptRepIteme1).setVisible(true);
+        menu.findItem(R.id.disbDeptRepIteme1).setIcon(android.R.drawable.ic_popup_sync);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+
         switch (item.getItemId()) {
             case R.id.disbDeptRepIteme1:
                 printDisbursementTable();
@@ -92,11 +98,14 @@ public class DisbursementListFragment extends Fragment {
 
             @Override
             protected void onPostExecute(Void result) {
-                if (!disburse.isEmpty()) {
-                    TableRow firstrow = (TableRow) LayoutInflater.from(getActivity()).inflate(R.layout.row_disbursement_list, null);
+
+                TableRow firstrow = (TableRow) LayoutInflater.from(getActivity()).inflate(R.layout.row_disbursement_list, null);
+
+                if (!disburse.isEmpty()&& firstRowAdded==false){
                     ((TextView) firstrow.findViewById(R.id.textView_deptRep_disbursement_list_item)).setText("Item Description.");
                     ((TextView) firstrow.findViewById(R.id.textView_deptRep_disbursement_list_qty)).setText("Rec. Qty");
                     table.addView((firstrow));
+                    firstRowAdded=true;
                 }
                 if (disburse != null) {
                     for (DisbursementDetail d : disburse) {

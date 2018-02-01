@@ -23,7 +23,7 @@ public class MainActivity extends MLussisActivity {
 
     GridLayout storeClerkMain;
     CardView storeclerk_inventory, storeclerk_retrieval, storeclerk_disbursement, deptemp_newrequisition, deptemp_mydisbursements, deptemp_requisitionreview;
-    String[] cardAssignedRole = new String[]{"StoreClerk", "StoreClerk", "StoreClerk", "DepartmentRepresentative", "DepartmentEmployee", "DepartmentDeputy"};
+    String[] cardAssignedRole = new String[]{"StoreClerk", "StoreClerk", "StoreClerk","DepartmentEmployee", "DepartmentRepresentative", "DepartmentDeputy"};
 
     static boolean isBackTwice = false;
 
