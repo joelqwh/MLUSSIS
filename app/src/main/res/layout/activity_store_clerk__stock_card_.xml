@@ -9,8 +9,8 @@
 
     <TableLayout
         android:id="@+id/tableLayout2"
-        android:layout_width="376dp"
-        android:layout_height="163dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -35,7 +35,8 @@
             <TextView
                 android:id="@+id/textViewItemCode"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"/>
         </TableRow>
 
         <TableRow
@@ -52,7 +53,8 @@
             <TextView
                 android:id="@+id/textViewItemDesc"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"/>
         </TableRow>
 
         <TableRow
@@ -69,7 +71,8 @@
             <TextView
                 android:id="@+id/textViewItemBin"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"/>
         </TableRow>
 
         <TableRow
@@ -86,7 +89,8 @@
             <TextView
                 android:id="@+id/textViewItemUOM"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"/>
         </TableRow>
 
         <TableRow
@@ -103,7 +107,8 @@
             <TextView
                 android:id="@+id/textViewItemSupp1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"/>
         </TableRow>
 
         <TableRow
@@ -120,7 +125,8 @@
             <TextView
                 android:id="@+id/textViewItemSupp2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"/>
 
         </TableRow>
 
@@ -138,7 +144,8 @@
             <TextView
                 android:id="@+id/textViewItemSupp3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"/>
 
         </TableRow>
     </TableLayout>
