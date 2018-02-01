@@ -10,7 +10,7 @@
         android:id="@+id/retFragment1"
         android:name="com.logicuniv.mlussis.StoreClerk.StatRetMenuFragment"
         android:layout_width="match_parent"
-        android:layout_height="70dp"></fragment>
+        android:layout_height="wrap_content"></fragment>
 
     <FrameLayout
         android:id="@+id/retDetailsFragment"

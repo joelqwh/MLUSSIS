@@ -34,6 +34,7 @@
         android:gravity="right"
         android:padding="5dp"
         android:text="TextView"
+        android:textAlignment="center"
         android:singleLine="true"
         android:imeOptions="actionDone"
         android:inputType="number"

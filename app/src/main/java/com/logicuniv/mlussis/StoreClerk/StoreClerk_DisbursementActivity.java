@@ -104,20 +104,22 @@ public class StoreClerk_DisbursementActivity extends MLussisActivity {
                     }
                     @Override
                     protected void onPostExecute(Void result){
+
+                        Intent intent = new Intent(getApplicationContext(), StoreClerk_ConfirmationActivity.class);
+                        Bundle b = new Bundle();
+                        b.putSerializable("deptName", spinner_dept.getSelectedItem().toString());
+                        b.putSerializable("repName", tv_deptRep.getText().toString());
+                        String disbNo = deptDisDet.get(0).get("DisbursementNo");
+                        //String disbNo = DisbursementController.getCurrentDisbursementForDepartment(deptCode).get("DisbursementNo");
+                        b.putSerializable("disbNo", disbNo);
+                        intent.putExtra("bundle", b);
+                        startActivityForResult(intent,0);
                     }
                 }.execute();
 
                 // PendingDisbursement.updatePendingDisDetsforDepartment();
 
-                Intent intent = new Intent(getApplicationContext(), StoreClerk_ConfirmationActivity.class);
-                Bundle b = new Bundle();
-                b.putSerializable("deptName", spinner_dept.getSelectedItem().toString());
-                b.putSerializable("repName", tv_deptRep.getText().toString());
-                String disbNo = deptDisDet.get(0).get("DisbursementNo");
-                //String disbNo = DisbursementController.getCurrentDisbursementForDepartment(deptCode).get("DisbursementNo");
-                b.putSerializable("disbNo", disbNo);
-                intent.putExtra("bundle", b);
-                startActivityForResult(intent,0);
+
             }
         });
     }

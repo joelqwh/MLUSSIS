@@ -42,12 +42,12 @@
     <string name="scMenuItem3">Disbursement</string>
 
     <!-- InventoryActivity Usage -->
-    <string name="reqToRaise">Requisition to Raise</string>
+    <string name="reqToRaise">Items Requested</string>
     <string name="button_submitReq">Submit</string>
     <string name="button_reject">Reject</string>
     <string name="text_PendingRequisition">Pending Stationery Requisitions</string>
 
-    <!-- StockCard Usage -->
+    <!-- StoreClerk StockCard/Retrieval Usage -->
     <string name="itemCode">Item Code</string>
     <string name="itemBin">Bin#</string>
     <string name="itemSupp1">Supplier 1</string>
@@ -56,8 +56,9 @@
     <string name="itemStockEdit">Edit Stock</string>
     <string name="itemTxnView">View Full History</string>
     <string name="itemCurrentStock">Current Quantity</string>
-    <string name="itemAdjustedStock">Actual Quantity</string>
+    <string name="itemAdjustedStock">Actual Qty</string>
     <string name="adjReasonInput">Insert Adjustment Reason</string>
+    <string name="retrievalDate">Retrieval Date: </string>
 
     <!-- StoreClerk Disbursement Usage -->
     <string name="disburseConfirmQuantity">CONFIRM QUANTITY</string>
