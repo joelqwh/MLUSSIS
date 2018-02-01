@@ -23,10 +23,7 @@
         <activity android:name=".DeputyHead.ViewPendingRequisitionDetailsActivity"
             android:windowSoftInputMode="adjustPan"></activity>
 
-        <activity
-            android:name=".StoreClerk.StoreClerk_MainActivity"
-            android:theme="@style/MainPage">
-        </activity>
+
         <activity
             android:name=".StoreClerk.StatRetActivity"
             android:screenOrientation="landscape" android:configChanges="keyboardHidden|orientation">

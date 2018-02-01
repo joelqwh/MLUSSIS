@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@color/backgroundAndMenu"
     android:weightSum="10"
-    tools:context="com.logicuniv.mlussis.StoreClerk.StoreClerk_MainActivity">
+    tools:context="com.logicuniv.mlussis.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
