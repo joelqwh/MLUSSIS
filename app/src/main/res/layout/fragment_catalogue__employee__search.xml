@@ -5,19 +5,13 @@
     tools:context="com.logicuniv.mlussis.Employee.Catalogue_Employee_SearchFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/catalogue"
-        android:textAlignment="center"
-        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/editText_employee_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/search"
         android:inputType="text" />
@@ -27,7 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="250dp"
-        android:layout_marginTop="50dp"
-        android:text="@string/button_clear" />
+        android:layout_marginTop="16dp"
+        android:text="@string/button_clear"
+        android:paddingHorizontal="8dp"
+        android:background="@drawable/button_selector"
+        android:textColor="@android:color/white"/>
 
 </FrameLayout>
