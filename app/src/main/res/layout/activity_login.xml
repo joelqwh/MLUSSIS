@@ -19,15 +19,15 @@
         android:ems="10"
         android:hint="Username"
         android:inputType="text"
-        android:textColor="@color/login_text_color"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
+        android:textColor="@color/login_text_color"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998" />
+        app:layout_constraintVertical_bias="0.45" />
 
     <EditText
         android:id="@+id/PasswordEditText"
@@ -70,7 +70,7 @@
         app:layout_constraintVertical_bias="0.18" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/logo_loading"
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_marginBottom="8dp"
@@ -79,6 +79,21 @@
         android:layout_marginTop="16dp"
         android:src="@mipmap/ic_launcher_round"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/logo_login"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintBottom_toTopOf="@+id/userNameEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
