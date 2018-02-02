@@ -119,7 +119,7 @@ public class DisbursementListFragment extends Fragment {
                         TableRow row = (TableRow) LayoutInflater.from(getActivity()).inflate(R.layout.row_disbursement_list, null);
                         ((TextView) row.findViewById(R.id.textView_deptRep_disbursement_list_item)).setText(d.get("Description"));
                         ((TextView) row.findViewById(R.id.textView_deptRep_disbursement_list_item)).setPadding(0,15,0,15);
-                        ((TextView) row.findViewById(R.id.textView_deptRep_disbursement_list_qty)).setText(d.get("Promised"));
+                        ((TextView) row.findViewById(R.id.textView_deptRep_disbursement_list_qty)).setText(d.get("Received"));
                         ((TextView) row.findViewById(R.id.textView_deptRep_disbursement_list_qty)).setPadding(0,15,0,15);
 
                         table.addView(row);
