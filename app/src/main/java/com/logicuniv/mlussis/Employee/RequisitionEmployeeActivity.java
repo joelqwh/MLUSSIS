@@ -68,7 +68,7 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
         View.OnClickListener ocl_addItem = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RequisitionEmployeeActivity.this,Catalogue_EmployeeActivity.class);
+                Intent intent = new Intent(getApplicationContext(),Catalogue_EmployeeActivity.class);
                 startActivityForResult(intent,4); //check if Requisition gets lost when adding new item. need to ensure that it stays. StartActivityForResult?
 
             }
@@ -79,19 +79,9 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
             @Override
             public void onClick(View v) {
 
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        TempRequisition.startNewRequisition(LoginController.GetLoggedInEmployeeNumber(getApplicationContext()));
-                        return null;
-                    }
+                Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
+                finish();
 
-                    protected void onPostExecute(Void result)
-                    {
-                        Toast.makeText(RequisitionEmployeeActivity.this, "Requisition removed", Toast.LENGTH_LONG).show();
-                        finish();
-                    }
-                }.execute();
             }
         };
         button_cancelReq.setOnClickListener(ocl_reject);
@@ -107,7 +97,6 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
                         try{
 
                             TempRequisition.submitNewRequisition();
-                            TempRequisition.startNewRequisition(empNo);
                         }
                         catch (Exception e)
                         {
@@ -226,7 +215,7 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(RESULT_OK==resultCode) {
+        if(RESULT_OK==resultCode&& requestCode==4) {
             Bundle b = data.getBundleExtra("bundle");
             qty = b.getString("qty");
 
