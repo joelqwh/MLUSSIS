@@ -33,7 +33,8 @@ public class LoginActivity extends Activity {
         App.setAppContext(getApplicationContext());
         usernameEditText = findViewById(R.id.userNameEditText);
         passwordEditText = findViewById(R.id.PasswordEditText);
-        final ImageView imageView = findViewById(R.id.imageView);
+        final ImageView imageView = findViewById(R.id.logo_loading);
+        final ImageView login_imageView = findViewById(R.id.logo_login);
         final Button signIn = findViewById(R.id.signInButton);
 
         // If already logged in, redirect to next activity
@@ -56,6 +57,7 @@ public class LoginActivity extends Activity {
                         startActivity(intent);
                     } else {
                         // Now Show the login Button User won't have time to respond now
+                        login_imageView.setVisibility(View.VISIBLE);
                         signIn.setVisibility(View.VISIBLE);
                         usernameEditText.setVisibility(View.VISIBLE);
                         passwordEditText.setVisibility(View.VISIBLE);
@@ -64,6 +66,7 @@ public class LoginActivity extends Activity {
                 }
             }.execute();
         } else {
+            login_imageView.setVisibility(View.VISIBLE);
             signIn.setVisibility(View.VISIBLE);
             usernameEditText.setVisibility(View.VISIBLE);
             passwordEditText.setVisibility(View.VISIBLE);
