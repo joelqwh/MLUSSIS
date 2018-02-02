@@ -90,6 +90,7 @@ public class StoreClerk_ConfirmationActivity extends MLussisActivity {
                         protected void onPostExecute(Void result)
                         {
                             Toast.makeText(getApplicationContext(),"Disbursement completed", Toast.LENGTH_LONG).show();
+                            setResult(RESULT_OK);
                             finish();
                         }
                 }.execute(confdisbNo, enterPin.getText().toString());
