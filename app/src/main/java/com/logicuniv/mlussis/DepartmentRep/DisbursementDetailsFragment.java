@@ -19,7 +19,13 @@ import com.logicuniv.mlussis.R;
 
 public class DisbursementDetailsFragment extends Fragment {
 
+    String deptName;
+    String empName;
+    String colPtName;
 
+    TextView tv_Dept;
+    TextView tv_Emp;
+    TextView tv_colPt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,18 +33,67 @@ public class DisbursementDetailsFragment extends Fragment {
 
         final View v = inflater.inflate(R.layout.fragment_disbursement_details, container, false);
 
-        final TextView tv_Dept = v.findViewById(R.id.textView_Dept);
-        final TextView tv_Emp = v.findViewById(R.id.textView_Employee);
-        final TextView tv_colPt = v.findViewById(R.id.textView_ColPt);
+        tv_Dept = v.findViewById(R.id.textView_Dept);
+        tv_Emp = v.findViewById(R.id.textView_Employee);
+        tv_colPt = v.findViewById(R.id.textView_ColPt);
 
-        new AsyncTask<String, Void, Void>() {
-            boolean t = false;
-            String deptName;
-            String empName;
-            String colPtName;
+        printDisbDetails();
+
+//        new AsyncTask<String, Void, Void>() {
+//
+//            @Override
+//            protected Void doInBackground(String...params) {
+//                String empNoLoggedIn = LoginController.GetLoggedInEmployeeNumber(getContext());
+//
+//                String deptCode = EmployeeController.getEmployeeById(empNoLoggedIn).get("DeptCode").toString();
+//
+//                d = DisbursementController.getCurrentDisbursementForDepartment(deptCode);     //get parameter from login details when it is set up
+//
+//
+//                if (d != null) {
+//
+//                    deptName = DepartmentController.getDepartmentName(d.get("DeptCode"));     //to initialise this method later
+//
+//
+//                    empName = EmployeeController.getEmployeeName(d.get("RepEmpNo"));
+//
+//
+//                    colPtName = new CollectionPointController().getCollectionPointDetails(d.get("CollectionPointNo"));
+//                }
+//
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Void result)
+//            {
+//                if(deptName!=null && empName!=null && colPtName!=null) {
+//                    tv_Dept.setText(deptName);
+//                    tv_Emp.setText(empName);
+//                    tv_colPt.setText("Collection Point: " + colPtName);
+//                }
+//                else
+//                {
+//                    tv_Dept.setText(null);
+//                    tv_Emp.setText(null);
+//                    tv_colPt.setText(null);
+//                }
+//            }
+//
+//        }.execute();
+
+        return v;
+
+
+
+    }
+
+    public void printDisbDetails()
+    {
+        new AsyncTask<String, Void, Disbursement>() {
 
             @Override
-            protected Void doInBackground(String...params) {
+            protected Disbursement doInBackground(String...params) {
                 String empNoLoggedIn = LoginController.GetLoggedInEmployeeNumber(getContext());
 
                 String deptCode = EmployeeController.getEmployeeById(empNoLoggedIn).get("DeptCode").toString();
@@ -57,23 +112,26 @@ public class DisbursementDetailsFragment extends Fragment {
                     colPtName = new CollectionPointController().getCollectionPointDetails(d.get("CollectionPointNo"));
                 }
 
-                return null;
+                return d;
             }
 
             @Override
-            protected void onPostExecute(Void result)
+            protected void onPostExecute(Disbursement result)
             {
-                tv_Dept.setText(deptName);
-                tv_Emp.setText(empName);
-                tv_colPt.setText("Collection Point: " + colPtName);
+                if(result!=null) {
+                    tv_Dept.setText(deptName);
+                    tv_Emp.setText(empName);
+                    tv_colPt.setText("Collection Point: " + colPtName);
+                }
+                else
+                {
+                    tv_Dept.setText(null);
+                    tv_Emp.setText(null);
+                    tv_colPt.setText(null);
+                }
             }
 
         }.execute();
-
-        return v;
-
-
-
     }
 
 }
