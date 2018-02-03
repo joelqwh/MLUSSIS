@@ -95,7 +95,7 @@ public class LoginActivity extends Activity {
                         } else {
                             Class nextActivity = MainActivity.class;
                             Intent intent = new Intent(getApplicationContext(), nextActivity);
-                            startActivity(intent);
+                            startActivityForResult(intent, 0);
                         }
                     }
                 }.execute(username, password);

@@ -65,23 +65,28 @@ public class HeadManageRequisitionActivity extends MLussisActivity implements Ad
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        new AsyncTask<Void, Void, Void>() {
+        if(requestCode == 0) {
+            new AsyncTask<Void, Void, Void>() {
 
-            ArrayList<Requisition> alr;
-            @Override
-            protected Void doInBackground(Void... params) {
-                alr = RequisitionController.getPendingRequisitions();
+                ArrayList<Requisition> alr;
 
-                return null;
-            }
-            protected void onPostExecute(Void result) {
+                @Override
+                protected Void doInBackground(Void... params) {
+                    alr = RequisitionController.getPendingRequisitions();
 
-                adapt = new HeadManageRequisitionArrayAdapter(HeadManageRequisitionActivity.this, alr);
-                lv_manageReq.setAdapter(adapt);
-                lv_manageReq.setOnItemClickListener(HeadManageRequisitionActivity.this);
-            }
-        }.execute();
+                    return null;
+                }
+
+                protected void onPostExecute(Void result) {
+
+                    adapt = new HeadManageRequisitionArrayAdapter(HeadManageRequisitionActivity.this, alr);
+                    lv_manageReq.setAdapter(adapt);
+                    lv_manageReq.setOnItemClickListener(HeadManageRequisitionActivity.this);
+                }
+            }.execute();
+        }
     }
 
 }

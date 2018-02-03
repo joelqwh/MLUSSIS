@@ -22,43 +22,16 @@ import java.net.URL;
 //JSONParser not completed! - 17Jan2018
 public class JSONParser {
 
+    static int defaultTimeoutMilli = 10000;
+
     public static String getStream(String url) {
         InputStream is = null;
         StringBuilder sb = new StringBuilder();
         try {
             URL u = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+            conn.setConnectTimeout(defaultTimeoutMilli);
             conn.setRequestMethod("GET");
-            conn.connect();
-            is = conn.getInputStream();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "iso-8859-1"), 8);
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-                sb.append('\n');
-            }
-            is.close();
-        } catch (Exception e) {
-            Log.e("Buffer Error", "Error converting result " + e.toString());
-        }
-        return(sb.toString());
-    }
-
-    public static String getStream(String url, int timeoutmilliseconds) {
-        InputStream is = null;
-        StringBuilder sb = new StringBuilder();
-        try {
-            URL u = new URL(url);
-            HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setConnectTimeout(timeoutmilliseconds);
             conn.connect();
             is = conn.getInputStream();
         } catch (UnsupportedEncodingException e) {
@@ -104,6 +77,7 @@ public class JSONParser {
             URL u = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) u.openConnection();
             conn.setRequestMethod("POST");
+            conn.setConnectTimeout(defaultTimeoutMilli);
             conn.setDoInput(true);
             conn.setDoOutput(true);
             conn.setRequestProperty("Accept", "application/json");
@@ -132,8 +106,6 @@ public class JSONParser {
         return jObj;
     }
 
-
-
     public static JSONArray getJSONArrayFromUrl(String url) {
         JSONArray jArray = null;
         try {
@@ -144,45 +116,4 @@ public class JSONParser {
         return jArray;
     }
 
-    /*public static JSONArray searchJSONArrayFromUrl(String url, StationeryCatalogue sc) {
-        JSONObject scItem = new JSONObject();
-        JSONArray scItemArray = null;
-        try {
-            scItem.put("Description", sc.get("Description"));
-        }
-        catch (Exception e)
-        {
-            Log.e("JSON Parser", "Error searching array "+ e.toString());
-        }
-
-        try {
-            scItemArray = new JSONArray(postStream(url, scItem.toString()));
-        }
-        catch (JSONException e)
-        {
-            Log.e("JSON Parser", "Error parsing array "+ e.toString());
-        }
-        return scItemArray;
-    }*/
-
-//    public static JSONArray searchJSONArrayFromUrl(String url, Book book) {
-//        JSONObject jBook = new JSONObject();
-//        JSONArray jArray = null;
-//        try {
-//            jBook.put("Id", book.get("Id"));
-//            jBook.put("Title", book.get("Title"));
-//            jBook.put("Category",book.get("Category"));
-//            jBook.put("ISBN", book.get("ISBN"));
-//            jBook.put("Author", book.get("Author"));
-//            jBook.put("Price", book.get("Price"));
-//        } catch (Exception e) {
-//        }
-//
-//        try {
-//            jArray = new JSONArray(JSONParser.postStream(url, jBook.toString()));
-//        } catch (JSONException e) {
-//            Log.e("JSON Parser", "Error parsing array " + e.toString());
-//        }
-//        return jArray;
-//    }
 }
