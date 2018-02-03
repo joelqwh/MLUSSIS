@@ -31,6 +31,7 @@ public class StoreClerk_StockCardActivity extends MLussisActivity {
         final TextView itemCode = findViewById(R.id.textViewItemCode);
         TextView itemDesc = findViewById(R.id.textViewItemDesc);
         TextView itemBin = findViewById(R.id.textViewItemBin);
+        TextView itemCurrentQty = findViewById(R.id.textViewItemCurrentQty);
         TextView itemUOM = findViewById(R.id.textViewItemUOM);
         TextView itemSupp1 = findViewById(R.id.textViewItemSupp1);
         TextView itemSupp2 = findViewById(R.id.textViewItemSupp2);
@@ -39,6 +40,7 @@ public class StoreClerk_StockCardActivity extends MLussisActivity {
         itemCode.setText(sc.get("ItemNo"));
         itemDesc.setText(sc.get("Description"));
         itemBin.setText(sc.get("Bin"));
+        itemCurrentQty.setText(sc.get("CurrentQty"));
         itemUOM.setText(sc.get("Uom"));
         itemSupp1.setText(sc.get("Supplier1"));
         itemSupp2.setText(sc.get("Supplier2"));

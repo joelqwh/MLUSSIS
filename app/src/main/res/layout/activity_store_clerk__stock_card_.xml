@@ -30,13 +30,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/itemCode" />
+                android:paddingVertical="5dp"
+                android:text="@string/itemCode"
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/textViewItemCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dp"/>
+                android:paddingLeft="16dp"
+                android:paddingVertical="5dp"
+                android:textSize="16dp" />
         </TableRow>
 
         <TableRow
@@ -48,13 +52,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/catalogue_description" />
+                android:paddingVertical="5dp"
+                android:text="@string/catalogue_description"
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/textViewItemDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dp"/>
+                android:paddingLeft="16dp"
+                android:paddingVertical="5dp"
+                android:textSize="16dp" />
         </TableRow>
 
         <TableRow
@@ -66,13 +74,39 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/itemBin" />
+                android:paddingVertical="5dp"
+                android:text="@string/itemBin"
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/textViewItemBin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dp"/>
+                android:paddingLeft="16dp"
+                android:paddingVertical="5dp"
+                android:textSize="16dp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/itemCurrentQtyRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:text="@string/itemQuantity"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textViewItemCurrentQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingVertical="5dp"
+                android:textSize="16dp" />
         </TableRow>
 
         <TableRow
@@ -84,13 +118,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/catalogue_uom" />
+                android:paddingVertical="5dp"
+                android:text="@string/catalogue_uom"
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/textViewItemUOM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dp"/>
+                android:paddingLeft="16dp"
+                android:paddingVertical="5dp"
+                android:textSize="16dp" />
         </TableRow>
 
         <TableRow
@@ -102,13 +140,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/itemSupp1" />
+                android:paddingVertical="5dp"
+                android:text="@string/itemSupp1"
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/textViewItemSupp1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dp"/>
+                android:paddingLeft="16dp"
+                android:paddingVertical="5dp"
+                android:textSize="16dp" />
         </TableRow>
 
         <TableRow
@@ -120,13 +162,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/itemSupp2" />
+                android:paddingVertical="5dp"
+                android:text="@string/itemSupp2"
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/textViewItemSupp2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dp"/>
+                android:paddingLeft="16dp"
+                android:paddingVertical="5dp"
+                android:textSize="16dp" />
 
         </TableRow>
 
@@ -139,30 +185,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/itemSupp3" />
+                android:paddingVertical="5dp"
+                android:text="@string/itemSupp3"
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/textViewItemSupp3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dp"/>
+                android:paddingLeft="16dp"
+                android:paddingVertical="5dp"
+                android:textSize="16dp" />
 
         </TableRow>
     </TableLayout>
-
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="384dp"
-        android:layout_height="248dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.71000004"></ListView>
 
     <Button
         android:id="@+id/itemStockEditbtn"
@@ -172,16 +208,16 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/itemStockEdit"
-        android:paddingHorizontal="8dp"
         android:background="@drawable/button_selector"
+        android:paddingHorizontal="8dp"
+        android:text="@string/itemStockEdit"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView"
-        app:layout_constraintVertical_bias="0.47" />
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
+        app:layout_constraintVertical_bias="0.39" />
 
     <Button
         android:id="@+id/itemTxnViewBtn"
@@ -191,13 +227,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/itemTxnView"
-        android:paddingHorizontal="8dp"
         android:background="@drawable/button_selector"
+        android:paddingHorizontal="8dp"
+        android:text="@string/itemTxnView"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView" />
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
+        app:layout_constraintVertical_bias="0.39" />
 </android.support.constraint.ConstraintLayout>

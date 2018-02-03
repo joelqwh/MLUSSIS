@@ -28,7 +28,7 @@
     <string name="button_clear">Clear</string>
     <string name="catalogue_category">Cat.</string>
     <string name="catalogue_description">Description</string>
-    <string name="catalogue_uom">U.O.M.</string>
+    <string name="catalogue_uom">UOM</string>
     <string name="additem">Adding Item</string>
     <string name="button_additem">Add Item</string>
     <string name="button_cancel">Cancel</string>
@@ -50,6 +50,7 @@
     <!-- StoreClerk StockCard/Retrieval Usage -->
     <string name="itemCode">Item Code</string>
     <string name="itemBin">Bin#</string>
+    <string name="itemQuantity">Quantity</string>
     <string name="itemSupp1">Supplier 1</string>
     <string name="itemSupp2">Supplier 2</string>
     <string name="itemSupp3">Supplier 3</string>
