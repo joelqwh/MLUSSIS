@@ -8,6 +8,7 @@ import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.MLussisActivity;
@@ -59,10 +60,19 @@ public class StoreClerk_StockCardActivity extends MLussisActivity {
                         StationeryCatalogue sc1 = result;
                         Intent intent = new Intent(getApplicationContext(),StoreClerk_EditStockQtyActivity.class);
                         intent.putExtra("invdetails", sc1);
-                        startActivity(intent);
+                        startActivityForResult(intent,29);
                     }
                 }.execute(sc.get("ItemNo"));
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 29 && resultCode == RESULT_OK) {
+            Toast.makeText(getApplicationContext(), "Submitted for Adjustment", Toast.LENGTH_LONG).show();
+        }
     }
 }

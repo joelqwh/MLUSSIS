@@ -74,9 +74,11 @@ public class StoreClerk_EditStockQtyActivity extends MLussisActivity {
 
                         protected void onPostExecute(Void result)
                         {
-                            Toast.makeText(StoreClerk_EditStockQtyActivity.this, "Submitted for Adjustment", Toast.LENGTH_SHORT).show();
+                            setResult(RESULT_OK);
+                            finish();
+                            /*Toast.makeText(StoreClerk_EditStockQtyActivity.this, "Submitted for Adjustment", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), InventoryActivity.class);
-                            startActivity(intent);
+                            startActivity(intent);*/
                         }
                     }.execute();
 
