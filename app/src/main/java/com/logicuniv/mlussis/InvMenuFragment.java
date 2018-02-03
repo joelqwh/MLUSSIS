@@ -168,7 +168,7 @@ public class InvMenuFragment extends Fragment {
 
             @Override
             protected void onPostExecute(Void v) {
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, catName);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, catName);
                 catSearch.setAdapter(adapter);
             }
         }.execute();
@@ -197,7 +197,7 @@ public class InvMenuFragment extends Fragment {
 
             @Override
             protected void onPostExecute(Void v) {
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, binName);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, binName);
                 binSearch.setAdapter(adapter);
             }
         }.execute();
