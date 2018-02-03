@@ -17,6 +17,9 @@ public class LoginActivity extends Activity {
 
     EditText usernameEditText;
     EditText passwordEditText;
+    ImageView imageView;
+    ImageView login_imageView;
+    Button signIn;
 
     @Override
     public void onBackPressed() {
@@ -29,16 +32,65 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Initial Setup
         setContentView(R.layout.activity_login);
         App.setAppContext(getApplicationContext());
         usernameEditText = findViewById(R.id.userNameEditText);
         passwordEditText = findViewById(R.id.PasswordEditText);
-        final ImageView imageView = findViewById(R.id.logo_loading);
-        final ImageView login_imageView = findViewById(R.id.logo_login);
-        final Button signIn = findViewById(R.id.signInButton);
+        imageView = findViewById(R.id.logo_loading);
+        login_imageView = findViewById(R.id.logo_login);
+        signIn = findViewById(R.id.signInButton);
 
+        // Login Button Handler
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+                new AsyncTask<String, Void, Void>() {
+                    boolean logintrue = false;
+
+                    @Override
+                    protected Void doInBackground(String... params) {
+                        logintrue = LoginController.AuthenticateCredentials(getApplicationContext(), params[0], params[1]);
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void result) {
+                        if (!logintrue) {
+                            Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_LONG).show();
+                        } else {
+                            Class nextActivity = MainActivity.class;
+                            Intent intent = new Intent(getApplicationContext(), nextActivity);
+                            startActivityForResult(intent, 0);
+                        }
+                    }
+                }.execute(username, password);
+
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkIfAlreadyLoggedin();
+    }
+
+    private void checkIfAlreadyLoggedin()
+    {
         // If already logged in, redirect to next activity
         if (!LoginController.getSessionID(getApplicationContext()).equals("0")) {
+            // Now Show the login Button User won't have time to respond now
+            login_imageView.setVisibility(View.GONE);
+            signIn.setVisibility(View.GONE);
+            usernameEditText.setVisibility(View.GONE);
+            passwordEditText.setVisibility(View.GONE);
+            imageView.setVisibility(View.VISIBLE);
+
             new AsyncTask<Void, Void, Void>() {
                 boolean logintrue = false;
 
@@ -72,35 +124,5 @@ public class LoginActivity extends Activity {
             passwordEditText.setVisibility(View.VISIBLE);
             imageView.setVisibility(View.GONE);
         }
-
-        signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-
-                new AsyncTask<String, Void, Void>() {
-                    boolean logintrue = false;
-
-                    @Override
-                    protected Void doInBackground(String... params) {
-                        logintrue = LoginController.AuthenticateCredentials(getApplicationContext(), params[0], params[1]);
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Void result) {
-                        if (!logintrue) {
-                            Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_LONG).show();
-                        } else {
-                            Class nextActivity = MainActivity.class;
-                            Intent intent = new Intent(getApplicationContext(), nextActivity);
-                            startActivityForResult(intent, 0);
-                        }
-                    }
-                }.execute(username, password);
-
-            }
-        });
     }
 }
