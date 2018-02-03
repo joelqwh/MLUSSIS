@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,11 +52,12 @@ public class InvMenuFragment extends Fragment {
             @Override
             protected void onPostExecute(Void result) {
                 display(arraystationery);
+                catSpinner_inflate();
+                binSpinner_inflate();
             }
         }.execute();
 
-        catSpinner_inflate();
-        binSpinner_inflate();
+
 
         catSearch = v.findViewById(R.id.catspinner);
         catSearch.setSelection(0);
@@ -68,7 +70,14 @@ public class InvMenuFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String catSearchInfo = catSearch.getSelectedItem().toString();
-                String binSearchInfo = binSearch.getSelectedItem().toString();
+                String binSearchInfo = "";
+                try {
+                    binSearchInfo = binSearch.getSelectedItem().toString();
+                }
+                catch (Exception e)
+                {
+                    Log.e("binSearchInfo", e.toString());
+                }
                 String invSearchInfo = invSearch.getText().toString();
 
                 display(inventorySearch(catSearchInfo, binSearchInfo, invSearchInfo));
