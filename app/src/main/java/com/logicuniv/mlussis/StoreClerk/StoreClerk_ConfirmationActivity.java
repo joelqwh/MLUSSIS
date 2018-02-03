@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +49,7 @@ public class StoreClerk_ConfirmationActivity extends MLussisActivity {
         final String confdisbNo = b.getString("disbNo");
         final String deptCode = b.getString("deptCode");
 
-                new AsyncTask<String, Void, Void>(){
+        new AsyncTask<String, Void, Void>(){
             @Override
             protected Void doInBackground(String... params) {
 
@@ -59,10 +60,17 @@ public class StoreClerk_ConfirmationActivity extends MLussisActivity {
 
             @Override
             protected void onPostExecute(Void result) {
-                DisbursementItemArrayAdapter ddadapt = new DisbursementItemArrayAdapter(getApplicationContext(),disbursementConf);
-                conf.setAdapter(ddadapt);
+
+                SimpleAdapter confadapt = new SimpleAdapter(getApplicationContext(),disbursementConf,R.layout.row_list_confirmation_storeclerk,
+                        new String[]{"Description", "Received"},
+                        new int[]{R.id.scConfirmItemDesc, R.id.scConfirmItemQty});
+                conf.setAdapter(confadapt);
                 View header = getLayoutInflater().inflate(R.layout.fragment_store_clerk_disburse_row_header,null);
                 conf.addHeaderView(header, null, false);
+                /*DisbursementItemArrayAdapter ddadapt = new DisbursementItemArrayAdapter(getApplicationContext(),disbursementConf);
+                conf.setAdapter(ddadapt);
+                View header = getLayoutInflater().inflate(R.layout.fragment_store_clerk_disburse_row_header,null);
+                conf.addHeaderView(header, null, false);*/
 
             }
         }.execute(confdisbNo,deptCode);
