@@ -2,7 +2,10 @@ package com.logicuniv.mlussis.StoreClerk;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +25,7 @@ public class StoreClerk_EditStockQtyActivity extends MLussisActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_clerk__edit_stock_qty);
+        //StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
         Bundle b = getIntent().getExtras();
         HashMap<String, String> sc = (HashMap<String, String>) b.get("invdetails");
 
@@ -45,7 +49,38 @@ public class StoreClerk_EditStockQtyActivity extends MLussisActivity {
                     Toast.makeText(StoreClerk_EditStockQtyActivity.this, "Please enter adjustment reason", Toast.LENGTH_LONG).show();
                     return;
                 } else {
-                    AdjustmentVoucherController.createAdjustmentVoucher
+                    new AsyncTask<Void, Void, Void>(){
+                        @Override
+                        protected Void doInBackground(Void... params) {
+                            String adjItemCode = textEditStockItemCode.getText().toString();
+                            int adjItemActualQty = Integer.parseInt(EditStockItemActualQty.getText().toString());
+                            String adjGivenReason = adjReason.getText().toString();
+
+                            try
+                            {
+                                AdjustmentVoucherController.createAdjustmentVoucher
+                                        (
+                                                adjItemCode,
+                                                adjItemActualQty,
+                                                adjGivenReason
+                                        );
+                            }
+                            catch (Exception e)
+                            {
+                                Log.e("errorAdjAsync", e.getMessage());
+                            }
+                            return null;
+                        }
+
+                        protected void onPostExecute(Void result)
+                        {
+                            Toast.makeText(StoreClerk_EditStockQtyActivity.this, "Submitted for Adjustment", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), InventoryActivity.class);
+                            startActivity(intent);
+                        }
+                    }.execute();
+
+                    /*AdjustmentVoucherController.createAdjustmentVoucher
                             (
                             textEditStockItemCode.getText().toString(),
                             Integer.parseInt(EditStockItemActualQty.getText().toString()),
@@ -53,7 +88,7 @@ public class StoreClerk_EditStockQtyActivity extends MLussisActivity {
                             );
                     Toast.makeText(StoreClerk_EditStockQtyActivity.this, "Submitted for Adjustment", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), InventoryActivity.class);
-                    startActivity(intent);
+                    startActivity(intent);*/
                 }
             }
         });
