@@ -5,14 +5,20 @@ package com.logicuniv.mlussis.StoreClerk;
  */
 
 import android.app.ListFragment;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.Model.RetrievalDetails;
+import com.logicuniv.mlussis.Model.StationeryCatalogue;
 import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
@@ -28,6 +34,7 @@ public class StatRetTableFragment extends ListFragment {
     }
 
     View header;
+    StationeryCatalogue scSelected;
 
 
     @Override
@@ -59,5 +66,56 @@ public class StatRetTableFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getListView().addHeaderView(header, null, false);
+        getListView().setOnItemLongClickListener(listener);
     }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id){
+        RetrievalDetails rdSelected = (RetrievalDetails) getListAdapter().getItem(position-1);
+        String rdItemNo = rdSelected.get("ItemNo");
+
+        new AsyncTask<String, Void, Void>(){
+
+            @Override
+            protected Void doInBackground(String... params){
+                scSelected = StationeryCatalogueController.searchCatalogueById(params[0]);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result)
+            {
+                Intent intent = new Intent(getActivity(), StoreClerk_StockCardActivity.class);
+                intent.putExtra("invdetails1", scSelected);
+                startActivity(intent);
+            }
+
+        }.execute(rdItemNo);
+    }
+
+    AdapterView.OnItemLongClickListener listener = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            RetrievalDetails rdSelected = (RetrievalDetails) getListAdapter().getItem(position-1);
+            String rdItemNo = rdSelected.get("ItemNo");
+
+            new AsyncTask<String, Void, Void>(){
+
+                @Override
+                protected Void doInBackground(String... params){
+                    scSelected = StationeryCatalogueController.searchCatalogueById(params[0]);
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void result)
+                {
+                    Intent intent = new Intent(getActivity(), StoreClerk_EditStockQtyActivity.class);
+                    intent.putExtra("invdetails", scSelected);
+                    startActivity(intent);
+                }
+            }.execute(rdItemNo);
+            return true;
+        }
+    };
 }
