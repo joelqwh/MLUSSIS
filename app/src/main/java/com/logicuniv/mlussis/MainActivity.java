@@ -31,7 +31,7 @@ public class MainActivity extends MLussisActivity {
     @Override
     public void onBackPressed() {
         if (isBackTwice) {
-            LoginController.Logout(getApplicationContext());
+            LoginController.Logout(getApplicationContext(), this);
         } else {
             isBackTwice = true;
             Toast.makeText(getApplicationContext(), "Press Back Again To Logout", Toast.LENGTH_SHORT).show();
@@ -54,7 +54,6 @@ public class MainActivity extends MLussisActivity {
             }.execute();
         }
     }
-
 
     // The Main Screen probably the login screen
     @Override

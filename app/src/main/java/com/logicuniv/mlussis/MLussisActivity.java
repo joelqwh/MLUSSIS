@@ -23,6 +23,7 @@ public class MLussisActivity extends Activity {
 
     private static boolean isFirstTime = true;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,5 +82,18 @@ public class MLussisActivity extends Activity {
 
             isFirstTime = false;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Logout from anywhere
+        if(resultCode == LoginController.LOGOUT_CODE)
+        {
+            setResult(LoginController.LOGOUT_CODE);
+            finish();
+        }
+
     }
 }

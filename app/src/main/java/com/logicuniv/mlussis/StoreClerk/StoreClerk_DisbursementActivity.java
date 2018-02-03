@@ -145,7 +145,7 @@ public class StoreClerk_DisbursementActivity extends MLussisActivity {
 
             @Override
             protected void onPostExecute(Void v) {
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, deptName);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, deptName);
                 spinner_dept.setAdapter(adapter);
             }
         }.execute();

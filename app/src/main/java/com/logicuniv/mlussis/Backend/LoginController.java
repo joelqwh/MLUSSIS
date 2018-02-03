@@ -31,6 +31,7 @@ import static com.logicuniv.mlussis.Backend.JSONParser.readStream;
 public class LoginController {
 
     private static ArrayList<String> currentRoles = new ArrayList<String>();
+    public static final int LOGOUT_CODE = Integer.MIN_VALUE;
 
     public static boolean IsLoggedInUserInRole(Context context, String role)
     {
@@ -146,13 +147,13 @@ public class LoginController {
         return pref.getString("SessionID", "0");
     }
 
-    public static void Logout(Context context) {
+    public static void Logout(Context context, Activity currActivity) {
         setSessionID(context, "0");
         currentRoles.clear();
 
         Log.d("MainActivity", "Session Invalid, Need to login");
-        Intent intent = new Intent(context, LoginActivity.class);
-        context.startActivity(intent);
+        currActivity.setResult(LOGOUT_CODE);
+        currActivity.finish();
     }
 
     public static String GetLoggedInEmployeeNumber(Context context)
