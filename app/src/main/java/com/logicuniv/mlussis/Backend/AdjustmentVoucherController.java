@@ -20,7 +20,7 @@ public class AdjustmentVoucherController {
 
             response = JSONParser.postStream(App.WCFServer + "CreateAdjustmentVoucher", jsonObject.toString());
 
-            result = response.contains("true");
+            result = response.trim().contains("true");
         } catch (Exception e) {
             result = false;
         }

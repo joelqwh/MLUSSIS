@@ -40,29 +40,30 @@ public class DisbursementListFragment extends Fragment {
 
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.menu_disbursement_deptrep, menu);
-        if(menu!=null) {
-            menu.findItem(R.id.disbDeptRepIteme1).setVisible(true);
-            menu.findItem(R.id.disbDeptRepIteme1).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            menu.findItem(R.id.disbDeptRepIteme1).setIcon(android.R.drawable.ic_popup_sync);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-
-        switch (item.getItemId()) {
-            case R.id.disbDeptRepIteme1:
-                printDisbursementTable();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        inflater.inflate(R.menu.menu_disbursement_deptrep, menu);
+//        if(menu!=null) {
+//            menu.findItem(R.id.disbDeptRepIteme1).setVisible(true);
+//            menu.findItem(R.id.disbDeptRepIteme1).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//            menu.findItem(R.id.disbDeptRepIteme1).setIcon(android.R.drawable.ic_popup_sync);
+//        }
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//
+//        switch (item.getItemId()) {
+//            case R.id.disbDeptRepIteme1:
+//                printDisbursementTable();
+//
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
 
     @Override
@@ -70,13 +71,11 @@ public class DisbursementListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View v = inflater.inflate(R.layout.fragment_disbursement_list, container, false);
-       setHasOptionsMenu(true);
+//       setHasOptionsMenu(true);
 
         table = (TableLayout)v.findViewById(R.id.table_deptRep_disbursement_list);
 
         printDisbursementTable();
-
-
 
         return v;
     }
@@ -87,10 +86,11 @@ public class DisbursementListFragment extends Fragment {
             disburse.clear();
 
             int count = table.getChildCount();
-            for (int i = 1; i < count; i++) {
+            for (int i = 0; i < count; i++) {
                 View child = table.getChildAt(i);
                 if (child instanceof TableRow) ((ViewGroup) child).removeAllViews();
             }
+            firstRowAdded=false;
         }
 
         new AsyncTask<Void, Void, Void>() {
