@@ -63,6 +63,8 @@ public class LoginActivity extends Activity {
                         if (!logintrue) {
                             Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_LONG).show();
                         } else {
+                            usernameEditText.setText("");
+                            passwordEditText.setText("");
                             Class nextActivity = MainActivity.class;
                             Intent intent = new Intent(getApplicationContext(), nextActivity);
                             startActivityForResult(intent, 0);
