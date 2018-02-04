@@ -67,6 +67,26 @@ public class StoreClerk_StockCardActivity extends MLussisActivity {
                 }.execute(sc.get("ItemNo"));
             }
         });
+
+        Button itemStockTxnBtn = (Button) findViewById(R.id.itemTxnViewBtn);
+        itemStockTxnBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View v){
+                new AsyncTask<String, Void, StationeryCatalogue>(){
+                    @Override
+                    protected StationeryCatalogue doInBackground(String... params){
+                        return StationeryCatalogueController.searchCatalogueById(params[0]);
+                    }
+                    @Override
+                    protected void onPostExecute(StationeryCatalogue result){
+                        StationeryCatalogue sc1 = result;
+                        Intent intent = new Intent(getApplicationContext(),StoreClerk_StockCardTxnActivity.class);
+                        intent.putExtra("txndetails", sc1);
+                        startActivity(intent);
+                    }
+                }.execute(sc.get("ItemNo"));
+            }
+        });
     }
 
     @Override

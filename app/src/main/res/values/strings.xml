@@ -61,6 +61,11 @@
     <string name="adjReasonInput">Insert Adjustment Reason</string>
     <string name="retrievalDate">Retrieval Date: </string>
 
+    <!-- Display Item Transaction Details Usage -->
+    <string name="txnDate">Date</string>
+    <string name="txnDesc">Dept/Supplier</string>
+    <string name="txnAdjQty">Quantity</string>
+
     <!-- StoreClerk Disbursement Usage -->
     <string name="disburseConfirmQuantity">CONFIRM QUANTITY</string>
     <string name="hint_remarks_pendingreq">Enter Remarks here...(under 300 char)</string>
@@ -78,9 +83,4 @@
     <string name="scMenuItem4">New Requisition</string>
     <string name="scMenuItem5">My Disbursements</string>
     <string name="scMenuItem6">Requisition Review</string>
-    <string-array name="RetDate">
-    <item>Select Date</item>
-    <item>2017-01-12</item>
-    <item>2017-01-19</item>
-    </string-array>
 </resources>

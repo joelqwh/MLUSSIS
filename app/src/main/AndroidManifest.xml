@@ -13,41 +13,46 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/LussisTheme">
-
-        <activity android:name=".MainActivity"
-            android:theme="@style/test"/>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/test" />
         <activity android:name=".DepartmentRep.DisbursementActivity" />
-        <activity android:name=".Employee.Catalogue_EmployeeActivity"
-            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".Employee.Catalogue_EmployeeActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Employee.RequisitionEmployeeActivity" />
         <activity android:name=".DeputyHead.HeadManageRequisitionActivity" />
-        <activity android:name=".DeputyHead.ViewPendingRequisitionDetailsActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
-
-
+        <activity
+            android:name=".DeputyHead.ViewPendingRequisitionDetailsActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".StoreClerk.StatRetActivity"
-            android:screenOrientation="landscape" android:configChanges="keyboardHidden|orientation">
-        </activity>
-
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="landscape"></activity>
         <activity android:name=".InventoryActivity" />
-        <activity android:name=".LoginActivity"
-            android:theme="@style/test">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/test"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".StoreClerk.StoreClerk_StockCardActivity" />
-        <activity android:name=".StoreClerk.StoreClerk_EditStockQtyActivity"></activity>
-        <activity android:name=".StoreClerk.StoreClerk_DisbursementActivity"></activity>
-        <activity android:name=".StoreClerk.StoreClerk_ConfirmationActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+        <activity android:name=".StoreClerk.StoreClerk_EditStockQtyActivity" />
+        <activity android:name=".StoreClerk.StoreClerk_DisbursementActivity" />
+        <activity
+            android:name=".StoreClerk.StoreClerk_ConfirmationActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".StoreClerk.StoreClerk_StockCardTxnActivity"></activity>
     </application>
 
 </manifest>
