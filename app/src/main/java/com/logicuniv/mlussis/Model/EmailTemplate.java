@@ -29,4 +29,14 @@ public class EmailTemplate {
     {
         return "A new requisition has been submitted for your approval. Please log in to your app or your account on LUSSIS to view it. Thank you.";
     }
+
+    public static String GenerateAdjVoucherSubmittedEmailToSupervisorSubject()
+    {
+        return "Adjustment Voucher pending approval";
+    }
+
+    public static String GenerateAdjVoucherSubmittedEmailToSupervisor()
+    {
+        return "A new adjustment voucher has been submitted for your approval. Please log in to LUSSIS to view it. Thank you.";
+    }
 }
