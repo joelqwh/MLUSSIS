@@ -50,9 +50,6 @@ public class HeadManageRequisitionActivity extends MLussisActivity implements Ad
             }
         }.execute();
 
-//        lv_manageReq.setAdapter(adapt);
-//        lv_manageReq.setOnItemClickListener(this);      //need to change
-
     }
 
     @Override

@@ -28,7 +28,6 @@ public class MLussisActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO : Find a better way to get App Context for Controllers
         App.setAppContext(getApplicationContext());
     }
 
@@ -43,7 +42,6 @@ public class MLussisActivity extends Activity {
         super.onResume();
 
         // Setting App Context for Backend
-        // TODO : Find a better way to get App Context for Controllers
         App.setAppContext(getApplicationContext());
 
         // Check if We are authenticated when returning from onPause or starting for first time

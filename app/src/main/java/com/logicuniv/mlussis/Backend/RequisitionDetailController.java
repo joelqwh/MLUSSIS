@@ -184,10 +184,3 @@ public class RequisitionDetailController {
 
 }
 
-
-//        RequisitionDetail reqA = new RequisitionDetail("R1","I001","2");
-//        RequisitionDetail reqB = new RequisitionDetail("R1","I002","3");
-//        ArrayList<RequisitionDetail> alrrrrd = new ArrayList<>();
-//        alrrrrd.add(reqA);
-//        alrrrrd.add(reqB);
-//        addRequisitionDetail(alrrrrd);      //just for dummy purposes

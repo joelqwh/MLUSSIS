@@ -32,7 +32,6 @@ public class StoreClerk_EditStockQtyActivity extends MLussisActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_clerk__edit_stock_qty);
-        //StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
         Bundle b = getIntent().getExtras();
         HashMap<String, String> sc = (HashMap<String, String>) b.get("invdetails");
 
@@ -92,21 +91,10 @@ public class StoreClerk_EditStockQtyActivity extends MLussisActivity {
                         {
                             setResult(RESULT_OK);
                             finish();
-                            /*Toast.makeText(StoreClerk_EditStockQtyActivity.this, "Submitted for Adjustment", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), InventoryActivity.class);
-                            startActivity(intent);*/
+
                         }
                     }.execute();
 
-                    /*AdjustmentVoucherController.createAdjustmentVoucher
-                            (
-                            textEditStockItemCode.getText().toString(),
-                            Integer.parseInt(EditStockItemActualQty.getText().toString()),
-                            adjReason.getText().toString()
-                            );
-                    Toast.makeText(StoreClerk_EditStockQtyActivity.this, "Submitted for Adjustment", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), InventoryActivity.class);
-                    startActivity(intent);*/
                 }
             }
         });

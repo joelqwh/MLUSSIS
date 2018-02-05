@@ -109,7 +109,7 @@ public class Catalogue_Employee_SearchFragment extends Fragment {
         Bundle args = new Bundle();
         args.putSerializable("catalogue", details);
         frag.setArguments(args);
-        if (fm.findFragmentByTag(TAG) == null)        //to be amended with framelayout when the list fragment is out
+        if (fm.findFragmentByTag(TAG) == null)
             // fragment not found -- to be added
             trans.add(R.id.detailsframe, frag, TAG);
         else

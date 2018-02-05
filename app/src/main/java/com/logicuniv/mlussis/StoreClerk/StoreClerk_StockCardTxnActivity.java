@@ -37,34 +37,21 @@ public class StoreClerk_StockCardTxnActivity extends Activity {
         txnItemDesc.setText(sc.get("Description"));
 
         new AsyncTask<String, Void, Void>(){
-            //boolean isTxnDetailsPresent = false;
             @Override
             protected Void doInBackground(String... params){
-                //try{
                 stockTxnDetails.clear();
                 stockTxnDetails = StockTxnDetailController.getStockTxnDetails(params[0]);
-                    //isTxnDetailsPresent = true;
-                //}
-                /*catch (Exception e)
-                {
-                    isTxnDetailsPresent = false;
-                }
-                return isTxnDetailsPresent;*/
+
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void result){
-                //if (isTxnDetailsPresent){
                     SimpleAdapter txnadapt = new SimpleAdapter(getApplicationContext(), stockTxnDetails, R.layout.row_list_itemtxn_storeclerk,
                             new String[]{"Date", "Remarks", "AdjustQty"},
                             new int[]{R.id.textView_itemtxn_date, R.id.textView_itemtxn_desc, R.id.textView_itemtxn_adj});
                     txnList.setAdapter(txnadapt);
-                /*}
-                else if (!isTxnDetailsPresent)
-                {
-                    txnList.setAdapter(null);
-                }*/
+
             }
         }.execute(selectedItemNo);
     }

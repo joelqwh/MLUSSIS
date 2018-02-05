@@ -21,12 +21,6 @@ public class RequisitionController {
 
     static ArrayList<Requisition> alr = new ArrayList<Requisition>();
 
-//    public static void addRequisition(Requisition r)
-//    {
-//        alr.add(r);
-//        Log.e("joel",alr.toString());;
-//    }
-
     public static boolean addRequisition(Requisition r) {
         Boolean result = false;
 
@@ -81,23 +75,6 @@ public class RequisitionController {
         return result;
     }
 
-//    public static ArrayList<Requisition> getPendingRequisitions()
-//    {
-//        Requisition r = new Requisition("R1"," E001", Calendar.getInstance().getTime(),null,null,"Pending",null);
-//        alr.add(r);     //dummy for getAllReqs
-//
-//        ArrayList<Requisition> alr_i = new ArrayList<Requisition>();
-//
-//        for(Requisition req :alr)
-//        {
-//            if (req.get("Status").equals("Pending")||req.get("Status").equals(null))
-//            {
-//                alr_i.add(r);
-//            }
-//        }
-//
-//        return alr_i;
-//    }
 
     public static ArrayList<Requisition> getPendingRequisitions() {
         ArrayList<Requisition> result = new ArrayList<>();
@@ -129,22 +106,6 @@ public class RequisitionController {
         return result;
     }
 
-//    public static Requisition getRequisitionById(String reqNo)
-//    {
-//        Requisition r = new Requisition("R1"," E001",new Date(),null,null,"Pending",null);
-//        alr.add(r);     //dummy for getAllReqs
-//        ArrayList<Requisition> alr_i = new ArrayList<Requisition>();
-//
-//        for(Requisition req :alr)
-//        {
-//            if (req.get("ReqNo").equals(reqNo))
-//            {
-//                return req;
-//            }
-//        }
-//
-//        return null;
-//    }
 
     public static Requisition getRequisitionById(String reqNo) {
         Requisition result = null;
@@ -185,7 +146,6 @@ public class RequisitionController {
             jsonRequisition.put("IssuedBy", rUpdated.get("IssuedBy"));
             jsonRequisition.put("DateIssued", rUpdated.get("DateIssued"));
             jsonRequisition.put("ApprovedBy", rUpdated.get("ApprovedBy"));
-//            jsonRequisition.put("DateReviewed", rUpdated.get("DateReviewed"));
             jsonRequisition.put("Status", rUpdated.get("Status"));
             jsonRequisition.put("Remarks", rUpdated.get("Remarks"));
 

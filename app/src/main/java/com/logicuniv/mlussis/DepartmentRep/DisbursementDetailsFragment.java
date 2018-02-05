@@ -39,52 +39,7 @@ public class DisbursementDetailsFragment extends Fragment {
 
         printDisbDetails();
 
-//        new AsyncTask<String, Void, Void>() {
-//
-//            @Override
-//            protected Void doInBackground(String...params) {
-//                String empNoLoggedIn = LoginController.GetLoggedInEmployeeNumber(getContext());
-//
-//                String deptCode = EmployeeController.getEmployeeById(empNoLoggedIn).get("DeptCode").toString();
-//
-//                d = DisbursementController.getCurrentDisbursementForDepartment(deptCode);     //get parameter from login details when it is set up
-//
-//
-//                if (d != null) {
-//
-//                    deptName = DepartmentController.getDepartmentName(d.get("DeptCode"));     //to initialise this method later
-//
-//
-//                    empName = EmployeeController.getEmployeeName(d.get("RepEmpNo"));
-//
-//
-//                    colPtName = new CollectionPointController().getCollectionPointDetails(d.get("CollectionPointNo"));
-//                }
-//
-//                return null;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Void result)
-//            {
-//                if(deptName!=null && empName!=null && colPtName!=null) {
-//                    tv_Dept.setText(deptName);
-//                    tv_Emp.setText(empName);
-//                    tv_colPt.setText("Collection Point: " + colPtName);
-//                }
-//                else
-//                {
-//                    tv_Dept.setText(null);
-//                    tv_Emp.setText(null);
-//                    tv_colPt.setText(null);
-//                }
-//            }
-//
-//        }.execute();
-
         return v;
-
-
 
     }
 
@@ -102,7 +57,7 @@ public class DisbursementDetailsFragment extends Fragment {
 
 
                 if (d != null) {
-
+                    //filling values for the textViews
                     deptName = DepartmentController.getDepartmentName(d.get("DeptCode"));     //to initialise this method later
 
 
@@ -124,7 +79,7 @@ public class DisbursementDetailsFragment extends Fragment {
                     tv_colPt.setText("Collection Point: " + colPtName);
                 }
                 else
-                {
+                {   //cannot see TextViews if result is null
                     tv_Dept.setText(null);
                     tv_Emp.setText(null);
                     tv_colPt.setText(null);

@@ -42,34 +42,6 @@ public class PinDisbursementFragment extends Fragment {
         tv_pinText = v.findViewById(R.id.textView_deptRep_PinText);
 
         printPinDisbDetails();
-//
-//        new AsyncTask<Void, Void, Void>() {
-//            @Override
-//            protected Void doInBackground(Void... params) {
-//
-//                String empNoLoggedIn = LoginController.GetLoggedInEmployeeNumber(getContext());
-//                String deptCode = EmployeeController.getEmployeeById(empNoLoggedIn).get("DeptCode").toString();
-//                d = DisbursementController.getCurrentDisbursementForDepartment(deptCode);     //get parameter from login details when it is set up
-//
-//                return null;
-//
-//
-//                }
-//            @Override
-//            protected void onPostExecute(Void result)
-//            {
-//                    if (d != null) {
-//
-//                tv_Dept.setText(d.get("Pin"));
-//                }
-//                else
-//                    {
-//                        tv_pinText.setText("No Current Disbursement");
-//                        tv_Dept.setText(null);
-//                    }
-//
-//            }
-//        }.execute();
 
         return v;
     }
@@ -83,8 +55,7 @@ public class PinDisbursementFragment extends Fragment {
 
                 String empNoLoggedIn = LoginController.GetLoggedInEmployeeNumber(getContext());
                 String deptCode = EmployeeController.getEmployeeById(empNoLoggedIn).get("DeptCode").toString();
-                d = DisbursementController.getCurrentDisbursementForDepartment(deptCode);     //get parameter from login details when it is set up
-
+                d = DisbursementController.getCurrentDisbursementForDepartment(deptCode);
                 return null;
 
 
@@ -93,12 +64,12 @@ public class PinDisbursementFragment extends Fragment {
             protected void onPostExecute(Void result)
             {
                 if (d != null) {
-                    tv_pinText.setText("Pin: ");
+                    tv_pinText.setText("Pin: ");    //set the pin
                     tv_Dept.setText(d.get("Pin"));
                 }
                 else
                 {
-                    tv_pinText.setText("No Current Disbursement");
+                    tv_pinText.setText("No Current Disbursement");      //textviews cant be seen if there is no disbursements
                     tv_Dept.setText(null);
                 }
 

@@ -21,7 +21,6 @@ public class PendingDisbursement {
 
     public static void updatePendingDisDetsforDepartment() {
         //pass adjusted values into real DisbursementDetails database
-        //DisbursementDetailController.UpdateDisbursementDetail()
         for(int i = 0; i < pendingDisDets.size(); i++)
         {
             DisbursementDetailController.UpdateDisbursementDetail(pendingDisDets.get(i));

@@ -34,6 +34,7 @@ public class HeadManageRequisitionArrayAdapter extends ArrayAdapter<Requisition>
 
     Requisition req;
     Employee e;
+    ViewHolder holder;
 
     public HeadManageRequisitionArrayAdapter(@NonNull Context context, ArrayList<Requisition> alReq) {
         super(context, 0,alReq);
@@ -46,7 +47,7 @@ public class HeadManageRequisitionArrayAdapter extends ArrayAdapter<Requisition>
         StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
         req = getItem(position);
         View v = convertView;
-        ViewHolder holder;
+
 
         if(v==null)
         {
@@ -57,9 +58,12 @@ public class HeadManageRequisitionArrayAdapter extends ArrayAdapter<Requisition>
           holder.reqdate = v.findViewById(R.id.textView_managereq_reqdate);
             v.setTag(holder);
 
-           e= EmployeeController.getEmployeeById(req.get("IssuedBy").toString());
+            //getReqEmpDetails(req.get("IssuedBy").toString());
+
+            e= EmployeeController.getEmployeeById(req.get("IssuedBy").toString());
 
             holder.empname.setText(e.get("EmpName").toString());
+
             holder.reqno.setText(req.get("ReqNo").toString());
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
             Date d = null;
@@ -69,31 +73,6 @@ public class HeadManageRequisitionArrayAdapter extends ArrayAdapter<Requisition>
                 e1.printStackTrace();
             }
             holder.reqdate.setText(sdf.format(d));
-
-//        new AsyncTask<String, Void, Employee>() {
-//
-//            @Override
-//            protected Employee doInBackground(String... params) {
-//
-//                Employee ee = EmployeeController.getEmployeeById(params[0]);
-//                return ee;
-//            }
-//
-//            protected void onPostExecute(Employee result) {
-//                e = result;
-//                tv_empName.setText(e.get("EmpName").toString());
-//                tv_reqNo.setText(req.get("ReqNo").toString());
-//                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-//                Date d = null;
-//                try {
-//                    d = sdf.parse(req.get("DateIssued").toString());
-//                } catch (ParseException e1) {
-//                    e1.printStackTrace();
-//                }
-//                tv_reqDate.setText(sdf.format(d));
-//            }
-//        }.execute(req.get("IssuedBy").toString());
-
 
         }
         else
@@ -112,11 +91,33 @@ public class HeadManageRequisitionArrayAdapter extends ArrayAdapter<Requisition>
                 e1.printStackTrace();
             }
             holder.reqdate.setText(sdf.format(d));
+
+            //getReqEmpDetails(req.get("IssuedBy").toString());
         }
         return v;
     }
 
     private static class ViewHolder {
         public TextView empname, reqno, reqdate;
+    }
+
+    public void getReqEmpDetails(String empNo)
+    {
+        new AsyncTask<String, Void, Employee>() {
+
+            @Override
+            protected Employee doInBackground(String... params) {
+
+                Employee ee = EmployeeController.getEmployeeById(params[0]);
+                return ee;
+          }
+
+            protected void onPostExecute(Employee result) {
+//                e = result;
+
+                holder.empname.setText(result.get("EmpName").toString());
+
+            }
+        }.execute(empNo);
     }
 }

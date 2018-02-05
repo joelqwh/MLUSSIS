@@ -150,10 +150,10 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
 
                     protected void onPostExecute(Void result)
                     {
+                        //open dialog to amend quantity
                         final Dialog d = new Dialog(RequisitionEmployeeActivity.this);
                         d.setTitle("Change Quantity of Item");
                         d.setContentView(R.layout.dialog_catalogue_employee);
-                        //d.setCancelable(false);
                         Button buttonCancel = d.findViewById(R.id.dialog_catalogue_employee_buttonCancel);
                         Button buttonAdd = d.findViewById(R.id.dialog_catalogue_employee_buttonAddItem);
                         TextView tv_itemNo = d.findViewById(R.id.textView_dialog_catalogue_employee_itemNo);
@@ -175,7 +175,6 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
                             {
                                 String qty = et_qty.getText().toString();
                                 reqDet.put("Qty",qty);
-                                //RequisitionDetailController.updateRequisitionDetail(reqDet);
                                 Log.e("joel",reqDet.toString());
                                 Log.e("joel",details.toString());
                                 Toast.makeText(RequisitionEmployeeActivity.this, "Quantity Updated",Toast.LENGTH_SHORT).show();
@@ -243,12 +242,8 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
                     if(!isAlreadyAdded) {
                         details.add(new RequisitionDetail("", sc.get("ItemNo"), sc.get("Description"), qty));
                     }
-                    //                   adapt = (RequisitionEmployeeArrayAdapter) reqItemList.getAdapter();
                     adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this,details);
                     reqItemList.setAdapter(adapt);
-
-
-
 
 
                     Button button_submitReq = (Button) findViewById(R.id.button_requisition_employee_submit);

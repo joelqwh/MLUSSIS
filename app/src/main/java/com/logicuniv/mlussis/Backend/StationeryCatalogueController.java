@@ -132,47 +132,6 @@ public class StationeryCatalogueController {
 
     }
 
-    /*public static ArrayList<StationeryCatalogue> searchCatalogueByText(StationeryCatalogue sc) {
-        ArrayList<StationeryCatalogue> scList = new ArrayList<StationeryCatalogue>();
-        JSONArray scCat = JSONParser.searchJSONArrayFromUrl(App.WCFServer+"search", sc);
-        try {
-            for (int i=0; i<scCat.length(); i++) {
-                JSONObject scItem = scCat.getJSONObject(i);
-                scList.add(new StationeryCatalogue(
-                        scItem.getString("ItemNo"),
-                        scItem.getString("Description"),
-                        scItem.getString("Category"),
-                        scItem.getString("Uom"),
-                        scItem.getString("ReorderQty"),
-                        scItem.getString("ReorderLevel"),
-                        scItem.getString("CurrentQty"),
-                        scItem.getString("Supplier1"),
-                        scItem.getString("Supplier2"),
-                        scItem.getString("Supplier3"),
-                        scItem.getString("Bin")));
-            }
-        }
-        catch (Exception e){
-            Log.e("sc.search()", "JSONArray error"+e.toString());
-        }
-        return scList;
-    }*/
-
-        /*public static ArrayList<StationeryCatalogue> searchCatalogue(StationeryCatalogue sc)
-        {
-            //searchJSONFromUrl url will settle
-            ArrayList<StationeryCatalogue> alscc = getCatalogue(); //dummy values
-            ArrayList<StationeryCatalogue> alsccfake = new ArrayList<>();
-
-            for(StationeryCatalogue scdummy :alscc)
-            {
-                if(sc.get("Description").contains(scdummy.get("Description"))==true) {
-                    alsccfake.add(scdummy);
-                }
-            }
-
-            return alsccfake;
-        }*/
 
         public static StationeryCatalogue searchCatalogueById(String itemNo)
         {

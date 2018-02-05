@@ -37,7 +37,6 @@ public class StoreClerk_DisbursementActivity extends MLussisActivity {
     String repName;
     String repEmpNo;
     Button button_confirmDisburse;
-    DisbursementPendingArrayAdapter ddadapt;
     static String deptCode;
     static ArrayList<Department> alDept = new ArrayList<>();
     static ArrayList<DisbursementDetail> deptDisDet = new ArrayList<>();
@@ -77,14 +76,8 @@ public class StoreClerk_DisbursementActivity extends MLussisActivity {
 
             @Override
             public void onClick(View v) {
-//                for (DisbursementDetail dd : deptDisDet) {
-//                    EditText et = lv_disList.findViewById(R.id.scDisburseItemQty);
-//                    dd.put("Received",et.getText().toString());
-//                    Log.e("disburse",dd.get("ItemNo"));
-//                    Log.e("disburse", dd.get("Received"));
-//                }
 
-                int size = deptDisDet.size();//StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
+                int size = deptDisDet.size();
                 for (int i=1, j = 0;j<deptDisDet.size();i++, j++)
                 {
                     View view = lv_disList.getChildAt(i);
@@ -118,8 +111,6 @@ public class StoreClerk_DisbursementActivity extends MLussisActivity {
                         startActivityForResult(intent,0);
                     }
                 }.execute();
-
-                // PendingDisbursement.updatePendingDisDetsforDepartment();
 
 
             }
@@ -175,8 +166,6 @@ public class StoreClerk_DisbursementActivity extends MLussisActivity {
             @Override
             protected Boolean doInBackground(String... params){
                 try {
-                    //String disbursementNo = DisbursementController.getCurrentDisbursementForDepartment(params[0]).get("DisbursementNo");
-                    //deptDisDet = DisbursementDetailController.getCurrentDisbursementDetailsOf(disbursementNo);
                     deptDisDet = PendingDisbursement.getPendingDisDetsforDepartment(params[0]);
                     isDisbursementPresent = true;
                 }
@@ -190,8 +179,6 @@ public class StoreClerk_DisbursementActivity extends MLussisActivity {
             @Override
             protected void onPostExecute(Boolean result){
                 if (isDisbursementPresent) {
-                    //ddadapt = new DisbursementPendingArrayAdapter(StoreClerk_DisbursementActivity.this, deptDisDet);
-                    //lv_disList.setAdapter(ddadapt);
                     SimpleAdapter ddadapt = new SimpleAdapter(getApplicationContext(),deptDisDet,R.layout.fragment_store_clerk_disburse_row,
                             new String[]{"Description", "Received"},
                             new int[]{R.id.scDisburseItemDesc, R.id.scDisburseItemQty});

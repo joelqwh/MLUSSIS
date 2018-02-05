@@ -67,16 +67,11 @@ public class StoreClerk_ConfirmationActivity extends MLussisActivity {
                 conf.setAdapter(confadapt);
                 View header = getLayoutInflater().inflate(R.layout.fragment_store_clerk_disburse_row_header,null);
                 conf.addHeaderView(header, null, false);
-                /*DisbursementItemArrayAdapter ddadapt = new DisbursementItemArrayAdapter(getApplicationContext(),disbursementConf);
-                conf.setAdapter(ddadapt);
-                View header = getLayoutInflater().inflate(R.layout.fragment_store_clerk_disburse_row_header,null);
-                conf.addHeaderView(header, null, false);*/
 
             }
         }.execute(confdisbNo,deptCode);
 
         button_conf.setOnClickListener(new View.OnClickListener() {
-            String disbursePin = currentDisbursement.get("Pin");
             @Override
             public void onClick(View v) {
 

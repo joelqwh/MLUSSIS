@@ -42,14 +42,10 @@ public class StatRetTableFragment extends ListFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         header = inflater.inflate(R.layout.fragment_store_clerk_ret_header,null);
-/*
-        View v = inflater.inflate(R.layout.ret_list, container, false);
-*/
+
         View contactLayout = inflater.inflate(R.layout.ret_list,
                 container, false);
-/*
-        ListView lv = (ListView)contactLayout.findViewById(android.R.id.list);
-*/
+
 
         Bundle args = getArguments();
         final ArrayList<RetrievalDetails> rds = (ArrayList<RetrievalDetails>)args.getSerializable("displaystatret");

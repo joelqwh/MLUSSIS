@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.logicuniv.mlussis.Model.Retrieval;
 import com.logicuniv.mlussis.Model.RetrievalDetails;
-import com.logicuniv.mlussis.StationeryCatalogue;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

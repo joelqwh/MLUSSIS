@@ -9,32 +9,20 @@ import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.os.StrictMode;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.logicuniv.mlussis.Backend.RetrievalController;
 import com.logicuniv.mlussis.Backend.RetrievalDetailsController;
-import com.logicuniv.mlussis.Backend.RetrievalDisplayStationeryController;
-import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
-import com.logicuniv.mlussis.InvTableFragment;
-import com.logicuniv.mlussis.Model.RequisitionDetail;
 import com.logicuniv.mlussis.Model.Retrieval;
 import com.logicuniv.mlussis.Model.RetrievalDetails;
-import com.logicuniv.mlussis.Model.RetrievalDisplayStationery;
-import com.logicuniv.mlussis.Model.StationeryCatalogue;
 import com.logicuniv.mlussis.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -44,7 +32,6 @@ import java.util.Set;
  */
 public class StatRetMenuFragment extends Fragment {
 
-    ArrayList<RetrievalDisplayStationery> disStat = RetrievalDisplayStationeryController.getRetrievalDisplayStationery();
     private Spinner bin_Spinner;
     ArrayList<RetrievalDetails> al_rd;
     Retrieval ret;
@@ -60,7 +47,6 @@ public class StatRetMenuFragment extends Fragment {
         bin_Spinner = v.findViewById(R.id.retBinSpinner);
         final TextView tv_retDate = v.findViewById(R.id.textView_retDate_storeClerk);
 
-       // StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
         new AsyncTask<Void, Void, ArrayList<RetrievalDetails>>() {
             @Override
             protected ArrayList<RetrievalDetails> doInBackground(Void... params) {
@@ -117,28 +103,6 @@ public class StatRetMenuFragment extends Fragment {
 
         bin_Spinner.setOnItemSelectedListener(oisl);
 
-//        display(disStat);
-//
-//        dateSearch = v.findViewById(R.id.retDateSpinner);
-//        dateSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String dateSearched = dateSearch.getSelectedItem().toString();
-//                ArrayList<RetrievalDisplayStationery> statRetSearch = new ArrayList<>();
-//                if (dateSearched.toUpperCase().equals(("Select Date").toUpperCase())) {
-//                    statRetSearch = disStat;
-//                } else {
-//                    statRetSearch = displayStationeryRetrievalViaDate(dateSearched);
-//                }
-//                display(statRetSearch);
-//            }
-//
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
 
         return v;
     }
@@ -159,30 +123,4 @@ public class StatRetMenuFragment extends Fragment {
         trans.commit();
     }
 
-//    public ArrayList<RetrievalDisplayStationery> displayStationeryRetrievalViaDate(String date) {
-//        //Requires WCF Query
-//
-//        ArrayList<RetrievalDisplayStationery> retds = new ArrayList<>();
-//
-//
-//        //Fake Data and wrong method
-//        if (date.equals("2017-01-12")) {
-//            RetrievalDisplayStationery rtds1 = new RetrievalDisplayStationery("A1", "Clips Double 1", "40", "0", "40");
-//            RetrievalDisplayStationery rtds2 = new RetrievalDisplayStationery("A2", "Clips Double 2", "30", "0", "30");
-//            RetrievalDisplayStationery rtds3 = new RetrievalDisplayStationery("A3", "Clips Double 3/4", "20", "0", "20");
-//            retds.add(rtds1);
-//            retds.add(rtds2);
-//            retds.add(rtds3);
-//
-//        }
-//
-//        if (date.equals("2017-01-19")) {
-//            RetrievalDisplayStationery rtds4 = new RetrievalDisplayStationery("A4", "Clips Paper Large", "90", "0", "90");
-//            RetrievalDisplayStationery rtds5 = new RetrievalDisplayStationery("A5", "Clips Paper Medium", "35", "0", "35");
-//            retds.add(rtds4);
-//            retds.add(rtds5);
-//
-//        }
-//        return retds;
-//    }
 }

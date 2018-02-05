@@ -40,38 +40,12 @@ public class DisbursementListFragment extends Fragment {
 
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        inflater.inflate(R.menu.menu_disbursement_deptrep, menu);
-//        if(menu!=null) {
-//            menu.findItem(R.id.disbDeptRepIteme1).setVisible(true);
-//            menu.findItem(R.id.disbDeptRepIteme1).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-//            menu.findItem(R.id.disbDeptRepIteme1).setIcon(android.R.drawable.ic_popup_sync);
-//        }
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//
-//        switch (item.getItemId()) {
-//            case R.id.disbDeptRepIteme1:
-//                printDisbursementTable();
-//
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View v = inflater.inflate(R.layout.fragment_disbursement_list, container, false);
-//       setHasOptionsMenu(true);
 
         table = (TableLayout)v.findViewById(R.id.table_deptRep_disbursement_list);
 
@@ -82,6 +56,7 @@ public class DisbursementListFragment extends Fragment {
 
     public void printDisbursementTable()
     {
+        //clear arraylist
         if(disburse!=null) {
             disburse.clear();
 
@@ -104,7 +79,7 @@ public class DisbursementListFragment extends Fragment {
             protected void onPostExecute(Void result) {
 
                 TableRow firstrow = (TableRow) LayoutInflater.from(getActivity()).inflate(R.layout.row_disbursement_list, null);
-
+                //populate table header view if there is values in disburse
                 if (!disburse.isEmpty()&& firstRowAdded==false){
                     ((TextView) firstrow.findViewById(R.id.textView_deptRep_disbursement_list_item)).setText("Item Description.");
                     ((TextView) firstrow.findViewById(R.id.textView_deptRep_disbursement_list_item)).setTypeface(null, Typeface.BOLD);
