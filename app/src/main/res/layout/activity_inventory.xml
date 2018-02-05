@@ -4,11 +4,11 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InventoryActivity">
+    tools:context=".StoreClerk.InventoryActivity">
 
     <fragment
         android:id="@+id/invFragment1"
-        android:name="com.logicuniv.mlussis.InvMenuFragment"
+        android:name="com.logicuniv.mlussis.StoreClerk.InvMenuFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </fragment>

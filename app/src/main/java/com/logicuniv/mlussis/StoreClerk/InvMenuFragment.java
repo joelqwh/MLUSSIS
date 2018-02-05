@@ -1,4 +1,4 @@
-package com.logicuniv.mlussis;
+package com.logicuniv.mlussis.StoreClerk;
 
 
 import android.app.FragmentManager;
@@ -19,6 +19,7 @@ import android.widget.Spinner;
 
 import com.logicuniv.mlussis.Backend.StationeryCatalogueController;
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
+import com.logicuniv.mlussis.R;
 
 import java.util.ArrayList;
 

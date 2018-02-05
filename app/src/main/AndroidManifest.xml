@@ -29,7 +29,7 @@
             android:name=".StoreClerk.StatRetActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="landscape"></activity>
-        <activity android:name=".InventoryActivity" />
+        <activity android:name=".StoreClerk.InventoryActivity" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/test"

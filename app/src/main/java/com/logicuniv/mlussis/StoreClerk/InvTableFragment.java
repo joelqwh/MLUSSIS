@@ -1,4 +1,4 @@
-package com.logicuniv.mlussis;
+package com.logicuniv.mlussis.StoreClerk;
 
 
 import android.app.ListFragment;
@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.logicuniv.mlussis.Model.StationeryCatalogue;
+import com.logicuniv.mlussis.R;
 import com.logicuniv.mlussis.StoreClerk.StoreClerk_EditStockQtyActivity;
 import com.logicuniv.mlussis.StoreClerk.StoreClerk_StockCardActivity;
 

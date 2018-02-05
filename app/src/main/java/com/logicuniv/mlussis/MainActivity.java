@@ -14,6 +14,7 @@ import com.logicuniv.mlussis.Backend.LoginController;
 import com.logicuniv.mlussis.DepartmentRep.DisbursementActivity;
 import com.logicuniv.mlussis.DeputyHead.HeadManageRequisitionActivity;
 import com.logicuniv.mlussis.Employee.RequisitionEmployeeActivity;
+import com.logicuniv.mlussis.StoreClerk.InventoryActivity;
 import com.logicuniv.mlussis.StoreClerk.StatRetActivity;
 import com.logicuniv.mlussis.StoreClerk.StoreClerk_DisbursementActivity;
 

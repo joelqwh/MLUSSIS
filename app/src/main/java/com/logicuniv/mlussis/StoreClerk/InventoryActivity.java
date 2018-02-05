@@ -1,9 +1,12 @@
-package com.logicuniv.mlussis;
+package com.logicuniv.mlussis.StoreClerk;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import com.logicuniv.mlussis.MLussisActivity;
+import com.logicuniv.mlussis.R;
 
 import java.sql.Connection;
 

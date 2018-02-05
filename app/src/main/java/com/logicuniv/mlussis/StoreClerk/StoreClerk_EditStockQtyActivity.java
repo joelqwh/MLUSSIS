@@ -1,10 +1,7 @@
 package com.logicuniv.mlussis.StoreClerk;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +14,6 @@ import com.logicuniv.mlussis.Backend.DepartmentController;
 import com.logicuniv.mlussis.Backend.EmailController;
 import com.logicuniv.mlussis.Backend.EmployeeController;
 import com.logicuniv.mlussis.Backend.LoginController;
-import com.logicuniv.mlussis.InventoryActivity;
 import com.logicuniv.mlussis.MLussisActivity;
 import com.logicuniv.mlussis.Model.Department;
 import com.logicuniv.mlussis.Model.EmailTemplate;
