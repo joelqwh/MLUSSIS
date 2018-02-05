@@ -84,13 +84,14 @@ public class StoreClerk_DisbursementActivity extends MLussisActivity {
 //                    Log.e("disburse", dd.get("Received"));
 //                }
 
-                //StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
-                for (int i=1;i<=deptDisDet.size();i++)
+                int size = deptDisDet.size();//StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
+                for (int i=1, j = 0;j<deptDisDet.size();i++, j++)
                 {
                     View view = lv_disList.getChildAt(i);
+                    view = lv_disList.getAdapter().getView(i, null, lv_disList);
                     EditText et = view.findViewById(R.id.scDisburseItemQty);
                     TextView tv = view.findViewById(R.id.scDisburseItemDesc);
-                        DisbursementDetail ddd = deptDisDet.get(i-1);
+                        DisbursementDetail ddd = deptDisDet.get(j);
                         ddd.put("Received", et.getText().toString());
                         Log.e("disburse", ddd.get("ItemNo"));
                         Log.e("disburse", ddd.get("Received"));
