@@ -43,6 +43,7 @@ public class InvMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_inventory_skeleton, container, false);
 
+        //Populate ListView with Catalogue, while also inflating Spinners for Category and Bin
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
@@ -58,15 +59,14 @@ public class InvMenuFragment extends Fragment {
             }
         }.execute();
 
-
-
+        //Defaulting spinner values to 'All Categories' and 'All Bins' respectively
         catSearch = v.findViewById(R.id.catspinner);
         catSearch.setSelection(0);
         invSearch = v.findViewById(R.id.invSearch);
         binSearch = v.findViewById(R.id.binspinner);
         binSearch.setSelection(0);
 
-        //Filter by Category
+        //Filter when Category is selected
         catSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -91,6 +91,7 @@ public class InvMenuFragment extends Fragment {
             }
         });
 
+        //Filter when Bin is selected
         binSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -131,6 +132,7 @@ public class InvMenuFragment extends Fragment {
         return v;
     }
 
+    //display ArrayList in fragment (InvTableFragment)
     void display(ArrayList<StationeryCatalogue> details) {
         final String TAG = "INVTABLE_FRAG";
         FragmentManager fm = getFragmentManager();
@@ -147,6 +149,7 @@ public class InvMenuFragment extends Fragment {
         trans.commit();
     }
 
+    //Populating Category Spinner with Category values
     private void catSpinner_inflate() {
         new AsyncTask<Void, Void, Void>() {
             String[] catName;
@@ -175,6 +178,7 @@ public class InvMenuFragment extends Fragment {
         }.execute();
     }
 
+    //Populating Bin Spinner with Bin values
     private void binSpinner_inflate() {
         new AsyncTask<Void, Void, Void>() {
             ArrayList<String> binList;
@@ -204,6 +208,7 @@ public class InvMenuFragment extends Fragment {
         }.execute();
     }
 
+    //Filter method to ensure that result is the merge of Search Field, Category Spinner and Bin Spinner
     private ArrayList<StationeryCatalogue> inventorySearch(String catSearchInfo, String binSearchInfo, String invSearchInfo) {
 
         ArrayList<StationeryCatalogue> stationerySearch = new ArrayList<>();
