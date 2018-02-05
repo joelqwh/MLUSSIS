@@ -37,11 +37,11 @@ public class DisbursementActivity extends FragmentActivity {
 
         switch (item.getItemId()) {
             case R.id.disbDeptRepIteme1:
-                DisbursementListFragment dlf = (DisbursementListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
-                dlf.printDisbursementTable();
                 DisbursementDetailsFragment ddf = (DisbursementDetailsFragment) getSupportFragmentManager().findFragmentById(R.id.fragment1);
-                ddf.printDisbDetails();
+                DisbursementListFragment dlf = (DisbursementListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
                 PinDisbursementFragment pdf = (PinDisbursementFragment) getSupportFragmentManager().findFragmentById(R.id.fragment3);
+                ddf.printDisbDetails();
+                dlf.printDisbursementTable();
                 pdf.printPinDisbDetails();
                 return true;
             default:

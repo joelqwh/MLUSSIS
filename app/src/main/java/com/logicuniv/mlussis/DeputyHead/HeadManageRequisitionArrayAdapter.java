@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,19 +45,22 @@ public class HeadManageRequisitionArrayAdapter extends ArrayAdapter<Requisition>
 
         StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
         req = getItem(position);
+        View v = convertView;
+        ViewHolder holder;
 
-        if(convertView==null)
+        if(v==null)
         {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_list_managereq_deputy, parent, false);
-
-          final  TextView tv_empName = convertView.findViewById(R.id.textView__managereq_empname);
-          final TextView tv_reqNo = convertView.findViewById(R.id.textView_managereq_reqno);
-          final TextView tv_reqDate = convertView.findViewById(R.id.textView_managereq_reqdate);
+            v = LayoutInflater.from(getContext()).inflate(R.layout.row_list_managereq_deputy, parent, false);
+                holder = new ViewHolder();
+          holder.empname = v.findViewById(R.id.textView__managereq_empname);
+          holder.reqno = v.findViewById(R.id.textView_managereq_reqno);
+          holder.reqdate = v.findViewById(R.id.textView_managereq_reqdate);
+            v.setTag(holder);
 
            e= EmployeeController.getEmployeeById(req.get("IssuedBy").toString());
 
-            tv_empName.setText(e.get("EmpName").toString());
-            tv_reqNo.setText(req.get("ReqNo").toString());
+            holder.empname.setText(e.get("EmpName").toString());
+            holder.reqno.setText(req.get("ReqNo").toString());
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
             Date d = null;
             try {
@@ -64,7 +68,7 @@ public class HeadManageRequisitionArrayAdapter extends ArrayAdapter<Requisition>
             } catch (ParseException e1) {
                 e1.printStackTrace();
             }
-            tv_reqDate.setText(sdf.format(d));
+            holder.reqdate.setText(sdf.format(d));
 
 //        new AsyncTask<String, Void, Employee>() {
 //
@@ -92,6 +96,27 @@ public class HeadManageRequisitionArrayAdapter extends ArrayAdapter<Requisition>
 
 
         }
-        return convertView;
+        else
+        {
+            holder = (ViewHolder) v.getTag();
+
+            e= EmployeeController.getEmployeeById(req.get("IssuedBy").toString());
+
+            holder.empname.setText(e.get("EmpName").toString());
+            holder.reqno.setText(req.get("ReqNo").toString());
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+            Date d = null;
+            try {
+                d = sdf.parse(req.get("DateIssued").toString());
+            } catch (ParseException e1) {
+                e1.printStackTrace();
+            }
+            holder.reqdate.setText(sdf.format(d));
+        }
+        return v;
+    }
+
+    private static class ViewHolder {
+        public TextView empname, reqno, reqdate;
     }
 }

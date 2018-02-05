@@ -1,3 +1,5 @@
+
+
 package com.logicuniv.mlussis.Employee;
 
 import android.content.Context;
@@ -28,29 +30,30 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
     StationeryCatalogue sc;
 
     public RequisitionEmployeeArrayAdapter(@NonNull Context context, ArrayList<RequisitionDetail> alReqDet) {
-        super(context, 0,alReqDet);
+        super(context, 0, alReqDet);
     }
 
     @Override
-    public View getView (int position, View convertView, ViewGroup parent)
-    {
+    public View getView(int position, View convertView, ViewGroup parent) {
         StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
-       reqDet = getItem(position);
-        final ViewHolder holder;
 
-        if(convertView==null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_list_requisition_employee, parent, false);
-            holder  = new ViewHolder();
+        reqDet = getItem(position);
+        View v = convertView;
+        ViewHolder holder;
 
-            holder.description = (TextView) convertView.findViewById(R.id.textView_req_desc);
-            holder.qty = (TextView) convertView.findViewById(R.id.textView_req_qty);
-            holder.uom = (TextView) convertView.findViewById(R.id.textView_req_uom);
+        if (v == null) {
+            v = LayoutInflater.from(getContext()).inflate(R.layout.row_list_requisition_employee, parent, false);
+            holder = new ViewHolder();
 
+            holder.description = (TextView) v.findViewById(R.id.textView_req_desc);
+            holder.qty = (TextView) v.findViewById(R.id.textView_req_qty);
+            holder.uom = (TextView) v.findViewById(R.id.textView_req_uom);
+            v.setTag(holder);
             //final TextView tv_description = convertView.findViewById(R.id.textView_req_desc);
             //final TextView tv_qty = convertView.findViewById(R.id.textView_req_qty);
             //final TextView tv_uom = convertView.findViewById(R.id.textView_req_uom);
 //            retrieveSC(reqDet.get("ItemNo").toString());
-
+//
             sc = StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
             holder.description.setText(sc.get("Description"));
             holder.qty.setText((String) reqDet.get("Qty"));
@@ -73,22 +76,26 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
 //                }
 //            }.execute(reqDet.get("ItemNo").toString());
 
+        } else {
+            holder = (ViewHolder) v.getTag();
+
+            sc = StationeryCatalogueController.searchCatalogueById(reqDet.get("ItemNo").toString());
+            holder.description.setText(sc.get("Description"));
+            holder.qty.setText((String) reqDet.get("Qty"));
+            holder.uom.setText(sc.get("Uom"));
         }
-            else
-            {
-                holder= (ViewHolder)convertView.getTag();
-            }
 
-        return convertView;
+
+
+        return v;
     }
 
-    private static class ViewHolder{
-        public TextView description,qty,uom;
+    private static class ViewHolder {
+        public TextView description, qty, uom;
     }
 
 
-    public void retrieveSC (String reqDetNo)
-    {
+    public void retrieveSC(String reqDetNo) {
         new AsyncTask<String, Void, StationeryCatalogue>() {
 
             @Override
@@ -98,7 +105,7 @@ public class RequisitionEmployeeArrayAdapter extends ArrayAdapter<RequisitionDet
             }
 
             protected void onPostExecute(StationeryCatalogue result) {
-                sc=result;
+                sc = result;
             }
         }.execute(reqDetNo);
     }

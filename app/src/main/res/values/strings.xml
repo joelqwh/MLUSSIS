@@ -29,7 +29,7 @@
     <string name="catalogue_category">Cat.</string>
     <string name="catalogue_description">Description</string>
     <string name="catalogue_uom">UOM</string>
-    <string name="additem">Adding Item</string>
+    <string name="additem">Adding Item...</string>
     <string name="button_additem">Add Item</string>
     <string name="button_cancel">Cancel</string>
     <string name="text_enterDesiredQty">Enter Desired Quantity:</string>

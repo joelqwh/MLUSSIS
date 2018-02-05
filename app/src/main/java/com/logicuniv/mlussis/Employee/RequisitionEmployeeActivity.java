@@ -246,7 +246,10 @@ public class RequisitionEmployeeActivity extends MLussisActivity {
                     //                   adapt = (RequisitionEmployeeArrayAdapter) reqItemList.getAdapter();
                     adapt = new RequisitionEmployeeArrayAdapter(RequisitionEmployeeActivity.this,details);
                     reqItemList.setAdapter(adapt);
-                    adapt.notifyDataSetChanged();
+
+
+
+
 
                     Button button_submitReq = (Button) findViewById(R.id.button_requisition_employee_submit);
                     Button button_cancelReq = (Button) findViewById(R.id.button_requisition_employee_cancelReq);
